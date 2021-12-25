@@ -3,7 +3,7 @@ import { BsSlack } from 'react-icons/bs'
 export default {
     projectChatLink: 'https://relocify.slack.com/',
     projectChatLinkIcon: <BsSlack />,
-    titleSuffix: ' – Redocs',
+    titleSuffix: ' – Redox',
     nextLinks: true,
     prevLinks: true,
     search: true,
@@ -14,7 +14,7 @@ export default {
     footerEditLink: false,
     logo: (
         <b>
-            <span className="mr-2 font-extrabold md:inline">REDOCS</span>
+            <span className="mr-2 font-extrabold md:inline">REDOX</span>
         </b>
     ),
     head: (
