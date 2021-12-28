@@ -7,8 +7,6 @@ To create a heading, add number signs (`#`) in front of a word or phrase. The nu
 
 To add titles to pages use `# Heading level 1`, for titles to separate sections use `## Heading level 2`  and for subsections (to title section inside another section) use `### Heading level 3`.
 
-## Best practices
-
 Always put space after `#` and add new lines before and after the header.
 <table class="table table-bordered">
   <thead class="thead-light">
@@ -21,20 +19,23 @@ Always put space after `#` and add new lines before and after the header.
     <tr>
       <td>
         <code>
-Some Text<br />
-<br />
-# Here's a Heading<br />
-<br />
-More text
+            # Here's a Heading
         </code>
       </td>
       <td>
         <code>
-Some Text<br />
-#Here's a Heading<br />
-More text
+            #Here's a Heading
         </code>
       </td>
     </tr>
   </tbody>
 </table>
+
+# Adding YouTube Video
+To add the video write `<Youtube id="video-id" />` and if YouTube video link is `https://www.youtube.com/watch?v=Ck4ejDDP1gI` then video ID will be `Ck4ejDDP1gI` and to embed this video you will write 
+```
+<Youtube id="Ck4ejDDP1gI" />
+```
+and it will appear like this:
+
+![Image](docs/youtube.png)
