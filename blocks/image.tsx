@@ -6,7 +6,10 @@ interface Props {
 
 const Image: React.FC<Props> = ({ src }) => {
     return (
-        <img src={`/img/${src}`}  alt="Redox image" />
+        <>
+            <br />
+            <img src={`/img/${src}`}  alt="Redox image" />
+        </>
     )
 }
 
