@@ -19,7 +19,7 @@ And here some text for this section
 And here some text for this subsection
 ```
 
-Which will be look like this on the page:
+Which will look like this on the page:
 ![Image](docs/text.png)
 
 Always put space after `#` and add new lines before and after the header.
