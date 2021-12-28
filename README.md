@@ -3,9 +3,7 @@ This is the knowledge base of Relocify containing all the information necessary 
 For formatting the text you have to use markdown syntax, here are all the elements you can use:
 
 # Text formatting
-To create a heading, add number signs (`#`) in front of a word or phrase. The number of number signs you use should correspond to the heading level. For example, to create a heading level three (`<h3>`), use three number signs (e.g., `### My Header`).
-
-To add titles to pages use `# Heading level 1`, for titles to separate sections use `## Heading level 2`  and for subsections (to title section inside another section) use `### Heading level 3`.
+To create a heading, add hash signs (`#`) in front of a word or phrase. So, to add titles to pages use `# Heading level 1`, for titles to separate sections use `## Heading level 2`  and for subsections (to title section inside another section) use `### Heading level 3`.
 
 Always put space after `#` and add new lines before and after the header.
 <table class="table table-bordered">
