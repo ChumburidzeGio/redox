@@ -33,7 +33,7 @@ Always put space after `#` and add new lines before and after the header.
 
 # Adding YouTube Video
 To add the video write `<Youtube id="video-id" />` and if YouTube video link is `https://www.youtube.com/watch?v=Ck4ejDDP1gI` then video ID will be `Ck4ejDDP1gI` and to embed this video you will write
-```
+```html
 <Youtube id="Ck4ejDDP1gI" />
 ```
 
