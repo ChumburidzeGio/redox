@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is the knowledge base of Relocify containing all the information necessary for our clients. All the content lives under `pages` folder and each file that ends with `.mdx` represents page on the website, for example `pages/amsterdam/districts.mdx` is the page accessible under `/amsterdam/districts`.
 
-## Getting Started
+For formatting the text you have to use markdown syntax, here are all the elements you can use:
 
-First, run the development server:
+# Text formatting
+To create a heading, add number signs (`#`) in front of a word or phrase. The number of number signs you use should correspond to the heading level. For example, to create a heading level three (`<h3>`), use three number signs (e.g., `### My Header`).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+To add titles to pages use `# Heading level 1`, for titles to separate sections use `## Heading level 2`  and for subsections (to title section inside another section) use `### Heading level 3`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Best practices
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Always put space after `#` and add new lines before and after the header.
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>✅&nbsp; Do this</th>
+      <th>❌&nbsp; Don't do this</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>
+Some Text<br />
+<br />
+# Here's a Heading<br />
+<br />
+More text
+        </code>
+      </td>
+      <td>
+        <code>
+Some Text<br />
+#Here's a Heading<br />
+More text
+        </code>
+      </td>
+    </tr>
+  </tbody>
+</table>
