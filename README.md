@@ -3,7 +3,24 @@ This is the knowledge base of Relocify containing all the information necessary 
 For formatting the text you have to use markdown syntax, here are all the elements you can use:
 
 # Text formatting
-To create a heading, add hash signs (`#`) in front of a word or phrase. So, to add titles to pages use `# Heading level 1`, for titles to separate sections use `## Heading level 2`  and for subsections (to title section inside another section) use `### Heading level 3`.
+To create a heading, add hash signs (`#`) in front of a word or phrase. So, to add titles to pages use `# Heading level 1`, for titles to separate sections use `## Heading level 2`  and for subsections (to title section inside another section) use `### Heading level 3`. 
+
+To make a text bold just wrap it into two asterisks `**bold**` and if you want to italicize the text, wrap it with one asterisks `*italic*`.
+
+Here is the example:
+```markdown
+# Title of the page
+Some **bold text**, and some *italicized text*. 
+
+## Title of the section A
+And here some text for this section
+
+### Subsection of the section A
+And here some text for this subsection
+```
+
+Which will be look like this on the page:
+![Image](docs/text.png)
 
 Always put space after `#` and add new lines before and after the header.
 <table class="table table-bordered">
