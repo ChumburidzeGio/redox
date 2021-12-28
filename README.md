@@ -32,10 +32,29 @@ Always put space after `#` and add new lines before and after the header.
 </table>
 
 # Adding YouTube Video
-To add the video write `<Youtube id="video-id" />` and if YouTube video link is `https://www.youtube.com/watch?v=Ck4ejDDP1gI` then video ID will be `Ck4ejDDP1gI` and to embed this video you will write 
+To add the video write `<Youtube id="video-id" />` and if YouTube video link is `https://www.youtube.com/watch?v=Ck4ejDDP1gI` then video ID will be `Ck4ejDDP1gI` and to embed this video you will write
 ```
 <Youtube id="Ck4ejDDP1gI" />
 ```
-and it will appear like this:
 
-![Image](docs/youtube.png)
+# Adding Callout
+Callouts are used to emphasize some paragraph, or to give a warning and look like this:
+
+![Image](docs/callout.png)
+
+To add them to the page wrap text that you want to be emphesized in `<Callout>` tags as following:
+```html
+<Callout>
+    Some callout text
+</Callout>
+```
+
+If you want to display  warning callout which looks like this:
+![Image](docs/callout-warning.png)
+
+You have to add `warning` to the callout element as follows:
+```html
+<Callout warning>
+    Some warning message here
+</Callout>
+```
