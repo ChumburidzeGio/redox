@@ -2,5 +2,7 @@
   "bsn": "BSN",
   "banking": "Banking",
   "insurance": "Insurance",
-  "transportation": "Transportation"
+  "transportation": "Transportation",
+  "digid": "DigiD",
+  "my-government": "MyGovernment"
 }
