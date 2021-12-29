@@ -77,7 +77,7 @@ You have to add `warning` to the callout element as follows:
 ## Adding Image
 To add an image first you have to upload it by going to `public/img` directory and clicking `Add file -> Upload files` as shown in the gif bellow:
 
-![Image](docs/files-upload.gif)
+![Image](docs/upload-files.gif)
 
 Make sure to call the file some understandable name before uploading, so it's clear what that image is for and what's on it.
 
