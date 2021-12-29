@@ -81,7 +81,7 @@ To add an image first you have to upload it by going to `public/img` directory a
 
 Make sure to call the file some understandable name before uploading, so it's clear what that image is for and what's on it.
 
-After uploading the image go to the file to which you want to add the image and add the following assuming that file that uploaded was called `some-understandable-name.png`:
+After uploading the image go to the page to which you want to add the image and add the following assuming that file that you uploaded was called `some-understandable-name.png`:
 
 ```html
 <Image src="some-understandable-name.png" />
