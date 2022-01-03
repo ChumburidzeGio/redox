@@ -1,8 +1,9 @@
 {
-  "bsn": "BSN",
   "banking": "Banking",
   "insurance": "Insurance",
-  "transportation": "Transportation",
-  "digid": "DigiD",
-  "my-government": "MyGovernment"
+  "shopping": "Shopping",
+  "well-being": "Well-being",
+  "cultural-integration": "Cultural Integration",
+  "entertainment": "Entertainment",
+  "schooling": "Schooling"
 }
