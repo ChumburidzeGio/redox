@@ -12,7 +12,7 @@ const Image: React.FC<Props> = ({ src }) => {
     return (
         <>
             <br />
-            <img src={imagesUrl(src)} alt="Redox image" />
+            <img src={imagesUrl(src)} alt="Redox image" style={{ borderRadius: '8px' }} />
         </>
     )
 }
