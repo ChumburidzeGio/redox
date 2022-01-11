@@ -1,11 +1,7 @@
 {
   "index": "Introduction",
-  "services": "Our Services",
   "get-started": "Get Started",
-  "amsterdam": "\uD83C\uDDF3\uD83C\uDDF1 Netherlands",
-  "immigration": "\uD83D\uDCC3 Immigration",
-  "housing": "\uD83C\uDFE0 Housing",
-  "settle": "\uD83C\uDFE6 Settling In",
-  "transportation": "\uD83D\uDE8A Transportation",
-  "company": "Company"
+  "amsterdam": "Amsterdam",
+  "essentials": "Essentials",
+  "settle": "Settling In"
 }

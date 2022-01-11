@@ -1,9 +1,11 @@
 {
-  "banking": "Banking",
-  "insurance": "Insurance",
+  "bicycle": "Bicycle",
   "shopping": "Shopping",
-  "well-being": "Well-being",
-  "cultural-integration": "Cultural Integration",
+  "public-transport": "Public Transport",
+  "digid": "DigiD",
+  "30-percent-ruling": "30% Ruling",
+  "driving-licence": "Driving Licence",
   "entertainment": "Entertainment",
-  "schooling": "Schooling"
+  "well-being": "Well-being",
+  "my-government": "MyGovernment"
 }

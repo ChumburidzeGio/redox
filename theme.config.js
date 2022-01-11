@@ -25,6 +25,6 @@ export default {
         </>
     ),
     unstable_staticImage: true,
-    defaultMenuCollapsed: true,
+    defaultMenuCollapsed: false,
     floatTOC: true,
 }
