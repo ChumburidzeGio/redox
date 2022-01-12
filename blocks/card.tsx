@@ -27,9 +27,9 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoI
         <div style={{ display: 'flex', flexFlow: 'row', border: "2px solid #c1c1c1", borderRadius: "8px", marginTop: "20px", overflow: 'hidden' }}>
             {imageSrc && <div style={{
                 display: "flex",
-                height: "200px",
                 flex: "1 0 auto",
-                width: "200px",
+                height: "250px",
+                width: "250px",
                 justifyContent: "center",
                 alignItems: "center",
                 overflow: "hidden",
@@ -44,7 +44,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoI
             <div style={{ display: 'flex', flexFlow: 'column', padding: "10px 15px", justifyContent: "space-between" }}>
                 <div style={{ display: 'flex' }}>{children}</div>
                 <div style={{ display: 'flex' }}>
-                    {videoId && <a href={`https://www.youtube.com/maps/place/${mapQuery}`} target="_blank" style={{
+                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" style={{
                         display: 'flex',
                         textDecoration: "none",
                         color: "#0163e8",
