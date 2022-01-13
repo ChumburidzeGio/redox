@@ -4,9 +4,16 @@ interface Props {
     src: string
 }
 
+export function imagesUrl(path: string) {
+    return `/img/${path}`
+}
+
 const Image: React.FC<Props> = ({ src }) => {
     return (
-        <img src={src}  alt="Redox image" />
+        <>
+            <br />
+            <img src={imagesUrl(src)} alt="Redox image" style={{ borderRadius: '8px' }} />
+        </>
     )
 }
 

@@ -1,10 +1,9 @@
 {
-  "index": "Introduction",
-  "services": "Our Services",
-  "get-started": "Get Started",
-  "amsterdam": "Amsterdam",
-  "housing": "Housing",
-  "settle": "Settling In",
-  "recipes": "Recipes",
-  "company": "Company"
+  "index": "Getting started",
+  "amsterdam": "1. About Amsterdam",
+  "housing": "2. Housing",
+  "bsn": "3. BSN",
+  "banking": "4. Banking",
+  "utilities": "5. Utilities",
+  "insurance": "6. Insurance"
 }

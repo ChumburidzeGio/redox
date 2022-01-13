@@ -1,4 +1,5 @@
 import { BsSlack } from 'react-icons/bs'
+import { Badge } from 'blocks'
 
 export default {
     projectChatLink: 'https://relocify.slack.com/',
@@ -14,7 +15,9 @@ export default {
     footerEditLink: false,
     logo: (
         <b>
-            <span className="mr-2 font-extrabold md:inline">REDOX</span>
+            <span className="mr-2 font-extrabold md:inline" style={{ display: "flex", alignItems: "center" }}>
+                REDOX <Badge color="yellow">beta</Badge>
+            </span>
         </b>
     ),
     head: (
