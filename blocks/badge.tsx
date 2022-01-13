@@ -17,6 +17,10 @@ const colorSchemes = {
         background: "rgb(198, 246, 213)",
         color: "rgb(34, 84, 61)",
     },
+    red: {
+        background: "rgb(254, 215, 215)",
+        color: "rgb(130, 39, 39)",
+    },
 }
 
 const Badge: React.FC<Props> = ({ color, children }) => {
