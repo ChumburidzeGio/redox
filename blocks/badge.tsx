@@ -2,6 +2,7 @@ import * as React from 'react'
 
 interface Props {
     color?: "yellow" | "green"
+    className?: string
 }
 
 const colorSchemes = {
@@ -23,24 +24,22 @@ const colorSchemes = {
     },
 }
 
-const Badge: React.FC<Props> = ({ color, children }) => {
+const Badge: React.FC<Props> = ({ color, className, children }) => {
     const colorScheme = colorSchemes[color || "white"]
 
-    return (
-        <div style={{
-            padding: "0 4px",
-            background: colorScheme.background,
-            borderRadius: "2px",
-            display: "inline-flex",
-            fontSize: "12px",
-            fontWeight: "700",
-            lineHeight: "22px",
-            color: colorScheme.color,
-            textTransform: "uppercase"
-        }}>
-            {children}
-        </div>
-    )
+    return <div className={className} style={{
+        padding: "0 4px",
+        background: colorScheme.background,
+        borderRadius: "2px",
+        display: "inline-flex",
+        fontSize: "12px",
+        fontWeight: "700",
+        lineHeight: "22px",
+        color: colorScheme.color,
+        textTransform: "uppercase"
+    }}>
+        {children}
+    </div>
 }
 
 export default Badge
