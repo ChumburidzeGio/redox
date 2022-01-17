@@ -49,15 +49,8 @@ export const DocsLayout: React.FC = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     return (
+        // @ts-ignore
         <MDXProvider components={components}>
-            {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
             <div>
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog as="div" className="fixed inset-0 flex z-40 md:hidden" onClose={setSidebarOpen}>
