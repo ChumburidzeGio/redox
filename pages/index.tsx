@@ -1,4 +1,6 @@
 import { LogEvent, Callout } from "blocks"
 import { DocsLayout } from 'layout'
 
-export default () => <DocsLayout>Content</DocsLayout>
+const Home = () => <DocsLayout>Content</DocsLayout>
+
+export default Home
