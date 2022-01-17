@@ -14,17 +14,19 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
-import { slugger } from './elements'
+import { useRouter } from 'next/router'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
+import { slugger } from './elements'
+
 const navigation = [
-    { name: 'Getting Started', href: '/dox', icon: HomeIcon, current: true },
-    { name: '1. About Amsterdam', href: '/dox/amsterdam', icon: UsersIcon, current: false },
-    { name: '2. Housing', href: '/dox/housing', icon: FolderIcon, current: false },
-    { name: '3. BSN', href: '/dox/bsn', icon: CalendarIcon, current: false },
-    { name: '4. Banking', href: '/dox/banking', icon: InboxIcon, current: false },
-    { name: '5. Utilities', href: '/dox/utilities', icon: ChartBarIcon, current: false },
-    { name: '6. Insurance', href: '/dox/insurance', icon: ChartBarIcon, current: false },
+    { name: 'Getting Started', href: '/dox' },
+    { name: '1. About Amsterdam', href: '/dox/amsterdam' },
+    { name: '2. Housing', href: '/dox/housing' },
+    { name: '3. BSN', href: '/dox/bsn' },
+    { name: '4. Banking', href: '/dox/banking' },
+    { name: '5. Utilities', href: '/dox/utilities' },
+    { name: '6. Insurance', href: '/dox/insurance' },
 ]
 
 const userNavigation = [
@@ -60,6 +62,7 @@ interface Props {
 }
 
 export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
+    const router = useRouter()
     const [sidebarOpen, setSidebarOpen] = React.useState(false)
     const sectionAnchors = React.useMemo(() => (sections || []).map(section => ({
         title: section,
@@ -127,7 +130,7 @@ export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
-                                                    item.current
+                                                    router.asPath === item.href
                                                         ? 'bg-gray-100 text-gray-900'
                                                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                                     'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -164,7 +167,7 @@ export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
-                                            item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                                            router.asPath === item.href ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                             'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                                         )}
                                     >
@@ -259,7 +262,7 @@ export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
                     </div>
 
                     <div className="flex-1 relative z-0 flex overflow-hidden">
-                        <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none mx-auto max-w-3xl px-4 md:px-8 pt-5 md:pt-8 pb-8">
+                        <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none mx-auto max-w-3xl px-4 md:px-8 lg:px-0 pt-5 md:pt-8 pb-8">
                             {children}
                         </main>
                         <aside className="hidden relative xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 overflow-y-auto">
