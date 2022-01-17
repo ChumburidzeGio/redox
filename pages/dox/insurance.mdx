@@ -1,4 +1,5 @@
-import { Callout, Youtube, LogEvent } from "blocks";
+import { Callout, Youtube, LogEvent } from "blocks"
+import { DocsLayout } from 'layout'
 
 <LogEvent name="redox:view" props={{ page: 'insurance' }} />
 
@@ -43,4 +44,6 @@ To select your insurance provider, you can check [Independer](https://www.indepe
 ## Finding GP
 General practitioners (huisarts) play an essential role in the Dutch healthcare system; they are the first port of call if you have health problems. If necessary, your GP will refer you to a specialist at a hospital. You are free to choose your doctor. However, it is helpful to choose one close to home.  
 
-You could use websites like [Zorgkaart](https://www.zorgkaartnederland.nl/) to compare different GPs in your area and pick the one that best fits your needs. Customer service of insurance providers will also help you find a GP near you or ask us, and we will try to help you with the search. 
+You could use websites like [Zorgkaart](https://www.zorgkaartnederland.nl/) to compare different GPs in your area and pick the one that best fits your needs. Customer service of insurance providers will also help you find a GP near you or ask us, and we will try to help you with the search.
+
+export default ({ children }) => <DocsLayout>{children}</DocsLayout>

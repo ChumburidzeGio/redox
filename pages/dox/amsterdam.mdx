@@ -1,4 +1,5 @@
 import {Image, Youtube, ImageCard, Badge, LogEvent} from 'blocks'
+import { DocsLayout } from 'layout'
 
 <LogEvent name="redox:view" props={{ page: 'amsterdam' }} />
 
@@ -123,3 +124,5 @@ Let's first check top areas in Amsterdam to live:
     <Badge color="white">suburb</Badge> <Badge color="green">safe</Badge> <Badge color="green">€</Badge> <Badge color="white">new buildings</Badge> <Badge color="white">family-friendly</Badge>\
     This young city with the available houses, many modern and innovative architectonic highlights, good schools, and sports facilities attract a growing international population.
 </ImageCard>
+
+export default ({ children }) => <DocsLayout>{children}</DocsLayout>

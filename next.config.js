@@ -1,10 +1,12 @@
-/** @type {import('next').NextConfig} */
-const withNextra = require('nextra')({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.js',
-  // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
 })
 
-module.exports = withNextra({
+module.exports = withMDX({
+  pageExtensions: ['tsx', 'mdx'],
   reactStrictMode: true,
 })

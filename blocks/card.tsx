@@ -42,7 +42,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoI
                 }} />
             </div>}
             <div style={{ display: 'flex', flexFlow: 'column', padding: "10px 15px", justifyContent: "space-between" }}>
-                <div style={{ display: 'flex' }}>{children}</div>
+                <div style={{ display: 'flex', flexFlow: 'column' }}>{children}</div>
                 <div style={{ display: 'flex' }}>
                     {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" style={{
                         display: 'flex',

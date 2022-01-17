@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import amplitude from "amplitude-js"
 
-import 'nextra-theme-docs/style.css'
+import '../styles/global.css'
 import '../blocks/services.css'
 
 const initAmplitude = () => {
