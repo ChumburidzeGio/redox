@@ -25,6 +25,6 @@ export default function Nextra({ Component, pageProps }: AppProps) {
   }, [router.isReady])
 
   return (
-        <Component {...pageProps} />
+    <Component {...pageProps} />
   )
 }
