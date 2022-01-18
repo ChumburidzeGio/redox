@@ -2,22 +2,16 @@ import * as React from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
     BellIcon,
-    CalendarIcon,
-    ChartBarIcon,
-    FolderIcon,
-    HomeIcon,
-    InboxIcon,
     MenuAlt2Icon,
-    UsersIcon,
     XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { MDXProvider } from '@mdx-js/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 import { slugger, NavProfile } from './elements'
+import { Badge } from 'blocks'
 
 const navigation = [
     { name: 'Getting Started', href: '/dox' },
@@ -117,11 +111,7 @@ export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
                                     </div>
                                 </Transition.Child>
                                 <div className="flex-shrink-0 flex items-center px-4">
-                                    <img
-                                        className="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                                        alt="Workflow"
-                                    />
+                                    LOGO
                                 </div>
                                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                     <nav className="px-2 space-y-1">
@@ -154,11 +144,14 @@ export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
                     {/* Sidebar component, swap this element with another sidebar if you like */}
                     <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
                         <div className="flex items-center flex-shrink-0 px-4">
-                            <img
-                                className="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                                alt="Workflow"
-                            />
+                           
+                        <a className="no-underline text-current inline-flex items-center hover:opacity-75" href="/">
+                                        <b>
+                                            <span className="mr-2 font-extrabold md:inline" style={{ display: "flex", alignItems: "center" }}>
+                                                <span className="mr-1">REDOX</span> <Badge color="yellow">beta</Badge>
+                                            </span>
+                                        </b>
+                                    </a>
                         </div>
                         <div className="mt-5 flex-grow flex flex-col">
                             <nav className="flex-1 px-2 pb-4 space-y-1">
