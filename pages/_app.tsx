@@ -1,6 +1,7 @@
 import * as React from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
+import { SessionProvider } from "next-auth/react"
 import amplitude from "amplitude-js"
 
 import '../styles/global.css'
@@ -15,7 +16,7 @@ const initAmplitude = () => {
   });
 };
 
-export default function Nextra({ Component, pageProps }: AppProps) {
+export default function Nextra({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter()
 
   React.useEffect(() => {
@@ -25,6 +26,8 @@ export default function Nextra({ Component, pageProps }: AppProps) {
   }, [router.isReady])
 
   return (
-    <Component {...pageProps} />
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
   )
 }
