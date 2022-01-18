@@ -5,5 +5,8 @@
   "bsn": "3. BSN",
   "banking": "4. Banking",
   "utilities": "5. Utilities",
-  "insurance": "6. Insurance"
+  "insurance": "6. Insurance",
+  "transportation": "7. Transportation",
+  "settling-in": "8. Settling In",
+  "integration": "9. Integration"
 }
