@@ -16,7 +16,7 @@ export default {
     logo: (
         <b>
             <span className="mr-2 font-extrabold md:inline" style={{ display: "flex", alignItems: "center" }}>
-                REDOX <Badge color="yellow">beta</Badge>
+                REDOX <Badge color="yellow" className="ml-1">beta</Badge>
             </span>
         </b>
     ),
@@ -28,6 +28,6 @@ export default {
         </>
     ),
     unstable_staticImage: true,
-    defaultMenuCollapsed: false,
+    defaultMenuCollapsed: true,
     floatTOC: true,
 }
