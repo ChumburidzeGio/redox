@@ -1,3 +1,15 @@
 ul {
     margin-top: 0!important;
 }
+
+@media (max-width: 600px) {
+    .relo-services {
+        grid-template-columns: 1fr 1fr!important;
+    }
+}
+
+@media (max-width: 400px) {
+    .relo-services {
+        grid-template-columns: 1fr!important;
+    }
+}

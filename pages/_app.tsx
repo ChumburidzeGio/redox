@@ -5,6 +5,7 @@ import amplitude from "amplitude-js"
 
 import 'nextra-theme-docs/style.css'
 import '../blocks/services.css'
+import '../blocks/card.css'
 
 const initAmplitude = () => {
   amplitude.getInstance().init("127e72a08a594d038656516bb021f04b", undefined, {
