@@ -23,12 +23,6 @@ const navigation = [
     { name: '6. Insurance', href: '/dox/insurance' },
 ]
 
-const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
-]
-
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
@@ -160,8 +154,8 @@ export const DocsLayout: React.FC<Props> = ({ children, sections }) => {
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
-                                            router.asPath === item.href ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                                            'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                                            router.asPath === item.href ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900',
+                                            'group flex items-center px-2 py-3 text-sm font-medium rounded-md'
                                         )}
                                     >
                                         {item.name}
