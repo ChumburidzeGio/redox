@@ -6,8 +6,9 @@
   "banking": "4. Banking",
   "utilities": "5. Utilities",
   "insurance": "6. Insurance",
-  "transportation": "7. Transportation",
-  "settling-in": "8. Settling In",
-  "integration": "9. Integration",
+  "family": "7. Family",
+  "transportation": "8. Transportation",
+  "settling-in": "9. Settling In",
+  "integration": "10. Integration",
   "changelog": "Changelog"
 }
