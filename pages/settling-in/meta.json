@@ -1,7 +1,9 @@
 {
     "digid": "DigiD",
     "my-government": "MyGoverment",
-    "entertainment": "Entertainment",
+    "healthcare": "Healthcare System",
     "shopping": "Shopping",
-    "well-being": "Well-being"
+    "well-being": "Well-being",
+    "entertainment": "Entertainment",
+    "furnishing": "Furnishing Apartment"
 }
