@@ -41,7 +41,7 @@ const Settings = () => <AppLayout>
 
         <button
             type="button"
-            className="inline-flex items-center px-6 py-2 w-full justify-center border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4"
+            className="inline-flex items-center px-6 py-2 w-full justify-center border border-transparent shadow-sm text-base font-medium rounded-md text-white text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-4"
             onClick={() => signOut()}
         >
             Sign Out
