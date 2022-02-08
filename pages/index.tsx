@@ -1,6 +1,5 @@
-import { LogEvent, Callout } from "blocks"
-import { DocsLayout } from 'layout'
+import { AppLayout } from 'layout'
 
-const Home = () => <DocsLayout>Content</DocsLayout>
+const Home = () => <AppLayout>Content</AppLayout>
 
 export default Home

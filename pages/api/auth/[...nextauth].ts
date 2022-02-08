@@ -1,6 +1,6 @@
-
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
 
 const users = [
   {
@@ -12,6 +12,9 @@ const users = [
 ]
 
 export default NextAuth({
+  pages: {
+    // signIn: '/auth/credentials-signin',
+  },
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -25,7 +28,7 @@ export default NextAuth({
         email: { label: "Email", type: "email", placeholder: "john@acme.com" },
         password: {  label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Add logic here to look up the user from the credentials supplied
         const isUser = users.find(user => {
           return user.email === credentials?.email && user.password === credentials.password
@@ -41,6 +44,10 @@ export default NextAuth({
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter        
         }
       }
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
     })
   ],
   callbacks: {

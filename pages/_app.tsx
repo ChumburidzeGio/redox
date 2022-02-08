@@ -16,7 +16,7 @@ const initAmplitude = () => {
   });
 };
 
-export default function Nextra({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter()
 
   React.useEffect(() => {

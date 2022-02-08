@@ -1,46 +1,27 @@
 import * as React from 'react'
 
-interface Props {
-    color?: "yellow" | "green"
-}
-
 const colorSchemes = {
-    white: {
-      background: "rgb(237, 242, 247)",
-      color: "rgb(26, 32, 44)",
-    },
-    yellow: {
-        background: "rgb(254, 252, 191)",
-        color: "rgb(116, 66, 16)",
-    },
-    green: {
-        background: "rgb(198, 246, 213)",
-        color: "rgb(34, 84, 61)",
-    },
-    red: {
-        background: "rgb(254, 215, 215)",
-        color: "rgb(130, 39, 39)",
-    },
+    gray: 'bg-gray-100 text-gray-800',
+    red: 'bg-red-100 text-red-800',
+    yellow: 'bg-yellow-100 text-yellow-800',
+    green: 'bg-green-100 text-green-800',
+    blue: 'bg-blue-100 text-blue-800',
+    indigo: 'bg-indigo-100 text-indigo-800',
+    purple: 'bg-purple-100 text-purple-800',
+    pink: 'bg-pink-100 text-pink-800',
+
 }
 
-const Badge: React.FC<Props> = ({ color, children }) => {
-    const colorScheme = colorSchemes[color || "white"]
+export interface BadgeProps {
+    color?: keyof typeof colorSchemes
+}
+
+export const Badge: React.FC<BadgeProps> = ({ color, children }) => {
+    const colorScheme = colorSchemes[color || "gray"]
 
     return (
-        <div style={{
-            padding: "0 4px",
-            background: colorScheme.background,
-            borderRadius: "2px",
-            display: "inline-flex",
-            fontSize: "12px",
-            fontWeight: "700",
-            lineHeight: "22px",
-            color: colorScheme.color,
-            textTransform: "uppercase"
-        }}>
+        <span className={`inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-bold uppercase ${colorScheme}`}>
             {children}
-        </div>
+        </span>
     )
 }
-
-export default Badge
