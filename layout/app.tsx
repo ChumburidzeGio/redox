@@ -3,7 +3,7 @@ import { BaseLayout } from "./base";
 
 const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Settings', href: '/settings' },
+    { name: 'Profile', href: '/profile' },
     { name: 'Dox', href: '/dox' },
 ]
 
@@ -15,7 +15,7 @@ export const AppLayout: React.FC = ({ children }) => {
                    {children}
                </main>
                <aside className="hidden relative xl:flex xl:flex-col flex-shrink-0 w-64 border-r border-gray-200 overflow-y-auto">
-                  Aside
+
                </aside>
            </div>
        </BaseLayout>

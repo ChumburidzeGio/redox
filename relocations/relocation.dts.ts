@@ -1,5 +1,4 @@
 import {
-    validate,
     Length,
     IsString,
     IsMobilePhone,
@@ -38,9 +37,9 @@ class Adult extends Person {
     email: string
 }
 
-class Relocation extends Adult {
+export class Relocation extends Adult {
     @IsString()
-    relationship: 'single' | 'married' | 'registered_partnership' | 'cohabitating' | 'divorced' | 'widowed'
+    relationship: 'single' | 'married' | 'registered_partnership' | 'cohabitation' | 'divorced' | 'widowed'
 
     @IsString()
     status: 'completed' | 'active' | 'canceled'
