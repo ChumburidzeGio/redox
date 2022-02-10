@@ -1,5 +1,7 @@
 import districts from "./districts";
-import {ImageCard, Badge, BadgeProps} from "../";
+import { Badge } from "elements";
+import type { BadgeProps } from "elements";
+import {ImageCard} from "../";
 
 const tagToColor: Record<string, BadgeProps['color']> = {
     safe: 'green',

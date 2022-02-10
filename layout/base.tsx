@@ -9,7 +9,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 
 import { NavProfile} from './elements'
-import { Badge } from 'blocks'
+import { Logo } from "elements";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -73,7 +73,7 @@ export const BaseLayout: React.FC<Props> = ({ children, navigation }) => {
                                 </div>
                             </Transition.Child>
                             <div className="flex-shrink-0 flex items-center px-4">
-                                LOGO
+                                <Logo />
                             </div>
                             <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav className="px-2 space-y-1">
@@ -107,12 +107,8 @@ export const BaseLayout: React.FC<Props> = ({ children, navigation }) => {
                 <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
                     <div className="flex items-center flex-shrink-0 px-6">
 
-                        <a className="no-underline text-current inline-flex items-center hover:opacity-75" href="/">
-                            <b>
-                                            <span className="mr-2 font-extrabold md:inline" style={{ display: "flex", alignItems: "center" }}>
-                                                <span className="mr-1">REDOX</span> <Badge color="yellow">beta</Badge>
-                                            </span>
-                            </b>
+                        <a className="no-underline text-current inline-flex items-center" href="/">
+                           <Logo />
                         </a>
                     </div>
                     <div className="mt-5 flex-grow flex flex-col">
