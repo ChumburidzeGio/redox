@@ -7,7 +7,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import { components } from "./mdx-components";
 
 const navigation = [
-    { name: 'Getting Started', href: '/dox' },
+    { name: 'Getting Started', href: '/' },
     { name: '1. About Amsterdam', href: '/dox/amsterdam' },
     { name: '2. Housing', href: '/dox/housing' },
     { name: '3. BSN', href: '/dox/bsn' },
