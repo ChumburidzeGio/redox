@@ -7,9 +7,9 @@ export interface CalloutProps {
 export const Callout: React.FC<CalloutProps> = ({ type, children }) => {
     return (
         <div className={`shadow rounded-md overflow-hidden border border-gray-300 border-l-0 mt-4`}>
-            <div className={`flex p-4 border-l-4 ${type === "warning" ? 'border-yellow-400' : 'border-emerald-500'}`}>
+            <div className={`flex p-4 border-l-4 ${type === "warning" ? 'border-yellow-400' : 'border-cyan-500'}`}>
                 <div className="ml-3">
-                    <p className={`text-md ${type === "warning" ? 'text-yellow-700' : ''}`}>
+                    <p className={`text-md`}>
                         {children}
                     </p>
                 </div>
