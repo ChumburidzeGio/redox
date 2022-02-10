@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 
-import {slugger, extractHeaders} from './elements'
+import { extractHeaders } from './elements'
 import {BaseLayout} from "./base";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import { components } from "./mdx-components";
 
 const navigation = [
     { name: 'Getting Started', href: '/dox' },
@@ -14,24 +15,6 @@ const navigation = [
     { name: '5. Utilities', href: '/dox/utilities' },
     { name: '6. Insurance', href: '/dox/insurance' },
 ]
-
-const CustomH1: React.FC = ({ children }) => (
-    <h1 className="text-4xl mt-1 font-bold text-gray-900" id={slugger(children as string)}>{children}</h1>
-)
-
-const CustomH2: React.FC = ({ children }) => (
-    <h1 className="text-3xl mt-7 font-semibold text-gray-800" id={slugger(children as string)}>{children}</h1>
-)
-
-const CustomP: React.FC = ({ children }) => (
-    <h1 className="text-md mt-7 text-gray-900">{children}</h1>
-)
-
-const components = {
-    h1: CustomH1,
-    h2: CustomH2,
-    p: CustomP,
-}
 
 export const DocsLayout: React.FC = ({ children }) => {
     const sectionAnchors = React.useMemo(() => extractHeaders(children as React.ReactElement[]), [children])
