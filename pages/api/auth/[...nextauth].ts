@@ -12,8 +12,15 @@ const users = [
 ]
 
 export default NextAuth({
+  debug: true,
   pages: {
-    // signIn: '/auth/credentials-signin',
+    signIn: '/auth/signin',
+    newUser: '/auth/new-user'
+  },
+  theme: {
+    colorScheme: "light", // "auto" | "dark" | "light"
+    brandColor: "#2255fc", // Hex color code
+    logo: "https://www.relocify.nl/lib_LZtzTqMpfIqVhzka/dcic8u7lvd90yueq.png?w=180" // Absolute URL to image
   },
   // Configure one or more authentication providers
   providers: [
