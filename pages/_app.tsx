@@ -1,5 +1,6 @@
 import * as React from 'react'
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import amplitude from "amplitude-js"
 
@@ -16,6 +17,9 @@ const initAmplitude = () => {
   });
 };
 
+const metaTitle = "Redox - Complete Guide to Amsterdam"
+const metaDescription = "Learn about housing, BSN, banking, insurance, and many other things, use integration module to better understand Netherlands and Dutch people and use Redox as an ultimate guide to your new home."
+
 export default function Nextra({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
@@ -26,6 +30,19 @@ export default function Nextra({ Component, pageProps }: AppProps) {
   }, [router.isReady])
 
   return (
+      <>
+        <Head>
+          <title>{metaTitle}</title>
+          <meta name="title" content={metaTitle} />
+          <meta name="description" content={metaDescription} />
+
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://dox.relocify.nl/" />
+          <meta property="og:title" content={metaTitle} />
+          <meta property="og:description" content={metaDescription} />
+          <meta property="og:image" content="https://dox.relocify.nl/meta.png" />
+        </Head>
         <Component {...pageProps} />
+      </>
   )
 }
