@@ -31,6 +31,7 @@ export default function Nextra({ Component, pageProps }: AppProps) {
 
   return (
       <>
+        <Component {...pageProps} />
         <Head>
           <title>{metaTitle}</title>
           <meta name="title" content={metaTitle} />
@@ -42,7 +43,6 @@ export default function Nextra({ Component, pageProps }: AppProps) {
           <meta property="og:description" content={metaDescription} />
           <meta property="og:image" content="https://dox.relocify.nl/meta.png" />
         </Head>
-        <Component {...pageProps} />
       </>
   )
 }
