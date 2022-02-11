@@ -6,9 +6,10 @@
   "banking": "4. Banking",
   "utilities": "5. Utilities",
   "insurance": "6. Insurance",
-  "schooling": "7. Schooling",
   "transportation": "8. Transportation",
   "settling-in": "9. Settling In",
-  "integration": "10. Integration",
+  "education": "10. Education",
+  "buying-property": "11. Buying Property",
+  "integration": "12. Integration",
   "changelog": "Changelog"
 }
