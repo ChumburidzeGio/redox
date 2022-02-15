@@ -1,14 +1,15 @@
-import {Image, DistrictsExplorer, LogEvent} from 'blocks'
-import { DocsLayout } from 'layout'
+import {Image, Youtube, ImageCard, Badge, LogEvent} from 'blocks'
 
 <LogEvent name="redox:view" props={{ page: 'amsterdam' }} />
+
+[//]: <> (Section about NL RMy_VlQ9vyQ)
 
 # Amsterdam
 From its humble beginnings as a 13th-century fishing village on a river bed to its current role as a major hub for business, tourism, and culture, Amsterdam has long had a strong reputation as a center of culture and commerce.
 
 Although the seat of the Dutch government is in The Hague, Amsterdam is the nominal capital. It is also the country's largest city, with a population of more than 851,000 in the city and 2.48 million in the metro area. It's also the most visited, with over 3,5 million foreign visitors a year.
 
-<youtube id="TF2qK6TX3YY" />
+<Youtube id="TF2qK6TX3YY" />
 
 ## Districts
 The Amsterdam Area encompasses the city of Amsterdam and 32 of its surrounding
@@ -28,9 +29,102 @@ municipalities. Amsterdam is broken up into 8 districts or boroughs (stadsdelen)
 
 ## Where to live?
 Let's first check top areas in Amsterdam to live:
+<ImageCard imageSrc="/img/hoods/jordaan.jpeg" videoId="N-XFY8KyFlI" mapQuery="Jordaan,+Amsterdam,+Netherlands">
+    **Jordaan**\
+    <Badge color="white">central</Badge> <Badge color="white">busy</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">old buildings</Badge>\
+    One of the city’s most desirable areas for locals and new arrivals alike with a bohemian mix of yuppies, expats, and young families. It is known for its lively cafés terraces, historic brown bars, and canal streets.
+</ImageCard>
 
-<DistrictsExplorer />
+<ImageCard imageSrc="/img/hoods/depijp.jpeg" videoId="9kjrKS-ZIHY" mapQuery="De+Pijp,+Amsterdam,+Netherlands">
+    **De Pijp**\
+    <Badge color="white">central</Badge> <Badge color="white">busy</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">old buildings</Badge>\
+    One of the most cosmopolitan and vibrant districts of Amsterdam with fantastic cafés, restaurants, shops, and the daily Albert Cuyp street market.
+</ImageCard>
 
-export default ({ children }) => {
-    return (<DocsLayout>{children}</DocsLayout>)
-}
+<ImageCard imageSrc="/img/hoods/oudzuid.jpeg" videoId="HloBo9J0lDw" mapQuery="Oud-Zuid,+Amsterdam,+Netherlands">
+    **Oud-Zuid**\
+    <Badge color="white">central</Badge> <Badge color="green">safe</Badge>  <Badge color="white">busy</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">old buildings</Badge>\
+    More expensive than De Pijp and one of the most desirable residential neighborhood with the city's most fashionable shopping streets PC Hooftstraat, Van Baerlestraat and Beethovenstraat, famous museums, Coster Diamonds, Concertgebouw, and the Vondelpark.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/amstelveen.jpeg" videoId="1mya35gytAA&t=40" mapQuery="Amstelveen,+Amsterdam,+Netherlands">
+    **Amstelveen**\
+    <Badge color="white">suburb</Badge> <Badge color="green">safe</Badge> <Badge color="green">€</Badge> <Badge color="white">family-friendly</Badge>\
+    It has grown into a lively city, giving a natural neighborhood feeling. This city is family-friendly, including family groups, sports clubs, international schools, and social clubs.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/oudwest.jpeg" videoId="Y6O8G65lLv4" mapQuery="Oud-West,+Amsterdam,+Netherlands">
+    **Oud-West**\
+    <Badge color="white">central</Badge> <Badge color="white">busy</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">old buildings</Badge>\
+    Dynamic neighborhood with restaurants, boutiques, design stores, alternative music venues, and trendy cafes.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/westerpark.jpeg" videoId="yaLo2PzDKzc" mapQuery="Westerpark,+Amsterdam,+Netherlands">
+    **Westerpark**\
+    <Badge color="white">central</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">old buildings</Badge>\
+    Another lively neighborhood of Amsterdam West. It homes cozy terraces, a big park, old-school street markets, and brown cafes.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/bosenlommer.jpeg" videoId="f_3a4VRR2BA" mapQuery="Bos+en+Lommer,+Amsterdam,+Netherlands">
+  **Bos en Lommer & De Baarsjes**\
+    <Badge color="white">central</Badge> <Badge color="yellow">€€€</Badge>\
+    Popular with their green open spaces, young and multicultural crowd. They are also further than the city center, so they are desirable to avoid the city crowd.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/nieuwwest.jpeg" videoId="Z62GGqqYMPE&t=39" mapQuery="Nieuw+West,+Amsterdam,+Netherlands">
+  **Nieuw West**\
+    <Badge color="white">central</Badge> <Badge color="red">unsafe</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">new buildings</Badge>\
+    Bordered by Sloterplas Lake and Rembrandt Park with newly built apartments. The area is easily accessible from anywhere in the city by Lelylaan train station, bus, tram, and metro lines.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/oost.jpeg" videoId="fNvifRd6W_U" mapQuery="Oost,+Amsterdam,+Netherlands">
+    **Oost**\
+    <Badge color="white">central</Badge> <Badge color="white">busy</Badge> <Badge color="yellow">€€€</Badge>\
+    The most touristic area of the borough of Amsterdam Oost. Recently many trendy bars, restaurants and clubs have opened here and it is a nice area to live.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/deplantage.jpeg" videoId="Y8F__Cj__WA" mapQuery="De+Plantage,+Amsterdam,+Netherlands">
+    **De Plantage**\
+    <Badge color="white">central</Badge> <Badge color="white">busy</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">old buildings</Badge>\
+    Located the east of the city center. You can find theatres, concert halls, and public parks in this area, including a zoo, botanical gardens.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/the-oostelijke-eilanden.jpeg" videoId="HryTOb08zDM" mapQuery="Oostelijke+Eilanden,+Amsterdam,+Netherlands">
+    **The Oostelijke Eilanden (Eastern Docklands)**\
+    <Badge color="white">central</Badge> <Badge color="white">family-friendly</Badge> <Badge color="yellow">€€€</Badge>\
+    Where water meets modern architecture. Here, you can find various cultural offerings, including the Marineterrein, teeming with bars and breweries.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/ijburg.jpeg" videoId="O5J5NeHh2_4&t=24" mapQuery="IJburg,+Amsterdam,+Netherlands">
+    **IJburg**\
+    <Badge color="white">family-friendly</Badge> <Badge color="white">new buildings</Badge>\
+    Amsterdam's newest neighborhood, made up of artificial islands. It is located in the easternmost part of the city with local cafes and higher-end bars and is famous for water sports.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/noord.jpeg" videoId="PAM0AcMtKRk" mapQuery="Noord,+Amsterdam,+Netherlands">
+    **Noord**\
+    <Badge color="white">central</Badge> <Badge color="white">old buildings</Badge>\
+    Across the water from Centraal Station is Amsterdam-Noord (Amsterdam North), a district that has been little more than a dull dormitory suburb up until now. However, this is changing with its Noorder Park, charming little villages, quiet dining options, and waterside hangouts with beautiful terraces. A free ferry from behind Central Station will take you there in minutes.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/ndsm.jpeg" videoId="KDFKvwe1odk" mapQuery="NDSM,+Amsterdam,+Netherlands">
+    **NDSM**\
+    <Badge color="white">central</Badge> <Badge color="yellow">€€€</Badge> <Badge color="white">new buildings</Badge>\
+    Area has been transformed into a creative area with flea markets, restaurants, waterside hangouts, and nightlife venues. The area hosts multi-disciplinary festivals, performances, exhibitions, dance parties.
+</ImageCard>
+
+<ImageCard imageSrc="/img/hoods/zuidoost.jpeg" videoId="jPLcfG-vBlU" mapQuery="Zuidoost,+Amsterdam,+Netherlands">
+    **Zuidoost**\
+    <Badge color="white">central</Badge> <Badge color="red">unsafe</Badge> <Badge color="green">€</Badge> <Badge color="white">new buildings</Badge>\
+    Includes the residential area De Bijlmer and the Johan Cruijff ArenA, AFAS Live, and the Ziggo Dome. It's about as far away as you can get from your typical canals-and-clogs image of Amsterdam.
+</ImageCard>
+
+
+<ImageCard imageSrc="/img/hoods/almere.jpeg" videoId="WrbAWzd40cM" mapQuery="Almere,+Netherlands">
+    **Almere**\
+    <Badge color="white">suburb</Badge> <Badge color="green">safe</Badge> <Badge color="green">€</Badge> <Badge color="white">new buildings</Badge> <Badge color="white">family-friendly</Badge>\
+    This young city with the available houses, many modern and innovative architectonic highlights, good schools, and sports facilities attract a growing international population.
+</ImageCard>
+
+### Safety in Neighbourhoods
+Cities in the Netherlands provide statistics on their websites for each district/hood, including crime rates. For **Amsterdam and Amstelveen** check an [interactive map](https://onderzoek.amsterdam.nl/interactief/dashboard-veiligheid) for crime rates. For **Almere** check [Neighbourhood Monitor](https://wijkmonitoralmere.nl/nl/start.html) for in-depth overview of each hood, including crime rates (*"Aantal misdrijven per 1000 inwoners"*).

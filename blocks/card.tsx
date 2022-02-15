@@ -10,12 +10,11 @@ interface ImageCardProps {
 
 export const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoId, children }) => {
     return (
-        <div style={{ display: 'flex', flexFlow: 'row', border: "2px solid #c1c1c1", borderRadius: "8px", marginTop: "20px", overflow: 'hidden' }}>
-            {imageSrc && <div style={{
+        <div className="flex overflow-hidden rounded flex-col md:flex-row" style={{ border: "2px solid #c1c1c1", marginTop: "20px"}}>
+            {imageSrc && <div className="sm:w-100 relo-block-card-img" style={{
                 display: "flex",
                 flex: "1 0 auto",
                 height: "250px",
-                width: "250px",
                 justifyContent: "center",
                 alignItems: "center",
                 overflow: "hidden",

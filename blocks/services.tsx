@@ -10,7 +10,7 @@ export const Services: React.FC = ({ children }) => {
     }, [children]);
 
     return (
-        <div style={{
+        <div className="relo-services md:bg-red-300" style={{
             display: 'grid',
             alignItems: 'start',
             gridTemplateColumns: '1fr '.repeat(count),
