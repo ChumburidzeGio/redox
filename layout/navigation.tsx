@@ -2,6 +2,8 @@ import * as React from 'react'
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import {signOut} from "next-auth/react";
+import {LogoutIcon} from "@heroicons/react/outline";
 
 const navigation = [
     { name: 'Getting Started', href: '/' },
@@ -91,23 +93,34 @@ export const Navigation: React.FC = () => {
     const router = useRouter()
 
     return <>
-        {navigation.map((item) => item.children ? (
-            <DropdownMenu items={item.children} name={item.name} key={item.name} />
-        ) : (
-            <Link key={item.name} href={item.href} passHref>
-                <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                        router.asPath === item.href
-                            ? 'bg-slate-200 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                        'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                    )}
-                >
-                    {item.name}
+        <nav className="flex flex-1 px-4 pb-4 pt-3 space-y-1 flex-col justify-between h-full">
+            <div className="flex flex-col">
+                {navigation.map((item) => item.children ? (
+                    <DropdownMenu items={item.children} name={item.name} key={item.name} />
+                ) : (
+                    <Link key={item.name} href={item.href} passHref>
+                        <a
+                            key={item.name}
+                            href={item.href}
+                            className={classNames(
+                                router.asPath === item.href
+                                    ? 'bg-slate-200 text-gray-900'
+                                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                                'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                            )}
+                        >
+                            {item.name}
+                        </a>
+                    </Link>
+                ))}
+            </div>
+
+            <div className="flex flex-col">
+                <a className="group flex items-center px-2 py-2 text-md rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={() => signOut()}>
+                    <LogoutIcon className="mr-2 h-6 w-6" />
+                    Sign out
                 </a>
-            </Link>
-        ))}
+            </div>
+        </nav>
     </>
 }

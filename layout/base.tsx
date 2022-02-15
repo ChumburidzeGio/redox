@@ -1,12 +1,7 @@
 import * as React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import {
-    XIcon,
-    LogoutIcon,
-    MenuAlt2Icon
-} from '@heroicons/react/outline'
+import { XIcon, MenuAlt2Icon } from '@heroicons/react/outline'
 import { Logo } from "elements";
-import { signOut } from "next-auth/react";
 import { Navigation } from "./navigation";
 
 export const BaseLayout: React.FC = ({ children}) => {
@@ -61,9 +56,7 @@ export const BaseLayout: React.FC = ({ children}) => {
                                 <Logo />
                             </div>
                             <div className="mt-5 flex-1 h-0 overflow-y-auto">
-                                <nav className="px-2 space-y-1">
-                                    <Navigation />
-                                </nav>
+                                <Navigation />
                             </div>
                         </div>
                     </Transition.Child>
@@ -83,18 +76,7 @@ export const BaseLayout: React.FC = ({ children}) => {
                         </a>
                     </div>
                     <div className="mt-5 flex-grow flex flex-col">
-                        <nav className="flex flex-1 px-4 pb-4 pt-3 space-y-1 flex-col justify-between">
-                            <div className="flex flex-col">
-                                <Navigation />
-                            </div>
-
-                            <div className="flex flex-col">
-                                <a className="group flex items-center px-2 py-2 text-md rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={() => signOut()}>
-                                    <LogoutIcon className="mr-2 h-6 w-6" />
-                                    Sign out
-                                </a>
-                            </div>
-                        </nav>
+                        <Navigation />
                     </div>
                 </div>
             </div>
