@@ -1,5 +1,6 @@
 import * as React from "react";
 import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { getCsrfToken } from "next-auth/react"
 import {Badge, Logo} from "elements"
 
@@ -14,6 +15,9 @@ function errorToMessage(error: keyof typeof errorMapping) {
 export default function SignIn({ csrfToken, error }: { csrfToken: string, error: keyof typeof errorMapping }) {
     const message = React.useMemo(() => errorToMessage(error), [error])
 
+    const router = useRouter()
+    const { callbackUrl } = router.query
+
     return (
         <div className="h-full min-h-screen bg-gray-50">
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -27,6 +31,7 @@ export default function SignIn({ csrfToken, error }: { csrfToken: string, error:
                         <form className="space-y-6" method="POST" action="/api/auth/callback/credentials">
 
                             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+                            <input name="callbackUrl" type="hidden" defaultValue={callbackUrl} />
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email address
