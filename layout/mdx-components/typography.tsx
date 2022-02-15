@@ -21,7 +21,10 @@ export const Linkable: React.FC = ({ children }) => {
     const href = React.useMemo(() => router.isReady ? slugToAnchor(slug) : '', [slug])
 
     const [hovering, setHovering] = React.useState(false)
-    const copyHandler = () => ref.current?.scrollIntoView()
+    const copyHandler = () => {
+        window.location.href = href
+        ref.current?.scrollIntoView()
+    }
 
     return (
         <CopyToClipboard text={href} onCopy={copyHandler}>
@@ -32,7 +35,7 @@ export const Linkable: React.FC = ({ children }) => {
                 onMouseOver={() => setHovering(true)}
                 onMouseOut={() => setHovering(false)}
                 style={{
-                    scrollMarginTop: '5rem'
+                    scrollMarginTop: '1rem'
                 }}
             >
 

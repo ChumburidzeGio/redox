@@ -9,6 +9,7 @@ export const Youtube = ({ id, height }: YoutubeProps) => (
     <>
         <br />
         <iframe
+            className="rounded-md"
             src={`https://www.youtube.com/embed/${id}`}
             width="100%"
             height={`${height || 500}px`}

@@ -1,0 +1,113 @@
+import * as React from 'react'
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { ChevronDownIcon } from '@heroicons/react/solid'
+
+const navigation = [
+    { name: 'Getting Started', href: '/' },
+    { name: '1. About Amsterdam', href: '/amsterdam' },
+    { name: '2. Housing', href: '/housing' },
+    { name: '3. BSN', href: '/bsn' },
+    { name: '4. Banking', href: '/banking' },
+    { name: '5. Utilities', href: '/utilities' },
+    { name: '6. Insurance', href: '/insurance' },
+    { name: '7. Transportation', children: [
+        { name: "Bicycle", href: "/transportation/bicycle" },
+        { name: "Public Transportation", href: "/transportation/public-transport" },
+        { name: "Driving License", href: "/transportation/driving-license" },
+    ]},
+    { name: '8. Settling In', children: [
+        { name: "DigiD", href: "/settling-in/digid" },
+        { name: "MyGovernment", href: "/settling-in/my-government" },
+        { name: "Healthcare System", href: "/settling-in/healthcare" },
+        { name: "Shopping", href: "/settling-in/shopping" },
+        { name: "Well-being", href: "/settling-in/well-being" },
+        { name: "Entertainment", href: "/settling-in/entertainment" },
+        { name: "Furnishing Apartment", href: "/settling-in/furnishing" },
+    ]},
+    { name: '9. Education', children: [
+        { name: "Introduction", href: "/education/introduction" },
+        { name: "Primary education", href: "/education/primary" },
+        { name: "International Schools", href: "/education/international-schools" },
+    ]},
+    { name: '10. Buying property', href: '/buying-property' },
+    { name: '11. Integration', children: [
+        { name: "Dutch Language", href: "/integration/language" },
+        { name: "Dutch Culture", href: "/integration/culture" },
+        { name: "Short History", href: "/integration/history" },
+        { name: "Dutch Art", href: "/integration/art" },
+    ]},
+]
+
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+}
+
+interface DropdownMenuProps {
+    name: string
+    items: {
+        name: string
+        href: string
+    }[]
+}
+
+export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items }) => {
+    const router = useRouter()
+    const [folded, setFolded] = React.useState(() => {
+        return !items.find(item => item.href === router.asPath)
+    })
+
+    return (
+        <div>
+            <span
+                onClick={() => setFolded((isFolded) => !isFolded)}
+                className="group flex items-center px-2 py-2 text-base font-medium text-gray-600 justify-between cursor-pointer hover:bg-gray-50 hover:text-gray-900">
+                {name}
+                <ChevronDownIcon className="w-5 h-5 text-gray-600" />
+            </span>
+            <div className={classNames(
+                folded ? 'hidden' : 'visible',
+                'flex flex-col'
+            )}>
+                {items.map(item => (
+                    <Link href={item.href} key={item.name} passHref>
+                        <a className={classNames(
+                                router.asPath === item.href
+                                    ? 'bg-slate-200 text-gray-900'
+                                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                                'ml-4 group flex items-center px-2 py-2 text-base rounded-md'
+                            )}
+                        >
+                            {item.name}
+                        </a>
+                    </Link>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export const Navigation: React.FC = () => {
+    const router = useRouter()
+
+    return <>
+        {navigation.map((item) => item.children ? (
+            <DropdownMenu items={item.children} name={item.name} key={item.name} />
+        ) : (
+            <Link key={item.name} href={item.href} passHref>
+                <a
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                        router.asPath === item.href
+                            ? 'bg-slate-200 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                        'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                    )}
+                >
+                    {item.name}
+                </a>
+            </Link>
+        ))}
+    </>
+}

@@ -9,6 +9,8 @@ import { LogEvent } from './analytics'
 import type { LogEventProps } from './analytics'
 import { Image } from './image'
 import type { ImageProps } from './image'
+import { Anchor } from './anchor'
+import type { AnchorProps } from './anchor'
 import { DocsLayout } from '../docs'
 
 // Table of components https://mdxjs.com/table-of-components/
@@ -26,6 +28,7 @@ export const components = {
     callout: (props: CalloutProps) => <Callout {...props} />,
     'log-event': (props: LogEventProps) => <LogEvent {...props} />,
     img: (props: ImageProps) => <Image {...props} />,
+    a: (props: AnchorProps) => <Anchor {...props} />,
     // As far as we don't know type of wrapper use spreading to avoid type errors
     wrapper: ({ ...props }) => <DocsLayout {...props} />
 }
