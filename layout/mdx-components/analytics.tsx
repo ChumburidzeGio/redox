@@ -2,12 +2,12 @@ import * as React from "react";
 import { useRouter } from 'next/router'
 import amplitude from "amplitude-js"
 
-interface Props {
+export interface LogEventProps {
     name: string
     props?: Record<string, any>
 }
 
-export const LogEvent: React.FC<Props> = ({ name, props }) => {
+export const LogEvent: React.FC<LogEventProps> = ({ name, props }) => {
     const router = useRouter()
 
     React.useEffect(() => {

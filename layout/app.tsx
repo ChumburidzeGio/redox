@@ -3,12 +3,6 @@ import { BaseLayout } from "./base";
 
 const navigation = [
     { name: 'Getting Started', href: '/' },
-    { name: '1. About Amsterdam', href: '/dox/amsterdam' },
-    { name: '2. Housing', href: '/dox/housing' },
-    { name: '3. BSN', href: '/dox/bsn' },
-    { name: '4. Banking', href: '/dox/banking' },
-    { name: '5. Utilities', href: '/dox/utilities' },
-    { name: '6. Insurance', href: '/dox/insurance' },
 ]
 
 export const AppLayout: React.FC = ({ children }) => {

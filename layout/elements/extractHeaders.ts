@@ -11,7 +11,7 @@ export function extractHeaders(children: React.ReactElement[]) {
     children.map((child: React.ReactElement) => {
         const type = child.props?.mdxType
 
-        if (!type || !['h1', 'h2', 'h3'].includes(type)) {
+        if (!type || !['h2', 'h3'].includes(type)) {
             return
         }
 

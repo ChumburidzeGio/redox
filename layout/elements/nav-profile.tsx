@@ -5,7 +5,7 @@ export const NavProfile = () => {
   const { data: session } = useSession()
   if (session) {
     return (
-      <Link href="/profile" passHref>
+      <Link href="/auth/profile" passHref>
         <a>
           {session.user?.image && <img
             className="h-8 w-8 rounded-full"

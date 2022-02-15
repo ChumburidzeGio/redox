@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { MdOutlineOpenInNew } from "react-icons/md";
-import { imagesUrl } from "./image";
+import { imagesUrl } from "../layout/mdx-components/image";
 
 export const Services: React.FC = ({ children }) => {
     const count = React.useMemo(() => {
@@ -10,7 +10,7 @@ export const Services: React.FC = ({ children }) => {
     }, [children]);
 
     return (
-        <div className="relo-services md:bg-red-300" style={{
+        <div className="relo-services" style={{
             display: 'grid',
             alignItems: 'start',
             gridTemplateColumns: '1fr '.repeat(count),

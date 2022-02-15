@@ -20,6 +20,7 @@
     "@types/amplitude-js": "^8.9.3",
     "@types/mdx-js__react": "^1.5.5",
     "@types/react-anchor-link-smooth-scroll": "^1.0.2",
+    "@types/react-copy-to-clipboard": "^5.0.2",
     "@vcarl/remark-headings": "^0.0.1",
     "amplitude-js": "^8.15.0",
     "class-transformer": "^0.5.1",
@@ -31,6 +32,7 @@
     "nextra-theme-docs": "2.0.0-beta.5",
     "react": "^17.0.2",
     "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "remark-gfm": "^3.0.1"

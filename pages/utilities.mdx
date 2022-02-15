@@ -1,7 +1,4 @@
-import { LogEvent } from "blocks"
-import { DocsLayout } from 'layout'
-
-<LogEvent name="redox:view" props={{ page: 'utilities' }} />
+<log-event name="redox:view" props={{ page: 'utilities' }} />
 
 # Utilities
 
@@ -31,9 +28,9 @@ You can choose between a contract (Abonnementen) or a prepaid card.
 
 Prepaid card providers offer cheap packages including the option to keep the same number without charge. On the other hand, it would be wiser to sign a contract if you use your phone for national calls. You can compare the mobile phone provider in [this website](https://www.prijsvergelijken.nl/en_GB//telefoon-abonnement/)
 
-<Callout>
+<callout>
   You will need a Dutch bank account to subscribe to utilities in your apartment, such as electricity, gas, and internet.
-</Callout>
+</callout>
 
 ## Municipal taxes
 For all tenants within the Amsterdam region, two municipal taxes apply. In principle, these amounts are directly paid by the tenant to Waternet and the municipality.
@@ -41,5 +38,3 @@ For all tenants within the Amsterdam region, two municipal taxes apply. In princ
 **Water authority tax**: As a tenant, you pay for the purification of water. Tenants receive a tax assessment from Waternet. For more information, visit [here](https://www.waternet.nl/en/service-and-contact/water-authority-tax/).
 
 **Waste collection tax**: The tenant pays this tax to the municipality for the collection and processing of household waste. This tax is calculated on the basis of the number of people living in the rented property and the location of the property.
-
-export default ({ children }) => <DocsLayout>{children}</DocsLayout>
