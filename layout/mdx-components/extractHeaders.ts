@@ -1,5 +1,5 @@
 import * as React from 'react'
-import slugger from "../mdx-components/slugger";
+import slugger from "./slugger";
 
 export function extractHeaders(children: React.ReactElement[]) {
     const headings: {

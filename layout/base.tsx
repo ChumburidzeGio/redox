@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
-    BellIcon,
     MenuAlt2Icon,
     XIcon,
 } from '@heroicons/react/outline'
@@ -160,13 +159,6 @@ export const BaseLayout: React.FC<Props> = ({ children, navigation }) => {
                             </form>
                         </div>
                         <div className="ml-4 flex items-center md:ml-6">
-                            <button
-                                type="button"
-                                className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            >
-                                <span className="sr-only">View notifications</span>
-                                <BellIcon className="h-6 w-6" aria-hidden="true" />
-                            </button>
 
                             {/* Profile dropdown */}
                             <Menu as="div" className="ml-3 relative">

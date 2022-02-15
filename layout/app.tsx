@@ -1,9 +1,6 @@
 import * as React from 'react'
 import { BaseLayout } from "./base";
-
-const navigation = [
-    { name: 'Getting Started', href: '/' },
-]
+import navigation from "./navigation";
 
 export const AppLayout: React.FC = ({ children }) => {
     return (
