@@ -31,7 +31,7 @@ export const BaseLayout: React.FC = ({ children}) => {
                         leaveFrom="translate-x-0"
                         leaveTo="-translate-x-full"
                     >
-                        <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
+                        <div className="relative flex-1 flex flex-col max-w-xs w-full pt-2 pb-4 bg-white">
                             <Transition.Child
                                 as={React.Fragment}
                                 enter="ease-in-out duration-300"
@@ -52,10 +52,7 @@ export const BaseLayout: React.FC = ({ children}) => {
                                     </button>
                                 </div>
                             </Transition.Child>
-                            <div className="flex-shrink-0 flex items-center px-4">
-                                <Logo />
-                            </div>
-                            <div className="mt-5 flex-1 h-0 overflow-y-auto">
+                            <div className="flex-1 h-0 overflow-y-auto">
                                 <Navigation />
                             </div>
                         </div>
@@ -90,6 +87,9 @@ export const BaseLayout: React.FC = ({ children}) => {
                         <span className="sr-only">Open sidebar</span>
                         <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
+                    <div className="flex items-center ml-3">
+                        <Logo />
+                    </div>
                     {/*<div className="flex-1 px-4 flex justify-between">*/}
                     {/*    <div className="flex-1 flex">*/}
                     {/*        <form className="w-full flex md:ml-0" action="#" method="GET">*/}
