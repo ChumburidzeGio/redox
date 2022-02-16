@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { extractHeaders } from './mdx-components/extractHeaders'
 import {BaseLayout} from "./base";
-import { FooterNavigation } from "./navigation";
+import { FooterNavigation } from "./footer-navigation";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 export const DocsLayout: React.FC = ({ children }) => {
