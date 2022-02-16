@@ -11,6 +11,8 @@ import { Image } from './image'
 import type { ImageProps } from './image'
 import { Anchor } from './anchor'
 import type { AnchorProps } from './anchor'
+import { Loom } from './loom'
+import type { LoomProps } from './loom'
 import { DocsLayout } from '../docs'
 
 // Table of components https://mdxjs.com/table-of-components/
@@ -24,6 +26,7 @@ export const components = {
     ul: CustomUl,
     li: CustomLi,
     youtube: (props: YoutubeProps) => <Youtube {...props} />,
+    loom: (props: LoomProps) => <Loom {...props} />,
     'youtube-card': (props: YoutubeCardProps) => <YoutubeCard {...props} />,
     callout: (props: CalloutProps) => <Callout {...props} />,
     'log-event': (props: LogEventProps) => <LogEvent {...props} />,
