@@ -33,7 +33,8 @@ export const navigation = [
     ]},
     { name: 'Education', children: [
         { name: "Introduction", href: "/education/introduction" },
-        { name: "Primary education", href: "/education/primary" },
+        { name: "Primary Education", href: "/education/primary" },
+        { name: "Secondary Education", href: "/education/secondary" },
         { name: "International Schools", href: "/education/international-schools" },
     ]},
     { name: 'Buying property', href: '/buying-property' },
@@ -43,6 +44,7 @@ export const navigation = [
         { name: "Short History", href: "/integration/history" },
         { name: "Dutch Art", href: "/integration/art" },
     ]},
+    { name: 'Changelog', href: '/changelog' },
 ]
 
 function classNames(...classes: string[]) {
