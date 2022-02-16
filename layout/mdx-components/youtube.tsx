@@ -2,23 +2,20 @@ import * as React from "react";
 
 export interface YoutubeProps {
     id: string
-    height?: number
 }
 
-export const Youtube = ({ id, height }: YoutubeProps) => (
-    <>
+export const Youtube = ({ id }: YoutubeProps) => (
+    <div className="relative mt-6 pb-[61.74957118353345%] h-0">
         <br />
         <iframe
-            className="rounded-md"
+            className="rounded-md absolute top-0 left-0 w-full h-full"
             src={`https://www.youtube.com/embed/${id}`}
-            width="100%"
-            height={`${height || 500}px`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
         />
-    </>
+    </div>
 )
 
 export interface YoutubeCardProps {
@@ -27,8 +24,17 @@ export interface YoutubeCardProps {
 
 export const YoutubeCard: React.FC<YoutubeCardProps> = ({ id, children }) => {
     return (
-        <div style={{ display: 'flex', flexFlow: 'row', border: "2px solid #c1c1c1", borderRadius: "8px", marginTop: "20px", overflow: 'hidden' }}>
-            <div style={{ display: 'flex', flex: "1 0 auto" }}><Youtube id={id} height={200} /></div>
+        <div className="flex flex-col md:flex-row border-2 border-gray-200 rounded-md mt-6 overflow-hidden">
+            <div className="flex flex-[1_0_auto]">
+                <iframe
+                    className="top-0 left-0 w-full h-200"
+                    src={`https://www.youtube.com/embed/${id}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                />
+            </div>
             <div style={{ display: 'flex', flexFlow: 'column', padding: "10px 15px" }}>{children}</div>
         </div>
     )
