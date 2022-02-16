@@ -11,7 +11,7 @@ const tagToColor: Record<string, BadgeProps['color']> = {
 const DistrictsExplorer = () => districts.map(district => (
     <ImageCard imageSrc={district.imageSrc} videoId={district.videoId} mapQuery={district.id}>
         <div className="text-lg font-bold">{district.title}</div>
-        <div className="flex flex-row mb-3 mt-1">
+        <div className="flex flex-row mb-3 mt-1 flex-wrap">
             {district.tags.map(tag => (
                 <div className="mr-1">
                     <Badge color={tagToColor[tag]}>{tag}</Badge>

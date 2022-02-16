@@ -10,39 +10,18 @@ interface ImageCardProps {
 
 export const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoId, children }) => {
     return (
-        <div className="flex overflow-hidden rounded flex-col md:flex-row" style={{ border: "2px solid #c1c1c1", marginTop: "20px"}}>
-            {imageSrc && <div className="sm:w-100 relo-block-card-img" style={{
-                display: "flex",
-                flex: "1 0 auto",
-                height: "250px",
-                justifyContent: "center",
-                alignItems: "center",
-                overflow: "hidden",
-            }}>
-                <img src={imageSrc} alt={mapQuery} style={{
-                    flexShrink: "0",
-                    minWidth: "100%",
-                    minHeight: "100%",
-                    objectFit: "cover",
-                }} />
+        <div className="flex overflow-hidden rounded flex-col md:flex-row border-2 border-gray-200 mt-6">
+            {imageSrc && <div className="sm:w-100 max-w-full sm:max-w-[250px] flex flex-[1_0_auto] h-[250px] justify-center items-center overflow-hidden">
+                <img src={imageSrc} alt={mapQuery} className="flex-shrink-0 min-w-full min-h-full object-cover" />
             </div>}
-            <div style={{ display: 'flex', flexFlow: 'column', padding: "10px 15px", justifyContent: "space-between" }}>
-                <div style={{ display: 'flex', flexFlow: 'column' }}>{children}</div>
-                <div style={{ display: 'flex' }}>
-                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" style={{
-                        display: 'flex',
-                        textDecoration: "none",
-                        color: "#0163e8",
-                        marginRight: "20px"
-                    }}>
-                        <AiFillYoutube size={20} style={{ marginRight: "5px", marginTop: "2px" }} /> Check video
+            <div className="flex flex-col px-5 py-4 justify-between">
+                <div className="flex flex-col">{children}</div>
+                <div className="flex flex-wrap">
+                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" className="flex no-underline text-blue-700 mr-7 mt-2">
+                        <AiFillYoutube size={20} className="mr-2 mt-1" /> Check video
                     </a>}
-                    <a href={`https://www.google.com/maps/place/${mapQuery}`} target="_blank" style={{
-                        display: 'flex',
-                        textDecoration: "none",
-                        color: "#0163e8"
-                    }}>
-                        <MdMap size={20} style={{ marginRight: "5px", marginTop: "2px" }} /> Check on the map
+                    <a href={`https://www.google.com/maps/place/${mapQuery}`} target="_blank" className="flex no-underline text-blue-700 mt-2">
+                        <MdMap size={20} className="mr-2 mt-1" /> Check on the map
                     </a>
                 </div>
             </div>
