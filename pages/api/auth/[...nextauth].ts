@@ -3,10 +3,49 @@ import CredentialsProvider from "next-auth/providers/credentials"
 
 const users = [
   {
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    role: 'admin',
+    email: 'giorgi@relocify.nl',
+    password: '16111995'
+  },
+  {
+    role: 'admin',
+    email: 'gulce@relocify.nl',
+    password: '18121994'
+  },
+  {
     role: 'client',
-    email: 'john@acme.com',
-    password: 'somepass'
+    email: 'odbc@yandex.ru', // Sergey Simonyan
+    password: '02031986'
+  },
+  {
+    role: 'client',
+    email: 'benno.deysel@gmail.com', // Benno Deysel
+    password: '02041981'
+  },
+  {
+    role: 'client',
+    email: 'theanad@gmail.com', // Theana Deysel
+    password: '28011981'
+  },
+  {
+    role: 'client',
+    email: 'kronolynx@gmail.com', // Johann Grisales
+    password: '24061982'
+  },
+  {
+    role: 'client',
+    email: 'updatedsapiens@gmail.com', // Roxana Manu
+    password: '10121981'
+  },
+  {
+    role: 'client',
+    email: 'ilyas9406@yandex.ru', // Ilya Surkov
+    password: '02011994'
+  },
+  {
+    role: 'client',
+    email: 'luilui312@gmail.com', // Luisa Paz Perez
+    password: '03121986'
   }
 ]
 
