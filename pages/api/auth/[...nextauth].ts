@@ -17,12 +17,6 @@ export default NextAuth({
     signIn: '/auth/signin',
     newUser: '/auth/new-user'
   },
-  theme: {
-    colorScheme: "light", // "auto" | "dark" | "light"
-    brandColor: "#2255fc", // Hex color code
-    logo: "https://www.relocify.nl/lib_LZtzTqMpfIqVhzka/dcic8u7lvd90yueq.png?w=180" // Absolute URL to image
-  },
-  // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -51,10 +45,6 @@ export default NextAuth({
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter        
         }
       }
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
     })
   ],
   callbacks: {
