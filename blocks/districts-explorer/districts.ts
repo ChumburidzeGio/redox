@@ -21,7 +21,7 @@ export default [
     imageSrc: '/img/hoods/oudzuid.jpeg',
     title: 'Oud-Zuid',
     tags: ['central', 'safe', 'busy', '€€€', 'old buildings'],
-    description: 'More expensive than De Pijp and one of the most desirable residential neighborhood with the city\'s most fashionable shopping streets PC Hooftstraat, Van Baerlestraat and Beethovenstraat, famous museums, Coster Diamonds, Concertgebouw, and the Vondelpark.'
+    description: 'One of the most desirable neighborhoods with fashionable shopping streets PC Hooftstraat, Van Baerlestraat and Beethovenstraat, famous museums, Coster Diamonds, Concertgebouw, and the Vondelpark.'
   },
   {
     id: 'Amstelveen,+Netherlands',
@@ -101,7 +101,7 @@ export default [
     imageSrc: '/img/hoods/noord.jpeg',
     title: 'Noord',
     tags: ['central', 'old buildings'],
-    description: 'Across the water from Centraal Station is Amsterdam-Noord (Amsterdam North), a district that has been little more than a dull dormitory suburb up until now. However, this is changing with its Noorder Park, charming little villages, quiet dining options, and waterside hangouts with beautiful terraces. A free ferry from behind Central Station will take you there in minutes.'
+    description: 'Across the water from Centraal Station, Noord has been little more than a dull dormitory suburb up until now. However, this is changing with its Noorder Park, charming little villages, quiet dining options, and waterside hangouts with beautiful terraces.'
   },
   {
     id: 'NDSM,+Amsterdam,+Netherlands',

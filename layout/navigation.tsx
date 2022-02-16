@@ -30,6 +30,7 @@ export const navigation = [
         { name: "Well-being", href: "/settling-in/well-being" },
         { name: "Entertainment", href: "/settling-in/entertainment" },
         { name: "Furnishing Apartment", href: "/settling-in/furnishing" },
+        { name: "Buying Property", href: "/settling-in/buying-property" },
     ]},
     { name: 'Education', children: [
         { name: "Introduction", href: "/education/introduction" },
@@ -37,7 +38,6 @@ export const navigation = [
         { name: "Secondary Education", href: "/education/secondary" },
         { name: "International Schools", href: "/education/international-schools" },
     ]},
-    { name: 'Buying property', href: '/buying-property' },
     { name: 'Integration', children: [
         { name: "Dutch Language", href: "/integration/language" },
         { name: "Dutch Culture", href: "/integration/culture" },

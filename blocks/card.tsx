@@ -10,11 +10,11 @@ interface ImageCardProps {
 
 export const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoId, children }) => {
     return (
-        <div className="flex overflow-hidden rounded flex-col md:flex-row border-2 border-gray-200 mt-6">
-            {imageSrc && <div className="sm:w-100 max-w-full sm:max-w-[250px] flex flex-[1_0_auto] h-[250px] justify-center items-center overflow-hidden">
+        <div className="flex overflow-hidden rounded flex-col md:flex-row border border-gray-300 shadow mt-6">
+            {imageSrc && <div className="sm:w-100 max-w-full sm:max-w-[200px] flex flex-[1_0_auto] sm:min-h-[200px] justify-center items-center overflow-hidden">
                 <img src={imageSrc} alt={mapQuery} className="flex-shrink-0 min-w-full min-h-full object-cover" />
             </div>}
-            <div className="flex flex-col px-5 py-4 justify-between">
+            <div className="flex flex-col px-5 py-3 justify-between">
                 <div className="flex flex-col">{children}</div>
                 <div className="flex flex-wrap">
                     {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" className="flex no-underline text-blue-700 mr-7 mt-2">
