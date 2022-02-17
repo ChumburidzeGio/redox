@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { MdOutlineOpenInNew } from "react-icons/md";
-import { imagesUrl } from "../layout/mdx-components/image";
+import { imagesUrl } from "lib/mdx/image";
 
 export const Services: React.FC = ({ children }) => {
     const count = React.useMemo(() => {

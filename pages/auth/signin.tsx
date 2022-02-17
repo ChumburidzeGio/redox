@@ -2,7 +2,7 @@ import * as React from "react";
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { getCsrfToken } from "next-auth/react"
-import {Badge, Logo} from "elements"
+import {Badge, Logo} from "lib/shared-ui"
 
 const errorMapping = {
     CredentialsSignin: 'Email or password is incorrect'

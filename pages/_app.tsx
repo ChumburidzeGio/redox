@@ -5,9 +5,9 @@ import { useRouter } from 'next/router'
 import { SessionProvider } from "next-auth/react"
 import amplitude from "amplitude-js"
 import { MDXProvider } from '@mdx-js/react'
-import { components as MDXComponents } from "../layout/mdx-components";
+import { components as MDXComponents } from "lib/mdx";
 
-import '../styles/global.css'
+import 'lib/styles/global.css'
 import '../blocks/services.css'
 
 const initAmplitude = () => {
