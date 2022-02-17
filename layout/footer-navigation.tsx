@@ -59,7 +59,15 @@ export const FooterNavigation: React.FC = () => {
         }
 
         const parentIndex = navigation.findIndex(item => item.children && item.children?.some(child => child.href === path))
-        const childIndex = navigation[parentIndex].children?.findIndex(item => item.href && item.href === path)
+        if (parentIndex === -1) {
+            return {
+                prev: null,
+                next: null
+            }
+        }
+
+        const childIndex = navigation[parentIndex]?.children?.findIndex(item => item.href && item.href === path)
+
         return {
             prev: getPrevOrNext(true, parentIndex, childIndex),
             next: getPrevOrNext(false, parentIndex, childIndex)
