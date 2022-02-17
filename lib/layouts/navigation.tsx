@@ -4,6 +4,7 @@ import Link from "next/link";
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import {signOut} from "next-auth/react";
 import {LogoutIcon} from "@heroicons/react/outline";
+import {logEvent} from "lib/analytics";
 
 export const navigation = [
     { name: 'Getting Started', href: '/' },
@@ -98,6 +99,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items }) => {
 export const Navigation: React.FC = () => {
     const router = useRouter()
 
+    const handleSignOut = () => {
+        logEvent('redox:logout')
+        signOut()
+    }
+
     return <>
         <nav className="flex flex-1 px-4 pb-4 pt-3 space-y-1 flex-col justify-between h-full">
             <div className="flex flex-col">
@@ -122,7 +128,7 @@ export const Navigation: React.FC = () => {
             </div>
 
             <div className="flex flex-col">
-                <a className="group flex items-center px-2 py-2 text-md rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={() => signOut()}>
+                <a className="group flex items-center px-2 py-2 text-md rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={handleSignOut}>
                     <LogoutIcon className="mr-2 h-6 w-6" />
                     Sign out
                 </a>

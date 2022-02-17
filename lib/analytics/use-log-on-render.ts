@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import * as React from "react";
-import amplitude from "amplitude-js";
+import { logEvent } from "./log-event";
 
 export function useLogOnRender(name: string, props?: Record<string, any>) {
     const router = useRouter()
@@ -8,7 +8,7 @@ export function useLogOnRender(name: string, props?: Record<string, any>) {
     React.useEffect(() => {
         if (router.isReady) {
             setTimeout(() => {
-                amplitude.getInstance().logEvent(name, props || {});
+                logEvent(name, props || {});
             }, 200)
         }
     }, [router.isReady])
