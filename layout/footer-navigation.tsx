@@ -48,8 +48,9 @@ function getPrevOrNext(isBackwards: boolean, index: number, childIndex?: number)
 
 export const FooterNavigation: React.FC = () => {
     const { asPath } = useRouter()
+    const path = asPath.split('#')[0]
     const { next, prev } = React.useMemo(() => {
-        const index = navigation.findIndex(item => item.href && item.href === asPath)
+        const index = navigation.findIndex(item => item.href && item.href === path)
         if (index > -1) {
             return {
                 prev: getPrevOrNext(true, index),
@@ -57,14 +58,14 @@ export const FooterNavigation: React.FC = () => {
             }
         }
 
-        const parentIndex = navigation.findIndex(item => item.children && item.children?.some(child => child.href === asPath))
-        const childIndex = navigation[parentIndex].children?.findIndex(item => item.href && item.href === asPath)
+        const parentIndex = navigation.findIndex(item => item.children && item.children?.some(child => child.href === path))
+        const childIndex = navigation[parentIndex].children?.findIndex(item => item.href && item.href === path)
         return {
             prev: getPrevOrNext(true, parentIndex, childIndex),
             next: getPrevOrNext(false, parentIndex, childIndex)
         }
 
-    }, [asPath])
+    }, [path])
 
     return (
         <nav className="px-4 flex items-center justify-between sm:px-0 mt-8 flex-col sm:flex-row">
