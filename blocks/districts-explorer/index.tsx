@@ -24,11 +24,11 @@ const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoId, chil
             </div>}
             <div className="flex flex-col px-5 py-3 justify-between">
                 <div className="flex flex-col">{children}</div>
-                <div className="flex flex-wrap">
-                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" className="flex no-underline text-blue-700 mr-7 mt-2 items-center">
+                <div className="flex flex-wrap text-stone-800">
+                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" className="flex no-underline mr-7 mt-2 items-center">
                         <VideoCameraIcon className="h-6 w-6 mr-2" /> Check video
                     </a>}
-                    <a href={`https://www.google.com/maps/place/${mapQuery}`} target="_blank" className="flex no-underline text-blue-700 mt-2">
+                    <a href={`https://www.google.com/maps/place/${mapQuery}`} target="_blank" className="flex no-underline mt-2">
                         <MapIcon className="h-6 w-6 mr-2" /> Check on the map
                     </a>
                 </div>
