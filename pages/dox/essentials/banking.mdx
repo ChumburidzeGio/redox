@@ -1,4 +1,4 @@
-import { Services, ServiceItem } from 'blocks/services'
+import { Services } from 'lib/services'
 
 <log-event name="redox:view" props={{ page: 'banking' }} />
 
@@ -15,24 +15,22 @@ For online payments generally, iDEAL is used, which transfers money directly fro
 ## Opening Bank Account
 To receive your salary and pay expenses you need to open a bank account. The most popular banks among expats are:
 
-<Services>
-    <ServiceItem logo="logos/abn-amro.png" label="ABN Amro" link="https://www.abnamro.nl/en/personal/index.html">
-        - ✅ BSN not required<br />
-        - ✅ Fully in English<br />
-        - Average mobile-app
-    </ServiceItem>
-    <ServiceItem logo="logos/ing.png" label="ING" link="https://www.ing.nl/particulier/index.html">
-        - ✅ Amazing mobile-app<br />
-        - BSN required<br />
-        - Partially in English
-    </ServiceItem>
-    <ServiceItem logo="logos/bunq.png" label="bunq" link="https://www.bunq.com/">
-        - ✅ Amazing mobile-app<br />
-        - ✅ BSN not required<br />
-        - ✅ Fully in English<br />
-        - Can't top-up with cash
-    </ServiceItem>
-</Services>
+<Services items={[
+    {
+        logo: "logos/abn-amro.png",
+        label: "ABN Amro",
+        link: "https://www.abnamro.nl/en/personal/index.html",
+        pros: ["BSN not required", "Fully in English"],
+        cons: ["Average mobile-app"]
+    },
+    {
+        logo: "logos/bunq.png",
+        label: "bunq",
+        link: "https://www.bunq.com/",
+        pros: ["Amazing mobile-app", "BSN not required", "Fully in English"],
+        cons: ["Can't top-up with cash"]
+    }
+]} />
 
 We usually open accounts in ABN Amro as it has a [special program](https://www.abnamro.nl/en/personal/payments/open-an-account/make-appointment.html) for expats.
 

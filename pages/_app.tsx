@@ -7,7 +7,6 @@ import { components as MDXComponents } from "lib/mdx";
 import { AmplitudeProvider } from "lib/analytics";
 
 import 'lib/styles/global.css'
-import '../blocks/services.css'
 
 const metaTitle = "Redox - Complete Guide to Amsterdam"
 const metaDescription = "Learn about housing, BSN, banking, insurance, and many other things, use integration module to better understand Netherlands and Dutch people and use Redox as an ultimate guide to your new home."

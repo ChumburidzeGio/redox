@@ -1,4 +1,4 @@
-import { Services, ServiceItem } from 'blocks/services'
+import { Services } from 'lib/services'
 
 <log-event name="redox:view" props={{ page: 'dutch-language' }} />
 
@@ -6,22 +6,35 @@ import { Services, ServiceItem } from 'blocks/services'
 Although almost everyone can speak English, especially in Amsterdam, understanding Dutch makes it easier to communicate with people around you. There are various websites and learning courses where you can start practicing Dutch. **Duolingo** and **Babbel** are examples of language apps for people looking to learn a new language as well as free courses from municipalities like this [official course](https://www.amsterdam.nl/en/education/learning-dutch/) from the city of Amsterdam.
 
 For paid courses, where you can quickly learn the language by taking individual or group classes, we recommend these companies:
-<Services>
-    <ServiceItem logo="logos/dutchcoursesamsterdam.jpeg" label="Dutch Courses A'dam" link="https://dutchcoursesamsterdam.nl/">
-        - Group (max 6-8 students) or individual<br />
-        - Intensive, semi-intensive courses<br />
-        - Online or in-person morning and evening courses <br />
-        - Individual homework <br />
-        - Free level assessment <br />
-        - Fee includes study materials, coffee/tea, certificate
-    </ServiceItem>
-    <ServiceItem logo="logos/koentact.png" label="Koentact" link="https://koentact.nl/dutch-language-courses/">
-        - Group (max 7-12) or individual<br />
-        - In-person morning and evening courses <br />
-        - Online evening courses <br />
-        - Free review classes <br />
-        - Free civic integration workshops<br />
-        - Fee includes study materials, coffee/tea, certificate
-        - Field trips
-     </ServiceItem>
-</Services>
+
+<Services items={[
+    {
+        logo: "logos/dutchcoursesamsterdam.jpeg",
+        label: "Dutch Courses A'dam",
+        link: "https://dutchcoursesamsterdam.nl/",
+        pros: [
+            "Group (max 6-8 students) or individual",
+            "Intensive, semi-intensive courses",
+            "Online or in-person morning and evening courses",
+            "Individual homework",
+            "Free level assessment",
+            "Fee includes study materials, coffee/tea, certificate",
+        ],
+        cons: []
+    },
+    {
+        logo: "logos/koentact.png",
+        label: "Koentact",
+        link: "https://koentact.nl/dutch-language-courses/",
+        pros: [
+            "Group (max 7-12) or individual",
+            "In-person morning and evening courses",
+            "Online evening courses",
+            "Free review classes",
+            "Free civic integration workshops",
+            "Fee includes study materials, coffee/tea, certificate",
+            "Field trips",
+        ],
+        cons: []
+    }
+]} />
