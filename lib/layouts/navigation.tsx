@@ -11,8 +11,8 @@ export const navigation = [
     { name: 'Housing', children: [
         { name: "Amsterdam", href: "/dox/housing/amsterdam" },
         { name: "Rental Process", href: "/dox/housing/rental-process" },
-        { name: "Utilities", href: "/dox/essentials/utilities" },
-        { name: "Furnishing Apartment", href: "/dox/settling-in/furnishing" },
+        { name: "Utilities", href: "/dox/housing/utilities" },
+        { name: "Furnishing Apartment", href: "/dox/housing/furnishing" },
     ]},
     { name: 'Essentials', children: [
         { name: "BSN", href: "/dox/essentials/bsn" },
