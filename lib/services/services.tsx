@@ -30,7 +30,7 @@ const ProOrCon: React.FC<ProOrConProps> = ({ type, children }) => (
 export const Services: React.FC<ServicesProps> = ({ items }) => (
     <div className="grid align-start gap-10 my-10 grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto">
         {items.map(item => (
-            <a key={item.label} href={item.link} target="_blank" className="flex border border-gray-300 shadow overflow-hidden flex-col rounded-md no-underline relative">
+            <a key={item.label} href={item.link} target="_blank" rel="noreferrer" className="flex border border-gray-300 shadow overflow-hidden flex-col rounded-md no-underline relative">
                 <div className="flex h-[100px] overflow-hidden justify-center px-6 border-b border-gray-200">
                     <img src={imagesUrl(item.logo)} alt={`${item.label} service`} className="block max-h-[100px] w-auto m-auto" />
                 </div>

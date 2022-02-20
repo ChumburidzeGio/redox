@@ -27,7 +27,7 @@ export const Button: React.FC<React.HTMLProps<HTMLButtonElement & ButtonProps>> 
         }
 
         return list.filter(Boolean).join(' ')
-    }, [type])
+    }, [type, className])
 
     return (
         <button className={classes} type="button" {...rest}>

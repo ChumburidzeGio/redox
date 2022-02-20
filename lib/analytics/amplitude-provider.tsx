@@ -25,7 +25,7 @@ export const AmplitudeProvider: React.FC<AmplitudeProviderProps> = ({ apiKey, ch
         if (router.isReady) {
             initAmplitude(apiKey, session?.user?.email || undefined)
         }
-    }, [router.isReady])
+    }, [router.isReady, apiKey, session?.user?.email])
 
     return <>{children}</>
 }

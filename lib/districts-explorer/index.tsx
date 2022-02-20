@@ -25,10 +25,10 @@ const ImageCard: React.FC<ImageCardProps> = ({ imageSrc, mapQuery, videoId, chil
             <div className="flex flex-col px-5 py-3 justify-between">
                 <div className="flex flex-col">{children}</div>
                 <div className="flex flex-wrap text-stone-800">
-                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" className="flex no-underline mr-7 mt-2 items-center">
+                    {videoId && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noreferrer" className="flex no-underline mr-7 mt-2 items-center">
                         <VideoCameraIcon className="h-6 w-6 mr-2" /> Check video
                     </a>}
-                    <a href={`https://www.google.com/maps/place/${mapQuery}`} target="_blank" className="flex no-underline mt-2">
+                    <a href={`https://www.google.com/maps/place/${mapQuery}`} target="_blank" rel="noreferrer" className="flex no-underline mt-2">
                         <MapIcon className="h-6 w-6 mr-2" /> Check on the map
                     </a>
                 </div>
@@ -44,11 +44,11 @@ export const DistrictsExplorer: React.FC = () => {
         <div className="relative">
             <div className={`${expanded ? '' : 'max-h-[700px]'} overflow-hidden`}>
                 {districts.map(district => (
-                    <ImageCard imageSrc={district.imageSrc} videoId={district.videoId} mapQuery={district.id}>
+                    <ImageCard imageSrc={district.imageSrc} videoId={district.videoId} mapQuery={district.id} key={district.id}>
                         <div className="text-lg font-bold">{district.title}</div>
                         <div className="flex flex-row mb-3 mt-1 flex-wrap">
                             {district.tags.map(tag => (
-                                <div className="mr-1">
+                                <div className="mr-1" key={tag}>
                                     <Badge color={tagToColor[tag]}>{tag}</Badge>
                                 </div>
                             ))}

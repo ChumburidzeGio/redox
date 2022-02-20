@@ -11,5 +11,5 @@ export function useLogOnRender(name: string, props?: Record<string, any>) {
                 logEvent(name, props || {});
             }, 200)
         }
-    }, [router.isReady])
+    }, [router.isReady, name, props])
 }

@@ -18,7 +18,7 @@ export const Linkable: React.FC = ({ children }) => {
     const ref = React.useRef<HTMLSpanElement>(null)
 
     const slug = useSlugger(children as string)
-    const href = React.useMemo(() => router.isReady ? slugToAnchor(slug) : '', [slug])
+    const href = React.useMemo(() => router.isReady ? slugToAnchor(slug) : '', [slug, router.isReady])
 
     const [hovering, setHovering] = React.useState(false)
     const copyHandler = () => {

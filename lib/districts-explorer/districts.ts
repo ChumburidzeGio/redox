@@ -1,4 +1,4 @@
-export default [
+const districts = [
   {
     id: 'Jordaan,+Amsterdam,+Netherlands',
     videoId: 'N-XFY8KyFlI',
@@ -128,3 +128,5 @@ export default [
     description: 'This young city with the available houses, many modern and innovative architectonic highlights, good schools, and sports facilities attract a growing international population.'
   }
 ];
+
+export default districts
