@@ -11,11 +11,12 @@ export const navigation = [
     { name: 'Housing', children: [
         { name: "Amsterdam", href: "/dox/housing/amsterdam" },
         { name: "Rental Process", href: "/dox/housing/rental-process" },
+        { name: "Utilities", href: "/dox/essentials/utilities" },
+        { name: "Furnishing Apartment", href: "/dox/settling-in/furnishing" },
     ]},
     { name: 'Essentials', children: [
         { name: "BSN", href: "/dox/essentials/bsn" },
         { name: "Banking", href: "/dox/essentials/banking" },
-        { name: "Utilities", href: "/dox/essentials/utilities" },
         { name: "Insurance", href: "/dox/essentials/insurance" },
     ]},
     { name: 'Transportation', children: [
@@ -30,7 +31,6 @@ export const navigation = [
         { name: "Shopping", href: "/dox/settling-in/shopping" },
         { name: "Well-being", href: "/dox/settling-in/well-being" },
         { name: "Entertainment", href: "/dox/settling-in/entertainment" },
-        { name: "Furnishing Apartment", href: "/dox/settling-in/furnishing" },
         { name: "Buying Property", href: "/dox/settling-in/buying-property" },
     ]},
     { name: 'Education', children: [
