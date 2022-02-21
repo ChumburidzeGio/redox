@@ -1,0 +1,36 @@
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "gender": "male",
+    "birth_date": "01-01-1985",
+    "nationalities": ["AU"],
+    "phone": "+31685077777",
+    "email": "john@acme.com",
+    "password": "somepass",
+    "relationship": "married",
+    "status": "active",
+    "title": "CFO",
+    "company": "payconiq",
+    "partner": {
+        "firstName": "Joana",
+        "lastName": "Doe",
+        "gender": "female",
+        "birth_date": "02-02-1985",
+        "nationalities": ["AU"],
+        "phone": "+31685088888",
+        "email": "joana@acme.com"
+    },
+    "children": [
+        {
+            "firstName": "Jim",
+            "lastName": "Doe",
+            "gender": "female",
+            "birth_date": "02-02-2012",
+            "nationalities": ["AU"]
+        }
+    ],
+    "services": ["housing", "settling_in", "airport_shuttle", "schooling"],
+    "origin_country": "AU",
+    "destination_city": "Amsterdam",
+    "notes": ""
+}
