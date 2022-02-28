@@ -13,6 +13,7 @@ export const navigation = [
         { name: "Rental Process", href: "/dox/housing/rental-process" },
         { name: "Utilities", href: "/dox/housing/utilities" },
         { name: "Furnishing Apartment", href: "/dox/housing/furnishing" },
+        { name: "Moving Services (HHG)", href: "/dox/housing/moving-services" },
     ]},
     { name: 'Essentials', children: [
         { name: "BSN", href: "/dox/essentials/bsn" },
@@ -23,6 +24,7 @@ export const navigation = [
         { name: "Bicycle", href: "/dox/transportation/bicycle" },
         { name: "Public Transportation", href: "/dox/transportation/public-transport" },
         { name: "Driving License", href: "/dox/transportation/driving-license" },
+        { name: "Buying Car", href: "/dox/transportation/buying-car" },
     ]},
     { name: 'Settling In', children: [
         { name: "DigiD", href: "/dox/settling-in/digid" },
