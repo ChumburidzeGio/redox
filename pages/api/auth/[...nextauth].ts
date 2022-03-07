@@ -13,6 +13,16 @@ const users = [
     password: '18121994'
   },
   {
+    role: 'admin',
+    email: 'thessa@relocify.nl',
+    password: '08031996'
+  },
+  {
+    role: 'admin',
+    email: 'davit@relocify.nl',
+    password: '10061995'
+  },
+  {
     role: 'client',
     email: 'odbc@yandex.ru', // Sergey Simonyan
     password: '02031986'
