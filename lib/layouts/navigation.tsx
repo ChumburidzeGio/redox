@@ -12,6 +12,7 @@ export const navigation = [
         { name: "Amsterdam", href: "/dox/housing/amsterdam" },
         { name: "Rental Process", href: "/dox/housing/rental-process" },
         { name: "Utilities", href: "/dox/housing/utilities" },
+        { name: "Moving Services (HHG)", href: "/dox/housing/moving-services" },
         { name: "Furnishing Apartment", href: "/dox/housing/furnishing" },
     ]},
     { name: 'Essentials', children: [
@@ -23,6 +24,7 @@ export const navigation = [
         { name: "Bicycle", href: "/dox/transportation/bicycle" },
         { name: "Public Transportation", href: "/dox/transportation/public-transport" },
         { name: "Driving License", href: "/dox/transportation/driving-license" },
+        { name: "Buying Car", href: "/dox/transportation/buying-car" },
     ]},
     { name: 'Settling In', children: [
         { name: "DigiD", href: "/dox/settling-in/digid" },
@@ -38,6 +40,10 @@ export const navigation = [
         { name: "Primary Education", href: "/dox/education/primary" },
         { name: "Secondary Education", href: "/dox/education/secondary" },
         { name: "International Schools", href: "/dox/education/international-schools" },
+    ]},
+    { name: 'Family & Pets', children: [
+        { name: "Child Sports", href: "/dox/family_and_pets/child-sports" },
+        { name: "Pets", href: "/dox/family_and_pets/pets" },
     ]},
     { name: 'Integration', children: [
         { name: "Dutch Language", href: "/dox/integration/language" },
