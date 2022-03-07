@@ -5,6 +5,7 @@ import {ChevronDownIcon} from '@heroicons/react/solid'
 import {signOut} from "next-auth/react";
 import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon } from "@heroicons/react/outline";
 import {logEvent} from "lib/analytics";
+import {Badge} from "lib/shared-ui";
 
 export const navigation = [
     { name: 'Getting Started', href: '/' },
@@ -12,7 +13,7 @@ export const navigation = [
         { name: "Amsterdam", href: "/dox/housing/amsterdam" },
         { name: "Rental Process", href: "/dox/housing/rental-process" },
         { name: "Utilities", href: "/dox/housing/utilities" },
-        { name: "Moving Services (HHG)", href: "/dox/housing/moving-services" },
+        { name: "Moving HHGs", isNew: true, href: "/dox/housing/moving-services" },
         { name: "Furnishing Apartment", href: "/dox/housing/furnishing" },
     ]},
     { name: 'Essentials', Icon: CreditCardIcon, children: [
@@ -42,8 +43,8 @@ export const navigation = [
         { name: "International Schools", href: "/dox/education/international-schools" },
     ]},
     { name: 'Family & Pets', Icon: UserGroupIcon,  children: [
-        { name: "Child Sports", href: "/dox/family_and_pets/child-sports" },
-        { name: "Pets", href: "/dox/family_and_pets/pets" },
+        { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
+        { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
     ]},
     { name: 'Integration', Icon: SparklesIcon, children: [
         { name: "Dutch Language", href: "/dox/integration/language" },
@@ -62,6 +63,7 @@ interface DropdownMenuProps {
     name: string
     Icon?: React.FC<React.ComponentProps<'svg'>>
     items: {
+        isNew?: boolean
         name: string
         href: string
     }[]
@@ -98,6 +100,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items, Icon })
                             )}
                         >
                             {item.name}
+                            {item.isNew && <Badge color="green" size="sm" className="ml-2">new</Badge>}
                         </a>
                     </Link>
                 ))}
