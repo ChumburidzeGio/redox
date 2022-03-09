@@ -33,6 +33,7 @@ export const navigation = [
         { name: "Healthcare System", href: "/dox/settling-in/healthcare" },
         { name: "Shopping", href: "/dox/settling-in/shopping" },
         { name: "Well-being", href: "/dox/settling-in/well-being" },
+        { name: "News Sources", href: "/dox/settling-in/news-sources" },
         { name: "Entertainment", href: "/dox/settling-in/entertainment" },
         { name: "Buying Property", href: "/dox/settling-in/buying-property" },
     ]},
@@ -43,6 +44,8 @@ export const navigation = [
         { name: "International Schools", href: "/dox/education/international-schools" },
     ]},
     { name: 'Family & Pets', Icon: UserGroupIcon,  children: [
+        { name: "Daycare", isNew: true, href: "/dox/family-and-pets/daycare" },
+        { name: "Nannies", isNew: true, href: "/dox/family-and-pets/nannies" },
         { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
         { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
     ]},
