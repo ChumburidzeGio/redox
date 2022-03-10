@@ -25,7 +25,7 @@ const districts = [
   },
   {
     id: 'Amstelveen,+Netherlands',
-    videoId: 'HloBo9J0lDw',
+    videoId: '1mya35gytAA&t=16',
     imageSrc: '/img/hoods/amstelveen.jpeg',
     title: 'Amstelveen',
     tags: ['suburb', 'safe', '€', 'family-friendly'],
