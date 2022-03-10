@@ -25,7 +25,7 @@ export const navigation = [
         { name: "Bicycle", href: "/dox/transportation/bicycle" },
         { name: "Public Transportation", href: "/dox/transportation/public-transport" },
         { name: "Driving License", href: "/dox/transportation/driving-license" },
-        { name: "Buying Car", href: "/dox/transportation/buying-car" },
+        { name: "Buying/Renting Car", href: "/dox/transportation/buying-or-renting-car" },
     ]},
     { name: 'Settling In', Icon: FlagIcon, children: [
         { name: "DigiD", href: "/dox/settling-in/digid" },
@@ -33,7 +33,7 @@ export const navigation = [
         { name: "Healthcare System", href: "/dox/settling-in/healthcare" },
         { name: "Shopping", href: "/dox/settling-in/shopping" },
         { name: "Well-being", href: "/dox/settling-in/well-being" },
-        { name: "News Sources", href: "/dox/settling-in/news-sources" },
+        { name: "News Sources", isNew: true, href: "/dox/settling-in/news-sources" },
         { name: "Entertainment", href: "/dox/settling-in/entertainment" },
         { name: "Buying Property", href: "/dox/settling-in/buying-property" },
     ]},
@@ -45,7 +45,6 @@ export const navigation = [
     ]},
     { name: 'Family & Pets', Icon: UserGroupIcon,  children: [
         { name: "Daycare", isNew: true, href: "/dox/family-and-pets/daycare" },
-        { name: "Nannies", isNew: true, href: "/dox/family-and-pets/nannies" },
         { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
         { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
     ]},
