@@ -46,6 +46,7 @@ export const navigation = [
     { name: 'Family & Pets', Icon: UserGroupIcon,  children: [
         { name: "Daycare", isNew: true, href: "/dox/family-and-pets/daycare" },
         { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
+        { name: "Nannies", isNew: true, href: "/dox/family-and-pets/nannies" },
         { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
     ]},
     { name: 'Integration', Icon: SparklesIcon, children: [
