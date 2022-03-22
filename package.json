@@ -23,6 +23,7 @@
     "@types/react-copy-to-clipboard": "^5.0.2",
     "@vcarl/remark-headings": "^0.0.1",
     "amplitude-js": "^8.15.0",
+    "axios": "^0.26.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "github-slugger": "^1.4.0",
