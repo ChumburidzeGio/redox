@@ -9,14 +9,14 @@ import type { RadioCardProps } from "./radio-cards";
 import { ValidationRule, Message } from "react-hook-form";
 
 export interface ValidationsProps {
-  required: Message | ValidationRule<boolean>;
-  min: ValidationRule<number | string>;
-  max: ValidationRule<number | string>;
-  maxLength: ValidationRule<number>;
-  minLength: ValidationRule<number>;
-  pattern: ValidationRule<RegExp>;
-  valueAsNumber: boolean;
-  valueAsDate: boolean;
+  required?: Message | ValidationRule<boolean>;
+  min?: ValidationRule<number | string>;
+  max?: ValidationRule<number | string>;
+  maxLength?: ValidationRule<number>;
+  minLength?: ValidationRule<number>;
+  pattern?: ValidationRule<RegExp>;
+  valueAsNumber?: boolean;
+  valueAsDate?: boolean;
 }
 
 type Inputs = {
@@ -24,16 +24,7 @@ type Inputs = {
   exampleRequired: string;
 };
 
-type Field = (InputProps | SimpleSelectProps | RadioCardProps) & {
-  type:
-    | "text"
-    | "email"
-    | "hidden"
-    | "password"
-    | "simple-select"
-    | "radio-cards";
-  label?: string;
-};
+type Field = (InputProps | SimpleSelectProps | RadioCardProps);
 
 export interface FormProps {
   fields: Field[];

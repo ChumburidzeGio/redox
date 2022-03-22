@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useUser } from "lib/auth";
 
 const initAmplitude = (apiKey: string, userId?: string) => {
-  console.log({ apiKey, userId });
   amplitude.getInstance().init(apiKey, userId, {
     includeUtm: true,
     includeReferrer: true,

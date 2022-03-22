@@ -4,6 +4,7 @@ import { classNames } from "lib/shared-ui";
 
 export interface SimpleSelectProps {
   id: string;
+  type: 'simple-select';
   label: string;
   options: {
     key: string;

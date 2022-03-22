@@ -1,5 +1,6 @@
 import * as React from 'react'
 import slugger from "./slugger";
+import {JSXElementConstructor} from "react";
 
 export function extractHeaders(children: React.ReactElement) {
     const headings: {
@@ -8,12 +9,13 @@ export function extractHeaders(children: React.ReactElement) {
         link: string
     }[] = []
 
-    if (typeof children.type !== 'function') {
+    if (typeof children.type !== 'function' || typeof children.type !== "function") {
         return headings
     }
 
-    children.type().props.children.map((child: React.ReactElement) => {
-        const type = child?.type?.name
+    const element = children.type as () => React.ReactElement
+    element().props.children.map((child: React.ReactElement) => {
+        const type = (child?.type as JSXElementConstructor<any>)?.name
 
         if (!['CustomH2', 'CustomH3'].includes(type)) {
             return;

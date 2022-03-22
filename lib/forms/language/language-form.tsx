@@ -35,7 +35,6 @@ export const LanguageForm: React.FC = () => {
                             label: 'Giorgi Chumburidze'
                         }
                     ],
-                    required: true,
                     defaultValue: "gela"
                 },
                 {
@@ -43,7 +42,6 @@ export const LanguageForm: React.FC = () => {
                     type: 'email',
                     label: 'Email',
                     errorText: 'Email has to be present and be a valid email address',
-                    required: true
                 },
                 {
                     id: 'package',
@@ -51,7 +49,6 @@ export const LanguageForm: React.FC = () => {
                     label: 'Which package suits you the best?',
                     options: packages,
                     defaultValue: 'one',
-                    required: true
                 },
             ]}>
                 <Button type="secondary">Subscribe</Button>

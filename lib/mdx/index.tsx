@@ -1,4 +1,5 @@
 import * as React from "react";
+import type {MDXComponents} from "mdx/types";
 import { Youtube, YoutubeCard } from "./youtube";
 import type { YoutubeProps, YoutubeCardProps } from "./youtube";
 import { CustomH1, CustomH2, CustomH3, CustomH4, CustomP } from "./typography";
@@ -17,13 +18,21 @@ import { Wrapper } from "./wrapper";
 
 // Table of components https://mdxjs.com/table-of-components/
 // Overwriting components https://mdxjs.com/docs/using-mdx/#components
-export const components: any = {
+export const components: MDXComponents = {
+  // TODO: fix types
+  // @ts-ignore
   h1: CustomH1,
+  // @ts-ignore
   h2: CustomH2,
+  // @ts-ignore
   h3: CustomH3,
+  // @ts-ignore
   h4: CustomH4,
+  // @ts-ignore
   p: CustomP,
+  // @ts-ignore
   ul: CustomUl,
+  // @ts-ignore
   li: CustomLi,
   youtube: (props: YoutubeProps) => <Youtube {...props} />,
   loom: (props: LoomProps) => <Loom {...props} />,

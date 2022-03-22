@@ -15,10 +15,7 @@ export interface InputProps {
   errorText?: string;
   hintText?: string;
   disabled?: boolean;
-  validations?: Pick<
-    ValidationsProps,
-    "required" | "min" | "min" | "pattern" | "minLength" | "maxLength"
-  >;
+  validations?: Omit<ValidationsProps, "valueAsDate">;
 }
 
 export const Input: React.FC<InputProps> = ({

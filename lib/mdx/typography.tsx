@@ -46,7 +46,7 @@ export const Linkable: React.FC = ({ children }) => {
     )
 }
 
-export const CustomH1: React.FC = ({ children }) => {
+export const CustomH1: React.FC<any> = ({ children }) => {
     return (
         <h1 className="text-4xl mt-1 font-bold text-gray-900">
             {children}

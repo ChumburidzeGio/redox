@@ -1,23 +1,11 @@
 import * as React from "react";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
-import { getCsrfToken } from "next-auth/react";
 import { Badge, Logo } from "lib/shared-ui";
 import { Form } from "lib/forms/core";
 import Link from "next/link";
 import { useMutation } from "react-query";
 import axios from "axios";
 
-const errorMapping = {
-  CredentialsSignin: "Email or password is incorrect",
-};
-
-function errorToMessage(error: keyof typeof errorMapping) {
-  return errorMapping[error] || null;
-}
-
 export default function SignUp() {
-  const router = useRouter();
   const [showError, setShowError] = React.useState(false);
 
   const mutation = useMutation(

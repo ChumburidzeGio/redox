@@ -1,24 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
-
-interface SignUpProps {
-  password: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-}
+import { externalApis } from 'lib/api'
 
 const SignUpController = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { body } = req;
-  const { password, email, first_name, last_name } = body;
+  const { body: { password, email, first_name, last_name } } = req;
 
   try {
-    const user = await axios.post(
-      "https://nodari.onrender.com/users/sign-up",
-      { password, email, name: `${first_name} ${last_name}` },
-      { headers: { "Content-Type": "application/json" } }
-    );
-    if (user.data.id) {
+    const user = await externalApis.redarApi.signUp({
+      password,
+      email,
+      name: `${first_name} ${last_name}`
+    })
+
+    if (user.data?.id) {
       res.status(200).json({ success: true });
     }
   } catch (err) {}

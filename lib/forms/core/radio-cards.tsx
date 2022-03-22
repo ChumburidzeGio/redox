@@ -14,6 +14,7 @@ interface Option {
 
 export interface RadioCardProps {
   id: string;
+  type: 'radio-cards'
   label: string;
   options: Option[];
   defaultValue: string;

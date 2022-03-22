@@ -2,10 +2,14 @@ import * as React from 'react'
 import Link from 'next/link'
 
 export interface AnchorProps {
-    href: string
+    href?: string
 }
 
 export const Anchor: React.FC<AnchorProps> = ({ href, children }) => {
+    if (!href) {
+        return null
+    }
+
     const isInternal = href.startsWith('/')
 
     return isInternal ? (

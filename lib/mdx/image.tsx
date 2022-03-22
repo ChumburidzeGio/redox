@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 export interface ImageProps {
-    src: string
-    alt: string
+    src?: string
+    alt?: string
 }
 
 export function imagesUrl(path: string) {
@@ -10,6 +10,10 @@ export function imagesUrl(path: string) {
 }
 
 export const Image: React.FC<ImageProps> = ({ src, alt }) => {
+    if (!src) {
+        return null
+    }
+
     return (
         <>
             <img src={imagesUrl(src)} alt={alt} className={`rounded-md ${alt === 'bordered' && 'border border-gray-200'}`} />

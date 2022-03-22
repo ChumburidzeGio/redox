@@ -6,6 +6,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { components as MDXComponents } from "lib/mdx";
 import { AmplitudeProvider } from "lib/analytics";
 import { QueryClient, QueryClientProvider } from "react-query";
+import config from "config";
 
 import "lib/styles/global.css";
 
@@ -22,7 +23,7 @@ export default function App({
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={session}>
         <MDXProvider components={MDXComponents}>
-          <AmplitudeProvider apiKey="127e72a08a594d038656516bb021f04b">
+          <AmplitudeProvider apiKey={config.services.amplitude.apiKey}>
             <Component {...pageProps} />
             <Head>
               <title>{metaTitle}</title>
