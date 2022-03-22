@@ -1,7 +1,7 @@
 {
   "name": "redox",
-  "description": "Documentation for Relocify",
-  "version": "1.1.6",
+  "description": "Documentation and app for Relocify",
+  "version": "1.1.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
