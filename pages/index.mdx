@@ -1,3 +1,6 @@
+import { useSession } from "next-auth/react"
+import { Wrapper } from "lib/mdx"
+
 <log-event name="redox:view" props={{ page: 'home' }} />
 
 # Getting started
@@ -18,3 +21,30 @@ When we request these documents, you can upload the necessary documents via the 
 ![bordered](rapp-upload-file.gif)
 
 Now, let's start our journey by exploring Amsterdam, and its neighbourhoods and reading about the housing process.
+
+export default function Index({ children }) {
+    const { status } = useSession({
+        required: true,
+    })
+
+    if (status === "loading") {
+        return <>{' '}</>
+    }
+
+    // Manually setting headings as it throws error inside
+    // Wrapper because hell knows what
+    const headings = [
+        {
+            name: 'About Relocify',
+            depth: 1,
+            link: '#about-relocify'
+        },
+        {
+            name: 'First steps',
+            depth: 1,
+            link: '#first-steps'
+        }
+    ]
+
+    return <Wrapper headings={headings}>{children}</Wrapper>
+}

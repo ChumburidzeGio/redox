@@ -15,6 +15,10 @@ import type { AnchorProps } from "./anchor";
 import { Loom } from "./loom";
 import type { LoomProps } from "./loom";
 import { Wrapper } from "./wrapper";
+import { User } from "./user";
+import type { UserProps } from "./user";
+
+export { Wrapper } from "./wrapper";
 
 // Table of components https://mdxjs.com/table-of-components/
 // Overwriting components https://mdxjs.com/docs/using-mdx/#components
@@ -43,4 +47,5 @@ export const components: MDXComponents = {
   a: (props: AnchorProps) => <Anchor {...props} />,
   // As far as we don't know type of wrapper use spreading to avoid type errors
   wrapper: ({ ...props }) => <Wrapper {...props} />,
+  'user': (props: UserProps) => <User {...props} />,
 };

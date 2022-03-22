@@ -9,11 +9,11 @@ import Link from "next/link";
 const messageMapping = {
   CredentialsSignin: "Email or password is incorrect",
   SuccessfullSignUp:
-    "You successfully signed up. Please sign in with your email and password.",
+    "You successfully signed up. Please sign in now with your email and password.",
 };
 
 function messageToText(text: keyof typeof messageMapping) {
-  return messageMapping[text] || null;
+  return messageMapping[text] || messageMapping['CredentialsSignin'];
 }
 
 export default function SignIn({
@@ -69,7 +69,9 @@ export default function SignIn({
                   label: "Email",
                   errorText:
                     "Email has to be present and be a valid email address",
-                  required: true,
+                  validations: {
+                    required: true,
+                  }
                 },
                 {
                   id: "password",
@@ -77,7 +79,9 @@ export default function SignIn({
                   label: "Password",
                   errorText:
                     "Email has to be present and be a valid email address",
+                validations: {
                   required: true,
+                }
                 },
               ]}
             >

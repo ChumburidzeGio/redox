@@ -63,7 +63,8 @@ const users = [
 export default NextAuth({
   debug: true,
   pages: {
-    signIn: '/auth/signin'
+    signIn: '/auth/signin',
+    error: '/auth/signin'
   },
   providers: [
     CredentialsProvider({

@@ -1,18 +1,22 @@
 import * as React from "react";
 
 import { extractHeaders } from "./extractHeaders";
+import type { Heading } from "./extractHeaders";
 import { BaseLayout } from "lib/layouts";
 import { FooterNavigation } from "./footer-navigation";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import { JSXElementConstructor } from "react";
 
-export const Wrapper: React.FC = ({ children }) => {
+interface Props {
+    headings?: Heading[]
+}
+
+export const Wrapper: React.FC<Props> = ({ headings, children}) => {
   const sectionAnchors = React.useMemo(
-    () =>
+    () => headings ||
       extractHeaders(
-        children as React.ReactElement<string | JSXElementConstructor<any>>
+        children as React.ReactElement<string | React.JSXElementConstructor<any>>
       ),
-    [children]
+    []
   );
 
   return (

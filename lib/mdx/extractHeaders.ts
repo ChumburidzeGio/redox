@@ -2,12 +2,14 @@ import * as React from 'react'
 import slugger from "./slugger";
 import {JSXElementConstructor} from "react";
 
+export interface Heading {
+    name: string
+    depth: number
+    link: string
+}
+
 export function extractHeaders(children: React.ReactElement) {
-    const headings: {
-        name: string
-        depth: number
-        link: string
-    }[] = []
+    const headings: Heading[] = []
 
     if (typeof children.type !== 'function' || typeof children.type !== "function") {
         return headings
