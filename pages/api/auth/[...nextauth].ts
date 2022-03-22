@@ -6,7 +6,6 @@ export default NextAuth({
   debug: true,
   pages: {
     signIn: '/auth/signin',
-    newUser: '/auth/new-user',
     error: '/auth/signin'
   },
   providers: [
