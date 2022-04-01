@@ -20,6 +20,7 @@ export const navigation = [
         { name: "BSN", href: "/dox/essentials/bsn" },
         { name: "Banking", href: "/dox/essentials/banking" },
         { name: "Insurance", href: "/dox/essentials/insurance" },
+        { name: "TB Test", isNew: true, href: "/dox/essentials/tb-test" },
     ]},
     { name: 'Transportation', Icon: MapIcon, children: [
         { name: "Bicycle", href: "/dox/transportation/bicycle" },
@@ -46,8 +47,14 @@ export const navigation = [
     { name: 'Family & Pets', Icon: UserGroupIcon,  children: [
         { name: "Daycare", isNew: true, href: "/dox/family-and-pets/daycare" },
         { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
+        { name: "Nannies", isNew: true, href: "/dox/family-and-pets/nannies" },
         { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
     ]},
+    // { name: 'Work', Icon: BriefcaseIcon,  children: [
+    //     { name: "Introduction", isNew: true, href: "/dox/work/intro" },
+    //     { name: "Finding Job", isNew: true, href: "/dox/work/finding-job" },
+    //     { name: "Taxes and Social Security", isNew: true, href: "/dox/work/taxes" },
+    // ]},
     { name: 'Integration', Icon: SparklesIcon, children: [
         { name: "Dutch Language", href: "/dox/integration/language" },
         { name: "Dutch Culture", href: "/dox/integration/culture" },
