@@ -56,6 +56,16 @@ const users = [
     role: 'client',
     email: 'luilui312@gmail.com', // Luisa Paz Perez
     password: '03121986'
+  },
+  {
+    role: 'client',
+    email: 'marriatarasova@gmail.com', // Mariia Tarasova
+    password: '22101993'
+  },
+  {
+    role: 'client',
+    email: 'iamusualguy@gmail.com', // Anton Stepanov
+    password: '14041993'
   }
 ]
 
