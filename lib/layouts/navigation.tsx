@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import {signOut} from "next-auth/react";
-import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon, BriefcaseIcon } from "@heroicons/react/outline";
+import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon } from "@heroicons/react/outline";
 import {logEvent} from "lib/analytics";
 import {Badge} from "lib/shared-ui";
 
@@ -50,11 +50,11 @@ export const navigation = [
         { name: "Nannies", isNew: true, href: "/dox/family-and-pets/nannies" },
         { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
     ]},
-    { name: 'Work', Icon: BriefcaseIcon,  children: [
-        { name: "Introduction", isNew: true, href: "/dox/work/intro" },
-        { name: "Finding Job", isNew: true, href: "/dox/work/finding-job" },
-        { name: "Taxes and Social Security", isNew: true, href: "/dox/work/taxes" },
-    ]},
+    // { name: 'Work', Icon: BriefcaseIcon,  children: [
+    //     { name: "Introduction", isNew: true, href: "/dox/work/intro" },
+    //     { name: "Finding Job", isNew: true, href: "/dox/work/finding-job" },
+    //     { name: "Taxes and Social Security", isNew: true, href: "/dox/work/taxes" },
+    // ]},
     { name: 'Integration', Icon: SparklesIcon, children: [
         { name: "Dutch Language", href: "/dox/integration/language" },
         { name: "Dutch Culture", href: "/dox/integration/culture" },
