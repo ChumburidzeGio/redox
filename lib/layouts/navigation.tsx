@@ -20,7 +20,7 @@ export const navigation = [
         { name: "BSN", href: "/dox/essentials/bsn" },
         { name: "Banking", href: "/dox/essentials/banking" },
         { name: "Insurance", href: "/dox/essentials/insurance" },
-        { name: "TB Test", href: "/dox/essentials/tb-test" },
+        { name: "TB Test", isNew: true, href: "/dox/essentials/tb-test" },
     ]},
     { name: 'Transportation', Icon: MapIcon, children: [
         { name: "Bicycle", href: "/dox/transportation/bicycle" },
