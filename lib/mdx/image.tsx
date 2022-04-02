@@ -12,7 +12,7 @@ export function imagesUrl(path: string) {
 export const Image: React.FC<ImageProps> = ({ src, alt }) => {
     return (
         <>
-            <img src={imagesUrl(src)} alt={alt} className={`rounded-md ${alt === 'bordered' && 'border border-gray-200'}`} />
+            <img src={imagesUrl(src)} alt={alt} className={`rounded-md my-5 ${alt === 'bordered' && 'border border-gray-200'}`} />
         </>
     )
 }
