@@ -66,6 +66,11 @@ const users = [
     role: 'client',
     email: 'iamusualguy@gmail.com', // Anton Stepanov
     password: '14041993'
+  },
+  {
+    role: 'client',
+    email: 'cevacex@hotmail.com', // Stefan Milicevic
+    password: '27011990'
   }
 ]
 
