@@ -6,8 +6,23 @@ import {signOut} from "next-auth/react";
 import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon } from "@heroicons/react/outline";
 import {logEvent} from "lib/analytics";
 import {Badge} from "lib/shared-ui";
+import { useUser } from "lib/auth";
 
-export const navigation = [
+type IconProps = React.FC<React.ComponentProps<'svg'>>
+
+export interface NavigationItem {
+    name: string
+    href?: string
+    Icon?: IconProps
+    children?: {
+        name: string
+        href?: string
+        isNew?: boolean
+        Icon?: IconProps
+    }[]
+}
+
+export const customerNavigation: NavigationItem[] = [
     { name: 'Getting Started', href: '/' },
     { name: 'Housing', Icon: HomeIcon, children: [
         { name: "Amsterdam", href: "/dox/housing/amsterdam" },
@@ -57,17 +72,31 @@ export const navigation = [
     { name: 'Changelog', href: '/changelog' },
 ]
 
+export const employerNavigation: NavigationItem[] = [
+    { name: 'Dashboard', href: '/' },
+    { name: 'Knowledge Base', Icon: UserGroupIcon,  children: [
+        { name: "Daycare", isNew: true, href: "/dox/family-and-pets/daycare" },
+        { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
+        { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
+    ]},
+    { name: 'Sourcing', href: '/hr/sourcing' },
+    { name: 'Immigration', href: '/hr/immigration' },
+    { name: 'Relocation', href: '/hr/relocation' },
+    { name: 'Integration', href: '/hr/integration' },
+    { name: 'Changelog', href: '/changelog' },
+]
+
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
 interface DropdownMenuProps {
     name: string
-    Icon?: React.FC<React.ComponentProps<'svg'>>
+    Icon?: IconProps
     items: {
         isNew?: boolean
         name: string
-        href: string
+        href?: string
     }[]
 }
 
@@ -93,7 +122,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items, Icon })
                 'flex flex-col'
             )}>
                 {items.map(item => (
-                    <Link href={item.href} key={item.name} passHref>
+                    <Link href={item.href as string} key={item.name} passHref>
                         <a className={classNames(
                                 router.asPath === item.href
                                     ? 'bg-slate-200 text-gray-900 font-semibold'
@@ -113,6 +142,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items, Icon })
 
 export const Navigation: React.FC = () => {
     const router = useRouter()
+    const navigation = useNavigationItems()
 
     const handleSignOut = () => {
         logEvent('redox:logout')
@@ -153,3 +183,11 @@ export const Navigation: React.FC = () => {
     </>
 }
 
+export const useNavigationItems = (): NavigationItem[] => {
+    const { role, isLoading } = useUser()
+    if (isLoading) {
+        return []
+    }
+
+    return role === 'employer' ? employerNavigation : customerNavigation
+}

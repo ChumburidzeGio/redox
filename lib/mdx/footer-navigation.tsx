@@ -2,9 +2,10 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";
-import { navigation } from "lib/layouts";
+import { useNavigationItems } from "lib/layouts";
+import type { NavigationItem } from "lib/layouts";
 
-function getItemOrChild(item: { href?: string, name: string, children?: { href: string, name: string }[] }, isBackwards: boolean, childIndex?: number) {
+function getItemOrChild(item: NavigationItem, isBackwards: boolean, childIndex?: number) {
     if (!item.children) {
         return { target: item, parent: null }
     }
@@ -18,7 +19,7 @@ function getItemOrChild(item: { href?: string, name: string, children?: { href: 
             item.children[0], parent: item }
 }
 
-function getPrevOrNext(isBackwards: boolean, index: number, childIndex?: number) {
+function getPrevOrNext(navigation: NavigationItem[], isBackwards: boolean, index: number, childIndex?: number) {
     const isChild = childIndex !== undefined
 
     if (!navigation[index]) {
@@ -47,14 +48,15 @@ function getPrevOrNext(isBackwards: boolean, index: number, childIndex?: number)
 }
 
 export const FooterNavigation: React.FC = () => {
+    const navigation = useNavigationItems()
     const { asPath } = useRouter()
     const path = asPath.split('#')[0]
     const { next, prev } = React.useMemo(() => {
         const index = navigation.findIndex(item => item.href && item.href === path)
         if (index > -1) {
             return {
-                prev: getPrevOrNext(true, index),
-                next: getPrevOrNext(false, index)
+                prev: getPrevOrNext(navigation, true, index),
+                next: getPrevOrNext(navigation, false, index)
             }
         }
 
@@ -69,8 +71,8 @@ export const FooterNavigation: React.FC = () => {
         const childIndex = navigation[parentIndex]?.children?.findIndex(item => item.href && item.href === path)
 
         return {
-            prev: getPrevOrNext(true, parentIndex, childIndex),
-            next: getPrevOrNext(false, parentIndex, childIndex)
+            prev: getPrevOrNext(navigation, true, parentIndex, childIndex),
+            next: getPrevOrNext(navigation, false, parentIndex, childIndex)
         }
 
     }, [path])
