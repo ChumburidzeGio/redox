@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import config from "config";
+import config from "config"
 
 interface RedarSignInProps {
     email: string
@@ -12,7 +12,10 @@ interface RedarSignUpProps extends RedarSignInProps {
 
 const RadarApi = (instance: AxiosInstance) => ({
     signIn: (data: RedarSignInProps) => instance.post('/users/sign-in', data),
-    signUp: (data: RedarSignUpProps) => instance.post('/users/sign-up', data)
+    signUp: (data: RedarSignUpProps) => instance.post('/users/sign-up', data),
+    employer: {
+        loadRelocations: (employerId: number) => instance.get(`/relocations/employer/${employerId}`)
+    }
 })
 
 const create = () => {
