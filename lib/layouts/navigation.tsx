@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import {signOut} from "next-auth/react";
-import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon } from "@heroicons/react/outline";
+import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon, UsersIcon, SearchIcon } from "@heroicons/react/outline";
 import {logEvent} from "lib/analytics";
 import {Badge} from "lib/shared-ui";
 import { useUser } from "lib/auth";
@@ -73,16 +73,11 @@ export const customerNavigation: NavigationItem[] = [
 ]
 
 export const employerNavigation: NavigationItem[] = [
-    { name: 'Dashboard', href: '/' },
-    { name: 'Knowledge Base', Icon: UserGroupIcon,  children: [
-        { name: "Daycare", isNew: true, href: "/dox/family-and-pets/daycare" },
-        { name: "Child Sports", isNew: true, href: "/dox/family-and-pets/child-sports" },
-        { name: "Pets", isNew: true, href: "/dox/family-and-pets/pets" },
-    ]},
-    { name: 'Sourcing', href: '/hr/sourcing' },
-    { name: 'Immigration', href: '/hr/immigration' },
-    { name: 'Relocation', href: '/hr/relocation' },
-    { name: 'Integration', href: '/hr/integration' },
+    { name: 'Employees', href: '/', Icon: UsersIcon },
+    { name: 'Sourcing', href: '/employers/sourcing', Icon: SearchIcon },
+    { name: 'Immigration', href: '/employers/immigration', Icon: AcademicCapIcon },
+    { name: 'Relocation', href: '/employers/relocation', Icon: HomeIcon },
+    { name: 'Integration', href: '/employers/integration', Icon: SparklesIcon },
     { name: 'Changelog', href: '/changelog' },
 ]
 
@@ -166,7 +161,7 @@ export const Navigation: React.FC = () => {
                                 'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                             )}
                         >
-                            {Icon && <Icon className="h-4 w-4 mr-2" />}
+                            {Icon && <Icon className="h-5 w-5 mr-3" />}
                             {name}
                         </a>
                     </Link>
