@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon, MenuAlt2Icon } from '@heroicons/react/outline'
 import { Logo } from "lib/shared-ui";
+import Link from "next/link";
 import { Navigation } from "./navigation";
 
 export const BaseLayout: React.FC = ({ children}) => {
@@ -68,9 +69,11 @@ export const BaseLayout: React.FC = ({ children}) => {
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex flex-col flex-grow bg-slate-50 pt-5 overflow-y-auto border-r border-slate-100">
                     <div className="flex items-center flex-shrink-0 px-6">
-                        <a className="no-underline text-current inline-flex items-center" href="/">
-                           <Logo />
-                        </a>
+                        <Link href="/" passHref>
+                            <a className="no-underline text-current inline-flex items-center">
+                               <Logo />
+                            </a>
+                        </Link>
                     </div>
                     <div className="mt-5 flex-grow flex flex-col">
                         <Navigation />
