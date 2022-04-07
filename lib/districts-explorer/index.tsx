@@ -5,6 +5,8 @@ import type { BadgeProps } from "lib/shared-ui";
 import {ChevronDoubleDownIcon} from "@heroicons/react/solid";
 import {VideoCameraIcon, MapIcon} from "@heroicons/react/outline";
 
+export { MapItOut } from  './MapItOut'
+
 const tagToColor: Record<string, BadgeProps['color']> = {
     safe: 'green',
     unsafe: 'red',
@@ -42,7 +44,7 @@ export const DistrictsExplorer: React.FC = () => {
 
     return (
         <div className="relative">
-            <div className={`${expanded ? '' : 'max-h-[700px]'} overflow-hidden`}>
+            <div className={`${expanded ? '' : 'max-h-[450px]'} overflow-hidden`}>
                 {districts.map(district => (
                     <ImageCard imageSrc={district.imageSrc} videoId={district.videoId} mapQuery={district.id} key={district.id}>
                         <div className="text-lg font-bold">{district.title}</div>
