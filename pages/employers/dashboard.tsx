@@ -11,3 +11,5 @@ export function EmployerDashboard() {
         </AppLayout>
     )
 }
+
+export default EmployerDashboard
