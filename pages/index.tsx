@@ -4,11 +4,15 @@ import { EmployerDashboard } from './employers/dashboard'
 import { useUser } from 'lib/auth'
 
 export default function Dashboard() {
-    const { role } = useUser()
+    const { role, isLoading } = useUser()
 
-    return role === '' ? (
-        <EmployeeHome />
-    ) : (
+    if (isLoading) {
+        return null
+    }
+
+    return role === 'employer' ? (
         <EmployerDashboard />
+    ) : (
+        <EmployeeHome />
     )
 }
