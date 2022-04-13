@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useFormContext } from "react-hook-form"
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
+import type { ValidationsProps } from "./validation-props"
 
 export interface InputProps {
     id: string
@@ -13,11 +14,11 @@ export interface InputProps {
     helpText?: string
     errorText?: string
     hintText?: string
-    required?: boolean
     disabled?: boolean
+    rules?: Omit<ValidationsProps, "valueAsDate">
 }
 
-export const Input: React.FC<InputProps> = ({ id, type, label, defaultValue, placeholder, errorText, helpText, hintText, required, disabled}) => {
+export const Input: React.FC<InputProps> = ({ id, type, label, defaultValue, placeholder, errorText, helpText, hintText, rules, disabled}) => {
     const { register, formState: { errors } } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
@@ -52,7 +53,7 @@ export const Input: React.FC<InputProps> = ({ id, type, label, defaultValue, pla
                     placeholder={placeholder}
                     aria-invalid={isError ? 'true' : 'false'}
                     aria-describedby={isError ? `${id}-error` : `${id}-input`}
-                    {...register(id, { required })}
+                    {...register(id, rules)}
                 />
                 {isError && (<div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />

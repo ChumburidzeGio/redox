@@ -3,6 +3,7 @@ import { useFormContext, useController } from "react-hook-form"
 import { RadioGroup } from '@headlessui/react'
 import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
+import {ValidationsProps} from "./validation-props";
 
 interface Option {
     id: string
@@ -18,10 +19,10 @@ export interface RadioCardsProps {
     defaultValue: string
     helpText?: string
     errorText?: string
-    required?: boolean
+    rules?: Omit<ValidationsProps, "valueAsDate">
 }
 
-export const RadioCards: React.FC<RadioCardsProps> = ({ id, label, options, errorText, helpText, required, defaultValue}) => {
+export const RadioCards: React.FC<RadioCardsProps> = ({ id, label, options, errorText, helpText, rules, defaultValue}) => {
     const { control, formState: { errors } } = useFormContext()
 
     const {
@@ -29,7 +30,7 @@ export const RadioCards: React.FC<RadioCardsProps> = ({ id, label, options, erro
     } = useController({
         name: id,
         control,
-        rules: { required },
+        rules,
         defaultValue,
     });
 

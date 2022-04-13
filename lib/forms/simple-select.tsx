@@ -2,6 +2,7 @@ import * as React from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
 import {useFormContext} from "react-hook-form";
+import {ValidationsProps} from "./validation-props";
 
 export interface SimpleSelectProps {
     id: string
@@ -15,9 +16,10 @@ export interface SimpleSelectProps {
     errorText?: string
     hintText?: string
     defaultValue?: string
+    rules?: Omit<ValidationsProps, "valueAsDate">
 }
 
-export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, state, errorText, helpText, hintText, defaultValue}) => {
+export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, state, errorText, helpText, hintText, defaultValue, rules}) => {
     const { register, formState: { errors } } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
@@ -44,7 +46,7 @@ export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, 
                     )}
                     aria-invalid={state === 'error' ? 'true' : 'false'}
                     aria-describedby={state === 'error' ? `${id}-error` : `${id}-input`}
-                    {...register(id)}
+                    {...register(id, rules)}
                 >
                     {options.map(option => (
                         <option value={option.key} key={option.key}>{option.label}</option>
