@@ -16,6 +16,12 @@ export const Button: React.FC<React.HTMLProps<HTMLButtonElement & ButtonProps>> 
             'focus:outline-none focus:ring-2 focus:ring-offset-2'
         ]
 
+        if (type === 'primary') {
+            list.push(
+                'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-white'
+            )
+        }
+
         if (type === 'secondary') {
             list.push(
                 'bg-blue-100 hover:bg-blue-200 focus:ring-blue-500 text-blue-700'

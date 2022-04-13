@@ -54,19 +54,19 @@ export const CustomH1: React.FC = ({ children }) => {
 }
 
 export const CustomH2: React.FC = ({ children }) => (
-    <Header level="2">
+    <Header level="2" className="mt-7">
         <Linkable>{children}</Linkable>
     </Header>
 )
 
 export const CustomH3: React.FC = ({ children }) => (
-    <Header level="3">
+    <Header level="3" className="mt-7">
         <Linkable>{children}</Linkable>
     </Header>
 )
 
 export const CustomH4: React.FC = ({ children }) => (
-    <Header level="4">{children}</Header>
+    <Header level="4" className="mt-7">{children}</Header>
 )
 
 export const CustomP: React.FC = ({ children }) => (

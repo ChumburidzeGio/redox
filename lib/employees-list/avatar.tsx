@@ -1,34 +1,27 @@
 import * as React from 'react'
 
+const countries = {
+    GE: ['🇬🇪', 'bg-emerald-200'],
+    UA: ['🇺🇦', 'bg-pink-200'],
+    DE: ['🇩🇪', 'bg-teal-200'],
+    SE: ['🇸🇪', 'bg-blue-200'],
+    ES: ['🇪🇸', 'bg-amber-200'],
+}
+
 interface Props {
-    name: string
+    country: string
 }
 
-const colors = [
-    ['🇬🇪', 'bg-emerald-200'],
-    ['🇺🇦', 'bg-pink-200'],
-    ['🇱🇻', 'bg-red-200'],
-    ['🇪🇪', 'bg-sky-200'],
-    ['🇩🇪', 'bg-teal-200'],
-    ['🇸🇪', 'bg-blue-200'],
-    ['🇪🇸', 'bg-amber-200'],
-]
-
-function getColor(name: string, colorsLength:number): string[] {
-    try {
-        const min = Math.ceil(0);
-        const max = Math.floor(colorsLength - 1);
-        const random = Math.floor(Math.random() * (max - min) + min);
-
-        return colors[random]
-    } catch (e) {
-        return colors[0]
+function getFlagAndColor(country: string): string[] {
+    if (countries.hasOwnProperty(country)) {
+        return countries[country as keyof typeof countries]
     }
+
+    return [country, 'bg-amber-200']
 }
 
-export const Avatar: React.FC<Props> = ({ name }) => {
-    const initials = React.useMemo(() => name.split(' ').map((n) => n[0]).join(''), [name])
-    const [flag, color] = React.useMemo(() => getColor(initials, colors.length), [name])
+export const Avatar: React.FC<Props> = ({ country }) => {
+    const [flag, color] = React.useMemo(() => getFlagAndColor(country), [country])
 
     return (
         <span className={`inline-flex items-center justify-center h-12 w-12 rounded-full ${color}`}>
