@@ -21,7 +21,7 @@ export const InviteModal: React.FC<ModalProps> = ({ children, show, onClose, ini
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className="fixed inset-0 bg-gray-400 bg-opacity-75 transition-opacity" />
+                        <Dialog.Overlay className="fixed inset-0 bg-slate-300 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
