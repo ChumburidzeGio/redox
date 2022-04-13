@@ -10,13 +10,13 @@ export interface FormProps {
     onSubmit: (fields: any) => void
 }
 
-export const Form: React.FC<FormProps> = ({ children }) => {
+export const Form: React.FC<FormProps> = ({ children, onSubmit }) => {
     const methods = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data)
+    const onSubmitWrapper: SubmitHandler<Inputs> = data => onSubmit(data)
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <form onSubmit={methods.handleSubmit(onSubmitWrapper)}>
                 {children}
             </form>
         </FormProvider>

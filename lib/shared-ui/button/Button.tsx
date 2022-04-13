@@ -8,12 +8,12 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<React.HTMLProps<HTMLButtonElement> & ButtonProps> = (
-    { variant, type, className, children }
+    { variant, className, children, ...rest }
 ) => {
     const classes = React.useMemo(() => {
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',
-            'shadow-sm text-base font-medium rounded-md px-6 py-2',
+            'shadow-sm text-base font-medium rounded-md px-6 py-1',
             'focus:outline-none focus:ring-2 focus:ring-offset-2'
         ]
 
@@ -37,7 +37,7 @@ export const Button: React.FC<React.HTMLProps<HTMLButtonElement> & ButtonProps> 
     }, [variant, className])
 
     return (
-        <button className={classes} type={type}>
+        <button className={classes} {...rest}>
             {children}
         </button>
     )

@@ -1,46 +1,45 @@
 import * as React from "react";
-import { XIcon } from '@heroicons/react/outline'
 import {Button, Header} from "lib/shared-ui";
-import {InviteModal} from "./invite-modal";
-import {InviteForm} from "./invite-form";
+import {ErrorText, Form, Input, Label} from "lib/forms";
+import {useMutation} from "react-query";
+import {externalApis} from "../api";
 
 export function InviteEmployee() {
-    const [open, setOpen] = React.useState(false)
-    const inputRef = React.useRef(null)
+    const mutation = useMutation(
+        () => {
+            return externalApis.redarApi.employer.loadRelocations(1)
+        },
+        {
+            onSuccess: () => {
+                console.error('Success!')
+            },
+            onError: () => {
+                console.error('Error!')
+            },
+        }
+    );
 
     return (
-        <div>
-            <InviteModal show={open} onClose={() => setOpen(false)} initialFocus={inputRef}>
-                <div className="md:flex md:items-center md:justify-between">
-                    <div className="flex-1 min-w-0">
-                        <Header level="3">Invite your employee</Header>
-                    </div>
-                    <div className="mt-4 flex md:mt-0 md:ml-4">
-                        <button
-                            type="button"
-                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={() => setOpen(false)}
-                        >
-                            <span className="sr-only">Close panel</span>
-                            <XIcon className="h-6 w-6" aria-hidden="true" />
-                        </button>
-                    </div>
-                </div>
+        <div className="my-8 border border-slate-300 rounded-md p-6 bg-blue-50 bg-opacity-20">
+            <Header level="3">Invite your employees</Header>
+            <p className="mt-1 text-sm text-gray-500 mb-6">
+                Send email invite to your employee and give 10% discount on our services!
+            </p>
 
-                <div>
-                    <div className="mt-3 text-center sm:mt-5">
-                        <div className="mt-2">
-                            <p className="text-sm text-gray-500">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam laudantium explicabo
-                                pariatur iste dolorem animi vitae error totam. At sapiente aliquam accusamus facere veritatis.
-                            </p>
-                        </div>
-                    </div>
+            <Form onSubmit={(data) => mutation.mutate(data)}>
+                <Label id="email">Email address</Label>
+                <div className="flex mt-2">
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="Enter an email"
+                        rules={{ required: true }}
+                        className="w-full"
+                    />
+                    <Button variant="primary" className="ml-4 flex-shrink-0">Send invite</Button>
                 </div>
-
-                <InviteForm inputRef={inputRef} />
-            </InviteModal>
-            <Button variant="primary" onClick={() => setOpen(true)}>Invite Employee</Button>
+                <ErrorText id="email">Email has to be present and be a valid email address</ErrorText>
+            </Form>
         </div>
     )
 }
