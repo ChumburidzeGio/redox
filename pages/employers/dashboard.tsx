@@ -3,6 +3,7 @@ import { AppLayout } from 'lib/layouts'
 import { Header } from "lib/shared-ui"
 import {EmployeesList} from "lib/employees-list";
 import {InviteEmployee} from "../../lib/invite-employee";
+import {LanguageForm} from "../../lib/forms/language";
 
 export function EmployerDashboard() {
     return (
@@ -17,6 +18,8 @@ export function EmployerDashboard() {
                     </div>
                 </div>
                 <EmployeesList />
+
+                <LanguageForm />
             </div>
         </AppLayout>
     )

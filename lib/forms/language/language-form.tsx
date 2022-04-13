@@ -20,7 +20,7 @@ const packages = [
 
 export const LanguageForm: React.FC = () => {
     return (
-        <div className="my-8 border border-slate-300 rounded-md p-6">
+        <div className="my-8 border border-slate-300 rounded-md p-6 bg-gray-50 bg-opacity-20">
             <Header level="3">Subscribe for Language Courses</Header>
             <p className="mt-1 text-sm text-gray-500 mb-6">
                 We partner with several schools in Amsterdam, via this form based on your preferences we will assign you to one of them.
