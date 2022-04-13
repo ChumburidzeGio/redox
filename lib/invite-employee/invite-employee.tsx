@@ -40,7 +40,7 @@ export function InviteEmployee() {
 
                 <InviteForm inputRef={inputRef} />
             </InviteModal>
-            <Button type="primary" onClick={() => setOpen(true)}>Invite Employee</Button>
+            <Button variant="primary" onClick={() => setOpen(true)}>Invite Employee</Button>
         </div>
     )
 }

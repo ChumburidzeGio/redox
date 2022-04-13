@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Form } from 'lib/forms/core'
-import { Button } from 'lib/shared-ui'
+import {Form, Input, RadioCards} from 'lib/forms'
+import {Button, Header} from 'lib/shared-ui'
+import {SimpleSelect} from "../simple-select";
 
 const packages = [
     {
@@ -19,42 +20,24 @@ const packages = [
 
 export const LanguageForm: React.FC = () => {
     return (
-        <div className="my-8 border border-slate-300 rounded-md p-6 bg-gray-50">
-            <h3 className="text-xl leading-6 font-medium text-gray-900">Subscribe for Language Courses</h3>
+        <div className="my-8 border border-slate-300 rounded-md p-6">
+            <Header level="3">Subscribe for Language Courses</Header>
             <p className="mt-1 text-sm text-gray-500 mb-6">
                 We partner with several schools in Amsterdam, via this form based on your preferences we will assign you to one of them.
             </p>
-            <Form onSubmit={console.log} fields={[
-                {
-                    id: 'who',
-                    type: 'simple-select',
-                    label: 'Name',
-                    options: [
-                        {
-                            key: 'gela',
-                            label: 'Giorgi Chumburidze'
-                        }
-                    ],
-                    required: true,
-                    defaultValue: "gela"
-                },
-                {
-                    id: 'email',
-                    type: 'email',
-                    label: 'Email',
-                    errorText: 'Email has to be present and be a valid email address',
-                    required: true
-                },
-                {
-                    id: 'package',
-                    type: 'radio-cards',
-                    label: 'Which package suits you the best?',
-                    options: packages,
-                    defaultValue: 'one',
-                    required: true
-                },
-            ]}>
-                <Button type="secondary">Subscribe</Button>
+            <Form onSubmit={console.log}>
+                <SimpleSelect id="who" label="Name" options={[
+                    {
+                        key: 'gela',
+                        label: 'Giorgi Chumburidze'
+                    }
+                ]} defaultValue="gela" />
+                <br />
+                <Input id="email" type="email" label="Email" errorText="Email has to be present and be a valid email address" required />
+                <br />
+                <RadioCards id="package" label="Which package suits you the best?" options={packages} defaultValue="one" required />
+                <br />
+                <Button variant="secondary" type="submit" className="mt-4">Subscribe</Button>
             </Form>
         </div>
     )

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
+import {useFormContext} from "react-hook-form";
 
 export interface SimpleSelectProps {
     id: string
@@ -17,6 +18,10 @@ export interface SimpleSelectProps {
 }
 
 export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, state, errorText, helpText, hintText, defaultValue}) => {
+    const { register, formState: { errors } } = useFormContext()
+
+    const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
+
     return (
         <div>
             <div className="flex justify-between">
@@ -29,7 +34,6 @@ export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, 
             </div>
             <div className="mt-1 relative rounded-md shadow-sm">
                 <select
-                    name={id}
                     defaultValue={defaultValue}
                     id={id}
                     className={classNames(
@@ -40,6 +44,7 @@ export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, 
                     )}
                     aria-invalid={state === 'error' ? 'true' : 'false'}
                     aria-describedby={state === 'error' ? `${id}-error` : `${id}-input`}
+                    {...register(id)}
                 >
                     {options.map(option => (
                         <option value={option.key} key={option.key}>{option.label}</option>
@@ -50,9 +55,9 @@ export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, label, options, 
                 </div>)}
             </div>
             {(helpText || errorText) && (<p className={classNames(
-                state === 'error' ? 'text-red-600' : 'text-gray-500', 'mt-2 text-sm'
-            )} id={state === 'error' ? `${id}-error` : `${id}-helptext`}>
-                {(state === 'error' && errorText) || helpText}
+                isError ? 'text-red-600' : 'text-gray-500', 'mt-2 text-sm'
+            )} id={isError ? `${id}-error` : `${id}-helptext`}>
+                {(isError && errorText) || helpText}
             </p>)}
         </div>
     )

@@ -19,7 +19,7 @@ export const InviteForm: React.FC<Props> = ({ inputRef }) => {
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 placeholder="Enter an email"
             />
-            <Button type="secondary" className="ml-4 flex-shrink-0">Send invite</Button>
+            <Button variant="secondary" className="ml-4 flex-shrink-0">Send invite</Button>
         </form>
     )
 }

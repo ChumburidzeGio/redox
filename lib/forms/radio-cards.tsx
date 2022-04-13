@@ -11,7 +11,7 @@ interface Option {
     value: string
 }
 
-export interface RadioCardProps {
+export interface RadioCardsProps {
     id: string
     label: string
     options: Option[]
@@ -21,7 +21,7 @@ export interface RadioCardProps {
     required?: boolean
 }
 
-export const RadioCard: React.FC<RadioCardProps> = ({ id, label, options, errorText, helpText, required, defaultValue}) => {
+export const RadioCards: React.FC<RadioCardsProps> = ({ id, label, options, errorText, helpText, required, defaultValue}) => {
     const { control, formState: { errors } } = useFormContext()
 
     const {
