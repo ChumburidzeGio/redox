@@ -5,8 +5,7 @@ import externalApis from "lib/api/external";
 export default NextAuth({
   debug: true,
   pages: {
-    signIn: '/auth/signin',
-    error: '/auth/signin'
+    signIn: '/auth/signin'
   },
   providers: [
     CredentialsProvider({
