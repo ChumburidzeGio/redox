@@ -3,7 +3,7 @@ import {CheckCircleIcon, ChevronRightIcon, MailIcon} from "@heroicons/react/soli
 import {Avatar} from "./avatar";
 import EmptyState from "./empty-state";
 
-const applications2 = [
+const applications = [
     {
         id: 'george',
         name: 'George Cooper',
@@ -35,7 +35,7 @@ const applications2 = [
         href: '#',
     },
 ]
-const applications: typeof applications2= []
+// const applications: typeof applications2= []
 
 export const EmployeesList = () => {
     if (applications.length < 1) {

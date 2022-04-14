@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Button, Header} from "lib/shared-ui";
-import {ErrorText, Form, Input, Label} from "lib/forms";
+import {ErrorText, Form, Input, Label, RequestError} from "lib/forms";
 import {useMutation} from "react-query";
 import {externalApis} from "../api";
 
@@ -38,7 +38,10 @@ export function InviteEmployee() {
                     />
                     <Button variant="primary" className="ml-4 flex-shrink-0">Send invite</Button>
                 </div>
-                <ErrorText id="email">Email has to be present and be a valid email address</ErrorText>
+                <ErrorText id="email">Please enter a valid email address</ErrorText>
+                <ErrorText show={mutation.isError} error={mutation.error as RequestError}>
+                    We could not invite your employee, please try again and if problem persists, please contact us via the chat.
+                </ErrorText>
             </Form>
         </div>
     )
