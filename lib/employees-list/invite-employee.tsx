@@ -2,16 +2,19 @@ import * as React from "react";
 import {Button, Header} from "lib/shared-ui";
 import {ErrorText, Form, Input, Label, RequestError} from "lib/forms";
 import {useMutation} from "react-query";
-import {externalApis} from "../api";
+import api from "lib/api/internal";
+import {SuccessModal} from "./success-modal";
 
 export function InviteEmployee() {
+    const [showModal, setShowModal] = React.useState(false)
+
     const mutation = useMutation(
-        () => {
-            return externalApis.redarApi.employer.loadRelocations(1)
+        (data: { email: string }) => {
+            return api.employer.invite(data.email)
         },
         {
             onSuccess: () => {
-                console.error('Success!')
+                setShowModal(true)
             },
             onError: () => {
                 console.error('Error!')
@@ -43,6 +46,7 @@ export function InviteEmployee() {
                     We could not invite your employee, please try again and if problem persists, please contact us via the chat.
                 </ErrorText>
             </Form>
+            <SuccessModal show={showModal} onClose={() => setShowModal(false)} />
         </div>
     )
 }

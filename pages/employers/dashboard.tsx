@@ -2,7 +2,6 @@ import * as React from 'react'
 import { AppLayout } from 'lib/layouts'
 import { Header } from "lib/shared-ui"
 import {EmployeesList} from "lib/employees-list";
-import {InviteEmployee} from "../../lib/invite-employee";
 
 export function EmployerDashboard() {
     return (
@@ -14,7 +13,6 @@ export function EmployerDashboard() {
                     </div>
                 </div>
                 <EmployeesList />
-                <InviteEmployee />
             </div>
         </AppLayout>
     )

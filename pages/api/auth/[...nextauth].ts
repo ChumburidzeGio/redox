@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { externalApis } from "lib/api";
+import externalApis from "lib/api/external";
 
 export default NextAuth({
   debug: true,
