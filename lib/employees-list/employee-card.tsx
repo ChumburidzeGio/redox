@@ -51,7 +51,7 @@ function RelocationStatus({ status }: { status: RelocationDts["status"] }) {
 
 function Progress({ rate, faded }: { rate: number, faded: boolean }) {
     return (
-        <div className="w-full md:w-[230px] bg-gray-200 h-2 rounded-full">
+        <div className="w-full bg-gray-200 h-2 rounded-full">
             <div className={classNames(faded ? 'bg-indigo-300' : 'bg-indigo-600', 'h-2 rounded-full')} style={{
                 width: `${rate}%`
             }} />
@@ -135,7 +135,9 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({ relocati
                                     Last Activity: {relocation.updatedAt}
                                 </p>
                             </div>
-                            <Progress rate={relocation.progress} faded={relocation.status !== 'active'} />
+                            <div className="w-[230px]">
+                                <Progress rate={relocation.progress} faded={relocation.status !== 'active'} />
+                            </div>
                         </div>
                     </div>
                 </div>

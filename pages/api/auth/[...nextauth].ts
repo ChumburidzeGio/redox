@@ -38,11 +38,13 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, account, user }) {
       if (account) {
+        token.user_id = user?.id
         token.role = user?.role
       }
       return token
     },
     async session({ session, token }) {
+      session.user_id = token.user_id
       session.role = token.role
       return session
     }

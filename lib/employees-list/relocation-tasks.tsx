@@ -33,13 +33,13 @@ const Task: React.FC<{ task: TaskDts }> = ({ task }) => {
                         {task.name}
                     </span>
                     <p className="text-gray-500">
-                        {task.status}
-                        {task.stage && (
+                        <span className="capitalize">{task.status}</span>
+                        {(task.progress && task.progress < 100) ? (
                             <div className="inline-block ml-2">
                                 <div className="inline-block mr-2">|</div>
-                                {task.stage}
+                                {task.progress}% done
                             </div>
-                        )}
+                        ) : ''}
                         {task.appointment && (
                             <div className="inline-block ml-2">
                                 <div className="inline-block mr-2">|</div>

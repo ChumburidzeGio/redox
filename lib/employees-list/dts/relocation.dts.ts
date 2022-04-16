@@ -3,7 +3,7 @@ export interface TaskDts {
     name: string
     status: 'completed' | 'active' | 'cancelled'
     appointment?: string
-    stage?: string
+    progress?: number
 }
 
 export interface RelocationDts {

@@ -14,7 +14,10 @@ const RadarApi = (instance: AxiosInstance) => ({
     signIn: (data: RedarSignInProps) => instance.post('/users/sign-in', data),
     signUp: (data: RedarSignUpProps) => instance.post('/users/sign-up', data),
     employer: {
-        loadRelocations: (employerId: number) => instance.get(`/relocations/employer/${employerId}`)
+        relocations: (employerId: number) => instance.get(`/relocations/employer/${employerId}`)
+    },
+    users: {
+        id: (id: number) => instance.get(`/users/id/${id}`),
     }
 })
 
