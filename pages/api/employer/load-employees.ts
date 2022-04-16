@@ -1,5 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+function countryCodeToData(code: string) {}
+function timestampToDate(date: string) {}
+function tasksToProgress(tasks: any[]) {}
+function formatTasks(tasks: any[]) {}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         res.status(200).json([

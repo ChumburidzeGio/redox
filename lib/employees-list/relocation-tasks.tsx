@@ -3,7 +3,6 @@ import { CreditCardIcon, FlagIcon, LightningBoltIcon, SupportIcon, HomeIcon } fr
 import {classNames} from "lib/shared-ui";
 import {TaskDts} from "./dts/relocation.dts";
 
-
 const taskToIcon: Record<string, React.FC<React.ComponentProps<'svg'>>> = {
     'settle_bsn': FlagIcon,
     'rent': HomeIcon,
