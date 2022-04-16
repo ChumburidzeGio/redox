@@ -31,7 +31,7 @@ export function InviteEmployee() {
 
             <Form onSubmit={(data) => mutation.mutate(data)}>
                 <Label id="email">Email address</Label>
-                <div className="flex mt-2">
+                <div className="flex mt-2 sm:flex-row flex-col">
                     <Input
                         id="email"
                         type="email"
@@ -39,7 +39,7 @@ export function InviteEmployee() {
                         rules={{ required: true }}
                         className="w-full"
                     />
-                    <Button variant="primary" className="ml-4 flex-shrink-0">Send invite</Button>
+                    <Button variant="primary" className="sm:ml-4 mt-3 sm:mt-0 w-full sm:w-auto sm:flex-shrink-0">Send invite</Button>
                 </div>
                 <ErrorText id="email">Please enter a valid email address</ErrorText>
                 <ErrorText show={mutation.isError} error={mutation.error as RequestError}>

@@ -1,19 +1,11 @@
 import * as React from 'react'
 import {useQuery} from "react-query";
 import EmptyState from "./empty-state";
-import api from "lib/api/internal";
 import LoadingState from "./loading-state";
 import {EmployeeCard} from "./employee-card";
 import {InviteEmployee} from "./invite-employee";
-
-interface EmployeeProps {
-    id: string
-    from: string
-    name: string
-    email: string
-    date: string
-    stage: string
-}
+import api from "lib/api/internal";
+import {RelocationDts} from "./dts/relocation.dts";
 
 export const EmployeesList = () => {
     const { data, isError, isLoading } = useQuery('employees', () => {
@@ -30,16 +22,12 @@ export const EmployeesList = () => {
 
     return (
         <>
-            <div className="mt-7 overflow-hidden sm:rounded-md border border-gray-200">
+            <div className="mt-7 overflow-hidden rounded-md border border-gray-200">
                 <ul role="list" className="divide-y divide-gray-200">
-                    {data?.data.map((employee: EmployeeProps) => (
+                    {data?.data.map((relocation: RelocationDts) => (
                         <EmployeeCard
-                            key={employee.id}
-                            from={employee.from}
-                            name={employee.name}
-                            email={employee.email}
-                            appliedAt={employee.date}
-                            stage={employee.stage}
+                            key={relocation.id}
+                            relocation={relocation}
                         />
                     ))}
                 </ul>
