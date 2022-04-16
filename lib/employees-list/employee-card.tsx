@@ -68,7 +68,7 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({ relocati
                 <div className="flex flex-col px-6 pt-6 pb-7">
                     <div className="flex items-center mb-5">
                         <div>
-                            <Avatar name={relocation.from.name} flag={relocation.from.emoji} size="lg" />
+                            <Avatar flag={relocation.from.emoji} size="lg" />
                         </div>
                         <div className="ml-5">
                             <p className="text-2xl font-bold text-gray-700 group-hover:text-gray-900">{relocation.name}</p>
@@ -116,7 +116,7 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({ relocati
             <div className="flex items-center px-4 py-4 sm:px-6">
                 <div className="min-w-0 flex-1 flex items-center">
                     <div className="flex-shrink-0">
-                        <Avatar name={relocation.from.name} flag={relocation.from.emoji} size="md" />
+                        <Avatar flag={relocation.from.emoji} size="md" />
                     </div>
                     <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                         <div>
