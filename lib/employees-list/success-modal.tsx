@@ -49,7 +49,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ show, onClose }) => 
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            We invited your employee successfully, soon they will receive invitation email with free consultation offer. If the consultation goes well, they can signup with 10% off for any of our services.
+                                            We successfully invited your employee, soon they will receive invitation email with a free consultation offer and onboarding guidelines.
                                         </p>
                                     </div>
                                 </div>

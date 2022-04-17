@@ -18,6 +18,9 @@ const RadarApi = (instance: AxiosInstance) => ({
     },
     users: {
         id: (id: number) => instance.get(`/users/id/${id}`),
+    },
+    messageBus: {
+        adminNotify: (text: string) => instance.post(`/message-bus/admin-notify`, { text }),
     }
 })
 

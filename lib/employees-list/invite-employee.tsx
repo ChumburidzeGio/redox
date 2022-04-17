@@ -2,10 +2,12 @@ import * as React from "react";
 import {Button, Header} from "lib/shared-ui";
 import {ErrorText, Form, Input, Label, RequestError} from "lib/forms";
 import {useMutation} from "react-query";
+import { useForm } from "react-hook-form";
 import api from "lib/api/internal";
 import {SuccessModal} from "./success-modal";
 
 export function InviteEmployee() {
+    const methods = useForm()
     const [showModal, setShowModal] = React.useState(false)
 
     const mutation = useMutation(
@@ -15,6 +17,7 @@ export function InviteEmployee() {
         {
             onSuccess: () => {
                 setShowModal(true)
+                methods.reset()
             },
             onError: () => {
                 console.error('Error!')
@@ -26,10 +29,10 @@ export function InviteEmployee() {
         <div className="my-8 border border-slate-300 rounded-md p-6 bg-blue-50 bg-opacity-20">
             <Header level="3">Invite your employees</Header>
             <p className="mt-1 text-sm text-gray-500 mb-6">
-                Send email invite to your employee and give 10% discount on our services!
+                Send email invite to your employee and let them enjoy a smooth relocation experience!
             </p>
 
-            <Form onSubmit={(data) => mutation.mutate(data)}>
+            <Form onSubmit={(data) => mutation.mutate(data)} methods={methods}>
                 <Label id="email">Email address</Label>
                 <div className="flex mt-2 sm:flex-row flex-col">
                     <Input
