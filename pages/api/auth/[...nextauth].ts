@@ -2,14 +2,11 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import externalApis from "lib/api/external";
 
-console.log('NEXTAUTH_SECRET', process.env.NEXTAUTH_SECRET)
-
 export default NextAuth({
   debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/auth/signin',
-    error: '/auth/error'
+    signIn: '/auth/signin'
   },
   providers: [
     CredentialsProvider({
