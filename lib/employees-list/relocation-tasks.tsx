@@ -57,7 +57,7 @@ export const RelocationTasks: React.FC<{ tasks: TaskDts[] }> = ({ tasks }) => {
     return (
         <ul role="list" className="flex flex-col divide-y divide-gray-200">
             {tasks.map(task => (
-                <Task task={task} />
+                <Task key={task.id} task={task} />
             ))}
         </ul>
     )
