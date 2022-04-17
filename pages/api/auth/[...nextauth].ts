@@ -4,7 +4,6 @@ import externalApis from "lib/api/external";
 
 export default NextAuth({
   debug: true,
-  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin'
   },
