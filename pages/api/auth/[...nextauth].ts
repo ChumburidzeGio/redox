@@ -2,6 +2,8 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import externalApis from "lib/api/external";
 
+console.log('process.env.RELOAUTH_SECRET', process.env.RELOAUTH_SECRET)
+
 export default NextAuth({
   debug: true,
   secret: process.env.RELOAUTH_SECRET,
