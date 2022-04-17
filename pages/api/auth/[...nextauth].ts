@@ -2,11 +2,9 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import externalApis from "lib/api/external";
 
-console.log('process.env.RELOAUTH_SECRET', process.env.RELOAUTH_SECRET)
-
 export default NextAuth({
   debug: true,
-  secret: 'dcsdcsdcsdcsdcsdc',
+  secret: 'LlKq6ZtYbr+hTC073mAmAh9/h2HwMfsFo4hrfCx5mLg=',
   pages: {
     signIn: '/auth/signin',
     error: '/auth/error'
