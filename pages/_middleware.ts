@@ -1,7 +1,10 @@
 import { withAuth } from "next-auth/middleware"
 
-export default withAuth({
-    pages: {
-        signIn: '/auth/signin',
-    },
-})
+export function middleware(req: any) {
+    console.log(process.env.NEXTAUTH_URL, process.env.NEXTAUTH_SECRET);
+    return withAuth(req, {
+        callbacks: {
+            authorized: ({ token }) => !!token,
+        },
+    });
+}
