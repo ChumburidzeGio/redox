@@ -6,7 +6,7 @@ console.log('process.env.RELOAUTH_SECRET', process.env.RELOAUTH_SECRET)
 
 export default NextAuth({
   debug: true,
-  secret: process.env.RELOAUTH_SECRET,
+  secret: 'dcsdcsdcsdcsdcsdc',
   pages: {
     signIn: '/auth/signin',
     error: '/auth/error'
