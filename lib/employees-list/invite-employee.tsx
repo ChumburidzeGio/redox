@@ -29,7 +29,7 @@ export function InviteEmployee() {
         <div className="my-8 border border-slate-300 rounded-md p-6 bg-blue-50 bg-opacity-20">
             <Header level="3">Invite your employees</Header>
             <p className="mt-1 text-sm text-gray-500 mb-6">
-                Send email invite to your employee and let them enjoy a smooth relocation experience!
+                Send email invite to your employee and let them know about our service. We will schedule a free consultation with them and in case if they like our offer we will start a relocation process.
             </p>
 
             <Form onSubmit={(data) => mutation.mutate(data)} methods={methods}>

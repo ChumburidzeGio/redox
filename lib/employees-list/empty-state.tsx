@@ -10,7 +10,7 @@ export default function EmptyState() {
                         <UserGroupIcon className="mx-auto h-12 w-12 text-indigo-600" />
                         <h2 className="mt-2 text-lg font-medium text-gray-900">Here will be the list of your employees</h2>
                         <p className="mt-1 text-sm text-gray-500">
-                            Use the form bellow to invite your employees and simplify their relocation process to Amsterdam
+                            Use the form bellow to invite your employees and simplify their relocation process to the Netherlands
                         </p>
                     </div>
                 </div>
