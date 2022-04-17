@@ -1,7 +1,7 @@
 export default function Error() {
     return (
         <div className="">
-            {process.env.NEXTAUTH_URL}
+            {process.env.NEXT_PUBLIC_VERCEL_URL}
         </div>
     )
 }
