@@ -5,6 +5,10 @@ const EmployerApi = (instance: AxiosInstance) => ({
     loadEmployees: () => instance.get('/employer/load-employees'),
 })
 
+const UserApi = (instance: AxiosInstance) => ({
+    resetPassword: (oldPassword: string, newPassword: string) => instance.post('/auth/reset', { oldPassword, newPassword }),
+})
+
 const create = () => {
     const axiosInstance = axios.create({
         baseURL: '/api',
@@ -13,7 +17,8 @@ const create = () => {
     })
 
     return {
-        employer: EmployerApi(axiosInstance)
+        employer: EmployerApi(axiosInstance),
+        user: UserApi(axiosInstance)
     }
 }
 

@@ -18,6 +18,9 @@ const RadarApi = (instance: AxiosInstance) => ({
     },
     users: {
         id: (id: number) => instance.get(`/users/id/${id}`),
+        resetPassword: (userId: number, oldPassword: string, newPassword: string) => instance.post(`/users/reset-password`, {
+            userId, oldPassword, newPassword
+        })
     },
     messageBus: {
         adminNotify: (text: string) => instance.post(`/message-bus/admin-notify`, { text }),

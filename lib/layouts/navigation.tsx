@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import {signOut} from "next-auth/react";
-import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon, UsersIcon, SearchIcon } from "@heroicons/react/outline";
+import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon, UsersIcon, SearchIcon, CogIcon } from "@heroicons/react/outline";
 import {logEvent} from "lib/analytics";
 import {Badge} from "lib/shared-ui";
 import { useUser } from "lib/auth";
@@ -159,8 +159,6 @@ export const Navigation: React.FC = () => {
                 ) : (
                     <Link key={name} href={href as string} passHref>
                         <a
-                            key={name}
-                            href={href}
                             className={classNames(
                                 router.asPath === href
                                     ? 'bg-slate-200 text-gray-900 font-semibold'
@@ -176,7 +174,21 @@ export const Navigation: React.FC = () => {
             </div>
 
             <div className="flex flex-col">
-                <a className="group flex items-center px-2 py-2 text-md rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={handleSignOut}>
+                <Link href="/settings" passHref>
+                    <a
+                        className={classNames(
+                            router.asPath === '/settings'
+                                ? 'bg-slate-200 text-gray-900 font-semibold'
+                                : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900',
+                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                        )}
+                    >
+                        <CogIcon className="h-5 w-5 mr-3" />
+                        Settings
+                    </a>
+                </Link>
+
+                <a className="group flex items-center px-2 py-2 text-md font-medium rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={handleSignOut}>
                     <LogoutIcon className="mr-2 h-6 w-6" />
                     Sign out
                 </a>
