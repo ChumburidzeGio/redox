@@ -39,7 +39,7 @@ export default function SignIn() {
         }
 
         // TODO: check https://www.youtube.com/watch?v=kB6YNYZ63fw for a better solution
-        await signIn("credentials", {
+        signIn("credentials", {
             email,
             password,
             redirect: true,
