@@ -38,6 +38,7 @@ export default function SignIn() {
             return
         }
 
+        // TODO: check https://www.youtube.com/watch?v=kB6YNYZ63fw for a better solution
         await signIn("credentials", {
             email,
             password,
