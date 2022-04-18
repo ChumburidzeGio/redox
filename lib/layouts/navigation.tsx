@@ -76,7 +76,7 @@ export const customerNavigation: NavigationItem[] = [
         { name: "Short History", href: "/dox/integration/history" },
         { name: "Dutch Art", href: "/dox/integration/art" },
     ]},
-    { name: 'Changelog', href: '/changelog' },
+    // { name: 'Changelog', href: '/changelog' },
 ]
 
 export const employerNavigation: NavigationItem[] = [
@@ -85,7 +85,7 @@ export const employerNavigation: NavigationItem[] = [
     { name: 'Immigration', href: '/employers/immigration', Icon: AcademicCapIcon },
     { name: 'Relocation', href: '/employers/relocation', Icon: HomeIcon },
     { name: 'Integration', href: '/employers/integration', Icon: SparklesIcon },
-    { name: 'Changelog', href: '/changelog' },
+    // { name: 'Changelog', href: '/changelog' },
 ]
 
 function classNames(...classes: string[]) {

@@ -5,8 +5,6 @@ import type { BadgeProps } from "lib/shared-ui";
 import {ChevronDoubleDownIcon} from "@heroicons/react/solid";
 import {VideoCameraIcon, MapIcon} from "@heroicons/react/outline";
 
-export { MapItOut } from  './MapItOut'
-
 const tagToColor: Record<string, BadgeProps['color']> = {
     safe: 'green',
     unsafe: 'red',
