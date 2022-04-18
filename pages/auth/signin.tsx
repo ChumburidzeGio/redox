@@ -20,11 +20,13 @@ function errorToMessage(error?: string) {
 export default function SignIn() {
     const methods = useForm()
     const [errorMessage, setErrorMessage] = React.useState('')
+    const [isLoading, setIsLoading] = React.useState(false)
 
     const router = useRouter()
     const { callbackUrl } = router.query
 
     const signInHandler = async ({ email, password }: Record<'email' | 'password', string>) => {
+        setIsLoading(true)
         const res = await signIn("credentials", {
             email,
             password,
@@ -35,6 +37,7 @@ export default function SignIn() {
 
         if (!ok) {
             setErrorMessage(errorToMessage(error) || '')
+            setIsLoading(false)
             return
         }
 
@@ -99,7 +102,7 @@ export default function SignIn() {
                             </div>
 
                             <Button variant="primary" className="w-full mt-5">
-                                Sign In
+                                {isLoading ? '...' : ''} Sign{isLoading ? 'ing' : ''} In
                             </Button>
 
                             {errorMessage && <ErrorText id="errorMessage" show={Boolean(errorMessage)}>{errorMessage}</ErrorText>}
