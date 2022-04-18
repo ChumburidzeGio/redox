@@ -19,5 +19,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         req.body.newPassword
     )
 
+    console.log(
+        userId,
+        req.body.oldPassword,
+        req.body.newPassword
+    )
+
     res.status(200).json(response.data)
 }

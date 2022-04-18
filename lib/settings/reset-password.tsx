@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Button} from "lib/shared-ui";
+import {Alert, Button} from "lib/shared-ui";
 import {useForm} from "react-hook-form";
 import {ErrorText, Form, Input, Label, RequestError} from "lib/forms";
 import {useMutation} from "react-query";
@@ -7,14 +7,18 @@ import api from "../api/internal";
 
 export function ResetPassword() {
     const methods = useForm()
+    const [showModal, setShowModal] = React.useState(false)
 
     const mutation = useMutation(
         (data: { oldPassword: string, newPassword: string }) => {
             return api.user.resetPassword(data.oldPassword, data.newPassword)
         },
         {
-            onSuccess: () => {
-                methods.reset()
+            onSuccess: ({ data }) => {
+                if (data && data.success === true) {
+                    setShowModal(true)
+                    methods.reset()
+                }
             },
         }
     );
@@ -65,6 +69,14 @@ export function ResetPassword() {
                             </Button>
                         </div>
                     </Form>
+                    <Alert
+                        type="success"
+                        show={showModal}
+                        title="Successfully Updated"
+                        description="We successfully updated your password!"
+                        buttonText="Go back to Settings"
+                        onClose={() => setShowModal(false)}
+                    />
                 </div>
             </div>
         </div>

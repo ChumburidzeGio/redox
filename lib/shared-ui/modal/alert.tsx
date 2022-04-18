@@ -3,12 +3,16 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/outline'
 import {Button} from "lib/shared-ui";
 
-interface SuccessModalProps {
+interface AlertProps {
+    type: 'success'
     show: boolean
+    title: string
+    description: string
+    buttonText: string
     onClose: () => void
 }
 
-export const SuccessModal: React.FC<SuccessModalProps> = ({ show, onClose }) => {
+export const Alert: React.FC<AlertProps> = ({ show, onClose, buttonText, title, description }) => {
     return (
         <Transition.Root show={show} as={React.Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={onClose}>
@@ -45,17 +49,17 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ show, onClose }) => 
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
                                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                                        Successfully Invited
+                                        {title}
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            We successfully invited your employee, soon they will receive invitation email with a free consultation offer and onboarding guidelines.
+                                            {description}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div className="mt-5 sm:mt-6">
-                                <Button variant="primary" onClick={onClose} className="w-full">Go back to dashboard</Button>
+                                <Button variant="primary" onClick={onClose} className="w-full">{buttonText}</Button>
                             </div>
                         </div>
                     </Transition.Child>

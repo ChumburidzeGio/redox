@@ -4,7 +4,7 @@ import {ErrorText, Form, Input, Label, RequestError} from "lib/forms";
 import {useMutation} from "react-query";
 import { useForm } from "react-hook-form";
 import api from "lib/api/internal";
-import {SuccessModal} from "./success-modal";
+import {Alert} from "lib/shared-ui";
 
 export function InviteEmployee() {
     const methods = useForm()
@@ -18,9 +18,6 @@ export function InviteEmployee() {
             onSuccess: () => {
                 setShowModal(true)
                 methods.reset()
-            },
-            onError: () => {
-                console.error('Error!')
             },
         }
     );
@@ -49,7 +46,14 @@ export function InviteEmployee() {
                     We could not invite your employee, please try again and if problem persists, please contact us via the chat.
                 </ErrorText>
             </Form>
-            <SuccessModal show={showModal} onClose={() => setShowModal(false)} />
+            <Alert
+                type="success"
+                show={showModal}
+                title="Successfully Invited"
+                description="We successfully invited your employee, soon they will receive invitation email with a free consultation offer and onboarding guidelines."
+                buttonText="Go back to Dashboard"
+                onClose={() => setShowModal(false)}
+            />
         </div>
     )
 }
