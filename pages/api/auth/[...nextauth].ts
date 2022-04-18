@@ -16,6 +16,7 @@ export default NextAuth({
         password: {  type: "password" }
       },
       async authorize(credentials) {
+        console.log('credentials', credentials)
         if (!credentials?.email || !credentials?.password) {
           return null
         }
@@ -36,6 +37,11 @@ export default NextAuth({
     })
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return url.startsWith(baseUrl)
+          ? Promise.resolve(url)
+          : Promise.resolve(baseUrl)
+    },
     async jwt({ token, account, user }) {
       if (account) {
         token.user_id = user?.id
