@@ -3,11 +3,26 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import {signOut} from "next-auth/react";
-import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon, BriefcaseIcon } from "@heroicons/react/outline";
+import {LogoutIcon, HomeIcon, MapIcon, AcademicCapIcon, UserGroupIcon, CreditCardIcon, FlagIcon, SparklesIcon, UsersIcon, SearchIcon, CogIcon, BriefcaseIcon } from "@heroicons/react/outline";
 import {logEvent} from "lib/analytics";
 import {Badge} from "lib/shared-ui";
+import { useUser } from "lib/auth";
 
-export const navigation = [
+type IconProps = React.FC<React.ComponentProps<'svg'>>
+
+export interface NavigationItem {
+    name: string
+    href?: string
+    Icon?: IconProps
+    children?: {
+        name: string
+        href?: string
+        isNew?: boolean
+        Icon?: IconProps
+    }[]
+}
+
+export const customerNavigation: NavigationItem[] = [
     { name: 'Getting Started', href: '/' },
     { name: 'Housing', Icon: HomeIcon, children: [
         { name: "Amsterdam", href: "/dox/housing/amsterdam" },
@@ -61,7 +76,16 @@ export const navigation = [
         { name: "Short History", href: "/dox/integration/history" },
         { name: "Dutch Art", href: "/dox/integration/art" },
     ]},
-    { name: 'Changelog', href: '/changelog' },
+    // { name: 'Changelog', href: '/changelog' },
+]
+
+export const employerNavigation: NavigationItem[] = [
+    { name: 'Employees', href: '/', Icon: UsersIcon },
+    { name: 'Sourcing', href: '/employers/sourcing', Icon: SearchIcon },
+    { name: 'Immigration', href: '/employers/immigration', Icon: AcademicCapIcon },
+    { name: 'Relocation', href: '/employers/relocation', Icon: HomeIcon },
+    { name: 'Integration', href: '/employers/integration', Icon: SparklesIcon },
+    // { name: 'Changelog', href: '/changelog' },
 ]
 
 function classNames(...classes: string[]) {
@@ -70,11 +94,11 @@ function classNames(...classes: string[]) {
 
 interface DropdownMenuProps {
     name: string
-    Icon?: React.FC<React.ComponentProps<'svg'>>
+    Icon?: IconProps
     items: {
         isNew?: boolean
         name: string
-        href: string
+        href?: string
     }[]
 }
 
@@ -100,7 +124,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items, Icon })
                 'flex flex-col'
             )}>
                 {items.map(item => (
-                    <Link href={item.href} key={item.name} passHref>
+                    <Link href={item.href as string} key={item.name} passHref>
                         <a className={classNames(
                                 router.asPath === item.href
                                     ? 'bg-slate-200 text-gray-900 font-semibold'
@@ -120,6 +144,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ name, items, Icon })
 
 export const Navigation: React.FC = () => {
     const router = useRouter()
+    const navigation = useNavigationItems()
 
     const handleSignOut = () => {
         logEvent('redox:logout')
@@ -134,8 +159,6 @@ export const Navigation: React.FC = () => {
                 ) : (
                     <Link key={name} href={href as string} passHref>
                         <a
-                            key={name}
-                            href={href}
                             className={classNames(
                                 router.asPath === href
                                     ? 'bg-slate-200 text-gray-900 font-semibold'
@@ -143,7 +166,7 @@ export const Navigation: React.FC = () => {
                                 'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                             )}
                         >
-                            {Icon && <Icon className="h-4 w-4 mr-2" />}
+                            {Icon && <Icon className="h-5 w-5 mr-3" />}
                             {name}
                         </a>
                     </Link>
@@ -151,7 +174,21 @@ export const Navigation: React.FC = () => {
             </div>
 
             <div className="flex flex-col">
-                <a className="group flex items-center px-2 py-2 text-md rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={handleSignOut}>
+                <Link href="/settings" passHref>
+                    <a
+                        className={classNames(
+                            router.asPath === '/settings'
+                                ? 'bg-slate-200 text-gray-900 font-semibold'
+                                : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900',
+                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                        )}
+                    >
+                        <CogIcon className="h-5 w-5 mr-3" />
+                        Settings
+                    </a>
+                </Link>
+
+                <a className="group flex items-center px-2 py-2 text-md font-medium rounded-md cursor-pointer text-gray-500 hover:bg-gray-50 hover:text-gray-900" onClick={handleSignOut}>
                     <LogoutIcon className="mr-2 h-6 w-6" />
                     Sign out
                 </a>
@@ -160,3 +197,11 @@ export const Navigation: React.FC = () => {
     </>
 }
 
+export const useNavigationItems = (): NavigationItem[] => {
+    const { role, isLoading } = useUser()
+    if (isLoading) {
+        return []
+    }
+
+    return role === 'employer' ? employerNavigation : customerNavigation
+}

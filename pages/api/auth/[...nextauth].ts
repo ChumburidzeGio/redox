@@ -1,123 +1,56 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-
-const users = [
-  {
-    role: 'admin',
-    email: 'giorgi@relocify.nl',
-    password: '16111995'
-  },
-  {
-    role: 'admin',
-    email: 'gulce@relocify.nl',
-    password: '18121994'
-  },
-  {
-    role: 'admin',
-    email: 'thessa@relocify.nl',
-    password: '08031996'
-  },
-  {
-    role: 'admin',
-    email: 'davit@relocify.nl',
-    password: '10061995'
-  },
-  {
-    role: 'client',
-    email: 'odbc@yandex.ru', // Sergey Simonyan
-    password: '02031986'
-  },
-  {
-    role: 'client',
-    email: 'benno.deysel@gmail.com', // Benno Deysel
-    password: '02041981'
-  },
-  {
-    role: 'client',
-    email: 'theanad@gmail.com', // Theana Deysel
-    password: '28011981'
-  },
-  {
-    role: 'client',
-    email: 'kronolynx@gmail.com', // Johann Grisales
-    password: '24061982'
-  },
-  {
-    role: 'client',
-    email: 'updatedsapiens@gmail.com', // Roxana Manu
-    password: '10121981'
-  },
-  {
-    role: 'client',
-    email: 'ilyas9406@yandex.ru', // Ilya Surkov
-    password: '02011994'
-  },
-  {
-    role: 'client',
-    email: 'luilui312@gmail.com', // Luisa Paz Perez
-    password: '03121986'
-  },
-  {
-    role: 'client',
-    email: 'marriatarasova@gmail.com', // Mariia Tarasova
-    password: '22101993'
-  },
-  {
-    role: 'client',
-    email: 'iamusualguy@gmail.com', // Anton Stepanov
-    password: '14041993'
-  },
-  {
-    role: 'client',
-    email: 'cevacex@hotmail.com', // Stefan Milicevic
-    password: '27011990'
-  }
-]
+import externalApis from "lib/api/external";
 
 export default NextAuth({
   debug: true,
   pages: {
-    signIn: '/auth/signin',
-    newUser: '/auth/new-user'
+    signIn: '/auth/signin'
   },
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
+      // Left mostly for typing purposes (code in `authorize` inherits type from here)
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "john@acme.com" },
-        password: {  label: "Password", type: "password" }
+        email: { type: "email" },
+        password: {  type: "password" }
       },
       async authorize(credentials) {
-        // Add logic here to look up the user from the credentials supplied
-        const isUser = users.find(user => {
-          return user.email === credentials?.email && user.password === credentials.password
-        })
-  
-        if (isUser) {
-          // Any object returned will be saved in `user` property of the JWT
-          return isUser
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
+        console.log('credentials', credentials)
+        if (!credentials?.email || !credentials?.password) {
           return null
-          
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter        
         }
+
+        try {
+          const user = await externalApis.redarApi.signIn({
+            email: credentials?.email!,
+            password: credentials?.password!
+          })
+
+          if (user.data) {
+            return user.data
+          }
+        } catch (e) {}
+
+        return null
       }
     })
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return url.startsWith(baseUrl)
+          ? Promise.resolve(url)
+          : Promise.resolve(baseUrl)
+    },
     async jwt({ token, account, user }) {
       if (account) {
+        token.user_id = user?.id
         token.role = user?.role
       }
       return token
     },
     async session({ session, token }) {
+      session.user_id = token.user_id
       session.role = token.role
       return session
     }

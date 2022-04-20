@@ -48,7 +48,7 @@ export const Services: React.FC<ServicesProps> = ({ items, cta }) => (
                     </div>
                 </div>
                 <div className="px-5 mt-4 mb-4">
-                    <Button type="secondary" className="w-full">
+                    <Button variant="secondary" className="w-full">
                         {cta}
                         <ExternalLinkIcon className="h-5 w-5 ml-3" />
                     </Button>

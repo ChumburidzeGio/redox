@@ -1,3 +1,4 @@
 export { BaseLayout } from './base'
 export { AppLayout } from './app'
-export { navigation } from './navigation'
+export { useNavigationItems } from './navigation'
+export type { NavigationItem } from './navigation'
