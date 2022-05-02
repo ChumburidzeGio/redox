@@ -3,7 +3,7 @@ import EmployeeHome from './dox/home.mdx'
 import { EmployerDashboard } from './employers/dashboard'
 import { useUser } from 'lib/auth'
 
-export default function Dashboard() {
+export default function DashboardPage() {
     const { role, isLoading } = useUser()
 
     if (isLoading) {

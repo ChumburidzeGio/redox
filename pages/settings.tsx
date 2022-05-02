@@ -5,7 +5,7 @@ import {AppLayout} from "../lib/layouts";
 import {Header} from "../lib/shared-ui";
 import {ResetPassword} from "lib/settings";
 
-export default function Dashboard() {
+export default function SettingsPage() {
     const { isLoading, isAuth } = useUser()
     const router = useRouter()
 

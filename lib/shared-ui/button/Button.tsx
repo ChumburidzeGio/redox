@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 interface ButtonProps {
-    variant?: 'secondary' | 'primary'
+    variant?: 'secondary' | 'primary' | 'green' | 'red'
     type?: 'submit'
     className?: string
     children: React.ReactNode
@@ -26,6 +26,18 @@ export const Button: React.FC<React.HTMLProps<HTMLButtonElement> & ButtonProps> 
         if (variant === 'secondary') {
             list.push(
                 'bg-blue-100 hover:bg-blue-200 focus:ring-blue-500 text-blue-700'
+            )
+        }
+
+        if (variant === 'green') {
+            list.push(
+                'bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 text-white'
+            )
+        }
+
+        if (variant === 'red') {
+            list.push(
+                'bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-white'
             )
         }
 

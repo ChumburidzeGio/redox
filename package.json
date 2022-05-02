@@ -29,6 +29,7 @@
     "countries-list": "^2.6.1",
     "dayjs": "^1.11.0",
     "github-slugger": "^1.4.0",
+    "mapbox-gl": "^2.8.2",
     "next": "12.1.5",
     "next-auth": "4.3.2",
     "nextra": "^1.1.0",
@@ -40,6 +41,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.27.1",
     "react-icons": "^4.3.1",
+    "react-mapbox-gl": "^5.1.1",
     "react-query": "^3.34.19",
     "remark-gfm": "^3.0.1"
   },
