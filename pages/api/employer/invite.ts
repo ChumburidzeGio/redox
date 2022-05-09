@@ -14,6 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userId = session.user_id as number
     const userName = session.user?.name
 
-    await externalApi.redarApi.messageBus.adminNotify(`${userName} (id:${userId}) invited ${req.body.email}`)
+    await externalApi.redarApi.messageBus.alert(`${userName} (id:${userId}) invited ${req.body.email}`)
     res.status(200).json({ success: true })
 }
