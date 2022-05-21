@@ -2,8 +2,13 @@ import * as React from 'react'
 import { AppLayout } from 'lib/layouts'
 import { Header } from "lib/shared-ui"
 import {EmployeesList} from "lib/employees-list";
+import {useLogOnRender} from "../../lib/analytics";
 
 export function EmployerDashboard() {
+    useLogOnRender('redox:view', {
+        page: 'employer-dashboard'
+    })
+
     return (
         <AppLayout>
             <div className="mx-1">

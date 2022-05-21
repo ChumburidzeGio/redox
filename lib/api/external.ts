@@ -23,7 +23,7 @@ const RadarApi = (instance: AxiosInstance) => ({
         })
     },
     messageBus: {
-        adminNotify: (text: string) => instance.post(`/message-bus/admin-notify`, { text }),
+        alert: (text: string) => instance.post(`/message-bus/notify`, { text, channel: 'alerts' }),
     }
 })
 
