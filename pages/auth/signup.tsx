@@ -5,8 +5,11 @@ import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useMutation } from 'react-query'
 import api from '../../lib/api/internal'
 import { CheckIcon } from '@heroicons/react/outline'
+import { useLogOnRender } from '../../lib/analytics'
 
-export default function SignIn() {
+export default function SignUp() {
+  useLogOnRender('redox:signup')
+
   const methods = useForm()
 
   const mutation = useMutation(
