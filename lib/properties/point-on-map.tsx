@@ -28,9 +28,9 @@ export const PointOnMap = ({ lat, lng }: PointOnMapProps) => {
                     width: '100%'
                 }}
                 zoom={[11]}
-                center={[lat, lng]}
+                center={[lng, lat]}
             >
-                <Marker coordinates={[lat, lng]}>
+                <Marker coordinates={[lng, lat]}>
                     <LocationMarkerIcon className="h-10 w-10 text-blue-700" />
                 </Marker>
             </Map>}
