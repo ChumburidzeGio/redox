@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { SessionProvider } from "next-auth/react"
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { MDXProvider } from '@mdx-js/react'
 import { components as MDXComponents } from "lib/mdx";
 import { AmplitudeProvider } from "lib/analytics";
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <MDXProvider components={MDXComponents}>
           <AmplitudeProvider apiKey={config.services.amplitude.apiKey}>
             <Component {...pageProps} />

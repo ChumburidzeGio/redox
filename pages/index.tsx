@@ -10,7 +10,7 @@ export default function DashboardPage() {
         return null
     }
 
-    return role === 'employer' ? (
+    return role !== 'employer' ? (
         <EmployerDashboard />
     ) : (
         <EmployeeHome />
