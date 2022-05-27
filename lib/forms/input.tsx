@@ -6,7 +6,7 @@ import type { ValidationsProps } from "./validation-props"
 
 export interface InputProps {
     id: string
-    type: 'text' | 'email' | 'password' | 'hidden'
+    type: 'text' | 'email' | 'password' | 'hidden' | 'datetime-local'
     defaultValue?: string
     hidden?: boolean
     placeholder?: string
@@ -15,7 +15,7 @@ export interface InputProps {
     rules?: Omit<ValidationsProps, "valueAsDate">
 }
 
-export const Input: React.FC<InputProps> = ({ id, type, defaultValue, placeholder, className, rules, disabled}) => {
+export const Input: React.FC<InputProps> = ({ id, type, defaultValue, value, placeholder, className, rules, disabled}) => {
     const { register, formState: { errors } } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
