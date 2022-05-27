@@ -7,7 +7,7 @@ const EmployerApi = (instance: AxiosInstance) => ({
 
 const HomeApi = (instance: AxiosInstance) => ({
   loadHomes: () => instance.post("/home/load-homes"),
-  setOfferStatus: (status: string, id: number, date?: Date) =>
+  setOfferStatus: (status: string | null, id: number, date?: Date | string) =>
     instance.post(`home/set-offer-status`, { status, id, date }),
 });
 
