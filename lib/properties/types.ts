@@ -17,7 +17,7 @@ export interface Offer {
   relocationId: number;
   homeId: number;
   status: SearchOfferStatus;
-  viewingAt: Date;
+  viewingAt: string;
   createdAt: Date;
   updatedAt: Date;
   relocationName: string;
@@ -40,4 +40,31 @@ export interface PropertyDts {
   source: string;
   coordinates: CoordinatesDts;
   offers: Offer[];
+}
+
+export interface OfferOption {
+  label: string;
+  value: string;
+  desc: string;
+}
+
+export interface PropertyCardProps {
+  property: {
+    id: number;
+    photo: string;
+    street: string;
+    city: string;
+    postcode: string;
+    rent: string;
+    surface: number;
+    agency: string;
+    isNew: boolean;
+    rooms: number;
+    availability: string | null;
+    url: string;
+    source: string;
+    coordinates: { lat: number; lng: number };
+    interior: string | null;
+    offers: Offer[];
+  };
 }
