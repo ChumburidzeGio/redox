@@ -1,10 +1,10 @@
 import * as React from "react";
+import { useQuery } from "react-query";
 
 import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "../auth";
 import { Offer } from "./types";
-import { useQuery } from "react-query";
 
 interface ActionsProps {
   offers: Offer[];

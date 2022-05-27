@@ -3,8 +3,7 @@ import { useQuery } from "react-query";
 
 import api from "lib/api/internal";
 import { Header } from "lib/shared-ui";
-
-import { PropertiesCard } from "./property-card";
+import PropertiesCard from "./property-card";
 import LoadingState from "./loading-state";
 import EmptyState from "./empty-state";
 
