@@ -3,33 +3,17 @@ import { Drawer, Header, Button, Badge } from "lib/shared-ui";
 import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import { CustomerActions } from "./customer-actions";
 import { AgentActions } from "./agent-actions";
-import { Offer } from "./types";
+import { Offer, PropertyCardProps } from "./types";
 import { PointOnMap } from "./point-on-map";
+import Image from "next/image";
 
-interface Test {
-  property: {
-    id: number;
-    photo: string;
-    street: string;
-    city: string;
-    postcode: string;
-    rent: string;
-    surface: number;
-    agency: string;
-    isNew: boolean;
-    rooms: number;
-    availability: string | null;
-    url: string;
-    source: string;
-    coordinates: { lat: number; lng: number };
-    interior: string | null;
-    offers: Offer[] | any;
-  };
-}
-
-export const PropertiesCard = ({ property }: Test) => {
+const PropertiesCard = ({ property }: PropertyCardProps) => {
   const [showDetails, setShowDetails] = React.useState(false);
   const offers: Offer[] = property.offers;
+
+  const imgLoader = ({ src }: { src: string }): string => {
+    return src;
+  };
 
   return (
     <li
@@ -39,7 +23,15 @@ export const PropertiesCard = ({ property }: Test) => {
       <Drawer show={showDetails} onClose={() => setShowDetails(false)}>
         <div className="pointer-events-auto w-screen sm:max-w-lg max-w-full">
           <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-            <img src={property.photo} alt="image" className="rounded-sm" />
+            <Image
+              loader={imgLoader}
+              src={property.photo}
+              alt="image"
+              width="100%"
+              height="500px"
+              className="rounded-sm"
+            />
+
             <div className="pt-3 px-5 pb-5 flex flex-col justify-between">
               <div className="flex flex-col">
                 <Header level="3">{property.street}</Header>
@@ -67,6 +59,7 @@ export const PropertiesCard = ({ property }: Test) => {
                 </Button>
               </a>
               <CustomerActions offers={offers || []} />
+
               <AgentActions offers={offers || []} />
               {property.coordinates && (
                 <PointOnMap
@@ -80,8 +73,12 @@ export const PropertiesCard = ({ property }: Test) => {
       </Drawer>
       <div className="flex items-center py-3 sm:px-4 sm:py-4">
         <div className="min-w-0 flex-1 flex items-center">
-          <div className="flex-shrink-0 max-w-[100px]">
-            <img src={property.photo} alt="image" className="rounded-sm" />
+          <div className="sm:w-100 max-w-full sm:max-w-[100px] flex flex-[1_0_auto] sm:max-h-[80px] justify-center items-center overflow-hidden">
+            <img
+              src={property.photo}
+              alt="img"
+              className="flex-shrink-0 min-w-full min-h-full object-cover"
+            />
           </div>
           <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
             <div>
@@ -118,3 +115,5 @@ export const PropertiesCard = ({ property }: Test) => {
     </li>
   );
 };
+
+export default React.memo(PropertiesCard);
