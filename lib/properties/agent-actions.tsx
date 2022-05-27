@@ -1,62 +1,78 @@
 import * as React from "react";
-import { ErrorText, Form, Input, Label, RequestError } from "lib/forms";
-import { useMutation } from "react-query";
-import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import dayjs from "dayjs";
 
 import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "lib/auth";
-import { Offer } from "./types";
-import { useQuery } from "react-query";
-import { DateTime } from "../forms/date-time";
-import dayjs from "dayjs";
+import { Offer, OfferOption } from "./types";
+import { SharedPopover } from "./popover";
+import { AxiosResponse } from "axios";
 
-interface ActionsProps {
-  offers: Offer[];
+const statuses: OfferOption[] = [
+  {
+    label: "Considering",
+    value: "considering",
+    desc: "Status Description",
+  },
+  {
+    label: "Send Offer",
+    value: "offer_sent",
+    desc: "Status Description",
+  },
+  {
+    label: "Viewing Requested",
+    value: "viewing_requested",
+    desc: "Status Description",
+  },
+  {
+    label: "Rented",
+    value: "rented",
+    desc: "Status Description",
+  },
+];
+
+function GetStatus({ offer }: { offer: Offer }) {
+  const status = React.useMemo(() => {
+    switch (offer?.status) {
+      case "considering":
+        return "Considering";
+      case "offer_sent":
+        return "Offer Sent";
+      case "viewing_requested":
+        const { viewingAt } = offer;
+        return viewingAt
+          ? `Viewing at ${dayjs(viewingAt).format("MMM D, HH:mm")}`
+          : "Viewing Requested";
+      case "rented":
+        return "Rented";
+      default:
+        return "No Status";
+    }
+  }, [offer]);
+
+  return <div className="text-xs text-gray-700 ">{status}</div>;
 }
-
-interface MutationData {
-  date: Date;
-  status: string;
-  id: number;
-}
-
-export const AgentActions = ({ offers }: ActionsProps) => {
+export const AgentActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
-  const methods = useForm();
 
-  const mutation = useMutation(
-    (data: MutationData) => {
-      return api.home.setOfferStatus(data.status, data.id, data.date);
-    },
-    {
-      onSuccess: () => {
-        refetch();
-      },
-    }
-  );
-
-  const updateStatus = async (offer: Offer) => {
-    let status = "considering";
-    if (offer.status === "considering") {
-      status = "viewing_requested";
-    }
-    if (offer.status === "viewing_requested") {
-      status = "offer_sent";
-    }
-    if (offer.status === "offer_sent") {
-      status = "rented";
-    }
-    await api.home.setOfferStatus(status, offer.id);
+  const updateStatus = async (
+    status: string | null,
+    offer: Offer,
+    date?: Date | string
+  ) => {
+    await api.home.setOfferStatus(status, offer.id, date);
     refetch();
   };
 
-  const getHomes = () => {
+  const getHomes = (): Promise<AxiosResponse> => {
     return api.home.loadHomes();
   };
   const archiveStatus = async (id: number) => {
-    await api.home.setOfferStatus("archive", id);
-    refetch();
+    if (confirm("Are you sure you want to archive property?")) {
+      await api.home.setOfferStatus("archive", id);
+      refetch();
+    }
   };
 
   const { refetch } = useQuery("homes", getHomes, {
@@ -64,73 +80,25 @@ export const AgentActions = ({ offers }: ActionsProps) => {
     enabled: false,
   });
 
-  const getButtonContent = (status: string | null, offer: Offer): any => {
-    if (offer.status === "viewing_requested" && offer.viewingAt) {
-      return "Set offer sent";
-    }
-    switch (status) {
-      case "considering":
-        return "Considering";
-      case "viewing_requested":
-        return "Set Viewing Date";
-      case "offer_sent":
-        return "Set as Rented"  
-      default:
-        return "Send";
-    }
-  };
-
-  const getActions = (offer: Offer) => {
+  const getActions = (offer: Offer): JSX.Element => {
     return (
-      <>
-        {offer.status === "viewing_requested" && !offer.viewingAt ? (
-          <Form
-            onSubmit={(data) =>
-              mutation.mutate({ ...data, status: offer.status, id: offer.id })
-            }
-            methods={methods}
+      <div className="flex flex-col gap-1">
+        <div className="flex gap-2">
+          <Button
+            onClick={() => archiveStatus(offer.id)}
+            variant="gray"
+            className="py-1.5"
           >
-            <div className="flex flex-col gap-2">
-              <div>
-                <DateTime
-                  id="date"
-                  value={offer.viewingAt || mutation.data}
-                  rules={{ required: true }}
-                />
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  onClick={() => archiveStatus(offer.id)}
-                  variant="red"
-                  className="py-1.5"
-                >
-                  Archive
-                </Button>
-                <Button variant="primary" type="submit" className="py-1.5">
-                  Set viewing time
-                </Button>
-              </div>
-            </div>
-          </Form>
-        ) : (
-          <div className="flex gap-2">
-            <Button
-              onClick={() => archiveStatus(offer.id)}
-              variant="red"
-              className="py-1.5"
-            >
-              Archive
-            </Button>
-            <Button
-              onClick={() => updateStatus(offer)}
-              variant="primary"
-              className="py-1.5"
-            >
-              {getButtonContent(offer.status, offer)}
-            </Button>
-          </div>
-        )}
-      </>
+            Set Status
+          </Button>
+          <SharedPopover
+            options={statuses}
+            updateHandler={updateStatus}
+            offer={offer}
+          />
+        </div>
+        {<GetStatus offer={offer} />}
+      </div>
     );
   };
 
