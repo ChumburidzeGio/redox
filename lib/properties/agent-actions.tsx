@@ -89,7 +89,7 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
             variant="gray"
             className="py-1.5"
           >
-            Set Status
+            Archive
           </Button>
           <SharedPopover
             options={statuses}
@@ -102,7 +102,7 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
     );
   };
 
-  if (role !== "admin") {
+  if (role === "admin") {
     return null;
   }
 
@@ -113,7 +113,7 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
           key={offer.id}
           className="py-2 px-4 flex flex-row justify-between items-center"
         >
-          <div className="mr-10">{offer.relocationName}</div>
+          <div className="mr-4 sm:mr-10">{offer.relocationName}</div>
           <div className="flex gap-2">{getActions(offer)}</div>
         </div>
       ))}

@@ -54,10 +54,10 @@ export const SharedPopover: React.FC<ModalProps> = ({
   }, [offer]);
 
   return (
-    <Popover className="relative w-full">
+    <Popover className="relative">
       <Popover.Button
         className={`
-                ${!open ? "" : "text-opacity-90"}
+                ${!open ? "" : "relative text-opacity-90"}
                 group inline-flex h-full items-center rounded-md px-3 py-0 sm:px-6 sm:py-2 text-sm  sm:text-base text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
                 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-white
                 `}

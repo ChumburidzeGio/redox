@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useQuery } from "react-query";
+import dayjs from "dayjs";
 
 import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
@@ -12,6 +13,7 @@ interface ActionsProps {
 
 export const CustomerActions = ({ offers }: ActionsProps) => {
   const { role } = useUser();
+
   const updateStatus = async (offer: Offer) => {
     let status = "";
     if (offer.status === "considering") {
@@ -31,6 +33,7 @@ export const CustomerActions = ({ offers }: ActionsProps) => {
     await api.home.setOfferStatus("archive", id);
     refetch();
   };
+
   const getHomes = () => {
     return api.home.loadHomes();
   };
@@ -40,44 +43,61 @@ export const CustomerActions = ({ offers }: ActionsProps) => {
     enabled: false,
   });
 
+  function GetStatus({ offer }: { offer: Offer }) {
+    const status = React.useMemo(() => {
+      switch (offer?.status) {
+        case "viewing_requested":
+          const { viewingAt } = offer;
+          return viewingAt
+            ? `Viewing at ${dayjs(viewingAt).format("MMM D, HH:mm")}`
+            : "Viewing Requested";
+        default:
+          return "";
+      }
+    }, [offer]);
+    return <div className="text-xs text-gray-700 ">{status}</div>;
+  }
+
   const getButtonContent = (status: string | null): any => {
     switch (status) {
       case "considering":
-        return "Considering";
+        return "Request Viewing";
       case "viewing_requested":
         return "Cancel Viewing and Archive";
       case "offer_sent":
-        return "Cancel Offer";
+        return "Cancel Offer and Archive";
       default:
-        return "Send";
+        return "Cancel Offer and Archive";
     }
   };
 
-  const getActions = (offer: Offer) => {
+  const getActions = (offer: Offer): JSX.Element => {
     return (
-      <div className="flex gap-2">
-        {offer.status === null ||
-          (offer.status === "considering" && (
+      <div className="flex flex-col gap-1">
+        <div className="flex gap-2">
+          {offer.status === "considering" && (
             <Button
               onClick={() => archiveStatus(offer.id)}
-              variant="red"
+              variant="gray"
               className="py-1.5"
             >
               Archive
             </Button>
-          ))}
-        <Button
-          onClick={() => updateStatus(offer)}
-          variant="primary"
-          className="py-1.5"
-        >
-          {getButtonContent(offer.status)}
-        </Button>
+          )}
+          <Button
+            onClick={() => updateStatus(offer)}
+            variant="primary"
+            className="py-1.5"
+          >
+            {getButtonContent(offer.status)}
+          </Button>
+        </div>
+        {<GetStatus offer={offer} />}
       </div>
     );
   };
 
-  if (role !== "customer") {
+  if (role === "customer") {
     return null;
   }
 
@@ -88,7 +108,7 @@ export const CustomerActions = ({ offers }: ActionsProps) => {
           key={offer.id}
           className="py-2 px-4 flex flex-row justify-between items-center"
         >
-          <div className="mr-10">{offer.relocationName}</div>
+          <div className="mr-4 sm:mr-10">{offer.relocationName}</div>
           <div className="flex gap-2">{getActions(offer)}</div>
         </div>
       ))}
