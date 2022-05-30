@@ -102,7 +102,7 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
     );
   };
 
-  if (role === "admin") {
+  if (role !== "admin") {
     return null;
   }
 

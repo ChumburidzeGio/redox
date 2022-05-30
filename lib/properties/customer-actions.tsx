@@ -7,11 +7,7 @@ import { Button } from "lib/shared-ui";
 import { useUser } from "../auth";
 import { Offer } from "./types";
 
-interface ActionsProps {
-  offers: Offer[];
-}
-
-export const CustomerActions = ({ offers }: ActionsProps) => {
+export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
 
   const updateStatus = async (offer: Offer) => {
@@ -97,7 +93,7 @@ export const CustomerActions = ({ offers }: ActionsProps) => {
     );
   };
 
-  if (role === "customer") {
+  if (role !== "customer") {
     return null;
   }
 
