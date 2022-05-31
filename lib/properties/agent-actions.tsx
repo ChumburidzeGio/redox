@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useQuery } from "react-query";
-import dayjs from "dayjs";
+import { AxiosResponse } from "axios";
 
 import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "lib/auth";
 import { Offer, OfferOption } from "./types";
 import { SharedPopover } from "./popover";
-import { AxiosResponse } from "axios";
+import { useStatusLabel, archiveConfirm } from "./actions-utils";
 
 const statuses: OfferOption[] = [
   {
@@ -33,27 +33,17 @@ const statuses: OfferOption[] = [
 ];
 
 function GetStatus({ offer }: { offer: Offer }) {
-  const status = React.useMemo(() => {
-    switch (offer?.status) {
-      case "considering":
-        return "Considering";
-      case "offer_sent":
-        return "Offer Sent";
-      case "viewing_requested":
-        const { viewingAt } = offer;
-        return viewingAt
-          ? `Viewing at ${dayjs(viewingAt).format("MMM D, HH:mm")}`
-          : "Viewing Requested";
-      case "rented":
-        return "Rented";
-      default:
-        return "No Status";
-    }
-  }, [offer]);
-
+  const status = useStatusLabel(offer);
   return <div className="text-xs text-gray-700 ">{status}</div>;
 }
-export const AgentActions = ({ offers }: { offers: Offer[] }) => {
+
+export const AgentActions = ({
+  offers,
+  refetch,
+}: {
+  offers: Offer[];
+  refetch: () => void;
+}) => {
   const { role } = useUser();
 
   const updateStatus = async (
@@ -65,20 +55,9 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
     refetch();
   };
 
-  const getHomes = (): Promise<AxiosResponse> => {
-    return api.home.loadHomes();
-  };
   const archiveStatus = async (id: number) => {
-    if (confirm("Are you sure you want to archive property?")) {
-      await api.home.setOfferStatus("archive", id);
-      refetch();
-    }
+    archiveConfirm(id, () => refetch());
   };
-
-  const { refetch } = useQuery("homes", getHomes, {
-    refetchOnWindowFocus: false,
-    enabled: false,
-  });
 
   const getActions = (offer: Offer): JSX.Element => {
     return (

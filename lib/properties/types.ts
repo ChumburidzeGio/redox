@@ -67,4 +67,5 @@ export interface PropertyCardProps {
     interior: string | null;
     offers: Offer[];
   };
+  refetch: () => void;
 }

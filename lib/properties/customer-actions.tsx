@@ -6,8 +6,15 @@ import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "../auth";
 import { Offer } from "./types";
+import { useStatusLabel } from "./actions-utils";
 
-export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
+export const CustomerActions = ({
+  offers,
+  refetch,
+}: {
+  offers: Offer[];
+  refetch: () => void;
+}) => {
   const { role } = useUser();
 
   const updateStatus = async (offer: Offer) => {
@@ -30,31 +37,12 @@ export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
     refetch();
   };
 
-  const getHomes = () => {
-    return api.home.loadHomes();
-  };
-
-  const { refetch } = useQuery("homes", getHomes, {
-    refetchOnWindowFocus: false,
-    enabled: false,
-  });
-
   function GetStatus({ offer }: { offer: Offer }) {
-    const status = React.useMemo(() => {
-      switch (offer?.status) {
-        case "viewing_requested":
-          const { viewingAt } = offer;
-          return viewingAt
-            ? `Viewing at ${dayjs(viewingAt).format("MMM D, HH:mm")}`
-            : "Viewing Requested";
-        default:
-          return "";
-      }
-    }, [offer]);
+    const status = useStatusLabel(offer);
     return <div className="text-xs text-gray-700 ">{status}</div>;
   }
 
-  const getButtonContent = (status: string | null): any => {
+  const getButtonContent = (status: string | null): string => {
     switch (status) {
       case "considering":
         return "Request Viewing";

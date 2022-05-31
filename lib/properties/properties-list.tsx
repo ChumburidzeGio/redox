@@ -12,7 +12,7 @@ export const PropertiesList = () => {
     return api.home.loadHomes();
   };
 
-  const { data, isError, isLoading } = useQuery("homes", getHomes, {
+  const { data, isError, isLoading, refetch } = useQuery("homes", getHomes, {
     refetchOnWindowFocus: false,
   });
 
@@ -33,6 +33,7 @@ export const PropertiesList = () => {
             return (
               <PropertiesCard
                 key={home.id}
+                refetch={refetch}
                 property={{
                   id: home.id,
                   photo: home.photo,

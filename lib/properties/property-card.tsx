@@ -7,7 +7,7 @@ import { Offer, PropertyCardProps } from "./types";
 import { PointOnMap } from "./point-on-map";
 import Image from "next/image";
 
-const PropertiesCard = ({ property }: PropertyCardProps) => {
+const PropertiesCard = ({ property, refetch }: PropertyCardProps) => {
   const [showDetails, setShowDetails] = React.useState(false);
   const offers: Offer[] = property.offers;
 
@@ -58,9 +58,9 @@ const PropertiesCard = ({ property }: PropertyCardProps) => {
                   <ExternalLinkIcon className="h-5 w-5 ml-2" />
                 </Button>
               </a>
-              <CustomerActions offers={offers || []} />
+              <CustomerActions refetch={refetch} offers={offers || []} />
+              <AgentActions refetch={refetch} offers={offers || []} />
 
-              <AgentActions offers={offers || []} />
               {property.coordinates && (
                 <PointOnMap
                   lat={property.coordinates.lat}
