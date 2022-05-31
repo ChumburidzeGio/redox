@@ -7,30 +7,8 @@ import { Button } from "lib/shared-ui";
 import { useUser } from "lib/auth";
 import { Offer, OfferOption } from "./types";
 import { SharedPopover } from "./popover";
-import { useStatusLabel, archiveConfirm } from "./actions-utils";
+import { useStatusLabel, useSharedActions } from "./actions-utils";
 
-const statuses: OfferOption[] = [
-  {
-    label: "Considering",
-    value: "considering",
-    desc: "Status Description",
-  },
-  {
-    label: "Send Offer",
-    value: "offer_sent",
-    desc: "Status Description",
-  },
-  {
-    label: "Viewing Requested",
-    value: "viewing_requested",
-    desc: "Status Description",
-  },
-  {
-    label: "Rented",
-    value: "rented",
-    desc: "Status Description",
-  },
-];
 
 function GetStatus({ offer }: { offer: Offer }) {
   const status = useStatusLabel(offer);
@@ -45,6 +23,9 @@ export const AgentActions = ({
   refetch: () => void;
 }) => {
   const { role } = useUser();
+  const { archiveConfirm } = useSharedActions();
+
+  console.log(archiveConfirm, "ijoqowiejq");
 
   const updateStatus = async (
     status: string | null,
@@ -55,23 +36,20 @@ export const AgentActions = ({
     refetch();
   };
 
-  const archiveStatus = async (id: number) => {
-    archiveConfirm(id, () => refetch());
-  };
-
   const getActions = (offer: Offer): JSX.Element => {
     return (
       <div className="flex flex-col gap-1">
         <div className="flex gap-2">
           <Button
-            onClick={() => archiveStatus(offer.id)}
+            onClick={() => {
+              archiveConfirm(offer.id);
+            }}
             variant="gray"
             className="py-1.5"
           >
             Archive
           </Button>
           <SharedPopover
-            options={statuses}
             updateHandler={updateStatus}
             offer={offer}
           />

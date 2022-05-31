@@ -10,7 +10,6 @@ import { Button, Spinner } from "lib/shared-ui";
 
 interface ModalProps {
   offer: Offer;
-  options: OfferOption[];
   updateHandler: (status: string | null, offer: Offer, date?: string) => void;
 }
 
@@ -26,9 +25,31 @@ interface OptionProps {
   desc?: string;
 }
 
+const statuses: OfferOption[] = [
+  {
+    label: "Considering",
+    value: "considering",
+    desc: "Status Description",
+  },
+  {
+    label: "Send Offer",
+    value: "offer_sent",
+    desc: "Status Description",
+  },
+  {
+    label: "Viewing Requested",
+    value: "viewing_requested",
+    desc: "Status Description",
+  },
+  {
+    label: "Rented",
+    value: "rented",
+    desc: "Status Description",
+  },
+];
+
 export const SharedPopover: React.FC<ModalProps> = ({
   offer,
-  options,
   updateHandler,
 }) => {
   const [status, setStatus] = React.useState<string | null>("");
@@ -92,7 +113,7 @@ export const SharedPopover: React.FC<ModalProps> = ({
                     </div>
                   </div>
                 )}
-                {options.map((option: OptionProps) => (
+                {statuses.map((option: OptionProps) => (
                   <label
                     key={option.label}
                     className="relative p-4 flex cursor-pointer focus:outline-none"
