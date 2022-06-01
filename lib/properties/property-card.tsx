@@ -1,13 +1,14 @@
 import * as React from "react";
-import { Drawer, Header, Button, Badge } from "lib/shared-ui";
 import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/solid";
+import Image from "next/image";
+
+import { Drawer, Header, Button, Badge } from "lib/shared-ui";
 import { CustomerActions } from "./customer-actions";
 import { AgentActions } from "./agent-actions";
 import { Offer, PropertyCardProps } from "./types";
 import { PointOnMap } from "./point-on-map";
-import Image from "next/image";
 
-const PropertiesCard = ({ property, refetch }: PropertyCardProps) => {
+const PropertiesCard = ({ property }: PropertyCardProps) => {
   const [showDetails, setShowDetails] = React.useState(false);
   const offers: Offer[] = property.offers;
 
@@ -58,8 +59,8 @@ const PropertiesCard = ({ property, refetch }: PropertyCardProps) => {
                   <ExternalLinkIcon className="h-5 w-5 ml-2" />
                 </Button>
               </a>
-              <CustomerActions refetch={refetch} offers={offers || []} />
-              <AgentActions refetch={refetch} offers={offers || []} />
+              <CustomerActions offers={offers || []} />
+              <AgentActions offers={offers || []} />
 
               {property.coordinates && (
                 <PointOnMap
