@@ -1,13 +1,18 @@
 import * as React from 'react'
 import { useUser } from 'lib/auth'
 import {useRouter} from "next/router";
-import {AppLayout} from "../lib/layouts";
-import {Header} from "../lib/shared-ui";
+import {AppLayout} from "lib/layouts";
+import {Header} from "lib/shared-ui";
 import {ResetPassword} from "lib/settings";
+import {useLogOnRender} from "lib/analytics";
 
 export default function SettingsPage() {
     const { isLoading, isAuth } = useUser()
     const router = useRouter()
+
+    useLogOnRender('redox:view', {
+        page: 'settings'
+    })
 
     if (isLoading) {
         return null

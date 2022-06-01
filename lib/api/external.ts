@@ -41,6 +41,25 @@ const HomeApi = (instance: AxiosInstance) => ({
 
 const RelocationApi = (instance: AxiosInstance) => ({
   getForUser: (userId: number) => instance.get(`/relocations?userId=${userId}`),
+  signIn: (data: RedarSignInProps) => instance.post("/users/sign-in", data),
+  signUp: (data: RedarSignUpProps) => instance.post("/users/sign-up", data),
+  employer: {
+    relocations: (employerId: number) =>
+      instance.get(`/relocations/employer/${employerId}`),
+  },
+  users: {
+    id: (id: number) => instance.get(`/users/id/${id}`),
+    resetPassword: (userId: number, oldPassword: string, newPassword: string) =>
+      instance.post(`/users/reset-password`, {
+        userId,
+        oldPassword,
+        newPassword,
+      }),
+  },
+  messageBus: {
+    alert: (text: string) =>
+      instance.post(`/message-bus/notify`, { text, channel: "alerts" }),
+  },
 });
 
 const create = () => {
