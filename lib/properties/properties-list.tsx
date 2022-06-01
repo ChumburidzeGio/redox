@@ -6,13 +6,34 @@ import { Header } from "lib/shared-ui";
 import PropertiesCard from "./property-card";
 import LoadingState from "./loading-state";
 import EmptyState from "./empty-state";
+import { useUser } from "lib/auth";
+import { Home, HomeData, HomeWithSearchOffers } from "./types";
 
 export const PropertiesList = () => {
+  const { role } = useUser();
+
   const getHomes = () => {
     return api.home.loadHomes();
   };
 
-  const { data, isError, isLoading, refetch } = useQuery("homes", getHomes, {
+  const findRentedHome = (data: HomeData) => {
+    if (
+      data.data.find(
+        (home: HomeWithSearchOffers) => home?.offers[0].status === "rented"
+      )
+    ) {
+      return {
+        ...data,
+        data: data.data.filter(
+          (home: HomeWithSearchOffers) => home.offers[0].status === "rented"
+        ),
+      };
+    } else {
+      return data;
+    }
+  };
+
+  const { data, isError, isLoading } = useQuery("homes", getHomes, {
     refetchOnWindowFocus: false,
   });
 
@@ -24,16 +45,17 @@ export const PropertiesList = () => {
     return <EmptyState />;
   }
 
+  const filteredData = role === "customer" ? findRentedHome(data) : data;
+
   return (
     <div className="mt-4 sm:mt-6">
       <Header level="3">New apartments</Header>
       <div className="mt-4 overflow-hidden rounded-md sm:border border-gray-200">
         <ul role="list" className="divide-y divide-gray-200">
-          {data?.data?.map(({ home, offers }: any) => {
+          {filteredData?.data?.map(({ home, offers }: any) => {
             return (
               <PropertiesCard
                 key={home.id}
-                refetch={refetch}
                 property={{
                   id: home.id,
                   photo: home.photo,

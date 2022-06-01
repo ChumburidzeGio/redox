@@ -96,7 +96,7 @@ export const SharedPopover: React.FC<ModalProps> = ({
       >
         <Popover.Panel className="absolute min-w-[300px] -left-14 sm:-left-1/2 z-10 p-3 shadow-lg -translate-x-1/2 transform px-4 sm:px-0 max-w-3xl">
           <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-            <div className="relative grid gap-8 bg-white lg:grid-cols-2">
+            <div className="relative grid gap-8 bg-white">
               <Form
                 onSubmit={(data) => {
                   mutation.mutate({

@@ -15,11 +15,10 @@ export interface InputProps {
     rules?: Omit<ValidationsProps, "valueAsDate">
 }
 
-export const Input: React.FC<InputProps> = ({ id, type, defaultValue, value, placeholder, className, rules, disabled}) => {
+export const Input: React.FC<InputProps> = ({ id, type, defaultValue, placeholder, className, rules, disabled}) => {
     const { register, formState: { errors } } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
-
     return (
         <div className={classNames("relative", className)}>
             <input

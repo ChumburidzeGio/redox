@@ -7,10 +7,18 @@ import { CustomerActions } from "./customer-actions";
 import { AgentActions } from "./agent-actions";
 import { Offer, PropertyCardProps } from "./types";
 import { PointOnMap } from "./point-on-map";
+import { useUser } from "lib/auth";
+import { useStatusLabel } from "./actions-utils";
+
+function GetStatus({ offer }: { offer: Offer }) {
+  const status = useStatusLabel(offer);
+  return <div className="text-xs text-gray-700 ">{status}</div>;
+}
 
 const PropertiesCard = ({ property }: PropertyCardProps) => {
   const [showDetails, setShowDetails] = React.useState(false);
   const offers: Offer[] = property.offers;
+  const { role } = useUser();
 
   const imgLoader = ({ src }: { src: string }): string => {
     return src;
@@ -101,7 +109,11 @@ const PropertiesCard = ({ property }: PropertyCardProps) => {
                 {property.surface} m2 · {property.rooms} rooms
               </p>
               <p className="text-sm mt-1.5 text-gray-600">
-                {property.availability || property.interior}
+                {role !== "admin" ? (
+                  <div>{<GetStatus offer={offers[0]} />}</div>
+                ) : (
+                  property.availability || property.interior
+                )}
               </p>
             </div>
           </div>

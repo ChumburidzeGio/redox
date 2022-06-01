@@ -29,18 +29,16 @@ const useStatusLabel = (offer: Offer): string => {
 };
 
 const GetCustomerStatusValue = (offer: Offer): string => {
-  return React.useMemo(() => {
-    switch (offer?.status) {
-      case "considering":
-        return "viewing_requested";
-      case "viewing_requested":
-        return "archived";
-      case "offer_sent":
-        return "archived";
-      default:
-        return "archived";
-    }
-  }, [offer]);
+  switch (offer?.status) {
+    case "considering":
+      return "viewing_requested";
+    case "viewing_requested":
+      return "archived";
+    case "offer_sent":
+      return "archived";
+    default:
+      return "archived";
+  }
 };
 
 function useSharedActions() {
@@ -48,7 +46,7 @@ function useSharedActions() {
   async function archiveConfirm(id: number) {
     if (confirm("Are you sure you want to archive property?")) {
       try {
-        await api.home.setOfferStatus("archive", id);
+        await api.home.setOfferStatus("archived", id);
         await queryClient.prefetchQuery("homes");
       } catch (err) {
         notifyError(
