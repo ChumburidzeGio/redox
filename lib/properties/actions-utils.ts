@@ -1,9 +1,12 @@
 import React from "react";
 import dayjs from "dayjs";
+import toast from "react-hot-toast";
 
 import { Offer } from "./types";
 import api from "lib/api/internal";
 import { useQueryClient } from "react-query";
+
+const notifyError = (text: string) => toast.error(text);
 
 const useStatusLabel = (offer: Offer): string => {
   return React.useMemo(() => {
@@ -40,34 +43,33 @@ const useCustomerStatusValue = (offer: Offer): string => {
   }, [offer]);
 };
 
-const updateStatus = async (
-  onSuccess: () => void,
-  status: string | null,
-  offer: Offer,
-  date?: Date | string
-) => {
-  await api.home.setOfferStatus(status, offer.id, date);
-  onSuccess();
-};
-
 function useSharedActions() {
   const queryClient = useQueryClient();
   async function archiveConfirm(id: number) {
     if (confirm("Are you sure you want to archive property?")) {
-      await api.home.setOfferStatus("archive", id);
-      await queryClient.prefetchQuery("homes");
+      try {
+        await api.home.setOfferStatus("archive", id);
+        await queryClient.prefetchQuery("homes");
+      } catch (err) {
+        notifyError(
+          "Oops we broke something, please try again later or if error persists let us know in the chat."
+        );
+      }
     }
   }
+
   async function setStatus(status: string | null, id: number, date?: string) {
-    await api.home.setOfferStatus(status, id, date);
-    await queryClient.prefetchQuery("homes");
+    try {
+      await api.home.setOfferStatus(status, id, date);
+      await queryClient.prefetchQuery("homes");
+    } catch (err) {
+      notifyError(
+        "Oops we broke something, please try again later or if error persists let us know in the chat."
+      );
+    }
   }
+
   return { archiveConfirm, setStatus };
 }
 
-export {
-  useCustomerStatusValue,
-  useSharedActions,
-  updateStatus,
-  useStatusLabel,
-};
+export { useCustomerStatusValue, useSharedActions, useStatusLabel };

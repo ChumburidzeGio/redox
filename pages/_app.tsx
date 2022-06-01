@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { SessionProvider } from "next-auth/react"
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from 'react-hot-toast';
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { MDXProvider } from '@mdx-js/react'
 import { components as MDXComponents } from "lib/mdx";
@@ -51,6 +52,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       >
         This website uses cookies to enhance the user experience.
       </CookieConsent>
+      <Toaster />
     </SessionProvider>
   )
 }
