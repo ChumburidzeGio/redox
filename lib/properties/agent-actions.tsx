@@ -9,23 +9,14 @@ import { Offer, OfferOption } from "./types";
 import { SharedPopover } from "./popover";
 import { useStatusLabel, useSharedActions } from "./actions-utils";
 
-
 function GetStatus({ offer }: { offer: Offer }) {
   const status = useStatusLabel(offer);
   return <div className="text-xs text-gray-700 ">{status}</div>;
 }
 
-export const AgentActions = ({
-  offers,
-  refetch,
-}: {
-  offers: Offer[];
-  refetch: () => void;
-}) => {
+export const AgentActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
   const { archiveConfirm } = useSharedActions();
-
-  console.log(archiveConfirm, "ijoqowiejq");
 
   const updateStatus = async (
     status: string | null,
@@ -33,7 +24,6 @@ export const AgentActions = ({
     date?: Date | string
   ) => {
     await api.home.setOfferStatus(status, offer.id, date);
-    refetch();
   };
 
   const getActions = (offer: Offer): JSX.Element => {
@@ -49,10 +39,7 @@ export const AgentActions = ({
           >
             Archive
           </Button>
-          <SharedPopover
-            updateHandler={updateStatus}
-            offer={offer}
-          />
+          <SharedPopover updateHandler={updateStatus} offer={offer} />
         </div>
         {<GetStatus offer={offer} />}
       </div>

@@ -1,21 +1,14 @@
 import * as React from "react";
-import { useQuery } from "react-query";
-import dayjs from "dayjs";
 
 import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "../auth";
 import { Offer } from "./types";
-import { useStatusLabel } from "./actions-utils";
+import { useStatusLabel, useSharedActions } from "./actions-utils";
 
-export const CustomerActions = ({
-  offers,
-  refetch,
-}: {
-  offers: Offer[];
-  refetch: () => void;
-}) => {
+export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
+  const { archiveConfirm } = useSharedActions();
 
   const updateStatus = async (offer: Offer) => {
     let status = "";
@@ -29,12 +22,7 @@ export const CustomerActions = ({
       status = "";
     }
     await api.home.setOfferStatus(status, offer.id);
-    refetch();
-  };
-
-  const archiveStatus = async (id: number) => {
-    await api.home.setOfferStatus("archive", id);
-    refetch();
+    // refetch();
   };
 
   function GetStatus({ offer }: { offer: Offer }) {
@@ -61,7 +49,7 @@ export const CustomerActions = ({
         <div className="flex gap-2">
           {offer.status === "considering" && (
             <Button
-              onClick={() => archiveStatus(offer.id)}
+              onClick={() => archiveConfirm(offer.id)}
               variant="gray"
               className="py-1.5"
             >
