@@ -3,23 +3,18 @@ import * as React from "react";
 import { Button } from "lib/shared-ui";
 import { useUser } from "../auth";
 import { Offer } from "./types";
-import { useStatusLabel, useSharedActions } from "./actions-utils";
+import {
+  useStatusLabel,
+  useSharedActions,
+  GetCustomerStatusValue,
+} from "./actions-utils";
 
 export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
   const { archiveConfirm, setStatus } = useSharedActions();
 
   const updateStatus = async (offer: Offer) => {
-    let status = "";
-    if (offer.status === "considering") {
-      status = "viewing_requested";
-    }
-    if (offer.status === "viewing_requested") {
-      status = "archived";
-    }
-    if (offer.status === "offer_sent") {
-      status = "";
-    }
+    const status = GetCustomerStatusValue(offer);
     await setStatus(status, offer.id);
   };
 

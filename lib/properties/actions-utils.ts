@@ -28,7 +28,7 @@ const useStatusLabel = (offer: Offer): string => {
   }, [offer]);
 };
 
-const useCustomerStatusValue = (offer: Offer): string => {
+const GetCustomerStatusValue = (offer: Offer): string => {
   return React.useMemo(() => {
     switch (offer?.status) {
       case "considering":
@@ -72,4 +72,4 @@ function useSharedActions() {
   return { archiveConfirm, setStatus };
 }
 
-export { useCustomerStatusValue, useSharedActions, useStatusLabel };
+export { GetCustomerStatusValue, useSharedActions, useStatusLabel };
