@@ -10,7 +10,7 @@ import { Button, Spinner } from "lib/shared-ui";
 
 interface ModalProps {
   offer: Offer;
-  updateHandler: (status: string | null, offer: Offer, date?: string) => void;
+  updateHandler: (status: string | null, offer: number, date?: string) => void;
 }
 
 interface MutationData {
@@ -60,7 +60,7 @@ export const SharedPopover: React.FC<ModalProps> = ({
   const methods = useForm();
 
   const mutation = useMutation(async (data: MutationData) => {
-    await updateHandler(data.status, offer, data?.date);
+    await updateHandler(data.status, offer.id, data?.date);
   });
 
   const handleStatus = (status: string) => {

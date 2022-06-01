@@ -58,7 +58,11 @@ function useSharedActions() {
       await queryClient.prefetchQuery("homes");
     }
   }
-  return { archiveConfirm };
+  async function setStatus(status: string | null, id: number, date?: string) {
+    await api.home.setOfferStatus(status, id, date);
+    await queryClient.prefetchQuery("homes");
+  }
+  return { archiveConfirm, setStatus };
 }
 
 export {

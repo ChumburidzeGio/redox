@@ -1,11 +1,8 @@
 import * as React from "react";
-import { useQuery } from "react-query";
-import { AxiosResponse } from "axios";
 
-import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "lib/auth";
-import { Offer, OfferOption } from "./types";
+import { Offer } from "./types";
 import { SharedPopover } from "./popover";
 import { useStatusLabel, useSharedActions } from "./actions-utils";
 
@@ -16,15 +13,7 @@ function GetStatus({ offer }: { offer: Offer }) {
 
 export const AgentActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
-  const { archiveConfirm } = useSharedActions();
-
-  const updateStatus = async (
-    status: string | null,
-    offer: Offer,
-    date?: Date | string
-  ) => {
-    await api.home.setOfferStatus(status, offer.id, date);
-  };
+  const { archiveConfirm, setStatus } = useSharedActions();
 
   const getActions = (offer: Offer): JSX.Element => {
     return (
@@ -39,7 +28,7 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
           >
             Archive
           </Button>
-          <SharedPopover updateHandler={updateStatus} offer={offer} />
+          <SharedPopover updateHandler={setStatus} offer={offer} />
         </div>
         {<GetStatus offer={offer} />}
       </div>

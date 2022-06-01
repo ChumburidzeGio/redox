@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import api from "lib/api/internal";
 import { Button } from "lib/shared-ui";
 import { useUser } from "../auth";
 import { Offer } from "./types";
@@ -8,7 +7,7 @@ import { useStatusLabel, useSharedActions } from "./actions-utils";
 
 export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
   const { role } = useUser();
-  const { archiveConfirm } = useSharedActions();
+  const { archiveConfirm, setStatus } = useSharedActions();
 
   const updateStatus = async (offer: Offer) => {
     let status = "";
@@ -21,8 +20,7 @@ export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
     if (offer.status === "offer_sent") {
       status = "";
     }
-    await api.home.setOfferStatus(status, offer.id);
-    // refetch();
+    await setStatus(status, offer.id);
   };
 
   function GetStatus({ offer }: { offer: Offer }) {
