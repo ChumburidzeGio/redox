@@ -6,20 +6,22 @@ const EmployerApi = (instance: AxiosInstance) => ({
 })
 
 const UserApi = (instance: AxiosInstance) => ({
-    signup: (data: Record<string, string>) => instance.post('/auth/signup', data),
-    resetPassword: (oldPassword: string, newPassword: string) => instance.post('/auth/reset', { oldPassword, newPassword }),
+    signup: (data: Record<string, string>) =>
+        instance.post('/auth/signup', data),
+    resetPassword: (oldPassword: string, newPassword: string) =>
+        instance.post('/auth/reset', { oldPassword, newPassword }),
 })
 
 const HomesApi = (instance: AxiosInstance) => ({
-  renterScore: (data: Record<string, string | number>) =>
-    instance.post("/homes/renter-score", data),
-});
+    renterScore: (data: Record<string, string | number>) =>
+        instance.post('/homes/renter-score', data),
+})
 
 const create = () => {
     const axiosInstance = axios.create({
         baseURL: '/api',
         responseType: 'json',
-        withCredentials: true
+        withCredentials: true,
     })
 
     return {
