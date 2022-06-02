@@ -1,5 +1,5 @@
-import * as React from "react"
-import { SubmitHandler, FormProvider , UseFormReturn} from "react-hook-form"
+import * as React from 'react'
+import { SubmitHandler, FormProvider, UseFormReturn } from 'react-hook-form'
 
 export interface FormProps {
     onSubmit: (fields: any) => void
@@ -7,7 +7,7 @@ export interface FormProps {
 }
 
 export const Form: React.FC<FormProps> = ({ children, onSubmit, methods }) => {
-    const onSubmitWrapper: SubmitHandler<{}> = data => onSubmit(data)
+    const onSubmitWrapper: SubmitHandler<{}> = (data) => onSubmit(data)
 
     return (
         <FormProvider {...methods}>

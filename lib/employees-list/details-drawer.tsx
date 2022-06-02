@@ -7,10 +7,20 @@ interface ModalProps {
     initialFocus?: React.MutableRefObject<HTMLElement | null>
 }
 
-export const DetailsDrawer: React.FC<ModalProps> = ({ children, show, onClose, initialFocus }) => {
+export const DetailsDrawer: React.FC<ModalProps> = ({
+    children,
+    show,
+    onClose,
+    initialFocus,
+}) => {
     return (
         <Transition.Root show={show} as={React.Fragment}>
-            <Dialog as="div" className="fixed inset-0 z-10 overflow-hidden" onClose={onClose} initialFocus={initialFocus}>
+            <Dialog
+                as="div"
+                className="fixed inset-0 z-10 overflow-hidden"
+                onClose={onClose}
+                initialFocus={initialFocus}
+            >
                 <div className="absolute inset-0 overflow-hidden">
                     <Transition.Child
                         as={React.Fragment}

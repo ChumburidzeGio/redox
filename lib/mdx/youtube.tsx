@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 export interface YoutubeProps {
     id: string
@@ -35,7 +35,15 @@ export const YoutubeCard: React.FC<YoutubeCardProps> = ({ id, children }) => {
                     allowFullScreen
                 />
             </div>
-            <div style={{ display: 'flex', flexFlow: 'column', padding: "10px 15px" }}>{children}</div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexFlow: 'column',
+                    padding: '10px 15px',
+                }}
+            >
+                {children}
+            </div>
         </div>
     )
 }

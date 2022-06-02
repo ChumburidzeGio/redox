@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { useFormContext } from "react-hook-form"
+import { useFormContext } from 'react-hook-form'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
-import type { ValidationsProps } from "./validation-props"
+import type { ValidationsProps } from './validation-props'
 
 export interface InputProps {
     id: string
@@ -12,16 +12,27 @@ export interface InputProps {
     placeholder?: string
     disabled?: boolean
     className?: string
-    rules?: Omit<ValidationsProps, "valueAsDate">
+    rules?: Omit<ValidationsProps, 'valueAsDate'>
 }
 
-export const Input: React.FC<InputProps> = ({ id, type, defaultValue, placeholder, className, rules, disabled}) => {
-    const { register, formState: { errors } } = useFormContext()
+export const Input: React.FC<InputProps> = ({
+    id,
+    type,
+    defaultValue,
+    placeholder,
+    className,
+    rules,
+    disabled,
+}) => {
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
 
     return (
-        <div className={classNames("relative", className)}>
+        <div className={classNames('relative', className)}>
             <input
                 type={type}
                 disabled={disabled}
@@ -38,9 +49,14 @@ export const Input: React.FC<InputProps> = ({ id, type, defaultValue, placeholde
                 aria-describedby={isError ? `${id}-error` : `${id}-input`}
                 {...register(id, rules)}
             />
-            {isError && (<div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
-            </div>)}
+            {isError && (
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <ExclamationCircleIcon
+                        className="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                    />
+                </div>
+            )}
         </div>
     )
 }
