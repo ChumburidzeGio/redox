@@ -6,6 +6,7 @@ const EmployerApi = (instance: AxiosInstance) => ({
 })
 
 const UserApi = (instance: AxiosInstance) => ({
+    signup: (data: Record<string, string>) => instance.post('/auth/signup', data),
     resetPassword: (oldPassword: string, newPassword: string) => instance.post('/auth/reset', { oldPassword, newPassword }),
 })
 

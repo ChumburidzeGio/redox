@@ -1,18 +1,19 @@
 import * as React from 'react'
 import EmployeeHome from './dox/home.mdx'
+import { AppLayout } from 'lib/layouts'
 import { EmployerDashboard } from './employers/dashboard'
 import { useUser } from 'lib/auth'
 
 export default function Dashboard() {
-    const { role, isLoading } = useUser()
+    const { role } = useUser()
 
-    if (isLoading) {
-        return null
+    if (role === 'employer') {
+        return <EmployerDashboard />
     }
 
-    return role === 'employer' ? (
-        <EmployerDashboard />
-    ) : (
-        <EmployeeHome />
-    )
+    if (role === 'admin' || role === 'customer') {
+        return <EmployeeHome />
+    }
+
+    return <AppLayout />
 }
