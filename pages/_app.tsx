@@ -13,24 +13,29 @@ import 'lib/styles/global.css'
 
 const metaTitle = 'Redox - Complete Guide to Amsterdam'
 const metaDescription =
-  'Learn about housing, BSN, banking, insurance, and many other things, use integration module to better understand Netherlands and Dutch people and use Redox as an ultimate guide to your new home.'
+    'Learn about housing, BSN, banking, insurance, and many other things, use integration module to better understand Netherlands and Dutch people and use Redox as an ultimate guide to your new home.'
 const queryClient = new QueryClient()
 
 export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
+    Component,
+    pageProps: { session, ...pageProps },
 }: AppProps) {
-  return (
-    <SessionProvider session={session}>
-      <QueryClientProvider client={queryClient}>
-        <MDXProvider components={MDXComponents}>
-          <AmplitudeProvider apiKey={config.services.amplitude.apiKey}>
-            <Component {...pageProps} />
-            <MetaTags title={metaTitle} description={metaDescription} />
-          </AmplitudeProvider>
-        </MDXProvider>
-      </QueryClientProvider>
-      <CookieConsent />
-    </SessionProvider>
-  )
+    return (
+        <SessionProvider session={session}>
+            <QueryClientProvider client={queryClient}>
+                <MDXProvider components={MDXComponents}>
+                    <AmplitudeProvider
+                        apiKey={config.services.amplitude.apiKey}
+                    >
+                        <Component {...pageProps} />
+                        <MetaTags
+                            title={metaTitle}
+                            description={metaDescription}
+                        />
+                    </AmplitudeProvider>
+                </MDXProvider>
+            </QueryClientProvider>
+            <CookieConsent />
+        </SessionProvider>
+    )
 }

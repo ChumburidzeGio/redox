@@ -1,5 +1,5 @@
 import * as React from 'react'
-import slugger from "../shared-ui/text/slugger";
+import slugger from '../shared-ui/text/slugger'
 
 export function extractHeaders(children: React.ReactElement[]) {
     const headings: {

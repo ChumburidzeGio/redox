@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useFormContext} from "react-hook-form";
+import { useFormContext } from 'react-hook-form'
 
 export interface ErrorTextProps {
     id?: string
@@ -7,10 +7,20 @@ export interface ErrorTextProps {
     error?: Error
 }
 
-export const ErrorText: React.FC<ErrorTextProps> = ({ id, show, error, children}) => {
-    const { formState: { errors } } = useFormContext()
+export const ErrorText: React.FC<ErrorTextProps> = ({
+    id,
+    show,
+    error,
+    children,
+}) => {
+    const {
+        formState: { errors },
+    } = useFormContext()
 
-    const isError = React.useMemo(() => Boolean(id && errors[id]) || show === true, [id && errors[id], show])
+    const isError = React.useMemo(
+        () => Boolean(id && errors[id]) || show === true,
+        [id && errors[id], show]
+    )
 
     const errorDetails = React.useMemo(() => {
         return error && error.message ? error?.message : null
@@ -23,7 +33,9 @@ export const ErrorText: React.FC<ErrorTextProps> = ({ id, show, error, children}
     return (
         <p className="text-red-600 mt-3 text-sm">
             {children}
-            <span className="text-gray-600 mt-1 text-xs block">{errorDetails}</span>
+            <span className="text-gray-600 mt-1 text-xs block">
+                {errorDetails}
+            </span>
         </p>
     )
 }

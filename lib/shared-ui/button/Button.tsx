@@ -7,14 +7,14 @@ interface ButtonProps {
     children: React.ReactNode
 }
 
-export const Button: React.FC<React.HTMLProps<HTMLButtonElement> & ButtonProps> = (
-    { variant, className, children, ...rest }
-) => {
+export const Button: React.FC<
+    React.HTMLProps<HTMLButtonElement> & ButtonProps
+> = ({ variant, className, children, ...rest }) => {
     const classes = React.useMemo(() => {
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',
             'shadow-sm text-sm font-medium rounded-md px-6 py-2',
-            'focus:outline-none focus:ring-2 focus:ring-offset-2'
+            'focus:outline-none focus:ring-2 focus:ring-offset-2',
         ]
 
         if (variant === 'primary') {

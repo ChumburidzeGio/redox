@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react'
 import { LinkIcon } from '@heroicons/react/solid'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import slugger from "../shared-ui/text/slugger";
-import {useRouter} from "next/router";
-import { Header } from "lib/shared-ui";
+import slugger from '../shared-ui/text/slugger'
+import { useRouter } from 'next/router'
+import { Header } from 'lib/shared-ui'
 
 export function slugToAnchor(slug: string) {
     const path = `${location.pathname}#${slug}`
@@ -19,7 +19,10 @@ export const Linkable: React.FC = ({ children }) => {
     const ref = React.useRef<HTMLSpanElement>(null)
 
     const slug = useSlugger(children as string)
-    const href = React.useMemo(() => router.isReady ? slugToAnchor(slug) : '', [slug, router.isReady])
+    const href = React.useMemo(
+        () => (router.isReady ? slugToAnchor(slug) : ''),
+        [slug, router.isReady]
+    )
 
     const [hovering, setHovering] = React.useState(false)
     const copyHandler = () => {
@@ -36,21 +39,22 @@ export const Linkable: React.FC = ({ children }) => {
                 onMouseOver={() => setHovering(true)}
                 onMouseOut={() => setHovering(false)}
                 style={{
-                    scrollMarginTop: '1rem'
+                    scrollMarginTop: '1rem',
                 }}
             >
-
                 {children}
-                <LinkIcon className={`h-6 w-6 ml-2 cursor-pointer ${hovering ? 'text-gray-900' : 'text-slate-300'}`} />
+                <LinkIcon
+                    className={`h-6 w-6 ml-2 cursor-pointer ${
+                        hovering ? 'text-gray-900' : 'text-slate-300'
+                    }`}
+                />
             </span>
         </CopyToClipboard>
     )
 }
 
 export const CustomH1: React.FC = ({ children }) => {
-    return (
-        <Header level="1">{children}</Header>
-    )
+    return <Header level="1">{children}</Header>
 }
 
 export const CustomH2: React.FC = ({ children }) => (
@@ -66,7 +70,9 @@ export const CustomH3: React.FC = ({ children }) => (
 )
 
 export const CustomH4: React.FC = ({ children }) => (
-    <Header level="4" className="mt-7">{children}</Header>
+    <Header level="4" className="mt-7">
+        {children}
+    </Header>
 )
 
 export const CustomP: React.FC = ({ children }) => (

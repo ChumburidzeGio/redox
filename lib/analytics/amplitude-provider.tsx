@@ -1,7 +1,7 @@
-import * as React from "react";
-import amplitude from "amplitude-js";
-import { useRouter } from "next/router";
-import { useUser } from "lib/auth";
+import * as React from 'react'
+import amplitude from 'amplitude-js'
+import { useRouter } from 'next/router'
+import { useUser } from 'lib/auth'
 
 const initAmplitude = (apiKey: string, userId?: string) => {
     console.log({ apiKey, userId })
@@ -9,17 +9,20 @@ const initAmplitude = (apiKey: string, userId?: string) => {
         includeUtm: true,
         includeReferrer: true,
         includeGclid: true,
-        includeFbclid: true
-    });
+        includeFbclid: true,
+    })
 }
 
 interface AmplitudeProviderProps {
     apiKey: string
 }
 
-export const AmplitudeProvider: React.FC<AmplitudeProviderProps> = ({ apiKey, children }) => {
+export const AmplitudeProvider: React.FC<AmplitudeProviderProps> = ({
+    apiKey,
+    children,
+}) => {
     const router = useRouter()
-    const { email } = useUser();
+    const { email } = useUser()
 
     React.useEffect(() => {
         if (router.isReady) {

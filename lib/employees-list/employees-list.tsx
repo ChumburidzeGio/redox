@@ -1,11 +1,11 @@
 import * as React from 'react'
-import {useQuery} from "react-query";
-import EmptyState from "./empty-state";
-import LoadingState from "./loading-state";
-import {EmployeeCard} from "./employee-card";
-import {InviteEmployee} from "./invite-employee";
-import api from "lib/api/internal";
-import {RelocationDts} from "./dts/relocation.dts";
+import { useQuery } from 'react-query'
+import EmptyState from './empty-state'
+import LoadingState from './loading-state'
+import { EmployeeCard } from './employee-card'
+import { InviteEmployee } from './invite-employee'
+import api from 'lib/api/internal'
+import { RelocationDts } from './dts/relocation.dts'
 
 export const EmployeesList = () => {
     const { data, isError, isLoading } = useQuery('employees', () => {

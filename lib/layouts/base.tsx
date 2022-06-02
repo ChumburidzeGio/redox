@@ -1,17 +1,21 @@
 import * as React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon, MenuAlt2Icon } from '@heroicons/react/outline'
-import { Logo } from "lib/shared-ui";
-import Link from "next/link";
-import { Navigation } from "./navigation";
+import { Logo } from 'lib/shared-ui'
+import Link from 'next/link'
+import { Navigation } from './navigation'
 
-export const BaseLayout: React.FC = ({ children}) => {
+export const BaseLayout: React.FC = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = React.useState(false)
 
     return (
         <div>
             <Transition.Root show={sidebarOpen} as={React.Fragment}>
-                <Dialog as="div" className="fixed inset-0 flex z-40 md:hidden" onClose={setSidebarOpen}>
+                <Dialog
+                    as="div"
+                    className="fixed inset-0 flex z-40 md:hidden"
+                    onClose={setSidebarOpen}
+                >
                     <Transition.Child
                         as={React.Fragment}
                         enter="transition-opacity ease-linear duration-300"
@@ -48,8 +52,13 @@ export const BaseLayout: React.FC = ({ children}) => {
                                         className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                                         onClick={() => setSidebarOpen(false)}
                                     >
-                                        <span className="sr-only">Close sidebar</span>
-                                        <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                                        <span className="sr-only">
+                                            Close sidebar
+                                        </span>
+                                        <XIcon
+                                            className="h-6 w-6 text-white"
+                                            aria-hidden="true"
+                                        />
                                     </button>
                                 </div>
                             </Transition.Child>
@@ -71,7 +80,7 @@ export const BaseLayout: React.FC = ({ children}) => {
                     <div className="flex items-center flex-shrink-0 px-6">
                         <Link href="/" passHref>
                             <a className="no-underline text-current inline-flex items-center">
-                               <Logo />
+                                <Logo />
                             </a>
                         </Link>
                     </div>
