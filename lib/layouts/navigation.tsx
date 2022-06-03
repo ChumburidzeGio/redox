@@ -26,6 +26,7 @@ type IconProps = React.FC<React.ComponentProps<'svg'>>
 export interface NavigationItem {
     name: string
     href?: string
+    isNew?: boolean
     Icon?: IconProps
     children?: {
         name: string
@@ -46,7 +47,6 @@ export const customerNavigation: NavigationItem[] = [
             { name: 'Utilities', href: '/dox/housing/utilities' },
             {
                 name: 'Moving HHGs',
-                isNew: true,
                 href: '/dox/housing/moving-services',
             },
             { name: 'Furnishing Apartment', href: '/dox/housing/furnishing' },
@@ -59,7 +59,7 @@ export const customerNavigation: NavigationItem[] = [
             { name: 'BSN', href: '/dox/essentials/bsn' },
             { name: 'Banking', href: '/dox/essentials/banking' },
             { name: 'Insurance', href: '/dox/essentials/insurance' },
-            { name: 'TB Test', isNew: true, href: '/dox/essentials/tb-test' },
+            { name: 'TB Test', href: '/dox/essentials/tb-test' },
         ],
     },
     {
@@ -92,7 +92,6 @@ export const customerNavigation: NavigationItem[] = [
             { name: 'Well-being', href: '/dox/settling-in/well-being' },
             {
                 name: 'News Sources',
-                isNew: true,
                 href: '/dox/settling-in/news-sources',
             },
             { name: 'Entertainment', href: '/dox/settling-in/entertainment' },
@@ -121,25 +120,23 @@ export const customerNavigation: NavigationItem[] = [
         children: [
             {
                 name: 'Daycare',
-                isNew: true,
                 href: '/dox/family-and-pets/daycare',
             },
             {
                 name: 'Child Sports',
-                isNew: true,
                 href: '/dox/family-and-pets/child-sports',
             },
             {
                 name: 'Nannies',
-                isNew: true,
                 href: '/dox/family-and-pets/nannies',
             },
-            { name: 'Pets', isNew: true, href: '/dox/family-and-pets/pets' },
+            { name: 'Pets', href: '/dox/family-and-pets/pets' },
         ],
     },
     {
         name: 'Work',
         Icon: BriefcaseIcon,
+        isNew: true,
         children: [
             { name: 'Introduction', isNew: true, href: '/dox/work/intro' },
             { name: 'Finding Job', isNew: true, href: '/dox/work/finding-job' },
@@ -183,6 +180,7 @@ function classNames(...classes: string[]) {
 interface DropdownMenuProps {
     name: string
     Icon?: IconProps
+    isNew?: boolean
     items: {
         isNew?: boolean
         name: string
@@ -193,6 +191,7 @@ interface DropdownMenuProps {
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     name,
     items,
+    isNew,
     Icon,
 }) => {
     const router = useRouter()
@@ -206,9 +205,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 onClick={() => setFolded((isFolded) => !isFolded)}
                 className="group flex items-center px-2 py-2 text-base font-medium text-gray-600 justify-between cursor-pointer hover:bg-gray-50 hover:text-gray-900"
             >
-                <div className="flex">
-                    {Icon && <Icon className="h-5 w-5 mr-3" />}
+                <div className="flex ">
+                    {Icon && <Icon className="h-5 w-5 mr-3 mt-0.5" />}
                     {name}
+                    {isNew && (
+                        <span className="flex h-2 w-2 relative ml-1">
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                        </span>
+                    )}
                 </div>
                 <ChevronDownIcon className="w-5 h-5 text-gray-600" />
             </span>
@@ -255,12 +259,13 @@ export const Navigation: React.FC = () => {
         <>
             <nav className="flex flex-1 px-4 pb-4 pt-3 space-y-1 flex-col justify-between h-full">
                 <div className="flex flex-col">
-                    {navigation.map(({ children, name, href, Icon }) =>
+                    {navigation.map(({ children, isNew, name, href, Icon }) =>
                         children ? (
                             <DropdownMenu
                                 items={children}
                                 name={name}
                                 Icon={Icon}
+                                isNew={isNew}
                                 key={name}
                             />
                         ) : (
