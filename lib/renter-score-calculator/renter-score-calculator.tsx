@@ -1,190 +1,362 @@
-import * as React from "react";
-import { Form, RadioCards, Label, Input, SimpleSelect } from "lib/forms";
-import { useForm, useWatch } from "react-hook-form";
-import { useMutation } from "react-query";
-import api from "../api/internal";
-import { Button } from "../shared-ui";
+import * as React from 'react'
+import { useForm, useWatch } from 'react-hook-form'
+import { useMutation } from 'react-query'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 
-export const RenterScoreCalculator = () => {
-  const [score, setScore] = React.useState(0);
-  const [propertiesPerWeek, setPropertiesPerWeek] = React.useState(0);
-  const [weeksNeeded, setWeeksNeeded] = React.useState(0);
-  const [viewingsNeeded, setViewingsNeeded] = React.useState(0);
+import { Form, RadioCards, Label, Input, SimpleSelect } from 'lib/forms'
+import { classNames, Button } from 'lib/shared-ui'
+import api from '../api/internal'
 
-  // This could be CalculatorProps but problem is with
-  // type matches then so temporarily its string/string
-  const methods = useForm<Record<string, string>>({
-    defaultValues: {
-      occupation: "fulltimer",
-      who: "single",
-    },
-  });
-
-  const occupation = useWatch({
-    control: methods.control,
-    name: "occupation",
-  });
-
-  const who = useWatch({
-    control: methods.control,
-    name: "who",
-  });
-
-  const mutation = useMutation(
-    (data: { email: string }) => {
-      return api.homes.renterScore(data);
+const results = [
+    {
+        color: 'bg-[#ef4444]',
+        value: '0 - 49',
     },
     {
-      onSuccess: (data) => {
-        setScore(data.data.score);
-        setPropertiesPerWeek(data.data.propertiesPerWeek);
-        setWeeksNeeded(data.data.weeksNeeded);
-        setViewingsNeeded(data.data.viewingsNeeded);
-      },
+        color: 'bg-[#facc14]',
+        value: '50 - 90',
+    },
+    {
+        color: 'bg-[#11b981]',
+        value: '90 - 100',
+    },
+]
+
+export const RenterScoreCalculator = () => {
+    const [score, setScore] = React.useState(0)
+    const [propertiesPerWeek, setPropertiesPerWeek] = React.useState(0)
+    const [weeksNeeded, setWeeksNeeded] = React.useState(0)
+    const [viewingsNeeded, setViewingsNeeded] = React.useState(0)
+    const [recommendedPackage, setRecommendedPackage] =
+        React.useState<string>('Standard')
+
+    const getStatus = (score: number) => {
+        if (score > 89) {
+            return 'Positive'
+        }
+        if (score > 49) {
+            return 'Average'
+        }
+        return 'Negative'
     }
-  );
 
-  return (
-    <div className="px-5 py-7 border border-gray-300 rounded my-12 max-w-xl">
-      <Form onSubmit={(data) => mutation.mutate(data)} methods={methods}>
-        <Label id="who">Who is moving?</Label>
-        <RadioCards
-          id="who"
-          rules={{ required: true }}
-          options={[
-            {
-              id: "single",
-              title: `Single`,
-              description: `It's only me`,
-            },
-            {
-              id: "couple",
-              title: `Couple`,
-              description: `Me and my partner`,
-            },
-            {
-              id: "family",
-              title: `Family`,
-              description: `Me, partner and our kids`,
-            },
-          ]}
-        />
+    const statusColors = {
+        Positive: {
+            inner: 'rgb(167 243 208)',
+            outter: 'rgb(16 185 129)',
+            text: 'rgb(16 185 129)',
+        },
+        Average: {
+            inner: 'rgb(254 240 138)',
+            outter: 'rgb(234 179 8)',
+            text: 'rgb(234 179 8)',
+        },
+        Negative: {
+            inner: 'rgb(254 202 202)',
+            outter: 'rgb(185 28 28)',
+            text: 'rgb(185 28 28)',
+        },
+    }
 
-        <div className="mt-6" />
-        <Label id="pets">Do you have any pets?</Label>
-        <RadioCards
-          id="pets"
-          rules={{ required: true }}
-          options={[
-            {
-              id: "no",
-              title: `None`,
-            },
-            {
-              id: "dog",
-              title: `Dog(s)`,
-            },
-            {
-              id: "cat",
-              title: `Cat(s)`,
-            },
-          ]}
-          defaultValue="no"
-        />
+    const details = [
+        {
+            label: 'Apartments per week',
+            value: `${propertiesPerWeek} on average (last2m)`,
+        },
+        {
+            label: 'Time to find',
+            value: `${
+                weeksNeeded > 1
+                    ? weeksNeeded + ' weeks needed.'
+                    : weeksNeeded + ' week needed.'
+            }`,
+        },
+        {
+            label: 'Viewings needed',
+            value: `${viewingsNeeded} on average`,
+        },
+        {
+            label: 'Recommended package',
+            value: `${recommendedPackage}`,
+        },
+    ]
+    // This could be CalculatorProps but problem is with
+    // type matches then so temporarily its string/string
+    const methods = useForm<Record<string, string>>({
+        defaultValues: {
+            occupation: 'fulltimer',
+            who: 'single',
+        },
+    })
 
-        <div className="mt-6" />
-        <Label id="working">What best describes your work situation?</Label>
-        <SimpleSelect
-          id="occupation"
-          rules={{ required: true }}
-          options={[
-            {
-              key: "fulltimer",
-              label: `Working full-time in a company for 1+ year contract`,
-            },
-            {
-              key: "parttimer",
-              label: `Working part-time / Full-time with <1 contract / Zero-hour`,
-            },
-            {
-              key: "selfemployed",
-              label: `Business owner / Freelancer / ZZP'er`,
-            },
-            {
-              key: "unemployed",
-              label: `Student / Not working / Other`,
-            },
-          ]}
-        />
+    const occupation = useWatch({
+        control: methods.control,
+        name: 'occupation',
+    })
 
-        {occupation !== "unemployed" && (
-          <>
-            <div className="mt-6" />
-            <Label
-              id="salary"
-              hintText={who === "single" ? "" : "Of the whole family"}
-            >
-              Your gross annual income
-            </Label>
-            <Input
-              id="salary"
-              type="number"
-              rules={{ required: true }}
-              placeholder="€70,000"
-              className="mt-1"
-            />
-          </>
-        )}
+    const who = useWatch({
+        control: methods.control,
+        name: 'who',
+    })
 
-        <div className="mt-6" />
-        <Label id="bedrooms">What kind of apartment are you looking for?</Label>
-        <RadioCards
-          id="bedrooms"
-          rules={{ required: true }}
-          options={[
-            {
-              id: "studio",
-              title: `Studio`,
+    const mutation = useMutation(
+        (data: { email: string }) => {
+            return api.homes.renterScore(data)
+        },
+        {
+            onSuccess: (data) => {
+                setScore(data.data.score)
+                setPropertiesPerWeek(data.data.propertiesPerWeek)
+                setWeeksNeeded(data.data.weeksNeeded)
+                setViewingsNeeded(data.data.viewingsNeeded)
+                setRecommendedPackage(data.data.recommendedPackage)
             },
-            {
-              id: "1br",
-              title: `One bedroom`,
-            },
-            {
-              id: "2br",
-              title: `Two bedrooms`,
-            },
-            {
-              id: "3br+",
-              title: `Three+ bedrooms`,
-            },
-          ]}
-          defaultValue="1br"
-        />
+        }
+    )
 
-        <div className="mt-6" />
-        <Label id="budget" hintText="Including utilities (g/w/e)">
-          What's your maximum budget?
-        </Label>
-        <Input
-          id="budget"
-          type="number"
-          rules={{ required: true }}
-          placeholder="€1,600"
-          className="mt-1"
-        />
+    return (
+        <div className="flex flex-col gap-4">
+            <div className="sm:px-5 sm:py-7 flex-1  sm:border sm:border-gray-300 rounded my-12 ">
+                <Form
+                    onSubmit={(data) => mutation.mutate(data)}
+                    methods={methods}
+                >
+                    <Label id="who">Who is moving?</Label>
+                    <RadioCards
+                        id="who"
+                        rules={{ required: true }}
+                        options={[
+                            {
+                                id: 'single',
+                                title: `Single`,
+                                description: `It's only me`,
+                            },
+                            {
+                                id: 'couple',
+                                title: `Couple`,
+                                description: `Me and my partner`,
+                            },
+                            {
+                                id: 'family',
+                                title: `Family`,
+                                description: `Me, partner and our kids`,
+                            },
+                        ]}
+                    />
 
-        <Button variant="primary" className="mt-3">
-          Calculate
-        </Button>
+                    <div className="mt-6" />
+                    <Label id="pets">Do you have any pets?</Label>
+                    <RadioCards
+                        id="pets"
+                        rules={{ required: true }}
+                        options={[
+                            {
+                                id: 'no',
+                                title: `None`,
+                            },
+                            {
+                                id: 'dog',
+                                title: `Dog(s)`,
+                            },
+                            {
+                                id: 'cat',
+                                title: `Cat(s)`,
+                            },
+                        ]}
+                        defaultValue="no"
+                    />
 
-        <div className="mt-3">
-          Score: {score} <br />
-          Properties per week: {propertiesPerWeek} <br />
-          Weeks needed: {weeksNeeded} <br />
-          Viewings needed: {viewingsNeeded} <br />
+                    <div className="mt-6" />
+                    <Label id="working">
+                        What best describes your work situation?
+                    </Label>
+                    <SimpleSelect
+                        id="occupation"
+                        rules={{ required: true }}
+                        options={[
+                            {
+                                key: 'fulltimer',
+                                label: `Working full-time in a company for 1+ year contract`,
+                            },
+                            {
+                                key: 'parttimer',
+                                label: `Working part-time / Full-time with <1 contract / Zero-hour`,
+                            },
+                            {
+                                key: 'selfemployed',
+                                label: `Business owner / Freelancer / ZZP'er`,
+                            },
+                            {
+                                key: 'unemployed',
+                                label: `Student / Not working / Other`,
+                            },
+                        ]}
+                    />
+
+                    {occupation !== 'unemployed' && (
+                        <>
+                            <div className="mt-6" />
+                            <Label
+                                id="salary"
+                                hintText={
+                                    who === 'single'
+                                        ? ''
+                                        : 'Of the whole family'
+                                }
+                            >
+                                Your gross annual income
+                            </Label>
+                            <Input
+                                id="salary"
+                                type="number"
+                                rules={{ required: true }}
+                                placeholder="€70,000"
+                                className="mt-1"
+                            />
+                        </>
+                    )}
+
+                    <div className="mt-6" />
+                    <Label id="bedrooms">
+                        What kind of apartment are you looking for?
+                    </Label>
+                    <RadioCards
+                        id="bedrooms"
+                        rules={{ required: true }}
+                        options={[
+                            {
+                                id: 'studio',
+                                title: `Studio`,
+                            },
+                            {
+                                id: '1br',
+                                title: `One bedroom`,
+                            },
+                            {
+                                id: '2br',
+                                title: `Two bedrooms`,
+                            },
+                            {
+                                id: '3br+',
+                                title: `Three+ bedrooms`,
+                            },
+                        ]}
+                        defaultValue="1br"
+                    />
+
+                    <div className="mt-6" />
+                    <Label id="budget" hintText="Including utilities (g/w/e)">
+                        What's your maximum budget?
+                    </Label>
+                    <Input
+                        id="budget"
+                        type="number"
+                        rules={{ required: true }}
+                        placeholder="€1,600"
+                        className="mt-1"
+                    />
+
+                    <Button variant="primary" className="mt-3">
+                        Calculate
+                    </Button>
+                </Form>
+            </div>
+            {(score || mutation.isSuccess) && (
+                <div className="sm:px-5 sm:py-7 flex-1 py-8 sm:border sm:border-gray-300 rounded my-12">
+                    <div style={{ width: 100, height: 100, margin: '0 auto' }}>
+                        <CircularProgressbar
+                            value={score}
+                            background={true}
+                            styles={buildStyles({
+                                backgroundColor:
+                                    statusColors[getStatus(score)].inner,
+                                textSize: '16px',
+                                pathTransitionDuration: 5,
+                                pathColor:
+                                    statusColors[getStatus(score)].outter,
+
+                                textColor: statusColors[getStatus(score)].text,
+                            })}
+                            text={`${score}`}
+                        />
+                    </div>
+                    <div className="flex flex-col text-center">
+                        <div className="text-3xl mt-2 font-semibold">
+                            Renter Score
+                        </div>
+                        <div className="text-base mt-6 px-8">
+                            This score is based on the data you entered above
+                            and live data from the market(for the past 2
+                            months).
+                        </div>
+                        <div className="flex justify-around mt-10">
+                            {results.map((result) => (
+                                <div className="flex items-center gap-2 mr-2">
+                                    <div
+                                        className={classNames(
+                                            result.color,
+                                            'h-4 w-4 rounded-full'
+                                        )}
+                                    />
+                                    <div>{result.value} </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="grid grid-cols-1 xs:grid-cols-2 mt-10">
+                            {details.map((detail) => (
+                                <div className="flex flex-col  mb-6 text-left border-l-4 border-teal-500 pl-2">
+                                    <div className="text-base text-base font-semibold">
+                                        {detail.label}
+                                    </div>
+                                    <div className="text-sm text-sm">
+                                        {detail.value}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="flex flex-col">
+                            <div className="mt-8 ">
+                                <div className="text-lg font-semibold text-left mb-2">
+                                    How to start my relocation process?
+                                </div>
+                                <div className="text-base text-left leading-snug">
+                                    As a first step sign up bellow to create a
+                                    free account and get the access to our
+                                    knowledge base. Within 24 hours our agent
+                                    will reach you out to start your relocation
+                                    process as soon as you submit all the
+                                    necessary details
+                                </div>
+                                <Button
+                                    variant="primary"
+                                    className="mt-3 w-full"
+                                >
+                                    Create an account
+                                </Button>
+                            </div>
+                            <div className="mt-8 gap-2">
+                                <div className="text-lg font-semibold text-left mb-2">
+                                    Do you have any questions?
+                                </div>
+                                <div className="text-base text-left leading-snug">
+                                    Do you still have questions or are not sure
+                                    if our relocation service is a good fit for
+                                    you? Schedule a free 30 minutes consultation
+                                    bellow and we will be happy to answer all
+                                    your questions.
+                                </div>
+                                <Button
+                                    variant="yellow"
+                                    className="mt-3 w-full"
+                                >
+                                    Schedule a free consultation
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-      </Form>
-    </div>
-  );
-};
+    )
+}
