@@ -271,10 +271,12 @@ export const RenterScoreCalculator = () => {
                             styles={buildStyles({
                                 backgroundColor:
                                     statusColors[getStatus(score)].inner,
-                                textSize: '16px',
+                                textSize: '32px',
                                 pathTransitionDuration: 5,
                                 pathColor:
                                     statusColors[getStatus(score)].outter,
+                                trailColor:
+                                    statusColors[getStatus(score)].inner,
 
                                 textColor: statusColors[getStatus(score)].text,
                             })}
@@ -282,15 +284,13 @@ export const RenterScoreCalculator = () => {
                         />
                     </div>
                     <div className="flex flex-col text-center">
-                        <div className="text-3xl mt-2 font-semibold">
-                            Renter Score
-                        </div>
-                        <div className="text-base mt-6 px-8">
+                        <div className="text-2xl mt-4">Renter Score</div>
+                        <div className="text-sm mt-6 px-2 sm:px-48">
                             This score is based on the data you entered above
-                            and live data from the market(for the past 2
+                            and live data from the market (for the last 2
                             months).
                         </div>
-                        <div className="flex justify-around mt-10">
+                        <div className="flex justify-around mt-10 sm:px-40">
                             {results.map((result) => (
                                 <div className="flex items-center gap-2 mr-2">
                                     <div
@@ -303,30 +303,30 @@ export const RenterScoreCalculator = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="grid grid-cols-1 xs:grid-cols-2 mt-10">
+                        <div className="grid grid-cols-1 xs:grid-cols-2 sm:px-20 mt-14">
                             {details.map((detail) => (
                                 <div className="flex flex-col  mb-6 text-left border-l-4 border-teal-500 pl-2">
-                                    <div className="text-base text-base font-semibold">
+                                    <div className="text-lg">
                                         {detail.label}
                                     </div>
-                                    <div className="text-sm text-sm">
+                                    <div className="text-sm">
                                         {detail.value}
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex sm:px-4 flex-col sm:flex-row gap-x-6">
                             <div className="mt-8 ">
-                                <div className="text-lg font-semibold text-left mb-2">
+                                <div className="text-lg font-semibold text-gray-600  text-left mb-2">
                                     How to start my relocation process?
                                 </div>
-                                <div className="text-base text-left leading-snug">
+                                <div className="text-xs sm:text-base text-left leading-snug">
                                     As a first step sign up bellow to create a
                                     free account and get the access to our
                                     knowledge base. Within 24 hours our agent
                                     will reach you out to start your relocation
                                     process as soon as you submit all the
-                                    necessary details
+                                    necessary details.
                                 </div>
                                 <Button
                                     variant="primary"
@@ -336,10 +336,10 @@ export const RenterScoreCalculator = () => {
                                 </Button>
                             </div>
                             <div className="mt-8 gap-2">
-                                <div className="text-lg font-semibold text-left mb-2">
-                                    Do you have any questions?
+                                <div className="text-sm sm:text-lg font-semibold text-gray-600 text-left mb-2">
+                                    Do you have questions?
                                 </div>
-                                <div className="text-base text-left leading-snug">
+                                <div className="text-xs sm:text-base text-left leading-snug">
                                     Do you still have questions or are not sure
                                     if our relocation service is a good fit for
                                     you? Schedule a free 30 minutes consultation
