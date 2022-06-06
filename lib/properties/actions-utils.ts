@@ -6,26 +6,23 @@ import { Offer } from "./types";
 import api from "lib/api/internal";
 import { useQueryClient } from "react-query";
 
-const notifyError = (text: string) => toast.error(text);
-
 const useStatusLabel = (offer: Offer): string => {
   return React.useMemo(() => {
-    switch (offer?.status) {
+    switch (offer.status) {
       case "considering":
         return "Considering";
       case "offer_sent":
         return "Offer Sent";
       case "viewing_requested":
-        const { viewingAt } = offer;
-        return viewingAt
-          ? `Viewing at ${dayjs(viewingAt).format("MMM D, HH:mm")}`
+        return offer.viewingAt
+          ? `Viewing at ${dayjs(offer.viewingAt).format("MMM D, HH:mm")}`
           : "Viewing Requested";
       case "rented":
         return "Rented";
       default:
         return "No Status";
     }
-  }, [offer]);
+  }, [offer.status, offer.viewingAt]);
 };
 
 const GetCustomerStatusValue = (offer: Offer): string => {
@@ -47,9 +44,9 @@ function useSharedActions() {
     if (confirm("Are you sure you want to archive property?")) {
       try {
         await api.home.setOfferStatus("archived", id);
-        await queryClient.prefetchQuery("homes");
+        await queryClient.refetchQueries("homes");
       } catch (err) {
-        notifyError(
+        toast.error(
           "Oops we broke something, please try again later or if error persists let us know in the chat."
         );
       }
@@ -59,9 +56,9 @@ function useSharedActions() {
   async function setStatus(status: string | null, id: number, date?: string) {
     try {
       await api.home.setOfferStatus(status, id, date);
-      await queryClient.prefetchQuery("homes");
+      await queryClient.refetchQueries("homes");
     } catch (err) {
-      notifyError(
+      toast.error(
         "Oops we broke something, please try again later or if error persists let us know in the chat."
       );
     }
