@@ -30,6 +30,7 @@ export const Input: React.FC<InputProps> = ({
     } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
+
     return (
         <div className={classNames('relative', className)}>
             <input

@@ -1,11 +1,10 @@
 import * as React from 'react'
-import ReactMapboxGl, {Marker} from "react-mapbox-gl";
-import {LocationMarkerIcon} from "@heroicons/react/solid";
+import ReactMapboxGl, { Marker } from 'react-mapbox-gl'
+import { LocationMarkerIcon } from '@heroicons/react/solid'
 
 const Map = ReactMapboxGl({
-    accessToken:
-        'pk.eyJ1IjoicmVsb2NpZnkiLCJhIjoiY2wybWJjeGtxMGxtYjNibmsxYjZrdTVrOCJ9.NPMlF0xZYa0t35r7SilHXA'
-});
+    accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string,
+})
 
 interface PointOnMapProps {
     lat: number
@@ -21,19 +20,21 @@ export const PointOnMap = ({ lat, lng }: PointOnMapProps) => {
 
     return (
         <div className="mt-4 rounded-md overflow-hidden">
-            {show && <Map
-                style="mapbox://styles/mapbox/streets-v11"
-                containerStyle={{
-                    height: '200px',
-                    width: '100%'
-                }}
-                zoom={[11]}
-                center={[lng, lat]}
-            >
-                <Marker coordinates={[lng, lat]}>
-                    <LocationMarkerIcon className="h-10 w-10 text-blue-700" />
-                </Marker>
-            </Map>}
+            {show && (
+                <Map
+                    style="mapbox://styles/mapbox/streets-v11"
+                    containerStyle={{
+                        height: '200px',
+                        width: '100%',
+                    }}
+                    zoom={[11]}
+                    center={[lng, lat]}
+                >
+                    <Marker coordinates={[lng, lat]}>
+                        <LocationMarkerIcon className="h-10 w-10 text-blue-700" />
+                    </Marker>
+                </Map>
+            )}
         </div>
     )
 }

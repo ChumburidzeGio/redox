@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { AppProps } from 'next/app'
-import { SessionProvider } from "next-auth/react"
-import { Toaster } from 'react-hot-toast';
+import { SessionProvider } from 'next-auth/react'
+import { Toaster } from 'react-hot-toast'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MDXProvider } from '@mdx-js/react'
@@ -26,7 +26,7 @@ export default function App({
     return (
         <SessionProvider session={session}>
             <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false} />
+                <ReactQueryDevtools initialIsOpen={false} />
 
                 <MDXProvider components={MDXComponents}>
                     <AmplitudeProvider
