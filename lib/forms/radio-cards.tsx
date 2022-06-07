@@ -8,14 +8,14 @@ import { ValidationsProps } from './validation-props'
 interface Option {
     id: string
     title: string
-    description: string
-    value: string
+    description?: string
+    value?: string
 }
 
 export interface RadioCardsProps {
     id: string
     options: Option[]
-    defaultValue: string
+    defaultValue?: string
     rules?: Omit<ValidationsProps, 'valueAsDate'>
 }
 
@@ -69,18 +69,22 @@ export const RadioCards: React.FC<RadioCardsProps> = ({
                                             >
                                                 {option.title}
                                             </RadioGroup.Label>
-                                            <RadioGroup.Description
-                                                as="span"
-                                                className="mt-1 flex items-center text-sm text-gray-500"
-                                            >
-                                                {option.description}
-                                            </RadioGroup.Description>
-                                            <RadioGroup.Description
-                                                as="span"
-                                                className="mt-6 text-sm font-medium text-gray-900"
-                                            >
-                                                {option.value}
-                                            </RadioGroup.Description>
+                                            {option.description && (
+                                                <RadioGroup.Description
+                                                    as="span"
+                                                    className="mt-1 flex items-center text-sm text-gray-500"
+                                                >
+                                                    {option.description}
+                                                </RadioGroup.Description>
+                                            )}
+                                            {option.value && (
+                                                <RadioGroup.Description
+                                                    as="span"
+                                                    className="mt-6 text-sm font-medium text-gray-900"
+                                                >
+                                                    {option.value}
+                                                </RadioGroup.Description>
+                                            )}
                                         </div>
                                     </div>
                                     <CheckCircleIcon

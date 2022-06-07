@@ -12,6 +12,11 @@ const UserApi = (instance: AxiosInstance) => ({
         instance.post('/auth/reset', { oldPassword, newPassword }),
 })
 
+const HomesApi = (instance: AxiosInstance) => ({
+    renterScore: (data: Record<string, string | number>) =>
+        instance.post('/homes/renter-score', data),
+})
+
 const create = () => {
     const axiosInstance = axios.create({
         baseURL: '/api',
@@ -22,6 +27,7 @@ const create = () => {
     return {
         employer: EmployerApi(axiosInstance),
         user: UserApi(axiosInstance),
+        homes: HomesApi(axiosInstance),
     }
 }
 

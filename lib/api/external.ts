@@ -34,6 +34,14 @@ const RadarApi = (instance: AxiosInstance) => ({
         alert: (text: string) =>
             instance.post(`/message-bus/notify`, { text, channel: 'alerts' }),
     },
+    home: {
+        homesPerWeek: (data: {
+            budgetMin: number
+            budgetMax: number
+            roomsMin: number
+            roomsMax: number
+        }) => instance.post('/homes/homes-per-week', data),
+    },
 })
 
 const create = () => {
