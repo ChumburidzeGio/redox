@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { ChevronRightIcon, MailIcon } from "@heroicons/react/solid";
-import {classNames, Drawer} from "lib/shared-ui";
-import {Avatar} from "./avatar";
-import {RelocationTasks} from "./relocation-tasks";
-import {RelocationDts} from "./dts/relocation.dts";
+import { ChevronRightIcon, MailIcon } from '@heroicons/react/solid'
+import { classNames, Drawer } from 'lib/shared-ui'
+import { Avatar } from './avatar'
+import { RelocationTasks } from './relocation-tasks'
+import { RelocationDts } from './dts/relocation.dts'
 
 interface TagProps {
     dotColor: string
@@ -76,56 +76,94 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
     const [showDetails, setShowDetails] = React.useState(false)
 
     return (
-        <li className="block hover:bg-gray-50 cursor-pointer" onClick={() => setShowDetails(true)}>
+        <li
+            className="block hover:bg-gray-50 cursor-pointer"
+            onClick={() => setShowDetails(true)}
+        >
             <Drawer show={showDetails} onClose={() => setShowDetails(false)}>
                 <div className="pointer-events-auto w-screen max-w-md">
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                         <div className="flex flex-col px-6 pt-6 pb-7">
                             <div className="flex items-center mb-5">
                                 <div>
-                                    <Avatar flag={relocation.from.emoji} size="lg" />
+                                    <Avatar
+                                        flag={relocation.from.emoji}
+                                        size="lg"
+                                    />
                                 </div>
                                 <div className="ml-5">
-                                    <p className="text-2xl font-bold text-gray-700 group-hover:text-gray-900">{relocation.name}</p>
+                                    <p className="text-2xl font-bold text-gray-700 group-hover:text-gray-900">
+                                        {relocation.name}
+                                    </p>
                                     <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700 flex items-center">
                                         <span>{relocation.email}</span>
                                     </p>
                                 </div>
                             </div>
 
-                            <Progress rate={relocation.progress} faded={relocation.status !== 'active'} />
+                            <Progress
+                                rate={relocation.progress}
+                                faded={relocation.status !== 'active'}
+                            />
 
                             <div className="mt-6">
-                                <h3 className="font-medium text-gray-900">Details</h3>
+                                <h3 className="font-medium text-gray-900">
+                                    Details
+                                </h3>
                                 <dl className="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
                                     <div className="flex justify-between py-3 text-sm font-medium">
-                                        <dt className="text-gray-500">Origin Country</dt>
-                                        <dd className="text-gray-900">{relocation.from.name}</dd>
+                                        <dt className="text-gray-500">
+                                            Origin Country
+                                        </dt>
+                                        <dd className="text-gray-900">
+                                            {relocation.from.name}
+                                        </dd>
                                     </div>
                                     <div className="flex justify-between py-3 text-sm font-medium">
-                                        <dt className="text-gray-500">Authorized</dt>
-                                        <dd className="text-gray-900">{relocation.createdAt}</dd>
+                                        <dt className="text-gray-500">
+                                            Authorized
+                                        </dt>
+                                        <dd className="text-gray-900">
+                                            {relocation.createdAt}
+                                        </dd>
                                     </div>
                                     <div className="flex justify-between py-3 text-sm font-medium">
-                                        <dt className="text-gray-500">Last Activity</dt>
-                                        <dd className="text-gray-900">{relocation.updatedAt}</dd>
+                                        <dt className="text-gray-500">
+                                            Last Activity
+                                        </dt>
+                                        <dd className="text-gray-900">
+                                            {relocation.updatedAt}
+                                        </dd>
                                     </div>
-                                    {relocation.completedAt && (<div className="flex justify-between py-3 text-sm font-medium">
-                                        <dt className="text-gray-500">Completed At</dt>
-                                        <dd className="text-gray-900">{relocation.completedAt}</dd>
-                                    </div>)}
-                                    {relocation.canceledAt && (<div className="flex justify-between py-3 text-sm font-medium">
-                                        <dt className="text-gray-500">Canceled At</dt>
-                                        <dd className="text-gray-900">{relocation.canceledAt}</dd>
-                                    </div>)}
+                                    {relocation.completedAt && (
+                                        <div className="flex justify-between py-3 text-sm font-medium">
+                                            <dt className="text-gray-500">
+                                                Completed At
+                                            </dt>
+                                            <dd className="text-gray-900">
+                                                {relocation.completedAt}
+                                            </dd>
+                                        </div>
+                                    )}
+                                    {relocation.canceledAt && (
+                                        <div className="flex justify-between py-3 text-sm font-medium">
+                                            <dt className="text-gray-500">
+                                                Canceled At
+                                            </dt>
+                                            <dd className="text-gray-900">
+                                                {relocation.canceledAt}
+                                            </dd>
+                                        </div>
+                                    )}
                                 </dl>
                             </div>
 
                             <div className="mt-4">
-                                <h3 className="font-medium text-gray-900">Tasks</h3>
+                                <h3 className="font-medium text-gray-900">
+                                    Tasks
+                                </h3>
                                 <RelocationTasks tasks={relocation.tasks} />
                             </div>
-
                         </div>
                     </div>
                 </div>

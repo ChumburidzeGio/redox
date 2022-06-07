@@ -14,7 +14,7 @@ export const Button: React.FC<
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',
             'shadow-sm font-medium rounded-md px-3 py-0 sm:py-2',
-            'focus:outline-none focus:ring-2 focus:ring-offset-2 text-xs  sm:text-base'
+            'focus:outline-none focus:ring-2 focus:ring-offset-2 text-xs  sm:text-base',
         ]
 
         if (variant === 'primary') {

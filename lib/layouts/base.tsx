@@ -1,15 +1,19 @@
 import * as React from 'react'
 import { MenuAlt2Icon } from '@heroicons/react/outline'
-import { Drawer, Logo} from "lib/shared-ui";
-import Link from "next/link";
-import { Navigation } from "./navigation";
+import { Drawer, Logo } from 'lib/shared-ui'
+import Link from 'next/link'
+import { Navigation } from './navigation'
 
-export const BaseLayout: React.FC = ({ children}) => {
+export const BaseLayout: React.FC = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = React.useState(false)
 
     return (
         <div>
-            <Drawer show={sidebarOpen} onClose={() => setSidebarOpen(false)} fromLeft>
+            <Drawer
+                show={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+                fromLeft
+            >
                 <div className="pointer-events-auto w-screen max-w-md">
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                         <Navigation />
@@ -24,7 +28,7 @@ export const BaseLayout: React.FC = ({ children}) => {
                     <div className="flex items-center flex-shrink-0 px-6">
                         <Link href="/" passHref>
                             <a className="no-underline text-current inline-flex items-center">
-                               <Logo />
+                                <Logo />
                             </a>
                         </Link>
                     </div>
