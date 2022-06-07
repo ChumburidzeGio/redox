@@ -1,13 +1,15 @@
-import {Message, ValidationRule} from "react-hook-form";
+import { RegisterOptions } from 'react-hook-form'
 
-
-export interface ValidationsProps {
-    required?: Message | ValidationRule<boolean>;
-    min?: ValidationRule<number | string>;
-    max?: ValidationRule<number | string>;
-    maxLength?: ValidationRule<number>;
-    minLength?: ValidationRule<number>;
-    pattern?: ValidationRule<RegExp>;
-    valueAsNumber?: boolean;
-    valueAsDate?: boolean;
-}
+export type ValidationsProps = Pick<
+    RegisterOptions,
+    | 'required'
+    | 'min'
+    | 'max'
+    | 'maxLength'
+    | 'minLength'
+    | 'pattern'
+    | 'valueAsNumber'
+    | 'valueAsDate'
+    | 'validate'
+    | 'deps'
+>

@@ -1,11 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from "next-auth/react"
-import externalApi from "lib/api/external";
+import { getSession } from 'next-auth/react'
+import externalApi from 'lib/api/external'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
     const session = await getSession({ req })
 
-    if (req.method !== 'POST' || !session || !req.body.oldPassword || !req.body.newPassword) {
+    if (
+        req.method !== 'POST' ||
+        !session ||
+        !req.body.oldPassword ||
+        !req.body.newPassword
+    ) {
         res.status(401).json({ success: false })
         res.end()
         return
@@ -19,11 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         req.body.newPassword
     )
 
-    console.log(
-        userId,
-        req.body.oldPassword,
-        req.body.newPassword
-    )
+    console.log(userId, req.body.oldPassword, req.body.newPassword)
 
     res.status(200).json(response.data)
 }

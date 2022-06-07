@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .placeholder::after {
-    content: " ";
-    box-shadow: 0 0 50px 9px rgba(254,254,254);
+    content: ' ';
+    box-shadow: 0 0 50px 9px rgba(254, 254, 254);
     position: absolute;
     top: 0;
     left: -100%;
@@ -12,6 +12,10 @@
     animation: load 2s infinite;
 }
 @keyframes load {
-    0%{ left: -100%}
-    100%{ left: 150%}
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 150%;
+    }
 }

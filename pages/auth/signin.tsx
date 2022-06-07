@@ -1,12 +1,13 @@
-import * as React from "react";
+import * as React from 'react'
 import { useRouter } from 'next/router'
-import { signIn, SignInResponse } from "next-auth/react"
-import {Button, Logo} from "lib/shared-ui"
-import {useForm} from "react-hook-form";
-import {ErrorText, Form, Input, Label} from "lib/forms";
+import { signIn, SignInResponse } from 'next-auth/react'
+import { Button, Logo } from 'lib/shared-ui'
+import { useForm } from 'react-hook-form'
+import { ErrorText, Form, Input, Label } from 'lib/forms'
+import { useLogOnRender } from '../../lib/analytics'
 
 const errorMapping = {
-    CredentialsSignin: 'Wrong email or password'
+    CredentialsSignin: 'Wrong email or password',
 }
 
 function errorToMessage(error?: string) {
@@ -18,6 +19,8 @@ function errorToMessage(error?: string) {
 }
 
 export default function SignIn() {
+    useLogOnRender('redox:signin')
+
     const methods = useForm()
     const [errorMessage, setErrorMessage] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(false)
@@ -25,9 +28,12 @@ export default function SignIn() {
     const router = useRouter()
     const { callbackUrl } = router.query
 
-    const signInHandler = async ({ email, password }: Record<'email' | 'password', string>) => {
+    const signInHandler = async ({
+        email,
+        password,
+    }: Record<'email' | 'password', string>) => {
         setIsLoading(true)
-        const res = await signIn("credentials", {
+        const res = await signIn('credentials', {
             email,
             password,
             redirect: false,
@@ -42,11 +48,11 @@ export default function SignIn() {
         }
 
         // TODO: check https://www.youtube.com/watch?v=kB6YNYZ63fw for a better solution
-        signIn("credentials", {
+        signIn('credentials', {
             email,
             password,
             redirect: true,
-            callbackUrl: callbackUrl as string
+            callbackUrl: callbackUrl as string,
         })
     }
 
@@ -55,12 +61,13 @@ export default function SignIn() {
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md items-center flex flex-col">
                     <Logo size="2xl" />
-                    <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">Sign in to Redox</h2>
+                    <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
+                        Sign in to Redox
+                    </h2>
                 </div>
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 space-y-6">
-
                         <Form onSubmit={signInHandler} methods={methods}>
                             <Label id="email">Email</Label>
                             <Input
@@ -69,7 +76,9 @@ export default function SignIn() {
                                 className="mt-1"
                                 rules={{ required: true }}
                             />
-                            <ErrorText id="email">Please enter a valid email address</ErrorText>
+                            <ErrorText id="email">
+                                Please enter a valid email address
+                            </ErrorText>
 
                             <div className="mt-3" />
 
@@ -81,7 +90,9 @@ export default function SignIn() {
                                 rules={{ required: true }}
                             />
 
-                            <ErrorText id="password">Please enter a password</ErrorText>
+                            <ErrorText id="password">
+                                Please enter a password
+                            </ErrorText>
 
                             {/*<div className="text-sm">*/}
                             {/*    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">*/}
@@ -96,18 +107,28 @@ export default function SignIn() {
                                     type="checkbox"
                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                                 />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                <label
+                                    htmlFor="remember-me"
+                                    className="ml-2 block text-sm text-gray-900"
+                                >
                                     Remember me
                                 </label>
                             </div>
 
                             <Button variant="primary" className="w-full mt-5">
-                                {isLoading ? '...' : ''} Sign{isLoading ? 'ing' : ''} In
+                                {isLoading ? '...' : ''} Sign
+                                {isLoading ? 'ing' : ''} In
                             </Button>
 
-                            {errorMessage && <ErrorText id="errorMessage" show={Boolean(errorMessage)}>{errorMessage}</ErrorText>}
+                            {errorMessage && (
+                                <ErrorText
+                                    id="errorMessage"
+                                    show={Boolean(errorMessage)}
+                                >
+                                    {errorMessage}
+                                </ErrorText>
+                            )}
                         </Form>
-
                     </div>
                 </div>
             </div>

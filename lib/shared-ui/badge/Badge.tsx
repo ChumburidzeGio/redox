@@ -23,14 +23,23 @@ export interface BadgeProps {
     className?: string
 }
 
-export const Badge: React.FC<BadgeProps> = ({ color, size, className, children }) => {
-    const colorScheme = colorSchemes[color || "gray"]
+export const Badge: React.FC<BadgeProps> = ({
+    color,
+    size,
+    className,
+    children,
+}) => {
+    const colorScheme = colorSchemes[color || 'gray']
 
     return (
-        <span className={classNames(
-            `inline-flex items-center rounded-sm font-bold uppercase`,
-            colorScheme, className, sizes[size || "default"]
-        )}>
+        <span
+            className={classNames(
+                `inline-flex items-center rounded-sm font-bold uppercase`,
+                colorScheme,
+                className,
+                sizes[size || 'default']
+            )}
+        >
             {children}
         </span>
     )

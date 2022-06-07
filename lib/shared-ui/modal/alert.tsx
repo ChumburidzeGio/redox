@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/outline'
-import {Button} from "lib/shared-ui";
+import { Button } from 'lib/shared-ui'
 
 interface AlertProps {
     type: 'success'
@@ -12,10 +12,20 @@ interface AlertProps {
     onClose: () => void
 }
 
-export const Alert: React.FC<AlertProps> = ({ show, onClose, buttonText, title, description }) => {
+export const Alert: React.FC<AlertProps> = ({
+    show,
+    onClose,
+    buttonText,
+    title,
+    description,
+}) => {
     return (
         <Transition.Root show={show} as={React.Fragment}>
-            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={onClose}>
+            <Dialog
+                as="div"
+                className="fixed z-10 inset-0 overflow-y-auto"
+                onClose={onClose}
+            >
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
                         as={React.Fragment}
@@ -30,9 +40,12 @@ export const Alert: React.FC<AlertProps> = ({ show, onClose, buttonText, title, 
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
-                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-            &#8203;
-          </span>
+                    <span
+                        className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                        aria-hidden="true"
+                    >
+                        &#8203;
+                    </span>
                     <Transition.Child
                         as={React.Fragment}
                         enter="ease-out duration-300"
@@ -45,10 +58,16 @@ export const Alert: React.FC<AlertProps> = ({ show, onClose, buttonText, title, 
                         <div className="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                             <div>
                                 <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                                    <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
+                                    <CheckIcon
+                                        className="h-6 w-6 text-green-600"
+                                        aria-hidden="true"
+                                    />
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
-                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                    <Dialog.Title
+                                        as="h3"
+                                        className="text-lg leading-6 font-medium text-gray-900"
+                                    >
                                         {title}
                                     </Dialog.Title>
                                     <div className="mt-2">
@@ -59,7 +78,13 @@ export const Alert: React.FC<AlertProps> = ({ show, onClose, buttonText, title, 
                                 </div>
                             </div>
                             <div className="mt-5 sm:mt-6">
-                                <Button variant="primary" onClick={onClose} className="w-full">{buttonText}</Button>
+                                <Button
+                                    variant="primary"
+                                    onClick={onClose}
+                                    className="w-full"
+                                >
+                                    {buttonText}
+                                </Button>
                             </div>
                         </div>
                     </Transition.Child>

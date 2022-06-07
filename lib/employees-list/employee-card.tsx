@@ -14,10 +14,10 @@ const Tag: React.FC<TagProps> = ({ dotColor, textColor, children }) => {
     return (
         <div className="inline-flex items-center text-sm">
             <span className="absolute flex-shrink-0 flex items-center justify-center">
-              <span
-                  className={classNames(dotColor, 'h-1.5 w-1.5 rounded-full')}
-                  aria-hidden="true"
-              />
+                <span
+                    className={classNames(dotColor, 'h-1.5 w-1.5 rounded-full')}
+                    aria-hidden="true"
+                />
             </span>
             <span className={classNames(textColor, 'ml-3.5 font-medium')}>
                 {children}
@@ -26,39 +26,53 @@ const Tag: React.FC<TagProps> = ({ dotColor, textColor, children }) => {
     )
 }
 
-function RelocationStatus({ status }: { status: RelocationDts["status"] }) {
+function RelocationStatus({ status }: { status: RelocationDts['status'] }) {
     if (status === 'completed') {
         return (
-            <Tag dotColor="bg-teal-300" textColor="text-gray-900">Completed</Tag>
+            <Tag dotColor="bg-teal-300" textColor="text-gray-900">
+                Completed
+            </Tag>
         )
     }
 
     if (status === 'cancelled') {
         return (
-            <Tag dotColor="bg-red-300" textColor="text-gray-900">Canceled</Tag>
+            <Tag dotColor="bg-red-300" textColor="text-gray-900">
+                Canceled
+            </Tag>
         )
     }
 
     if (status === 'active') {
         return (
-            <Tag dotColor="bg-teal-500" textColor="text-gray-900">Active</Tag>
+            <Tag dotColor="bg-teal-500" textColor="text-gray-900">
+                Active
+            </Tag>
         )
     }
 
     return null
 }
 
-function Progress({ rate, faded }: { rate: number, faded: boolean }) {
+function Progress({ rate, faded }: { rate: number; faded: boolean }) {
     return (
         <div className="w-full bg-gray-200 h-2 rounded-full">
-            <div className={classNames(faded ? 'bg-indigo-300' : 'bg-indigo-600', 'h-2 rounded-full')} style={{
-                width: `${rate}%`
-            }} />
+            <div
+                className={classNames(
+                    faded ? 'bg-indigo-300' : 'bg-indigo-600',
+                    'h-2 rounded-full'
+                )}
+                style={{
+                    width: `${rate}%`,
+                }}
+            />
         </div>
     )
 }
 
-export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({ relocation }) => {
+export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
+    relocation,
+}) => {
     const [showDetails, setShowDetails] = React.useState(false)
 
     return (
@@ -127,8 +141,13 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({ relocati
                                 {relocation.name}
                             </p>
                             <p className="mt-1 flex items-center text-sm text-gray-500">
-                                <MailIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                <span className="truncate">{relocation.email}</span>
+                                <MailIcon
+                                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                    aria-hidden="true"
+                                />
+                                <span className="truncate">
+                                    {relocation.email}
+                                </span>
                             </p>
                         </div>
                         <div className="hidden md:block mt-2">
@@ -139,13 +158,19 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({ relocati
                                 </p>
                             </div>
                             <div className="w-[230px]">
-                                <Progress rate={relocation.progress} faded={relocation.status !== 'active'} />
+                                <Progress
+                                    rate={relocation.progress}
+                                    faded={relocation.status !== 'active'}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                    <ChevronRightIcon
+                        className="h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                    />
                 </div>
             </div>
         </li>

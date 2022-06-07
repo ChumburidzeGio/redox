@@ -7,9 +7,9 @@ interface ButtonProps {
     children: React.ReactNode
 }
 
-export const Button: React.FC<React.HTMLProps<HTMLButtonElement> & ButtonProps> = (
-    { variant, className, children, ...rest }
-) => {
+export const Button: React.FC<
+    React.HTMLProps<HTMLButtonElement> & ButtonProps
+> = ({ variant, className, children, ...rest }) => {
     const classes = React.useMemo(() => {
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',

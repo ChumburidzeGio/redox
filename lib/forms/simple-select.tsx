@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
-import {useFormContext} from "react-hook-form";
-import {ValidationsProps} from "./validation-props";
+import { useFormContext } from 'react-hook-form'
+import { ValidationsProps } from './validation-props'
 
 export interface SimpleSelectProps {
     id: string
@@ -11,11 +11,19 @@ export interface SimpleSelectProps {
         label: string
     }[]
     defaultValue?: string
-    rules?: Omit<ValidationsProps, "valueAsDate">
+    rules?: Omit<ValidationsProps, 'valueAsDate'>
 }
 
-export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, options, defaultValue, rules}) => {
-    const { register, formState: { errors } } = useFormContext()
+export const SimpleSelect: React.FC<SimpleSelectProps> = ({
+    id,
+    options,
+    defaultValue,
+    rules,
+}) => {
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext()
 
     const isError = React.useMemo(() => Boolean(errors[id]), [errors[id]])
 
@@ -34,13 +42,20 @@ export const SimpleSelect: React.FC<SimpleSelectProps> = ({ id, options, default
                 aria-describedby={isError ? `${id}-error` : `${id}-input`}
                 {...register(id, rules)}
             >
-                {options.map(option => (
-                    <option value={option.key} key={option.key}>{option.label}</option>
+                {options.map((option) => (
+                    <option value={option.key} key={option.key}>
+                        {option.label}
+                    </option>
                 ))}
             </select>
-            {isError && (<div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500 mr-5" aria-hidden="true" />
-            </div>)}
+            {isError && (
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <ExclamationCircleIcon
+                        className="h-5 w-5 text-red-500 mr-5"
+                        aria-hidden="true"
+                    />
+                </div>
+            )}
         </div>
     )
 }

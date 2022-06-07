@@ -13,6 +13,13 @@ export const Anchor: React.FC<AnchorProps> = ({ href, children }) => {
             <a className="text-blue-500 font-semibold">{children}</a>
         </Link>
     ) : (
-        <a target="_blank" rel="noreferrer" className="text-blue-500 font-medium" href={href}>{children}</a>
+        <a
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 font-medium"
+            href={href}
+        >
+            {children}
+        </a>
     )
 }

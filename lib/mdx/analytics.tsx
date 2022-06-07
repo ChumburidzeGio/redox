@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useLogOnRender } from "lib/analytics";
+import * as React from 'react'
+import { useLogOnRender } from 'lib/analytics'
 
 export interface LogEventProps {
     name: string

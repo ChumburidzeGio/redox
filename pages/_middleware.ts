@@ -1,28 +1,21 @@
-import { withAuth } from "next-auth/middleware"
+import { NextResponse } from 'next/server'
+import type { NextMiddleware } from 'next/server'
+import config from '../config'
+import { getToken } from 'next-auth/jwt'
 
-export default withAuth({
-    pages: {
-        signIn: '/auth/signin',
-    },
-    callbacks: {
-        authorized: ({ token, req }) => {
-            const path = req.nextUrl.pathname
-            const isGuest = !Boolean(token?.role)
-            const isEmployer = token?.role === 'employer'
-            const isCustomer = token?.role === 'customer'
+const guestRoutes = ['/auth/signin', '/auth/signup', '/auth/error']
 
-            if (isCustomer && path.startsWith('/employer/')) {
-                return false
-            }
+export const middleware: NextMiddleware = async (req: any) => {
+    const session = await getToken({ req })
+    const path = req.nextUrl.pathname
 
-            if (isEmployer && path.startsWith('/dox/')) {
-                return false
-            }
-
-            return !(isGuest && (
-                path === '/' ||
-                path === '/settings'
-            ));
-        }
+    if (!session && !guestRoutes.includes(path) && !path.startsWith('/api')) {
+        return NextResponse.redirect(config.baseUrl + 'auth/signin')
     }
-})
+
+    if (session && guestRoutes.includes(path)) {
+        return NextResponse.redirect(config.baseUrl)
+    }
+
+    return NextResponse.next()
+}

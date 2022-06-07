@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Youtube, YoutubeCard } from './youtube'
 import type { YoutubeProps, YoutubeCardProps } from './youtube'
-import {CustomH1, CustomH2, CustomH3, CustomH4, CustomP} from './typography'
+import { CustomH1, CustomH2, CustomH3, CustomH4, CustomP } from './typography'
 import { CustomUl, CustomLi } from './lists'
-import {Callout} from "./callout";
+import { Callout } from './callout'
 import type { CalloutProps } from './callout'
 import { LogEvent } from './analytics'
 import type { LogEventProps } from './analytics'
@@ -33,5 +33,5 @@ export const components = {
     img: (props: ImageProps) => <Image {...props} />,
     a: (props: AnchorProps) => <Anchor {...props} />,
     // As far as we don't know type of wrapper use spreading to avoid type errors
-    wrapper: ({ ...props }) => <Wrapper {...props} />
+    wrapper: ({ ...props }) => <Wrapper {...props} />,
 }
