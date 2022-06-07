@@ -42,7 +42,6 @@ const GetCustomerStatusValue = (offer: Offer): string => {
 
 function useSharedActions() {
     const queryClient = useQueryClient()
-
     async function archiveConfirm(id: number) {
         if (confirm('Are you sure you want to archive property?')) {
             try {

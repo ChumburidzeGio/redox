@@ -11,7 +11,6 @@ import { useStatusLabel } from './actions-utils'
 
 function GetStatus({ offer }: { offer: Offer }) {
     const status = useStatusLabel(offer)
-
     return <div className="text-xs text-gray-700 ">{status}</div>
 }
 
