@@ -1,28 +1,18 @@
 import * as React from 'react'
+
 import EmployeeHome from './dox/home.mdx'
 import { AppLayout } from 'lib/layouts'
 import { EmployerDashboard } from './employers/dashboard'
 import { useUser } from 'lib/auth'
-import { Delay } from '../lib/shared-ui'
+import { Delay } from 'lib/shared-ui'
 
-<<<<<<< HEAD
-export default function DashboardPage() {
-    const { role, isLoading } = useUser()
-=======
 export default function Dashboard() {
     const { role } = useUser()
->>>>>>> develop
 
     if (role === 'employer') {
         return <EmployerDashboard />
     }
 
-<<<<<<< HEAD
-    return role !== 'employer' ? (
-        <EmployerDashboard />
-    ) : (
-        <EmployeeHome />
-=======
     if (role === 'admin' || role === 'customer') {
         return <EmployeeHome />
     }
@@ -42,6 +32,5 @@ export default function Dashboard() {
                 </div>
             </Delay>
         </AppLayout>
->>>>>>> develop
     )
 }

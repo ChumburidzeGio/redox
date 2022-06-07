@@ -7,3 +7,4 @@ export { Header } from './text'
 export { Alert } from './modal'
 export { Drawer } from './drawer'
 export { Spinner } from './spinner';
+export { Delay } from './delay'

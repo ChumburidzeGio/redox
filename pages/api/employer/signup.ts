@@ -8,6 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return
     }
 
-    await externalApi.redarApi.messageBus.adminNotify(`Employer: New signup ${req.query.email}`)
+    await externalApi.redarApi.messageBus.alert(`Employer: New signup ${req.query.email}`)
     res.redirect('https://www.relocify.nl/companies/signed-up')
 }
