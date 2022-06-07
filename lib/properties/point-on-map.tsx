@@ -1,9 +1,10 @@
 import * as React from 'react'
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl'
 import { LocationMarkerIcon } from '@heroicons/react/solid'
+import config from 'config'
 
 const Map = ReactMapboxGl({
-    accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string,
+    accessToken: config.mapToken as string,
 })
 
 interface PointOnMapProps {
