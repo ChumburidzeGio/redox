@@ -1,11 +1,15 @@
 import * as React from 'react'
-import { Button, Logo, Header } from 'lib/shared-ui'
-import { useForm } from 'react-hook-form'
+import Router from 'next/router';
 import { ErrorText, Form, Input, Label } from 'lib/forms'
+import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import api from '../../lib/api/internal'
 import { CheckIcon } from '@heroicons/react/outline'
+import { signIn } from 'next-auth/react'
+
+import { Button, Logo, Header } from 'lib/shared-ui'
+import api from '../../lib/api/internal'
 import { useLogOnRender } from '../../lib/analytics'
+
 
 export default function SignUp() {
     useLogOnRender('redox:signup')
@@ -13,11 +17,19 @@ export default function SignUp() {
     const methods = useForm()
 
     const mutation = useMutation(
-        (data: Record<string, string>) => {
-            return api.user.signup(data)
+        async (data: Record<string, string>) => {
+            await  api.user.signup(data)
+            const {email} = data;
+            const password = '10061995';
+            await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+            })
+            Router.push('/');
         },
         {
-            onSuccess: () => {
+            onSuccess: async () => {
                 methods.reset()
             },
         }

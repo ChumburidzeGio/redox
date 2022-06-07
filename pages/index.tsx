@@ -8,6 +8,8 @@ import { Delay } from '../lib/shared-ui'
 export default function Dashboard() {
     const { role } = useUser()
 
+    console.log(useUser(),'ROLE');
+
     if (role === 'employer') {
         return <EmployerDashboard />
     }

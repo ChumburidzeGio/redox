@@ -36,6 +36,13 @@ const RadarApi = (instance: AxiosInstance) => ({
     },
 })
 
+const HomeApi = (instance: AxiosInstance) => ({
+    loadHomes: (status: (string | null)[], id?: number) =>
+      instance.post("/homes/index", { status, relocationId: id }),
+    setOfferStatus: (status: string, id: number, date?: Date) =>
+      instance.post("/homes/offer/status", { status, id, date }),
+  });
+
 const create = () => {
     const axiosInstance = axios.create({
         baseURL: config.services.redar.baseUrl,
@@ -45,6 +52,7 @@ const create = () => {
 
     return {
         redarApi: RadarApi(axiosInstance),
+        home: HomeApi(axiosInstance),
     }
 }
 

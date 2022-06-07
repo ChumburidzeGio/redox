@@ -14,11 +14,14 @@ export default async function handler(
     ) {
         res.status(401).json({ success: false })
         res.end()
+        // await externalApi.redarApi.messageBus.alert(
+        //     `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password})`
+        // )
         return
     }
 
-    await externalApi.redarApi.messageBus.alert(
-        `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password})`
-    )
+    // await externalApi.redarApi.messageBus.alert(
+    //     `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password})`
+    // )
     res.status(200).json({ success: true })
 }
