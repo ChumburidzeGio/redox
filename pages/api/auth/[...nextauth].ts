@@ -26,9 +26,8 @@ export default NextAuth({
                         email: credentials?.email!,
                         password: credentials?.password!,
                     })
-                
+
                     if (user.data) {
-                    
                         return user.data
                     }
                 } catch (e) {}
