@@ -3,65 +3,52 @@ import * as React from 'react'
 import { Button } from 'lib/shared-ui'
 import { useUser } from '../auth'
 import { Offer } from './types'
-import {
-    useStatusLabel,
-    useSharedActions,
-    GetCustomerStatusValue,
-} from './actions-utils'
+import { useSharedActions } from './actions-utils'
+import { OfferStatus } from './offer-status'
+
+const OfferActions = ({ offer }: { offer: Offer }): JSX.Element => {
+    const { archiveConfirm, setStatus } = useSharedActions()
+
+    const [action, actionLabel] = React.useMemo(() => {
+        switch (offer.status) {
+            case 'considering':
+                return ['viewing_requested', 'Request Viewing']
+            case 'viewing_requested':
+                return ['archived', 'Cancel Viewing and Archive']
+            case 'offer_sent':
+                return ['archived', 'Cancel Offer and Archive']
+            default:
+                return ['archived', 'Cancel Offer and Archive']
+        }
+    }, [offer.status])
+
+    return (
+        <div className="flex flex-col gap-1">
+            <div className="flex gap-2">
+                {offer.status === 'considering' && (
+                    <Button
+                        onClick={() => archiveConfirm(offer.id)}
+                        variant="gray"
+                        className="py-1.5"
+                    >
+                        Archive
+                    </Button>
+                )}
+                <Button
+                    onClick={() => setStatus(action, offer.id)}
+                    variant="primary"
+                    className="py-1.5"
+                >
+                    {actionLabel}
+                </Button>
+            </div>
+            {<OfferStatus offer={offer} />}
+        </div>
+    )
+}
 
 export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
     const { role } = useUser()
-    const { archiveConfirm, setStatus } = useSharedActions()
-
-    const updateStatus = async (offer: Offer) => {
-        const status = GetCustomerStatusValue(offer)
-        await setStatus(status, offer.id)
-    }
-
-    function GetStatus({ offer }: { offer: Offer }) {
-        const status = useStatusLabel(offer)
-        return <div className="text-xs text-gray-700 ">{status}</div>
-    }
-
-    const getButtonContent = (status: string | null): string => {
-        switch (status) {
-            case 'considering':
-                return 'Request Viewing'
-            case 'viewing_requested':
-                return 'Cancel Viewing and Archive'
-            case 'offer_sent':
-                return 'Cancel Offer and Archive'
-            default:
-                return 'Cancel Offer and Archive'
-        }
-    }
-
-    const getActions = (offer: Offer): JSX.Element => {
-        return (
-            <div className="flex flex-col gap-1">
-                <div className="flex gap-2">
-                    {offer.status === 'considering' && (
-                        <Button
-                            onClick={() => archiveConfirm(offer.id)}
-                            variant="gray"
-                            className="py-1.5"
-                        >
-                            Archive
-                        </Button>
-                    )}
-                    <Button
-                        onClick={() => updateStatus(offer)}
-                        variant="primary"
-                        className="py-1.5"
-                    >
-                        {getButtonContent(offer.status)}
-                    </Button>
-                </div>
-                {<GetStatus offer={offer} />}
-            </div>
-        )
-    }
-
     if (role !== 'customer') {
         return null
     }
@@ -74,7 +61,9 @@ export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
                     className="py-2 px-4 flex flex-row justify-between items-center"
                 >
                     <div className="mr-4 sm:mr-10">{offer.relocationName}</div>
-                    <div className="flex gap-2">{getActions(offer)}</div>
+                    <div className="flex gap-2">
+                        <OfferActions offer={offer} />
+                    </div>
                 </div>
             ))}
         </div>

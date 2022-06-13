@@ -11,10 +11,6 @@ export type SearchOfferStatus =
     | 'offer_sent'
     | 'rented'
 
-export interface HomeData {
-    data: HomeWithSearchOffers[]
-}
-
 export type Home = {
     agency: string
     city: string
@@ -22,16 +18,15 @@ export type Home = {
     interior: string
     photo: string | null
     postcode: string | null
-    rent: number
+    availability: string
+    source: string
+    rent: string
     rooms: number
     street: string
     surface: number
-    url: string | null
-}
-
-export interface HomeWithSearchOffers {
-    home: Home
+    url: string
     offers: Offer[]
+    coordinates: CoordinatesDts
 }
 
 export interface Offer {
@@ -46,48 +41,8 @@ export interface Offer {
     relocationName: string
 }
 
-export interface PropertyDts {
-    id: number
-    photo: string
-    street: string
-    city: string
-    postcode: string
-    rent: string
-    surface: number
-    publisher: string
-    isNew: boolean
-    rooms: number
-    furnishing: string | null
-    availability: string | null
-    url: string
-    source: string
-    coordinates: CoordinatesDts
-    offers: Offer[]
-}
-
 export interface OfferOption {
     label: string
     value: string
     desc: string
-}
-
-export interface PropertyCardProps {
-    property: {
-        id: number
-        photo: string
-        street: string
-        city: string
-        postcode: string
-        rent: string
-        surface: number
-        agency: string
-        isNew: boolean
-        rooms: number
-        availability: string | null
-        url: string
-        source: string
-        coordinates: { lat: number; lng: number }
-        interior: string | null
-        offers: Offer[]
-    }
 }

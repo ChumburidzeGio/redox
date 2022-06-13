@@ -3,37 +3,13 @@ import * as React from 'react'
 import { Button } from 'lib/shared-ui'
 import { useUser } from 'lib/auth'
 import { Offer } from './types'
-import { SharedPopover } from './popover'
-import { useStatusLabel, useSharedActions } from './actions-utils'
-
-function GetStatus({ offer }: { offer: Offer }) {
-    const status = useStatusLabel(offer)
-    return <div className="text-xs text-gray-700 ">{status}</div>
-}
+import { Popover } from './popover'
+import { useSharedActions } from './actions-utils'
+import { OfferStatus } from './offer-status'
 
 export const AgentActions = ({ offers }: { offers: Offer[] }) => {
     const { role } = useUser()
     const { archiveConfirm, setStatus } = useSharedActions()
-
-    const getActions = (offer: Offer): JSX.Element => {
-        return (
-            <div className="flex flex-col gap-1">
-                <div className="flex gap-2">
-                    <Button
-                        onClick={() => {
-                            archiveConfirm(offer.id)
-                        }}
-                        variant="gray"
-                        className="py-1.5"
-                    >
-                        Archive
-                    </Button>
-                    <SharedPopover updateHandler={setStatus} offer={offer} />
-                </div>
-                {<GetStatus offer={offer} />}
-            </div>
-        )
-    }
 
     if (role !== 'admin') {
         return null
@@ -47,7 +23,24 @@ export const AgentActions = ({ offers }: { offers: Offer[] }) => {
                     className="py-2 px-4 flex flex-row justify-between items-center"
                 >
                     <div className="mr-4 sm:mr-10">{offer.relocationName}</div>
-                    <div className="flex gap-2">{getActions(offer)}</div>
+                    <div className="flex gap-2">
+                        <div className="flex flex-col gap-1">
+                            <div className="flex gap-2">
+                                <Button
+                                    onClick={() => archiveConfirm(offer.id)}
+                                    variant="gray"
+                                    className="py-1.5"
+                                >
+                                    Archive
+                                </Button>
+                                <Popover
+                                    updateHandler={setStatus}
+                                    offer={offer}
+                                />
+                            </div>
+                            {<OfferStatus offer={offer} />}
+                        </div>
+                    </div>
                 </div>
             ))}
         </div>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Popover, Transition } from '@headlessui/react'
+import { Popover as HeadlessPopover, Transition } from '@headlessui/react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
 import dayjs from 'dayjs'
@@ -29,54 +29,60 @@ const statuses: OfferOption[] = [
     {
         label: 'Considering',
         value: 'considering',
-        desc: 'Status Description',
-    },
-    {
-        label: 'Send Offer',
-        value: 'offer_sent',
-        desc: 'Status Description',
+        desc: 'Apartment is approved by the agent',
     },
     {
         label: 'Viewing Requested',
         value: 'viewing_requested',
-        desc: 'Status Description',
+        desc: 'Requested with or without viewing date',
+    },
+    {
+        label: 'Offer Sent',
+        value: 'offer_sent',
+        desc: 'Agent sent an offer for the apartment',
     },
     {
         label: 'Rented',
         value: 'rented',
-        desc: 'Status Description',
+        desc: 'Lease agreement is signed by both parties',
     },
 ]
 
-export const SharedPopover: React.FC<ModalProps> = ({
-    offer,
-    updateHandler,
-}) => {
-    const [status, setStatus] = React.useState<string | null>('')
-    const date: string = React.useMemo(
-        () => offer.viewingAt || new Date().toString(),
-        [offer.viewingAt]
+export const Popover: React.FC<ModalProps> = ({ offer, updateHandler }) => {
+    const [status, setStatus] = React.useState<string | null>(
+        offer.status || null
     )
+
+    const [date, setDate] = React.useState<string>(() => {
+        if (offer.viewingAt) {
+            return dayjs(offer.viewingAt).format('YYYY-MM-DDTHH:mm')
+        }
+
+        return dayjs(offer.viewingAt || undefined).format('YYYY-MM-DDT00:00')
+    })
+
     const methods = useForm()
 
     const mutation = useMutation(async (data: MutationData) => {
         await updateHandler(data.status, offer.id, data?.date)
+
+        if (data?.date) {
+            setDate(data?.date)
+        }
     })
 
     const handleStatus = (status: string) => {
-        setStatus(status)
-        if (status !== 'viewing_requested') {
-            mutation.mutate({ status })
+        if (status === offer.status) {
+            return
         }
+
+        setStatus(status)
+        mutation.mutate({ status })
     }
 
-    React.useEffect(() => {
-        setStatus(offer.status)
-    }, [offer?.status])
-
     return (
-        <Popover className="relative">
-            <Popover.Button
+        <HeadlessPopover className="relative">
+            <HeadlessPopover.Button
                 className={`
                 ${!open ? '' : 'relative text-opacity-90'}
                 group inline-flex h-full items-center rounded-md px-3 py-0 sm:px-6 sm:py-2 text-sm  sm:text-base text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
@@ -84,7 +90,7 @@ export const SharedPopover: React.FC<ModalProps> = ({
                 `}
             >
                 <span>Set Status</span>
-            </Popover.Button>
+            </HeadlessPopover.Button>
             <Transition
                 as={React.Fragment}
                 enter="transition ease-out duration-200"
@@ -94,9 +100,9 @@ export const SharedPopover: React.FC<ModalProps> = ({
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
             >
-                <Popover.Panel className="absolute min-w-[300px] -left-14 sm:-left-1/2 z-10 p-3 shadow-lg -translate-x-1/2 transform px-4 sm:px-0 max-w-3xl">
-                    <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                        <div className="relative grid gap-8 bg-white">
+                <HeadlessPopover.Panel className="absolute min-w-[300px] -left-14 sm:-left-1/2 z-10 mt-3 -translate-x-1/2 transform px-4 sm:px-0 max-w-3xl">
+                    <div className="overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg">
+                        <div className="grid gap-8 bg-white">
                             <Form
                                 onSubmit={(data) => {
                                     mutation.mutate({
@@ -139,7 +145,7 @@ export const SharedPopover: React.FC<ModalProps> = ({
                                             </span>
                                             <span
                                                 id="privacy-setting-1-description"
-                                                className="block text-sm"
+                                                className="block text-xs text-gray-500"
                                             >
                                                 {option.desc}
                                             </span>
@@ -147,13 +153,11 @@ export const SharedPopover: React.FC<ModalProps> = ({
                                     </label>
                                 ))}
                                 {status === 'viewing_requested' && (
-                                    <div className="flex flex-col pb-5 px-5 gap-2">
+                                    <div className="flex flex-col pb-5 px-5 gap-2 border-t pt-4">
                                         <Input
                                             id="date"
                                             type="datetime-local"
-                                            defaultValue={dayjs(date).format(
-                                                'YYYY-MM-DDTHH:mm'
-                                            )}
+                                            defaultValue={date}
                                             rules={{ required: true }}
                                         />
                                         <Button
@@ -161,15 +165,16 @@ export const SharedPopover: React.FC<ModalProps> = ({
                                             type="submit"
                                             variant="primary"
                                         >
-                                            Update Viewing Time
+                                            {offer.viewingAt ? 'Update' : 'Set'}{' '}
+                                            Viewing Time
                                         </Button>
                                     </div>
                                 )}
                             </Form>
                         </div>
                     </div>
-                </Popover.Panel>
+                </HeadlessPopover.Panel>
             </Transition>
-        </Popover>
+        </HeadlessPopover>
     )
 }

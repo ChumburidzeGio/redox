@@ -27,19 +27,6 @@ const useStatusLabel = (offer: Offer): string => {
     }, [offer.status, offer.viewingAt])
 }
 
-const GetCustomerStatusValue = (offer: Offer): string => {
-    switch (offer?.status) {
-        case 'considering':
-            return 'viewing_requested'
-        case 'viewing_requested':
-            return 'archived'
-        case 'offer_sent':
-            return 'archived'
-        default:
-            return 'archived'
-    }
-}
-
 function useSharedActions() {
     const queryClient = useQueryClient()
     async function archiveConfirm(id: number) {
@@ -47,6 +34,7 @@ function useSharedActions() {
             try {
                 await api.home.setOfferStatus('archived', id)
                 await queryClient.refetchQueries('homes')
+                toast.success('Successfully archived the property')
             } catch (err) {
                 toast.error(
                     'Oops we broke something, please try again later or if error persists let us know in the chat.'
@@ -59,6 +47,12 @@ function useSharedActions() {
         try {
             await api.home.setOfferStatus(status, id, date)
             await queryClient.refetchQueries('homes')
+
+            toast.success(
+                date
+                    ? 'Successfully updated the viewing time'
+                    : 'Successfully updated the status'
+            )
         } catch (err) {
             toast.error(
                 'Oops we broke something, please try again later or if error persists let us know in the chat.'
@@ -69,4 +63,4 @@ function useSharedActions() {
     return { archiveConfirm, setStatus }
 }
 
-export { GetCustomerStatusValue, useSharedActions, useStatusLabel }
+export { useSharedActions, useStatusLabel }
