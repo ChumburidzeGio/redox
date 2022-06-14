@@ -49,7 +49,6 @@ export function InviteEmployee() {
                         Send invite
                     </Button>
                 </div>
-
                 <ErrorText id="email">
                     Please enter a valid email address
                 </ErrorText>
