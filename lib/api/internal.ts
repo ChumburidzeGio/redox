@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 
 const EmployerApi = (instance: AxiosInstance) => ({
-    invite: (email: string) => instance.post('/employer/invite', { email }),
+    invite: (email: string, note: string) => instance.post('/employer/invite', { email, note }),
     loadEmployees: () => instance.get('/employer/load-employees'),
 })
 
