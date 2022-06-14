@@ -69,7 +69,11 @@ function DashboardContent() {
         )
     }
 
-    return <>Hey Admin, no dashboard for you, for now :)</>
+    return (
+        <>
+            <PropertiesList />
+        </>
+    )
 }
 
 export default function Dashboard() {
