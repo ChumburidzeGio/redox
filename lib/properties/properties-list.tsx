@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useQuery } from 'react-query'
 
 import api from 'lib/api/internal'
-import { classNames, Header } from 'lib/shared-ui'
+import { classNames } from 'lib/shared-ui'
 import PropertiesCard from './property-card'
 import LoadingState from './loading-state'
 import EmptyState from './empty-state'
@@ -24,11 +24,9 @@ export const PropertiesList = () => {
     }
 
     return (
-        <div className="mt-4 sm:mt-6">
-            <Header level="3">New apartments</Header>
+        <div>
             <div
                 className={classNames(
-                    'mt-4',
                     role === 'customer'
                         ? 'overflow-hidden rounded-md sm:border border-gray-200'
                         : ''

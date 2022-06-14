@@ -35,9 +35,9 @@ function Image({
     return (
         <div
             className={classNames(
-                'max-w-full flex flex-[1_0_auto] justify-center items-center overflow-hidden rounded',
+                'max-w-full flex flex-[1_0_auto] justify-center items-center overflow-hidden',
                 isThumbnail
-                    ? 'max-w-[100px] sm:max-h-[80px]'
+                    ? 'rounded max-w-[100px] sm:max-h-[80px]'
                     : 'sm:max-w-full sm:max-h-[300px]'
             )}
         >
@@ -156,14 +156,16 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                     />
                 </div>
             </div>
-            <ul
-                role="list"
-                className="divide-y divide-dashed divide-gray-200 border-t border-gray-200"
-            >
-                {offers.map((offer) => (
-                    <OfferPreview key={offer.id} offer={offer} />
-                ))}
-            </ul>
+            {role === 'admin' && (
+                <ul
+                    role="list"
+                    className="divide-y divide-dashed divide-gray-200 border-t border-gray-200"
+                >
+                    {offers.map((offer) => (
+                        <OfferPreview key={offer.id} offer={offer} />
+                    ))}
+                </ul>
+            )}
         </li>
     )
 }

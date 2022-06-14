@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { AppLayout } from 'lib/layouts'
 import { Header } from 'lib/shared-ui'
-import { EmployeesList } from 'lib/employees-list'
+import { Relocations } from 'lib/relocations'
 import { useLogOnRender } from '../../lib/analytics'
 
 export function EmployerDashboard() {
@@ -17,7 +17,7 @@ export function EmployerDashboard() {
                         <Header level="1">Your Employees</Header>
                     </div>
                 </div>
-                <EmployeesList />
+                <Relocations />
             </div>
         </AppLayout>
     )
