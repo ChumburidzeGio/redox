@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { Button, Header } from 'lib/shared-ui'
-import { ErrorText, Form, Input, Label, RequestError } from 'lib/forms'
+import toast from 'react-hot-toast'
 import { useMutation } from 'react-query'
 import { useForm } from 'react-hook-form'
+
+import { Button, Header } from 'lib/shared-ui'
+import { ErrorText, Form, Input, RequestError } from 'lib/forms'
 import api from 'lib/api/internal'
-import { Alert } from 'lib/shared-ui'
 
 export function InviteEmployee() {
     const methods = useForm()
-    const [showModal, setShowModal] = React.useState(false)
 
     const mutation = useMutation(
         (data: { email: string; note: string }) => {
@@ -16,7 +16,7 @@ export function InviteEmployee() {
         },
         {
             onSuccess: () => {
-                setShowModal(true)
+                toast.success('Successfully Invited')
                 methods.reset()
             },
         }
@@ -66,14 +66,6 @@ export function InviteEmployee() {
                     relocation process.
                 </p>
             </Form>
-            <Alert
-                type="success"
-                show={showModal}
-                title="Successfully Invited"
-                description="We successfully invited your employee, soon they will receive invitation email with a free consultation offer and onboarding guidelines."
-                buttonText="Go back to Dashboard"
-                onClose={() => setShowModal(false)}
-            />
         </div>
     )
 }

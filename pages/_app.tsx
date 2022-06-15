@@ -1,6 +1,7 @@
 import * as React from 'react'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
+import { Toaster } from 'react-hot-toast'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MDXProvider } from '@mdx-js/react'
 import { components as MDXComponents } from 'lib/mdx'
@@ -36,6 +37,7 @@ export default function App({
                 </MDXProvider>
             </QueryClientProvider>
             <CookieConsent />
+            <Toaster />
         </SessionProvider>
     )
 }

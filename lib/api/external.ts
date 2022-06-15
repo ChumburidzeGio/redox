@@ -10,6 +10,13 @@ interface RedarSignUpProps extends RedarSignInProps {
     name: string
 }
 
+interface EmailProps {
+    title: string
+    preview: string
+    recipient: string
+    content: string
+}
+
 const RadarApi = (instance: AxiosInstance) => ({
     signIn: (data: RedarSignInProps) => instance.post('/users/sign-in', data),
     signUp: (data: RedarSignUpProps) => instance.post('/users/sign-up', data),
@@ -33,6 +40,12 @@ const RadarApi = (instance: AxiosInstance) => ({
     messageBus: {
         alert: (text: string) =>
             instance.post(`/message-bus/notify`, { text, channel: 'alerts' }),
+        email: (props: EmailProps) =>
+            instance.post(`/message-bus/email`, {
+                props,
+                type: 'transactional',
+                template: 'transactional',
+            }),
     },
 })
 
