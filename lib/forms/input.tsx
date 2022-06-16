@@ -6,7 +6,7 @@ import type { ValidationsProps } from './validation-props'
 
 export interface InputProps {
     id: string
-    type: 'text' | 'email' | 'password' | 'hidden'
+    type: 'text' | 'email' | 'password' | 'hidden' | 'datetime-local'
     defaultValue?: string
     hidden?: boolean
     placeholder?: string
