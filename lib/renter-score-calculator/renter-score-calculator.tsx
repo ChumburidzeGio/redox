@@ -219,7 +219,7 @@ export const RenterScoreCalculator = () => {
 
                     <div className="mt-6" />
                     <Label id="bedrooms">
-                        What kind of apartment are you looking for?
+                        What kind of property are you looking for?
                     </Label>
                     <RadioCards
                         id="bedrooms"
