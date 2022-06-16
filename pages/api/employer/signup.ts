@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import externalApi from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 export default async function handler(
     req: NextApiRequest,
@@ -11,8 +11,6 @@ export default async function handler(
         return
     }
 
-    await externalApi.redarApi.messageBus.alert(
-        `Employer: New signup ${req.query.email}`
-    )
+    await redarApi.messageBus.alert(`Employer: New signup ${req.query.email}`)
     res.redirect('https://www.relocify.nl/companies/signed-up')
 }

@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import toast from 'react-hot-toast'
 
 import { Offer } from './types'
-import api from 'lib/api/internal'
+import api from 'lib/api'
 import { useQueryClient } from 'react-query'
 
 const useStatusLabel = (offer: Offer): string => {

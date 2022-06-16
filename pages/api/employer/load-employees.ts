@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import externalApi from 'lib/api/external'
-import type { ExternalRelocation } from 'api-lib/relocations'
+import { redarApi } from 'api-lib/external-apis'
 import { formatRelocation } from 'api-lib/relocations'
 
 export default async function handler(
@@ -16,24 +15,17 @@ export default async function handler(
     }
 
     try {
-        const user = await externalApi.redarApi.users.id(
-            session.user_id as number
-        )
+        const user = await redarApi.users.id(session.user_id as number)
 
-        if (user.data.role !== 'employer' || !user.data.employerId) {
+        const { role, employerId } = user.data
+        if (role !== 'employer' || !employerId) {
             res.end()
             return
         }
 
-        const relocations = await externalApi.redarApi.employer.relocations(
-            user.data.employerId
-        )
+        const relocations = await redarApi.employer.relocations(employerId)
 
-        res.status(200).json(
-            relocations.data.map((relocation: ExternalRelocation) => {
-                return formatRelocation(relocation)
-            })
-        )
+        res.status(200).json(relocations.data.map(formatRelocation))
     } catch (e) {
         console.error(e)
     }

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RelocationTasks } from 'lib/relocations'
 import { useQuery } from 'react-query'
-import api from '../api/internal'
+import api from 'lib/api'
 import { Delay } from '../shared-ui'
 
 export const MyRelocation: React.FC = () => {

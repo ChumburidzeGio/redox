@@ -3,7 +3,7 @@ import { Button, Header } from 'lib/shared-ui'
 import { ErrorText, Form, Input, Label, RequestError } from 'lib/forms'
 import { useMutation } from 'react-query'
 import { useForm } from 'react-hook-form'
-import api from 'lib/api/internal'
+import api from 'lib/api'
 import { Alert } from 'lib/shared-ui'
 
 export function InviteEmployee() {
