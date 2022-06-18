@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from 'axios'
 
 const EmployerApi = (instance: AxiosInstance) => ({
-    invite: (email: string, note: string) => instance.post('/employer/invite', { email, note }),
+    invite: (email: string, note: string) =>
+        instance.post('/employer/invite', { email, note }),
     loadEmployees: () => instance.get('/employer/load-employees'),
 })
 
@@ -10,6 +11,10 @@ const UserApi = (instance: AxiosInstance) => ({
         instance.post('/auth/signup', data),
     resetPassword: (oldPassword: string, newPassword: string) =>
         instance.post('/auth/reset', { oldPassword, newPassword }),
+})
+
+const CustomerApi = (instance: AxiosInstance) => ({
+    invite: (email: string) => instance.post('/customer/invite', { email }),
 })
 
 const create = () => {
@@ -22,6 +27,7 @@ const create = () => {
     return {
         employer: EmployerApi(axiosInstance),
         user: UserApi(axiosInstance),
+        customer: CustomerApi(axiosInstance),
     }
 }
 

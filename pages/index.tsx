@@ -2,6 +2,7 @@ import * as React from 'react'
 import EmployeeHome from './dox/home.mdx'
 import { AppLayout } from 'lib/layouts'
 import { EmployerDashboard } from './employers/dashboard'
+import CustomerDashboard from './customers/dashboard'
 import { useUser } from 'lib/auth'
 import { Delay } from '../lib/shared-ui'
 
@@ -12,8 +13,12 @@ export default function Dashboard() {
         return <EmployerDashboard />
     }
 
-    if (role === 'admin' || role === 'customer') {
+    if (role === 'admin') {
         return <EmployeeHome />
+    }
+
+    if (role === 'customer') {
+        return <CustomerDashboard />
     }
 
     return (

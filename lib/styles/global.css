@@ -11,6 +11,11 @@
     height: 100%;
     animation: load 2s infinite;
 }
+
+path {
+    stroke-width: inherit;
+}
+
 @keyframes load {
     0% {
         left: -100%;

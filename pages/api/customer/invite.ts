@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
+
 import externalApi from 'lib/api/external'
 
 export default async function handler(
@@ -10,7 +11,7 @@ export default async function handler(
 
     const {
         method,
-        body: { email, note },
+        body: { email },
     } = req
 
     if (method !== 'POST' || !session || !email) {
@@ -19,13 +20,7 @@ export default async function handler(
         return
     }
 
-    const userId = session.user_id as number
-    const userName = session.user?.name
     const userEmail = session.user?.email
-
-    // await externalApi.redarApi.messageBus.alert(
-    //     `${userName} (id:${userId}) invited ${req.body.email}`
-    // )
 
     const content = `We successfully received the email address (${email}) of your employee and in a bit we will invite them to our platform.`
     const title = `Thanks for inviting ${email}`
@@ -40,7 +35,7 @@ export default async function handler(
     await externalApi.redarApi.messageBus.email({
         title,
         preview: content,
-        recipient: req.body.email,
+        recipient: email,
         content,
     })
 
