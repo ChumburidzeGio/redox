@@ -5,11 +5,18 @@ const EmployerApi = (instance: AxiosInstance) => ({
     loadEmployees: () => instance.get('/employer/load-employees'),
 })
 
+const HomeApi = (instance: AxiosInstance) => ({
+    loadHomes: () => instance.post('/home/load-homes'),
+    setOfferStatus: (status: string | null, id: number, date?: Date | string) =>
+        instance.post(`home/set-offer-status`, { status, id, date }),
+})
+
 const UserApi = (instance: AxiosInstance) => ({
     signup: (data: Record<string, string>) =>
         instance.post('/auth/signup', data),
     resetPassword: (oldPassword: string, newPassword: string) =>
         instance.post('/auth/reset', { oldPassword, newPassword }),
+    tasks: () => instance.get('/auth/tasks'),
 })
 
 const create = () => {
@@ -22,6 +29,7 @@ const create = () => {
     return {
         employer: EmployerApi(axiosInstance),
         user: UserApi(axiosInstance),
+        home: HomeApi(axiosInstance),
     }
 }
 

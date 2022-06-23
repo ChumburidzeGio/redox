@@ -3,11 +3,11 @@ import Router, { useRouter } from 'next/router'
 import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
+import api from 'lib/api'
 import { CheckIcon } from '@heroicons/react/outline'
 import { signIn } from 'next-auth/react'
 
 import { Button, Logo, Header } from 'lib/shared-ui'
-import api from '../../lib/api/internal'
 import { useLogOnRender } from '../../lib/analytics'
 
 export default function SignUp() {
@@ -24,8 +24,8 @@ export default function SignUp() {
                 data.role = 'employer'
             }
 
-            setError('');
-            await api.user.signup(data);
+            setError('')
+            await api.user.signup(data)
             await signIn('credentials', {
                 email: data.email,
                 password: data.password,
@@ -36,7 +36,11 @@ export default function SignUp() {
             Router.push('/')
         },
         {
-            onError: ({ response: { data: {message} } }) => {
+            onError: ({
+                response: {
+                    data: { message },
+                },
+            }) => {
                 setError(message || 'Something went wrong')
             },
         }

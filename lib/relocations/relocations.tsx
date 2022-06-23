@@ -4,10 +4,10 @@ import EmptyState from './empty-state'
 import LoadingState from './loading-state'
 import { EmployeeCard } from './employee-card'
 import { InviteEmployee } from './invite-employee'
-import api from 'lib/api/internal'
+import api from 'lib/api'
 import { RelocationDts } from './dts/relocation.dts'
 
-export const EmployeesList = () => {
+export const Relocations = () => {
     const { data, isError, isLoading } = useQuery('employees', () => {
         return api.employer.loadEmployees()
     })
@@ -16,7 +16,7 @@ export const EmployeesList = () => {
         return <LoadingState />
     }
 
-    if (data?.data?.length < 1 || isError) {
+    if (!data?.data?.length || isError) {
         return <EmptyState />
     }
 

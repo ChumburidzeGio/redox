@@ -7,7 +7,7 @@ interface RedarSignInProps {
 }
 
 interface RedarSignUpProps extends RedarSignInProps {
-    name: string,
+    first_name: string,
     last_name: string,
     role?: string
 }
@@ -18,6 +18,16 @@ const RadarApi = (instance: AxiosInstance) => ({
     employer: {
         relocations: (employerId: number) =>
             instance.get(`/relocations/employer/${employerId}`),
+    },
+    home: {
+        loadHomes: (status: (string | null)[], id?: number) =>
+            instance.post('/homes/index', { status, relocationId: id }),
+        setOfferStatus: (status: string, id: number, date?: Date) =>
+            instance.post('/homes/offer/status', { status, id, date }),
+    },
+    relocation: {
+        getForUser: (userId: number) =>
+            instance.get(`/relocations?userId=${userId}`),
     },
     users: {
         id: (id: number) => instance.get(`/users/id/${id}`),
@@ -38,13 +48,6 @@ const RadarApi = (instance: AxiosInstance) => ({
     },
 })
 
-const HomeApi = (instance: AxiosInstance) => ({
-    loadHomes: (status: (string | null)[], id?: number) =>
-      instance.post("/homes/index", { status, relocationId: id }),
-    setOfferStatus: (status: string, id: number, date?: Date) =>
-      instance.post("/homes/offer/status", { status, id, date }),
-  });
-
 const create = () => {
     const axiosInstance = axios.create({
         baseURL: config.services.redar.baseUrl,
@@ -52,10 +55,7 @@ const create = () => {
         withCredentials: true,
     })
 
-    return {
-        redarApi: RadarApi(axiosInstance),
-        home: HomeApi(axiosInstance),
-    }
+    return RadarApi(axiosInstance)
 }
 
 export default create()

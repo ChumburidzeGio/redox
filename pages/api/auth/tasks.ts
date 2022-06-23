@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { redarApi } from 'api-lib/external-apis'
+import { formatTasks } from 'api-lib/relocations'
 
 export default async function handler(
     req: NextApiRequest,
@@ -8,17 +9,17 @@ export default async function handler(
 ) {
     const session = await getSession({ req })
 
-    if (req.method !== 'POST' || !session || !req.body.email) {
+    if (req.method !== 'GET' || !session || session.role !== 'customer') {
         res.status(401).json({ success: false })
         res.end()
         return
     }
 
-    const userId = session.user_id as number
-    const userName = session.user?.name
-
-    await redarApi.messageBus.alert(
-        `${userName} (id:${userId}) invited ${req.body.email}`
+    const { data: relocation } = await redarApi.relocation.getForUser(
+        session.user_id as number
     )
-    res.status(200).json({ success: true })
+
+    res.status(200).json({
+        tasks: formatTasks(relocation.tasks),
+    })
 }

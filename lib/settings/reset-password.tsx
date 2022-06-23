@@ -3,7 +3,7 @@ import { Alert, Button } from 'lib/shared-ui'
 import { useForm } from 'react-hook-form'
 import { ErrorText, Form, Input, Label, RequestError } from 'lib/forms'
 import { useMutation } from 'react-query'
-import api from '../api/internal'
+import api from 'lib/api'
 
 export function ResetPassword() {
     const methods = useForm()
