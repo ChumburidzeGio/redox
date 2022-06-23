@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { useMutation } from 'react-query'
-// @ts-ignore
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 
