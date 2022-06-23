@@ -17,7 +17,6 @@ export default NextAuth({
                 password: { type: 'password' },
             },
             async authorize(credentials) {
-                console.log('credentials', credentials)
                 if (!credentials?.email || !credentials?.password) {
                     return null
                 }

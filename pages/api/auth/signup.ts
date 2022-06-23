@@ -1,24 +1,51 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { redarApi } from 'api-lib/external-apis'
 
+interface ErrorData {
+    data: {
+        statusCode: number
+        message: string
+    }
+}
+
+interface ServiceError {
+    response: ErrorData
+}
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    if (
-        req.method !== 'POST' ||
-        !req.body.email ||
-        !req.body.first_name ||
-        !req.body.last_name ||
-        !req.body.password
-    ) {
+    const {
+        method,
+        body: { first_name, last_name, email, password },
+    } = req
+
+    if (method !== 'POST' || !first_name || !last_name || !email || !password) {
         res.status(401).json({ success: false })
         res.end()
         return
     }
 
-    await redarApi.messageBus.alert(
-        `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password})`
-    )
-    res.status(200).json({ success: true })
+    try {
+        await redarApi.signUp({
+            first_name,
+            last_name,
+            email,
+            password,
+            role: 'customer',
+        })
+
+        await redarApi.messageBus.alert(
+            `${first_name} ${last_name} signed up! (${email} / ${password})`
+        )
+        res.status(200).json({ success: true })
+    } catch (err) {
+        const {
+            response: {
+                data: { statusCode, message },
+            },
+        } = err as ServiceError
+        return res.status(statusCode).json({ success: false, message })
+    }
 }
