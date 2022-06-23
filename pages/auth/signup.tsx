@@ -1,8 +1,8 @@
 import * as React from 'react'
-import Router, { useRouter } from 'next/router'
 import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
+import toast from 'react-hot-toast'
 import api from 'lib/api'
 import { CheckIcon } from '@heroicons/react/outline'
 import { signIn } from 'next-auth/react'
@@ -13,27 +13,30 @@ import { useLogOnRender } from '../../lib/analytics'
 export default function SignUp() {
     useLogOnRender('redox:signup')
 
-    const [error, setError] = React.useState<string>('')
-
-    const query = useRouter().query
     const methods = useForm()
 
     const mutation = useMutation(
-        async (data: Record<string, string>) => {
-            if (query.source === 'employer') {
-                data.role = 'employer'
-            }
+        async ({
+            email,
+            first_name,
+            last_name,
+            password,
+        }: Record<string, string>) => {
+            await api.user.signup({
+                email,
+                first_name,
+                last_name,
+                password,
+            })
 
-            setError('')
-            await api.user.signup(data)
             await signIn('credentials', {
-                email: data.email,
-                password: data.password,
+                email,
+                password,
                 redirect: false,
             })
 
             methods.reset()
-            Router.push('/')
+            // Router.push('/')
         },
         {
             onError: ({
@@ -41,7 +44,7 @@ export default function SignUp() {
                     data: { message },
                 },
             }) => {
-                setError(message || 'Something went wrong')
+                toast.error(message || 'Something went wrong')
             },
         }
     )
@@ -175,13 +178,6 @@ export default function SignUp() {
 
                                 <ErrorText id="repeat_password">
                                     Both passwords should match.
-                                </ErrorText>
-
-                                <ErrorText
-                                    className="text-center"
-                                    show={Boolean(error)}
-                                >
-                                    {error}
                                 </ErrorText>
 
                                 <div className="flex items-center mt-3">

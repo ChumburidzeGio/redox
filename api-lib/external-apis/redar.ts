@@ -7,9 +7,9 @@ interface RedarSignInProps {
 }
 
 interface RedarSignUpProps extends RedarSignInProps {
-    first_name: string,
-    last_name: string,
-    role?: string
+    first_name: string
+    last_name: string
+    role: 'customer' | 'employer'
 }
 
 const RadarApi = (instance: AxiosInstance) => ({

@@ -18,10 +18,10 @@ export default async function handler(
 ) {
     const {
         method,
-        body: { last_name, first_name, role, password, email },
+        body: { first_name, last_name, email, password },
     } = req
 
-    if (method !== 'POST' || !email || !first_name || !last_name || !password) {
+    if (method !== 'POST' || !first_name || !last_name || !email || !password) {
         res.status(401).json({ success: false })
         res.end()
         return
@@ -33,13 +33,12 @@ export default async function handler(
             last_name,
             email,
             password,
-            role,
+            role: 'customer',
         })
 
         await redarApi.messageBus.alert(
-            `${first_name} ${last_name} signed up! (${req.body.email} / ${req.body.password})`
+            `${first_name} ${last_name} signed up! (${email} / ${password})`
         )
-
         res.status(200).json({ success: true })
     } catch (err) {
         const {
@@ -47,6 +46,6 @@ export default async function handler(
                 data: { statusCode, message },
             },
         } = err as ServiceError
-        return res.status(statusCode).json({ success: false, message: message })
+        return res.status(statusCode).json({ success: false, message })
     }
 }
