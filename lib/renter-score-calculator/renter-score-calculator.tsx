@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { useMutation } from 'react-query'
+// @ts-ignore
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 
 import { Form, RadioCards, Label, Input, SimpleSelect } from 'lib/forms'
 import { classNames, Button } from 'lib/shared-ui'
-import api from '../api/internal'
+import api from 'lib/api'
 
 const results = [
     {
@@ -102,7 +103,7 @@ export const RenterScoreCalculator = () => {
 
     const mutation = useMutation(
         (data: { email: string }) => {
-            return api.homes.renterScore(data)
+            return api.home.renterScore(data)
         },
         {
             onSuccess: (data) => {

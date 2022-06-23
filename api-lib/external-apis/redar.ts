@@ -7,7 +7,9 @@ interface RedarSignInProps {
 }
 
 interface RedarSignUpProps extends RedarSignInProps {
-    name: string
+    first_name: string
+    last_name: string
+    role: 'customer' | 'employer'
 }
 
 const RadarApi = (instance: AxiosInstance) => ({
@@ -16,6 +18,22 @@ const RadarApi = (instance: AxiosInstance) => ({
     employer: {
         relocations: (employerId: number) =>
             instance.get(`/relocations/employer/${employerId}`),
+    },
+    home: {
+        loadHomes: (status: (string | null)[], id?: number) =>
+            instance.post('/homes/index', { status, relocationId: id }),
+        setOfferStatus: (status: string, id: number, date?: Date) =>
+            instance.post('/homes/offer/status', { status, id, date }),
+        homesPerWeek: (data: {
+            budgetMin: number
+            budgetMax: number
+            roomsMin: number
+            roomsMax: number
+        }) => instance.post('/homes/homes-per-week', data),
+    },
+    relocation: {
+        getForUser: (userId: number) =>
+            instance.get(`/relocations?userId=${userId}`),
     },
     users: {
         id: (id: number) => instance.get(`/users/id/${id}`),
@@ -34,14 +52,6 @@ const RadarApi = (instance: AxiosInstance) => ({
         alert: (text: string) =>
             instance.post(`/message-bus/notify`, { text, channel: 'alerts' }),
     },
-    home: {
-        homesPerWeek: (data: {
-            budgetMin: number
-            budgetMax: number
-            roomsMin: number
-            roomsMax: number
-        }) => instance.post('/homes/homes-per-week', data),
-    },
 })
 
 const create = () => {
@@ -51,9 +61,7 @@ const create = () => {
         withCredentials: true,
     })
 
-    return {
-        redarApi: RadarApi(axiosInstance),
-    }
+    return RadarApi(axiosInstance)
 }
 
 export default create()

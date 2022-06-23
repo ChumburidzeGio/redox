@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 interface ButtonProps {
-    variant?: 'secondary' | 'primary' | 'yellow'
+    variant?: 'secondary' | 'primary' | 'yellow' | 'green' | 'red' | 'gray'
     type?: 'submit'
     className?: string
     children: React.ReactNode
@@ -13,8 +13,8 @@ export const Button: React.FC<
     const classes = React.useMemo(() => {
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',
-            'shadow-sm text-sm font-medium rounded-md px-6 py-2',
-            'focus:outline-none focus:ring-2 focus:ring-offset-2',
+            'shadow-sm font-medium rounded-md px-3 py-2',
+            'focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm sm:text-base',
         ]
 
         if (variant === 'primary') {
@@ -28,10 +28,28 @@ export const Button: React.FC<
                 'bg-blue-100 hover:bg-blue-200 focus:ring-blue-500 text-blue-700'
             )
         }
-        
+
         if (variant === 'yellow') {
             list.push(
                 'bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-500 text-black'
+            )
+        }
+
+        if (variant === 'green') {
+            list.push(
+                'bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 text-white'
+            )
+        }
+
+        if (variant === 'red') {
+            list.push(
+                'bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-white'
+            )
+        }
+
+        if (variant === 'gray') {
+            list.push(
+                'bg-slate-200 hover:bg-slate-300 focus:outline-none  focus:ring-offset-2 focus:ring-slate-200 text-black'
             )
         }
 

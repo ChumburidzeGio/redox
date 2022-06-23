@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import externalApi from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 export default async function handler(
     req: NextApiRequest,
@@ -21,7 +21,7 @@ export default async function handler(
 
     const userId = session.user_id as number
 
-    const response = await externalApi.redarApi.users.resetPassword(
+    const response = await redarApi.users.resetPassword(
         userId,
         req.body.oldPassword,
         req.body.newPassword

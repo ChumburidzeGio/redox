@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
+import { classNames } from 'lib/shared-ui'
 
 export interface ErrorTextProps {
     id?: string
     show?: boolean
-    error?: Error
+    error?: Error,
+    className?: string
 }
 
 export const ErrorText: React.FC<ErrorTextProps> = ({
@@ -12,6 +14,7 @@ export const ErrorText: React.FC<ErrorTextProps> = ({
     show,
     error,
     children,
+    className
 }) => {
     const {
         formState: { errors },
@@ -31,7 +34,7 @@ export const ErrorText: React.FC<ErrorTextProps> = ({
     }
 
     return (
-        <p className="text-red-600 mt-3 text-sm">
+        <p className={classNames("text-red-600 mt-3 text-sm", className)}>
             {children}
             <span className="text-gray-600 mt-1 text-xs block">
                 {errorDetails}

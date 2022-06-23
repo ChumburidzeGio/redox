@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import externalApi from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 export default async function handler(
     req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
     const userId = session.user_id as number
     const userName = session.user?.name
 
-    await externalApi.redarApi.messageBus.alert(
+    await redarApi.messageBus.alert(
         `${userName} (id:${userId}) invited ${req.body.email}`
     )
     res.status(200).json({ success: true })

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import externalApi from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 interface CalculatorProps {
     who: 'single' | 'couple' | 'family'
@@ -34,14 +34,14 @@ export default async function handler(
     const propertiesPerWeek = await getWeeklyProperties(req.body)
     const viewingsNeeded = getViewingsNeeded(score)
     const weeksNeeded = getWeeksNeeded(viewingsNeeded, propertiesPerWeek)
-    const recommendedPackage = getPackage(viewingsNeeded);
+    const recommendedPackage = getPackage(viewingsNeeded)
 
     res.status(200).json({
         score,
         propertiesPerWeek,
         viewingsNeeded,
         weeksNeeded,
-        recommendedPackage
+        recommendedPackage,
     })
 }
 
@@ -162,7 +162,7 @@ async function getWeeklyProperties(data: CalculatorProps): Promise<number> {
     const budgetMin = budgetMax - 300
     const [roomsMin, roomsMax] = getBedroomsToRoomsRange(data.bedrooms)
 
-    const res = await externalApi.redarApi.home.homesPerWeek({
+    const res = await redarApi.home.homesPerWeek({
         budgetMax,
         budgetMin,
         roomsMax,
