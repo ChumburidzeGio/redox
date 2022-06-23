@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQuery } from 'react-query'
 
-import api from 'lib/api/internal'
+import api from 'lib/api'
 import { classNames } from 'lib/shared-ui'
 import PropertiesCard from './property-card'
 import LoadingState from './loading-state'

@@ -3,7 +3,7 @@ import { Button, Logo, Header } from 'lib/shared-ui'
 import { useForm } from 'react-hook-form'
 import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useMutation } from 'react-query'
-import api from '../../lib/api/internal'
+import api from 'lib/api'
 import { CheckIcon } from '@heroicons/react/outline'
 import { useLogOnRender } from '../../lib/analytics'
 

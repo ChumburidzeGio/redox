@@ -53,9 +53,7 @@ const create = () => {
         withCredentials: true,
     })
 
-    return {
-        redarApi: RadarApi(axiosInstance),
-    }
+    return RadarApi(axiosInstance)
 }
 
 export default create()

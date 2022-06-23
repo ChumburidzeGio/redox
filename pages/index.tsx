@@ -42,37 +42,31 @@ function DashboardContent() {
         )
     }
 
-    if (role === 'customer') {
-        return (
-            <div className="mx-1">
-                <div className="md:flex md:items-center md:justify-between mt-5">
-                    <div className="flex-1 min-w-0">
-                        <Header level="1">Welcome {firstName} 👋</Header>
-                    </div>
+    return (
+        <div className="mx-1">
+            <div className="md:flex md:items-center md:justify-between mt-5">
+                <div className="flex-1 min-w-0">
+                    <Header level="1">Welcome {firstName} 👋</Header>
                 </div>
+            </div>
 
-                <div className="grid sm:grid-cols-3 gap-12 mt-4 sm:mt-4">
-                    <div className="flex sm:col-span-2 flex-col">
-                        <Header level="3" className="mb-4 mt-3">
-                            Your Apartments
-                        </Header>
-                        <PropertiesList />
-                    </div>
+            <div className="grid sm:grid-cols-3 gap-12 mt-4 sm:mt-4">
+                <div className="flex sm:col-span-2 flex-col">
+                    <Header level="3" className="mb-4 mt-3">
+                        Your Apartments
+                    </Header>
+                    <PropertiesList />
+                </div>
+                {role === 'customer' && (
                     <div className="flex sm:col-span-1 flex-col">
                         <Header level="4" className="mb-3 mt-3">
                             Your Relocation Progress
                         </Header>
                         <MyRelocation />
                     </div>
-                </div>
+                )}
             </div>
-        )
-    }
-
-    return (
-        <>
-            <PropertiesList />
-        </>
+        </div>
     )
 }
 

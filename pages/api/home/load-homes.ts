@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as _ from 'lodash'
 import { getSession } from 'next-auth/react'
-import externalApi from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 interface ExternalHomeWithOffers {
     offers: {
@@ -85,7 +85,7 @@ async function getHomeLoaderParams(
 
     const {
         data: { id },
-    } = await externalApi.redarApi.relocation.getForUser(userId)
+    } = await redarApi.relocation.getForUser(userId)
 
     return { statuses, id }
 }
@@ -108,7 +108,7 @@ export default async function handler(
         )
 
         const { data }: { data: ExternalHomeWithOffers[] } =
-            await externalApi.redarApi.home.loadHomes(statuses, id)
+            await redarApi.home.loadHomes(statuses, id)
 
         res.status(200).json({
             success: true,

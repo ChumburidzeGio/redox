@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import externalApis from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 export default NextAuth({
     debug: true,
@@ -23,7 +23,7 @@ export default NextAuth({
                 }
 
                 try {
-                    const user = await externalApis.redarApi.signIn({
+                    const user = await redarApi.signIn({
                         email: credentials?.email!,
                         password: credentials?.password!,
                     })

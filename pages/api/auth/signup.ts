@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import externalApi from 'lib/api/external'
+import { redarApi } from 'api-lib/external-apis'
 
 export default async function handler(
     req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
         return
     }
 
-    await externalApi.redarApi.messageBus.alert(
+    await redarApi.messageBus.alert(
         `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password})`
     )
     res.status(200).json({ success: true })
