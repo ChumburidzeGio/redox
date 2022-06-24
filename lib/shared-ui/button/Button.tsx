@@ -43,7 +43,7 @@ export const Button: React.FC<
 
         if (variant === 'gray') {
             list.push(
-                'bg-slate-200 hover:bg-slate-300 focus:outline-none  focus:ring-offset-2 focus:ring-slate-200 text-black'
+                'bg-slate-200 hover:bg-slate-300 focus:outline-none focus:ring-offset-2 focus:ring-slate-200 text-black'
             )
         }
 

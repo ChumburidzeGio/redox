@@ -6,7 +6,6 @@ import { Delay, Header } from 'lib/shared-ui'
 import { useLogOnRender } from 'lib/analytics'
 import { Relocations } from 'lib/relocations'
 import { PropertiesList } from 'lib/properties'
-import { MyRelocation } from '../lib/my-relocation'
 
 function DashboardContent() {
     const { role, isLoading, name } = useUser()
@@ -50,22 +49,7 @@ function DashboardContent() {
                 </div>
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-12 mt-4 sm:mt-4">
-                <div className="flex sm:col-span-2 flex-col">
-                    <Header level="3" className="mb-4 mt-3">
-                        Your Apartments
-                    </Header>
-                    <PropertiesList />
-                </div>
-                {role === 'customer' && (
-                    <div className="flex sm:col-span-1 flex-col">
-                        <Header level="4" className="mb-3 mt-3">
-                            Your Relocation Progress
-                        </Header>
-                        <MyRelocation />
-                    </div>
-                )}
-            </div>
+            <PropertiesList />
         </div>
     )
 }

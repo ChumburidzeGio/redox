@@ -1,125 +1,39 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import * as _ from 'lodash'
-import { getSession } from 'next-auth/react'
-import { redarApi } from 'api-lib/external-apis'
-
-interface ExternalHomeWithOffers {
-    offers: {
-        id: number
-        relocationId: number
-        status: string
-        relocationName: string
-    }[]
-    home: {
-        id: number
-        externalId: string
-        url: string
-        rent: number
-        street: string
-        photo: string
-        city: string
-        postcode: string
-        agency: string
-        surface: number
-        rooms: number
-        interior: string
-        availability: string
-        coordinates: {
-            lat: number
-            lng: number
-        }
-        createdAt: string
-        updatedAt: string
-    }
-}
-
-function filterHomes(homes: ExternalHomeWithOffers[], isCustomer: boolean) {
-    if (!isCustomer) {
-        return homes
-    }
-
-    const rented = homes.find((home) => home.offers[0].status === 'rented')
-
-    return rented ? [rented] : homes
-}
-
-function getSource(externalId: string) {
-    return externalId.split(':')[0]
-}
-
-function formatRent(rent: number) {
-    return '€' + rent.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
-
-function formatHomes(rawHomes: ExternalHomeWithOffers[], isCustomer: boolean) {
-    return filterHomes(rawHomes, isCustomer).map(({ home, offers }) => ({
-        offers: offers.map((offer) =>
-            _.pick(offer, [
-                'id',
-                'status',
-                'relocationName',
-                'relocationId',
-                'viewingAt',
-            ])
-        ),
-        source: getSource(home.externalId),
-        ..._.omit(home, ['externalId', 'updatedAt']),
-        rent: formatRent(home.rent),
-    }))
-}
-
-async function getHomeLoaderParams(
-    role: string,
-    userId: number
-): Promise<{ statuses: (string | null)[]; id?: number }> {
-    const statuses = [
-        'considering',
-        'viewing_requested',
-        'offer_sent',
-        'rented',
-    ]
-
-    if (role === 'admin') {
-        return { statuses: [...statuses, null] }
-    }
-
-    const {
-        data: { id },
-    } = await redarApi.relocation.getForUser(userId)
-
-    return { statuses, id }
-}
+import { loadHomes } from 'api-lib/homes'
+import { loadUserRelocation } from 'api-lib/relocations'
+import { getAuth } from 'api-lib/auth'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const session = await getSession({ req })
+    const auth = await getAuth(req)
 
-    if (req.method !== 'POST' || !session) {
+    if (
+        req.method !== 'POST' ||
+        !auth ||
+        ['customer', 'admin'].indexOf(auth.role) < 0
+    ) {
         res.end()
         return
     }
 
-    try {
-        const { id, statuses } = await getHomeLoaderParams(
-            session.role as string,
-            session.user_id as number
-        )
-
-        const { data }: { data: ExternalHomeWithOffers[] } =
-            await redarApi.home.loadHomes(statuses, id)
-
-        res.status(200).json({
-            success: true,
-            homes: formatHomes(data, session.role === 'customer'),
-        })
-    } catch (e) {
-        console.error(e)
-        res.status(404).json({
-            success: false,
-        })
+    if (auth.role === 'admin') {
+        const homes = await loadHomes(auth.role)
+        res.status(200).json({ success: true, homes })
+        res.end()
+        return
     }
 
+    const relocation = await loadUserRelocation(auth.id)
+
+    if (!relocation) {
+        res.status(200).json({ success: false })
+        return
+    }
+
+    const homes = await loadHomes(auth.role, relocation?.id)
+
+    res.status(200).json({ success: true, homes, relocation })
     res.end()
 }

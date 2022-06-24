@@ -101,7 +101,7 @@ export const Popover: React.FC<ModalProps> = ({ offer, updateHandler }) => {
                 leaveTo="opacity-0 translate-y-1"
             >
                 <HeadlessPopover.Panel className="absolute min-w-[300px] -left-14 sm:-left-1/2 z-10 mt-3 -translate-x-1/2 transform px-4 sm:px-0 max-w-3xl">
-                    <div className="overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg">
+                    <div className="overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg relative">
                         <div className="grid gap-8 bg-white">
                             <Form
                                 onSubmit={(data) => {
@@ -130,11 +130,7 @@ export const Popover: React.FC<ModalProps> = ({ offer, updateHandler }) => {
                                             onClick={() =>
                                                 handleStatus(option.value)
                                             }
-                                            name="privacy-setting"
-                                            value="Private to Project Members"
                                             className="h-4 w-4 mt-0.5 cursor-pointer shrink-0 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                                            aria-labelledby="privacy-setting-1-label"
-                                            aria-describedby="privacy-setting-1-description"
                                         />
                                         <span className="ml-3 flex flex-col">
                                             <span
@@ -143,10 +139,7 @@ export const Popover: React.FC<ModalProps> = ({ offer, updateHandler }) => {
                                             >
                                                 {option.label}
                                             </span>
-                                            <span
-                                                id="privacy-setting-1-description"
-                                                className="block text-xs text-gray-500"
-                                            >
+                                            <span className="block text-xs text-gray-500">
                                                 {option.desc}
                                             </span>
                                         </span>

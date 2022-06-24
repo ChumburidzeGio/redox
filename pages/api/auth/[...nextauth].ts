@@ -22,13 +22,13 @@ export default NextAuth({
                 }
 
                 try {
-                    const user = await redarApi.signIn({
+                    const { data } = await redarApi.signIn({
                         email: credentials?.email!,
                         password: credentials?.password!,
                     })
 
-                    if (user.data) {
-                        return user.data
+                    if (data.user) {
+                        return data.user
                     }
                 } catch (e) {}
 

@@ -16,7 +16,6 @@ const UserApi = (instance: AxiosInstance) => ({
         instance.post('/auth/signup', data),
     resetPassword: (oldPassword: string, newPassword: string) =>
         instance.post('/auth/reset', { oldPassword, newPassword }),
-    tasks: () => instance.get('/auth/tasks'),
 })
 
 const create = () => {

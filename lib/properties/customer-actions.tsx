@@ -12,7 +12,7 @@ const OfferActions = ({ offer }: { offer: Offer }): JSX.Element => {
     const [action, actionLabel] = React.useMemo(() => {
         switch (offer.status) {
             case 'considering':
-                return ['viewing_requested', 'Request Viewing']
+                return ['viewing_requested', 'Archive']
             case 'viewing_requested':
                 return ['archived', 'Cancel Viewing and Archive']
             case 'offer_sent':
@@ -25,22 +25,22 @@ const OfferActions = ({ offer }: { offer: Offer }): JSX.Element => {
     return (
         <div className="flex flex-col gap-1">
             <div className="flex gap-2">
-                {offer.status === 'considering' && (
-                    <Button
-                        onClick={() => archiveConfirm(offer.id)}
-                        variant="gray"
-                        className="py-1.5"
-                    >
-                        Archive
-                    </Button>
-                )}
                 <Button
-                    onClick={() => setStatus(action, offer.id)}
-                    variant="primary"
+                    onClick={() => archiveConfirm(offer.id)}
+                    variant="gray"
                     className="py-1.5"
                 >
                     {actionLabel}
                 </Button>
+                {offer.status === 'considering' && (
+                    <Button
+                        onClick={() => setStatus(action, offer.id)}
+                        variant="primary"
+                        className="py-1.5"
+                    >
+                        Request Viewing
+                    </Button>
+                )}
             </div>
             {<OfferStatus offer={offer} />}
         </div>

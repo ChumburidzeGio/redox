@@ -25,4 +25,3 @@ export function formatRelocation(relocation: ExternalRelocation) {
         tasks: formatTasks(relocation.tasks),
     }
 }
-1
