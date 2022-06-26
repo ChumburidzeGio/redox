@@ -3,7 +3,12 @@ import type { NextMiddleware } from 'next/server'
 import config from '../config'
 import { getToken } from 'next-auth/jwt'
 
-const guestRoutes = ['/auth/signin', '/auth/signup', '/auth/error']
+const guestRoutes = [
+    '/auth/signin',
+    '/auth/signup',
+    '/auth/error',
+    '/auth/forgot',
+]
 
 export const middleware: NextMiddleware = async (req: any) => {
     const session = await getToken({ req })

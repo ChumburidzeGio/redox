@@ -6,11 +6,21 @@ import toast from 'react-hot-toast'
 import api from 'lib/api'
 import { signIn } from 'next-auth/react'
 import Router from 'next/router'
+import Link from 'next/link'
 
 import { Button, Logo } from 'lib/shared-ui'
 import { useLogOnRender } from '../../lib/analytics'
 
-export default function SignUp() {
+function translateError(errorCode?: string) {
+    switch (errorCode) {
+        case 'USER_ALREADY_EXISTS':
+            return 'User with this email address already exists. Please sign in or try to reset your password.'
+        default:
+            return 'Something went wrong :( Try again or contact us for help!'
+    }
+}
+
+export default function SignUpPage() {
     useLogOnRender('redox:signup')
 
     const methods = useForm()
@@ -18,16 +28,21 @@ export default function SignUp() {
     const mutation = useMutation(
         async ({
             email,
-            first_name,
-            last_name,
+            firstName,
+            lastName,
             password,
         }: Record<string, string>) => {
-            await api.user.signup({
+            const { data } = await api.user.signup({
                 email,
-                first_name,
-                last_name,
+                firstName,
+                lastName,
                 password,
             })
+
+            if (data?.success !== true) {
+                toast.error(translateError(data.errorCode))
+                return
+            }
 
             await signIn('credentials', {
                 email,
@@ -39,12 +54,8 @@ export default function SignUp() {
             Router.push('/')
         },
         {
-            onError: ({
-                response: {
-                    data: { message },
-                },
-            }) => {
-                toast.error(message || 'Something went wrong')
+            onError: () => {
+                toast.error(translateError())
             },
         }
     )
@@ -53,22 +64,30 @@ export default function SignUp() {
         <div className="h-full min-h-screen bg-gray-50">
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md items-center flex flex-col">
-                    <Logo size="2xl" />
+                    <Logo />
                     <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
-                        Create Relocify Account
+                        Create your account
                     </h2>
+                    <p className="mt-2 text-center text-sm text-gray-600">
+                        Or{' '}
+                        <Link href="/auth/signin" passHref>
+                            <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                sign in to your account
+                            </a>
+                        </Link>
+                    </p>
                 </div>
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                    <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 space-y-6">
+                    <div className="bg-white py-7 px-4 sm:px-7 border border-gray-200 sm:rounded-lg">
                         <Form
                             onSubmit={(data) => mutation.mutate(data)}
                             methods={methods}
                         >
-                            <div className="flex flex-col sm:flex-row mb-3">
-                                <div className="sm:w-1/2 sm:pr-3">
+                            <div className="flex flex-col sm:flex-row mb-4">
+                                <div className="sm:w-1/2 sm:pr-4">
                                     <Label id="email">First Name</Label>
                                     <Input
-                                        id="first_name"
+                                        id="firstName"
                                         type="text"
                                         className="mt-1"
                                         rules={{ required: true }}
@@ -78,10 +97,10 @@ export default function SignUp() {
                                     </ErrorText>
                                 </div>
 
-                                <div className="sm:w-1/2 sm:pl-3 mt-3 sm:mt-0">
+                                <div className="sm:w-1/2 sm:pl-4 mt-3 sm:mt-0">
                                     <Label id="email">Last Name</Label>
                                     <Input
-                                        id="last_name"
+                                        id="lastName"
                                         type="text"
                                         className="mt-1"
                                         rules={{ required: true }}
@@ -103,8 +122,8 @@ export default function SignUp() {
                                 Please enter a valid email address
                             </ErrorText>
 
-                            <div className="flex flex-col sm:flex-row my-3">
-                                <div className="sm:w-1/2 sm:pr-3">
+                            <div className="flex flex-col sm:flex-row my-4">
+                                <div className="sm:w-1/2 sm:pr-4">
                                     <Label id="email">Password</Label>
                                     <Input
                                         id="password"
@@ -120,7 +139,7 @@ export default function SignUp() {
                                     />
                                 </div>
 
-                                <div className="sm:w-1/2 sm:pl-3 mt-3 sm:mt-0">
+                                <div className="sm:w-1/2 sm:pl-4 mt-3 sm:mt-0">
                                     <Label id="email">Repeat password</Label>
                                     <Input
                                         id="repeat_password"
@@ -139,13 +158,9 @@ export default function SignUp() {
                             </div>
 
                             <ErrorText id="password">
-                                Please enter a password that has minimum 8
-                                characters (min 1 uppercase letter, 1 lowercase
-                                and one number).
-                            </ErrorText>
-
-                            <ErrorText id="repeat_password">
-                                Both passwords should match.
+                                Please enter a password (and repeat) that has a
+                                minimum 8 characters (min 1 uppercase letter, 1
+                                lowercase and one number).
                             </ErrorText>
 
                             <div className="flex items-center mt-3">

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { MenuAlt2Icon } from '@heroicons/react/outline'
 import { Drawer, Logo } from 'lib/shared-ui'
 import Link from 'next/link'
-import { Navigation } from './navigation'
+import { Navigation } from './navigation/navigation'
 
 export const BaseLayout: React.FC = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = React.useState(false)

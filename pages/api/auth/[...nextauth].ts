@@ -27,11 +27,12 @@ export default NextAuth({
                         password: credentials?.password!,
                     })
 
-                    if (data.user) {
+                    if (data.success) {
                         return data.user
                     }
-                } catch (e) {}
 
+                    return null
+                } catch (e) {}
                 return null
             },
         }),

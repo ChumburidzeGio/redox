@@ -1,4 +1,4 @@
-import { useUser } from '../auth'
+import { useUser } from '../../auth'
 import {
     AcademicCapIcon,
     BriefcaseIcon,
@@ -10,6 +10,8 @@ import {
     SparklesIcon,
     UserGroupIcon,
     UsersIcon,
+    CogIcon,
+    NewspaperIcon,
 } from '@heroicons/react/outline'
 import * as React from 'react'
 
@@ -44,11 +46,11 @@ export const employerKnowledgeBaseNavigation: NavigationItem[] = [
 ]
 
 export const customerNavigation: NavigationItem[] = [
-    { name: 'Dashboard', href: '/' },
+    { name: 'Dashboard', href: '/', Icon: NewspaperIcon },
+    { name: 'Settings', href: '/settings', Icon: CogIcon },
 ]
 
 export const customerKnowledgeBaseNavigation: NavigationItem[] = [
-    { name: 'Getting Started', href: '/' },
     {
         name: 'Housing',
         Icon: HomeIcon,
@@ -149,11 +151,10 @@ export const customerKnowledgeBaseNavigation: NavigationItem[] = [
         Icon: BriefcaseIcon,
         isNew: true,
         children: [
-            { name: 'Introduction', isNew: true, href: '/dox/work/intro' },
-            { name: 'Finding Job', isNew: true, href: '/dox/work/finding-job' },
+            { name: 'Introduction', href: '/dox/work/intro' },
+            { name: 'Finding Job', href: '/dox/work/finding-job' },
             {
                 name: 'Tax & Soc. Security',
-                isNew: true,
                 href: '/dox/work/taxes',
             },
         ],
@@ -171,13 +172,22 @@ export const customerKnowledgeBaseNavigation: NavigationItem[] = [
     // { name: 'Changelog', href: '/changelog' },
 ]
 
-export function useNavigationItems() {
+export function useNavigationItems(): {
+    primary: NavigationItem[]
+    secondary: NavigationItem[]
+} {
     const { role, isLoading } = useUser()
     if (isLoading) {
-        return []
+        return { primary: [], secondary: [] }
     }
 
-    return role === 'employer'
-        ? employerNavigation
-        : customerKnowledgeBaseNavigation
+    const primary =
+        role === 'employer' ? employerNavigation : customerNavigation
+
+    const secondary =
+        role === 'employer'
+            ? employerKnowledgeBaseNavigation
+            : customerKnowledgeBaseNavigation
+
+    return { primary, secondary }
 }

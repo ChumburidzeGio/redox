@@ -7,8 +7,8 @@ interface RedarSignInProps {
 }
 
 interface RedarSignUpProps extends RedarSignInProps {
-    first_name: string
-    last_name: string
+    firstName: string
+    lastName: string
     role: 'customer' | 'employer'
 }
 
