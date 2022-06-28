@@ -39,7 +39,7 @@ function RelocationStatus({ status }: { status: RelocationDts['status'] }) {
     if (status === 'cancelled') {
         return (
             <Tag dotColor="bg-red-300" textColor="text-gray-900">
-                Cancelled
+                Canceled
             </Tag>
         )
     }
