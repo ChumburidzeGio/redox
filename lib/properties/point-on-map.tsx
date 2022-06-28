@@ -15,7 +15,7 @@ interface PointOnMapProps {
 
 export const PointOnMap = ({ lat, lng }: PointOnMapProps) => {
     return (
-        <div className="mt-4 rounded-md overflow-hidden">
+        <div className="rounded-md overflow-hidden mt-4 h-[200px]">
             <Delay by={250}>
                 <Map
                     style="mapbox://styles/mapbox/streets-v11"
