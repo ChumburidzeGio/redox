@@ -5,13 +5,18 @@ import { useQuery } from 'react-query'
 import api from 'lib/api'
 import { PropertiesList } from '../properties'
 import { useUser } from 'lib/auth'
+import LoadingState from './loading-state'
 
 export const CustomerDashboard: React.FC = () => {
     const { firstName } = useUser()
 
-    const { data, isError } = useQuery('homes', api.home.loadHomes, {
+    const { data, isError, isLoading } = useQuery('homes', api.home.loadHomes, {
         refetchOnWindowFocus: false,
     })
+
+    if (isLoading) {
+        return <LoadingState />
+    }
 
     if (
         isError ||

@@ -4,17 +4,20 @@ import { useQuery } from 'react-query'
 import api from 'lib/api'
 import { PropertiesList } from '../properties'
 import { useUser } from 'lib/auth'
+import LoadingState from './loading-state'
 
 export const AdminDashboard: React.FC = () => {
     const { firstName } = useUser()
 
-    const { data, isError } = useQuery('homes', api.home.loadHomes, {
+    const { data, isError, isLoading } = useQuery('homes', api.home.loadHomes, {
         refetchOnWindowFocus: false,
     })
 
-    const { homes, success } = data?.data
+    if (isLoading) {
+        return <LoadingState />
+    }
 
-    if (isError || !homes) {
+    if (isError || !data?.data?.homes) {
         return (
             <div>
                 Something went wrong, please refresh this page or contact
@@ -36,7 +39,7 @@ export const AdminDashboard: React.FC = () => {
                     <Header level="3" className="mb-4 mt-3">
                         Properties
                     </Header>
-                    <PropertiesList data={{ homes, success }} />
+                    <PropertiesList data={data?.data} />
                 </div>
                 <div className="flex sm:col-span-1 flex-col">
                     <Header level="4" className="mb-3 mt-3">
