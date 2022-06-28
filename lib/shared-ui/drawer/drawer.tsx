@@ -41,7 +41,7 @@ export const Drawer: React.FC<ModalProps> = ({
                     <div
                         className={classNames(
                             'pointer-events-none fixed inset-y-0 flex max-w-full',
-                            fromLeft ? 'left-0 pr-10' : 'right-0 pl-10'
+                            fromLeft ? 'left-0 pr-' : 'right-0 pl-0'
                         )}
                     >
                         <Transition.Child

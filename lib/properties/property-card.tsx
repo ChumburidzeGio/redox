@@ -9,6 +9,7 @@ import { PointOnMap } from './point-on-map'
 import { useUser } from 'lib/auth'
 import { OfferPreview } from './offer-preview'
 import { OfferStatus } from './offer-status'
+import { ArrowLeftIcon } from '@heroicons/react/outline'
 
 function Image({
     src,
@@ -72,7 +73,20 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                         <Image src={home.photo} />
 
-                        <div className="pt-3 px-5 pb-5 flex flex-col justify-between">
+                        <div className="flex sm:hidden absolute top-4 left-4 bg-white rounded-full p-2 bg-opacity-70">
+                            <ArrowLeftIcon
+                                className="h-6 w-6 text-black"
+                                aria-hidden="true"
+                                onClick={() => setShowDetails(false)}
+                            />
+                        </div>
+
+                        <div
+                            className={classNames(
+                                !home.photo ? 'mt-10' : '',
+                                'pt-3 px-5 pb-5 flex flex-col justify-between'
+                            )}
+                        >
                             <div className="flex flex-col">
                                 <Header level="3">{home.street}</Header>
                                 <Header level="4" color="text-gray-700">

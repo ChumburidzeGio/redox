@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { MenuAlt2Icon } from '@heroicons/react/outline'
-import { Drawer, Logo } from 'lib/shared-ui'
+import { MenuAlt2Icon, XIcon } from '@heroicons/react/outline'
+import { Drawer, Header, Logo } from 'lib/shared-ui'
 import Link from 'next/link'
 import { Navigation } from './navigation/navigation'
 
@@ -16,6 +16,14 @@ export const BaseLayout: React.FC = ({ children }) => {
             >
                 <div className="pointer-events-auto w-screen max-w-md">
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                        <div className="px-5 pt-3 flex justify-between">
+                            <Header level="4">Menu</Header>
+                            <XIcon
+                                className="h-6 w-6 text-black"
+                                aria-hidden="true"
+                                onClick={() => setSidebarOpen(false)}
+                            />
+                        </div>
                         <Navigation />
                     </div>
                 </div>
@@ -48,7 +56,11 @@ export const BaseLayout: React.FC = ({ children }) => {
                         <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
                     <div className="flex items-center ml-3">
-                        <Logo />
+                        <Link href="/" passHref>
+                            <a>
+                                <Logo />
+                            </a>
+                        </Link>
                     </div>
                     {/*<div className="flex-1 px-4 flex justify-between">*/}
                     {/*    <div className="flex-1 flex">*/}
