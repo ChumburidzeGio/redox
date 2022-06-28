@@ -8,6 +8,8 @@ import { logEvent } from 'lib/analytics'
 import { classNames } from 'lib/shared-ui'
 import { useNavigationItems } from './use-navigation-items'
 import { IconProps } from './use-navigation-items'
+import { useUser } from '../../auth'
+import LoadingState from './loading-state'
 
 interface DropdownMenuProps {
     name: string
@@ -145,6 +147,7 @@ const MenuLink: React.FC<Omit<MenuItemProps, 'withArrow'>> = ({
 }
 
 export const Navigation: React.FC = () => {
+    const { isLoading } = useUser()
     const navigation = useNavigationItems()
 
     const handleSignOut = () => {
@@ -152,6 +155,10 @@ export const Navigation: React.FC = () => {
             logEvent('redox:logout')
             signOut()
         }
+    }
+
+    if (isLoading) {
+        return <LoadingState />
     }
 
     return (

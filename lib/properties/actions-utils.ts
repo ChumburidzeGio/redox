@@ -34,7 +34,7 @@ function useSharedActions() {
             try {
                 await api.home.setOfferStatus('archived', id)
                 await queryClient.refetchQueries('homes')
-                toast.success('Successfully archived the property')
+                toast.success('Successfully archived the offer')
             } catch (err) {
                 toast.error(
                     'Oops we broke something, please try again later or if error persists let us know in the chat.'
