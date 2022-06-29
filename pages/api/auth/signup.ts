@@ -18,7 +18,7 @@ export default async function handler(
     }
 
     await externalApi.redarApi.messageBus.alert(
-        `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password})`
+        `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password}) ${req.body.pkg}`
     )
     res.status(200).json({ success: true })
 }

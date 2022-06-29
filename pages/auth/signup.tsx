@@ -6,15 +6,19 @@ import { useMutation } from 'react-query'
 import api from '../../lib/api/internal'
 import { CheckIcon } from '@heroicons/react/outline'
 import { useLogOnRender } from '../../lib/analytics'
+import { useRouter } from 'next/router'
 
 export default function SignUp() {
     useLogOnRender('redox:signup')
 
     const methods = useForm()
 
+    const router = useRouter()
+    const { pkg } = router.query
+
     const mutation = useMutation(
         (data: Record<string, string>) => {
-            return api.user.signup(data)
+            return api.user.signup({ ...data, pkg: pkg as string })
         },
         {
             onSuccess: () => {
