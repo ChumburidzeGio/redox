@@ -1,20 +1,27 @@
 import axios, { AxiosInstance } from 'axios'
 import config from 'config'
 
-interface RedarSignInProps {
+interface SignInProps {
     email: string
     password: string
 }
 
-interface RedarSignUpProps extends RedarSignInProps {
+interface SignUpProps extends SignInProps {
     firstName: string
     lastName: string
     role: 'customer' | 'employer'
 }
 
+interface EmailProps {
+    title: string
+    preview: string
+    recipient: string
+    content: string
+}
+
 const RadarApi = (instance: AxiosInstance) => ({
-    signIn: (data: RedarSignInProps) => instance.post('/users/sign-in', data),
-    signUp: (data: RedarSignUpProps) => instance.post('/users/sign-up', data),
+    signIn: (data: SignInProps) => instance.post('/users/sign-in', data),
+    signUp: (data: SignUpProps) => instance.post('/users/sign-up', data),
     employer: {
         relocations: (employerId: number) =>
             instance.get(`/relocations/employer/${employerId}`),
@@ -45,6 +52,12 @@ const RadarApi = (instance: AxiosInstance) => ({
     messageBus: {
         alert: (text: string) =>
             instance.post(`/message-bus/notify`, { text, channel: 'alerts' }),
+        email: (props: EmailProps) =>
+            instance.post(`/message-bus/email`, {
+                props,
+                type: 'transactional',
+                template: 'transactional',
+            }),
     },
 })
 
