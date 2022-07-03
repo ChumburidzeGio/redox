@@ -8,11 +8,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    await validate
-        .withReq(req)
-        .isGet()
-        .has('email', 'string')
-        .isUser(['admin', 'customer'])
+    await validate.withReq(req).isGet().isUser(['admin', 'customer'])
 
     const user = await getUser(req)
 

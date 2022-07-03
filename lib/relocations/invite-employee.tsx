@@ -1,44 +1,50 @@
 import * as React from 'react'
 import { Button, Header } from 'lib/shared-ui'
-import { ErrorText, Form, Input, Label, RequestError } from 'lib/forms'
+import { ErrorText, Form, Input } from 'lib/forms'
 import { useMutation } from 'react-query'
+import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import api from 'lib/api'
-import { Alert } from 'lib/shared-ui'
 
 export function InviteEmployee() {
     const methods = useForm()
-    const [showModal, setShowModal] = React.useState(false)
 
     const mutation = useMutation(
-        (data: { email: string }) => {
-            return api.employer.invite(data.email)
+        (data: { email: string; note: string }) => {
+            return api.employer.invite(data.email, data.note)
         },
         {
             onSuccess: () => {
-                setShowModal(true)
+                toast.success('Successfully Invited')
                 methods.reset()
+            },
+            onError: () => {
+                toast.error(
+                    'We could not invite your employee, please try again and if problem persists, please contact us.'
+                )
             },
         }
     )
 
     return (
         <div className="my-8 border border-slate-300 rounded-md p-6 bg-blue-50 bg-opacity-20">
-            <Header level="3">Invite your employees</Header>
-            <p className="mt-1 text-sm text-gray-500 mb-6">
-                Send email invite to your employee and let them know about our
-                service. We will schedule a free consultation with them and in
-                case if they like our offer we will start a relocation process.
-            </p>
+            <Header level="3">Invite your employee</Header>
 
             <Form onSubmit={(data) => mutation.mutate(data)} methods={methods}>
-                <Label id="email">Email address</Label>
-                <div className="flex mt-2 sm:flex-row flex-col">
+                <div className="mt-3">
                     <Input
                         id="email"
                         type="email"
                         placeholder="Enter an email"
                         rules={{ required: true }}
+                        className="w-full"
+                    />
+                </div>
+                <div className="flex mt-3 sm:flex-row flex-col">
+                    <Input
+                        id="note"
+                        type="text"
+                        placeholder="Add a note for us... (recommended)"
                         className="w-full"
                     />
                     <Button
@@ -51,22 +57,13 @@ export function InviteEmployee() {
                 <ErrorText id="email">
                     Please enter a valid email address
                 </ErrorText>
-                <ErrorText
-                    show={mutation.isError}
-                    error={mutation.error as RequestError}
-                >
-                    We could not invite your employee, please try again and if
-                    problem persists, please contact us via the chat.
-                </ErrorText>
+                <p className="mt-3 text-sm text-gray-500">
+                    Send email invite to your employee and let them know about
+                    our service. We will schedule a free consultation with them
+                    and in case if they like our offer we will start a
+                    relocation process.
+                </p>
             </Form>
-            <Alert
-                type="success"
-                show={showModal}
-                title="Successfully Invited"
-                description="We successfully invited your employee, soon they will receive invitation email with a free consultation offer and onboarding guidelines."
-                buttonText="Go back to Dashboard"
-                onClose={() => setShowModal(false)}
-            />
         </div>
     )
 }

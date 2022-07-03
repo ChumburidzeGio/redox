@@ -11,12 +11,13 @@ export default async function handler(
         .withReq(req)
         .isPost()
         .has('email', 'string')
+        .hasOptional('note', 'string')
         .isUser('employer')
 
     const user = await getUser(req)
 
     await redarApi.messageBus.alert(
-        `${user.name} (id:${user.id}) invited ${req.body.email}`
+        `${user.name} (id:${user.id}) invited ${req.body.email} (${req.body.note})`
     )
 
     res.status(200).json({ success: true })

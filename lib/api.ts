@@ -1,12 +1,13 @@
 import axios, { AxiosInstance } from 'axios'
 
 const EmployerApi = (instance: AxiosInstance) => ({
-    invite: (email: string) => instance.post('/employer/invite', { email }),
+    invite: (email: string, note: string) =>
+        instance.post('/employer/invite', { email, note }),
     loadEmployees: () => instance.get('/employer/load-employees'),
 })
 
 const HomeApi = (instance: AxiosInstance) => ({
-    loadHomes: () => instance.post('/home/load-homes'),
+    loadHomes: () => instance.get('/home/load-homes'),
     setOfferStatus: (status: string | null, id: number, date?: Date | string) =>
         instance.post(`home/set-offer-status`, { status, id, date }),
 })
