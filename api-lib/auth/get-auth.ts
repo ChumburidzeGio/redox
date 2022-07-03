@@ -3,7 +3,7 @@ import { NextApiRequest } from 'next'
 
 export type UserRole = 'admin' | 'customer' | 'employer'
 
-interface GetAuthReturn {
+export interface AuthenticatedUser {
     id: number
     role: UserRole
     email: string
@@ -20,11 +20,11 @@ export async function getAuth(req: NextApiRequest) {
     return {
         id: session!.user_id as number,
         role: session!.role as UserRole,
-        email: session!.email as string,
+        email: session!.user?.email as string,
         name: session!.user?.name as string,
     }
 }
 
-export async function getUser(req: NextApiRequest): Promise<GetAuthReturn> {
-    return (await getAuth(req)) as never as Promise<GetAuthReturn>
+export async function getUser(req: NextApiRequest): Promise<AuthenticatedUser> {
+    return (await getAuth(req)) as never
 }

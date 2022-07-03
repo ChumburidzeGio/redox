@@ -15,8 +15,10 @@ interface DropdownMenuProps {
     name: string
     Icon?: IconProps
     isNew?: boolean
+    isDisabled?: boolean
     items: {
         isNew?: boolean
+        isDisabled?: boolean
         name: string
         href?: string
     }[]
@@ -26,6 +28,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     name,
     items,
     isNew,
+    isDisabled,
     Icon,
 }) => {
     const router = useRouter()
@@ -40,6 +43,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 Icon={Icon}
                 name={name}
                 isNew={isNew}
+                isDisabled={isDisabled}
                 withArrow
                 isSecondary
             />
@@ -55,6 +59,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                         path={item.href}
                         name={item.name}
                         isNew={item.isNew}
+                        isDisabled={item.isDisabled}
                         isSubItem
                         isSecondary
                     />
@@ -73,6 +78,7 @@ interface MenuItemProps {
     onClick?: () => void
     isSubItem?: boolean
     isSecondary?: boolean
+    isDisabled?: boolean
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({
@@ -83,6 +89,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     isNew,
     onClick,
     isSubItem,
+    isDisabled,
     isSecondary,
 }) => {
     const router = useRouter()
@@ -92,11 +99,14 @@ const MenuItem: React.FC<MenuItemProps> = ({
             className={classNames(
                 router.asPath === path
                     ? 'bg-slate-200 text-gray-900 font-semibold'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                    : 'hover:bg-gray-50',
                 withArrow ? 'justify-between' : '',
                 isSubItem ? 'ml-4' : '',
                 isSecondary ? 'text-sm' : 'text-base',
                 isSubItem ? 'font-base' : 'font-medium',
+                isDisabled
+                    ? 'text-gray-400'
+                    : 'text-gray-600 hover:text-gray-900',
                 'group flex items-center px-2 py-2 rounded-md cursor-pointer'
             )}
             onClick={onClick}
@@ -128,6 +138,7 @@ const MenuLink: React.FC<Omit<MenuItemProps, 'withArrow'>> = ({
     name,
     isNew,
     isSubItem,
+    isDisabled,
     isSecondary,
 }) => {
     return (
@@ -139,6 +150,7 @@ const MenuLink: React.FC<Omit<MenuItemProps, 'withArrow'>> = ({
                     isNew={isNew}
                     Icon={Icon}
                     isSubItem={isSubItem}
+                    isDisabled={isDisabled}
                     isSecondary={isSecondary}
                 />
             </a>
@@ -172,6 +184,7 @@ export const Navigation: React.FC = () => {
                             Icon={item.Icon}
                             name={item.name}
                             isNew={item.isNew}
+                            isDisabled={item.isDisabled}
                         />
                     ))}
 
@@ -190,13 +203,21 @@ export const Navigation: React.FC = () => {
                     </h3>
                     <div className="flex flex-col">
                         {navigation.secondary.map(
-                            ({ children, isNew, name, href, Icon }) =>
+                            ({
+                                children,
+                                isNew,
+                                isDisabled,
+                                name,
+                                href,
+                                Icon,
+                            }) =>
                                 children ? (
                                     <DropdownMenu
                                         items={children}
                                         name={name}
                                         Icon={Icon}
                                         isNew={isNew}
+                                        isDisabled={isDisabled}
                                         key={name}
                                     />
                                 ) : (
@@ -206,6 +227,7 @@ export const Navigation: React.FC = () => {
                                         Icon={Icon}
                                         name={name}
                                         isNew={isNew}
+                                        isDisabled={isDisabled}
                                         isSecondary
                                     />
                                 )

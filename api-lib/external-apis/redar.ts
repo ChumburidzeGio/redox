@@ -15,7 +15,8 @@ interface SignUpProps extends SignInProps {
 interface EmailProps {
     title: string
     preview: string
-    recipient: string
+    recipientName: string
+    recipientEmail: string
     content: string
 }
 

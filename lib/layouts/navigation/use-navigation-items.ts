@@ -22,11 +22,13 @@ export interface NavigationItem {
     name: string
     href?: string
     isNew?: boolean
+    isDisabled?: boolean
     Icon?: IconProps
     children?: {
         name: string
         href?: string
         isNew?: boolean
+        isDisabled?: boolean
         Icon?: IconProps
     }[]
 }
@@ -36,14 +38,30 @@ export const employerNavigation: NavigationItem[] = [
 ]
 
 export const employerKnowledgeBaseNavigation: NavigationItem[] = [
-    { name: 'Sourcing', href: '/employers/sourcing', Icon: SearchIcon },
+    {
+        name: 'Sourcing',
+        href: '/employers/sourcing',
+        Icon: SearchIcon,
+        isDisabled: true,
+    },
     {
         name: 'Immigration',
         href: '/employers/immigration',
         Icon: AcademicCapIcon,
+        isDisabled: true,
     },
-    { name: 'Relocation', href: '/employers/relocation', Icon: HomeIcon },
-    { name: 'Integration', href: '/employers/integration', Icon: SparklesIcon },
+    {
+        name: 'Relocation',
+        href: '/employers/relocation',
+        Icon: HomeIcon,
+        isDisabled: true,
+    },
+    {
+        name: 'Integration',
+        href: '/employers/integration',
+        Icon: SparklesIcon,
+        isDisabled: true,
+    },
 ]
 
 export const customerNavigation: NavigationItem[] = [

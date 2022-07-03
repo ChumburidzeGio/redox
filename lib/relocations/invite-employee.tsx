@@ -31,7 +31,7 @@ export function InviteEmployee() {
             <Header level="3">Invite your employee</Header>
 
             <Form onSubmit={(data) => mutation.mutate(data)} methods={methods}>
-                <div className="mt-3">
+                <div className="mt-4">
                     <Input
                         id="email"
                         type="email"
@@ -57,7 +57,7 @@ export function InviteEmployee() {
                 <ErrorText id="email">
                     Please enter a valid email address
                 </ErrorText>
-                <p className="mt-3 text-sm text-gray-500">
+                <p className="mt-4 text-sm text-gray-500">
                     Send email invite to your employee and let them know about
                     our service. We will schedule a free consultation with them
                     and in case if they like our offer we will start a
