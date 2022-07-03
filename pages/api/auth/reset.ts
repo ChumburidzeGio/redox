@@ -1,22 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { redarApi } from 'api-lib/external-apis'
-import { getAuth } from 'api-lib/auth'
+import { getUser } from 'api-lib/auth'
+import { validate } from 'api-lib/validate'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const auth = await getAuth(req)
+    await validate
+        .withReq(req)
+        .isPost()
+        .has('oldPassword', 'string')
+        .has('newPassword', 'string')
+        .isUser()
+
+    const user = await getUser(req)
+
     const { oldPassword, newPassword } = req.body
 
-    if (req.method !== 'POST' || !auth || !oldPassword || !newPassword) {
-        res.status(401).json({ success: false })
-        res.end()
-        return
-    }
-
     const response = await redarApi.users.resetPassword(
-        auth.id,
+        user.id,
         oldPassword,
         newPassword
     )

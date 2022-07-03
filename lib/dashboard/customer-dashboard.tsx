@@ -1,11 +1,25 @@
 import * as React from 'react'
 import { RelocationTasks } from 'lib/relocations'
+import Link from 'next/link'
 import { Header } from '../shared-ui'
 import { useQuery } from 'react-query'
 import api from 'lib/api'
 import { PropertiesList } from '../properties'
 import { useUser } from 'lib/auth'
 import LoadingState from './loading-state'
+import { GiftIcon } from '@heroicons/react/outline'
+
+const Referrals = () => (
+    <Link href="/referrals" passHref>
+        <a className="flex items-center bg-red-50 rounded border border-red-500 p-4 mt-5 bg-opacity-20">
+            <GiftIcon className="flex h-10 w-12 sm:w-36 text-red-500 mr-4" />
+            <div className="flex text-sm text-gray-900">
+                Is your friend moving to Amsterdam? Invite to the app, get €100
+                and give them €50 discount.
+            </div>
+        </a>
+    </Link>
+)
 
 export const CustomerDashboard: React.FC = () => {
     const { firstName } = useUser()
@@ -52,6 +66,7 @@ export const CustomerDashboard: React.FC = () => {
                         Your Relocation Progress
                     </Header>
                     <RelocationTasks tasks={data?.data?.relocation.tasks} />
+                    <Referrals />
                 </div>
             </div>
         </div>

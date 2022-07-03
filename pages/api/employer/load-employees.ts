@@ -1,23 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
 import { redarApi } from 'api-lib/external-apis'
 import { formatRelocation } from 'api-lib/relocations'
+import { validate } from 'api-lib/validate'
+import { getUser } from 'api-lib/auth'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const session = await getSession({ req })
+    await validate
+        .withReq(req)
+        .isGet()
+        .has('email', 'string')
+        .isUser('employer')
 
-    if (req.method !== 'GET' || !session) {
-        res.end()
-        return
-    }
+    const user = await getUser(req)
 
     try {
-        const user = await redarApi.users.id(session.user_id as number)
+        const userData = await redarApi.users.id(user.id)
 
-        const { role, employerId } = user.data
+        const { role, employerId } = userData.data
         if (role !== 'employer' || !employerId) {
             res.end()
             return

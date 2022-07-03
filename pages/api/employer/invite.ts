@@ -1,24 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
 import { redarApi } from 'api-lib/external-apis'
+import { validate } from 'api-lib/validate'
+import { getUser } from 'api-lib/auth'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const session = await getSession({ req })
+    await validate
+        .withReq(req)
+        .isPost()
+        .has('email', 'string')
+        .isUser('employer')
 
-    if (req.method !== 'POST' || !session || !req.body.email) {
-        res.status(401).json({ success: false })
-        res.end()
-        return
-    }
-
-    const userId = session.user_id as number
-    const userName = session.user?.name
+    const user = await getUser(req)
 
     await redarApi.messageBus.alert(
-        `${userName} (id:${userId}) invited ${req.body.email}`
+        `${user.name} (id:${user.id}) invited ${req.body.email}`
     )
+
     res.status(200).json({ success: true })
 }

@@ -1,28 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
 import { redarApi } from 'api-lib/external-apis'
+import { validate } from 'api-lib/validate'
+import { getUser } from 'api-lib/auth'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const session = await getSession({ req })
+    await validate
+        .withReq(req)
+        .isPost()
+        .has('status', 'string')
+        .has('date', 'string')
+        .has('id', 'number')
+        .isUser(['admin', 'customer'])
 
-    if (req.method !== 'POST' || !session) {
-        res.end()
-        return
-    }
+    const user = await getUser(req)
 
     try {
         const { status, id, date } = req.body
         const { data } = await redarApi.home.setOfferStatus(status, id, date)
 
-        if (session.role !== 'admin') {
-            const userId = session.user_id as number
-            const userName = session.user?.name
-
+        if (user.role !== 'admin') {
             await redarApi.messageBus.alert(
-                `${userName} (id:${userId}) updated offer status (status id:${data.id}) to ${data.status}`
+                `${user.name} (id:${user.id}) updated offer status (status id:${data.id}) to ${data.status}`
             )
         }
 

@@ -12,6 +12,7 @@ import {
     UsersIcon,
     CogIcon,
     NewspaperIcon,
+    GiftIcon,
 } from '@heroicons/react/outline'
 import * as React from 'react'
 
@@ -47,6 +48,7 @@ export const employerKnowledgeBaseNavigation: NavigationItem[] = [
 
 export const customerNavigation: NavigationItem[] = [
     { name: 'Dashboard', href: '/', Icon: NewspaperIcon },
+    { name: 'Referrals', href: '/referrals', Icon: GiftIcon },
     { name: 'Settings', href: '/settings', Icon: CogIcon },
 ]
 

@@ -18,6 +18,10 @@ const UserApi = (instance: AxiosInstance) => ({
         instance.post('/auth/reset', { oldPassword, newPassword }),
 })
 
+const ReferralsApi = (instance: AxiosInstance) => ({
+    invite: (email: string) => instance.post('/referrals/invite', { email }),
+})
+
 const create = () => {
     const axiosInstance = axios.create({
         baseURL: '/api',
@@ -29,6 +33,7 @@ const create = () => {
         employer: EmployerApi(axiosInstance),
         user: UserApi(axiosInstance),
         home: HomeApi(axiosInstance),
+        referrals: ReferralsApi(axiosInstance),
     }
 }
 

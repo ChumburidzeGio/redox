@@ -1,20 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { redarApi } from 'api-lib/external-apis'
+import { validate } from 'api-lib/validate'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const {
-        method,
-        body: { firstName, lastName, email, password },
-    } = req
+    await validate
+        .withReq(req)
+        .isPost()
+        .has('firstName', 'string')
+        .has('lastName', 'string')
+        .has('email', 'string')
+        .has('password', 'string')
+        .isGuest()
 
-    if (method !== 'POST' || !firstName || !lastName || !email || !password) {
-        res.status(401).json({ success: false })
-        res.end()
-        return
-    }
+    const { firstName, lastName, email, password } = req.body
 
     const signup = await redarApi.signUp({
         firstName,

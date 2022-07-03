@@ -1,38 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { loadHomes } from 'api-lib/homes'
 import { loadUserRelocation } from 'api-lib/relocations'
-import { getAuth } from 'api-lib/auth'
+import { getUser } from 'api-lib/auth'
+import { validate } from 'api-lib/validate'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const auth = await getAuth(req)
+    await validate
+        .withReq(req)
+        .isGet()
+        .has('email', 'string')
+        .isUser(['admin', 'customer'])
 
-    if (
-        req.method !== 'POST' ||
-        !auth ||
-        ['customer', 'admin'].indexOf(auth.role) < 0
-    ) {
-        res.end()
-        return
-    }
+    const user = await getUser(req)
 
-    if (auth.role === 'admin') {
-        const homes = await loadHomes(auth.role)
+    if (user.role === 'admin') {
+        const homes = await loadHomes(user.role)
         res.status(200).json({ success: true, homes })
         res.end()
         return
     }
 
-    const relocation = await loadUserRelocation(auth.id)
+    const relocation = await loadUserRelocation(user.id)
 
     if (!relocation) {
         res.status(200).json({ success: false })
         return
     }
 
-    const homes = await loadHomes(auth.role, relocation?.id)
+    const homes = await loadHomes(user.role, relocation.id)
 
     res.status(200).json({ success: true, homes, relocation })
     res.end()
