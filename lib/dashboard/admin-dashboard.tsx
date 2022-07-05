@@ -42,9 +42,13 @@ export const AdminDashboard: React.FC = () => {
                     <PropertiesList data={data?.data} />
                 </div>
                 <div className="flex sm:col-span-1 flex-col">
-                    <Header level="4" className="mb-3 mt-3">
-                        Relocations in the future, but empty space for now :)
+                    <Header level="3" className="mb-3 mt-3">
+                        Active Relocations
                     </Header>
+                    <p>
+                        In the future here will be active relocations for
+                        Admins.
+                    </p>
                 </div>
             </div>
         </div>

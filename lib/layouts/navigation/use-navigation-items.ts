@@ -13,6 +13,7 @@ import {
     CogIcon,
     NewspaperIcon,
     GiftIcon,
+    SupportIcon,
 } from '@heroicons/react/outline'
 import * as React from 'react'
 
@@ -35,6 +36,7 @@ export interface NavigationItem {
 
 export const employerNavigation: NavigationItem[] = [
     { name: 'Employees', href: '/', Icon: UsersIcon },
+    { name: 'Support', href: '/support', Icon: SupportIcon },
 ]
 
 export const employerKnowledgeBaseNavigation: NavigationItem[] = [
@@ -66,8 +68,9 @@ export const employerKnowledgeBaseNavigation: NavigationItem[] = [
 
 export const customerNavigation: NavigationItem[] = [
     { name: 'Dashboard', href: '/', Icon: NewspaperIcon },
-    { name: 'Referrals', href: '/referrals', Icon: GiftIcon },
     { name: 'Settings', href: '/settings', Icon: CogIcon },
+    { name: 'Referrals', href: '/referrals', Icon: GiftIcon },
+    { name: 'Support', href: '/support', Icon: SupportIcon },
 ]
 
 export const customerKnowledgeBaseNavigation: NavigationItem[] = [

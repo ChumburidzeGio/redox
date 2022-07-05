@@ -31,10 +31,10 @@ export function ReferralsPage() {
 
     return (
         <AppLayout>
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
                 <div className="flex items-center mt-8 justify-center">
                     <GiftIcon className="w-14 mr-4 text-red-500" />
-                    <Header level="1" className="text-red-500">
+                    <Header level="1" color="text-red-500">
                         Referral Program
                     </Header>
                 </div>
