@@ -10,24 +10,41 @@ function expect(condition: boolean, description: string) {
     }
 }
 
+function checkType<T>(
+    value: T,
+    name: string,
+    type: FieldTypes,
+    typeCheck: (value: T) => boolean,
+    isOptional: boolean
+) {
+    if (isOptional && value === undefined) {
+        return
+    }
+
+    expect(
+        typeCheck(value),
+        `${name} should be a ${type} but is ${typeof value}`
+    )
+}
+
 function expectField(
     value: string | number,
-    name: string | number,
+    name: string,
     type: FieldTypes,
     isOptional: boolean
 ) {
     if (type === 'string') {
-        expect(
-            (isOptional ? true : Boolean(value)) && typeof value === 'string',
-            `${name} ${isOptional ? '(optional)' : ''} should be a string`
+        checkType(
+            value,
+            name,
+            type,
+            (val) => typeof val === 'string',
+            isOptional
         )
     }
 
     if (type === 'number') {
-        expect(
-            (isOptional ? true : Boolean(value)) && Number.isFinite(value),
-            `${name} ${isOptional ? '(optional)' : ''} should be a number`
-        )
+        checkType(value, name, type, (val) => Number.isFinite(val), isOptional)
     }
 }
 

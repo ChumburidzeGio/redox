@@ -11,7 +11,7 @@ export default async function handler(
         .withReq(req)
         .isPost()
         .has('status', 'string')
-        .has('date', 'string')
+        .hasOptional('date', 'string')
         .has('id', 'number')
         .isUser(['admin', 'customer'])
 
