@@ -38,8 +38,8 @@ function Image({
             className={classNames(
                 'max-w-full flex flex-[1_0_auto] justify-center items-center overflow-hidden',
                 isThumbnail
-                    ? 'rounded max-w-[100px] sm:max-h-[80px]'
-                    : 'sm:max-w-full sm:max-h-[300px]'
+                    ? 'rounded max-w-[100px] max-h-[80px]'
+                    : 'max-w-full max-h-[300px]'
             )}
         >
             <img
@@ -72,7 +72,6 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                 <div className="pointer-events-auto w-screen sm:max-w-lg max-w-full">
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                         <Image src={home.photo} />
-
                         <div className="flex sm:hidden absolute top-4 left-4 bg-white rounded-full p-2 bg-opacity-70">
                             <ArrowLeftIcon
                                 className="h-6 w-6 text-black"
@@ -80,11 +79,10 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                                 onClick={() => setShowDetails(false)}
                             />
                         </div>
-
                         <div
                             className={classNames(
                                 !home.photo ? 'mt-10' : '',
-                                'pt-3 px-5 pb-5 flex flex-col justify-between'
+                                'pt-3 px-5 flex flex-col justify-between'
                             )}
                         >
                             <div className="flex flex-col">
@@ -95,7 +93,7 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                                         · {home.rent}
                                     </span>
                                 </Header>
-                                <p className="text-sm mt-1">
+                                <p className="text-sm">
                                     {home.surface} m2 · {home.rooms} rooms ·{' '}
                                     {(home.availability || home.interior) &&
                                         `${
@@ -108,7 +106,7 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                             <a
                                 href={home.url}
                                 target="_blank"
-                                className="mt-5 mb-3"
+                                className="mt-2"
                                 rel="noreferrer"
                             >
                                 <Button variant="secondary" className="w-full">
@@ -119,9 +117,13 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                                     <ExternalLinkIcon className="h-5 w-5 ml-2" />
                                 </Button>
                             </a>
+                        </div>
+                        <div className="px-5 mt-3 border-t border-gray-200 pt-3">
                             <CustomerActions offers={offers || []} />
                             <AgentActions offers={offers || []} />
+                        </div>
 
+                        <div className="px-5">
                             {home.coordinates && (
                                 <PointOnMap
                                     lat={home.coordinates.lat}
@@ -132,7 +134,7 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                     </div>
                 </div>
             </Drawer>
-            <div className="flex items-center py-3 px-2 sm:px-4 sm:py-4">
+            <div className="flex items-center py-3 sm:px-2 sm:px-4 sm:py-4">
                 <div className="min-w-0 flex-1 flex items-center">
                     <Image src={home.photo} isThumbnail />
                     <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">

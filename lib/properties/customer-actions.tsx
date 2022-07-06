@@ -1,18 +1,17 @@
 import * as React from 'react'
 
-import { Button } from 'lib/shared-ui'
+import { Button, classNames } from 'lib/shared-ui'
+import { ThumbDownIcon, ThumbUpIcon, RefreshIcon } from '@heroicons/react/solid'
 import { useUser } from '../auth'
 import { Offer } from './types'
-import { useSharedActions } from './actions-utils'
-import { OfferStatus } from './offer-status'
+import { useSharedActions, useStatusLabel } from './actions-utils'
 
 const OfferActions = ({ offer }: { offer: Offer }): JSX.Element => {
     const { archiveConfirm, setStatus } = useSharedActions()
+    const status = useStatusLabel(offer)
 
-    const [action, actionLabel] = React.useMemo(() => {
+    const [actionLabel] = React.useMemo(() => {
         switch (offer.status) {
-            case 'considering':
-                return ['viewing_requested', 'Archive']
             case 'viewing_requested':
                 return ['archived', 'Cancel Viewing and Archive']
             case 'offer_sent':
@@ -23,26 +22,58 @@ const OfferActions = ({ offer }: { offer: Offer }): JSX.Element => {
     }, [offer.status])
 
     return (
-        <div className="flex flex-col gap-1">
-            <div className="flex gap-2">
-                <Button
-                    onClick={() => archiveConfirm(offer.id)}
-                    variant="gray"
-                    className="py-1.5"
-                >
-                    {actionLabel}
-                </Button>
-                {offer.status === 'considering' && (
+        <div className="flex flex-col">
+            <div
+                className={classNames(
+                    offer.status === 'considering' ||
+                        offer.status === 'archived'
+                        ? 'grid flex-row gap-2'
+                        : 'flex'
+                )}
+            >
+                {(offer.status === 'considering' ||
+                    offer.status === 'archived') && (
                     <Button
-                        onClick={() => setStatus(action, offer.id)}
-                        variant="primary"
-                        className="py-1.5"
+                        onClick={() => setStatus('viewing_requested', offer.id)}
+                        variant="green"
+                        className={classNames(
+                            offer.status === 'considering' ? '' : 'w-full'
+                        )}
                     >
-                        Request Viewing
+                        {offer.status === 'considering' ? (
+                            <>
+                                <ThumbUpIcon className="mr-2 h-5 w-5" /> Request
+                                Viewing
+                            </>
+                        ) : (
+                            <>
+                                <RefreshIcon className="mr-2 h-5 w-5" /> Recover
+                                and Request Viewing
+                            </>
+                        )}
+                    </Button>
+                )}
+
+                {offer.status !== 'archived' && (
+                    <Button
+                        onClick={() => archiveConfirm(offer.id)}
+                        variant={
+                            offer.status === 'considering' ? 'red' : 'primary'
+                        }
+                        className={classNames(
+                            offer.status === 'considering' ? '' : 'w-full'
+                        )}
+                    >
+                        <ThumbDownIcon className="mr-2 h-5 w-5" /> {actionLabel}
                     </Button>
                 )}
             </div>
-            {<OfferStatus offer={offer} />}
+            {offer.status !== 'considering' ? (
+                <div className="text-sm text-gray-700 mt-1">
+                    Current status:{' '}
+                    <span className="font-semibold">{status}</span>
+                </div>
+            ) : null}
         </div>
     )
 }
@@ -54,17 +85,9 @@ export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
     }
 
     return (
-        <div className="border border-gray-300 divide-y divide-gray-200 rounded-md sm:min-w-[400px] mt-4 sm:mt-0">
+        <div className="sm:min-w-[400px]">
             {offers.map((offer: Offer) => (
-                <div
-                    key={offer.id}
-                    className="py-2 px-4 flex flex-row justify-between items-center"
-                >
-                    <div className="mr-4 sm:mr-10">{offer.relocationName}</div>
-                    <div className="flex gap-2">
-                        <OfferActions offer={offer} />
-                    </div>
-                </div>
+                <OfferActions key={offer.id} offer={offer} />
             ))}
         </div>
     )

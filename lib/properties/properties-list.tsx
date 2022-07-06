@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { classNames } from 'lib/shared-ui'
 import PropertiesCard from './property-card'
-import EmptyState from './empty-state'
 import { Home } from './types'
 import { useUser } from '../auth'
 
@@ -15,10 +14,6 @@ interface Props {
 
 export const PropertiesList: React.FC<Props> = ({ data }) => {
     const { role } = useUser()
-
-    if (!data?.success || data.homes.length === 0) {
-        return <EmptyState />
-    }
 
     return (
         <div

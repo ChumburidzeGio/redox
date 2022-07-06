@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Header } from '../shared-ui'
 import { useQuery } from 'react-query'
 import api from 'lib/api'
-import { PropertiesList } from '../properties'
+import { HomeTabs, PropertiesList, EmptyState } from '../properties'
 import { useUser } from 'lib/auth'
 import LoadingState from './loading-state'
 import { GiftIcon } from '@heroicons/react/outline'
@@ -23,20 +23,22 @@ const Referrals = () => (
 
 export const CustomerDashboard: React.FC = () => {
     const { firstName } = useUser()
+    const [tabId, setTabId] = React.useState('all')
 
-    const { data, isError, isLoading } = useQuery('homes', api.home.loadHomes, {
-        refetchOnWindowFocus: false,
-    })
-
-    if (isLoading) {
-        return <LoadingState />
-    }
+    const { data, isError, isLoading } = useQuery(
+        ['homes', tabId],
+        () => api.home.loadHomes(tabId),
+        {
+            refetchOnWindowFocus: false,
+        }
+    )
 
     if (
-        isError ||
-        !data?.data?.homes ||
-        !data?.data?.relocation ||
-        !data?.data?.relocation.tasks
+        !isLoading &&
+        (isError ||
+            !data?.data?.homes ||
+            !data?.data?.relocation ||
+            !data?.data?.relocation.tasks)
     ) {
         return (
             <div>
@@ -56,16 +58,22 @@ export const CustomerDashboard: React.FC = () => {
 
             <div className="grid sm:grid-cols-3 gap-12 mt-4 sm:mt-4">
                 <div className="flex sm:col-span-2 flex-col">
-                    <Header level="3" className="mb-4 mt-3">
-                        Your Apartments
-                    </Header>
-                    <PropertiesList data={data?.data} />
+                    <HomeTabs onChange={setTabId} />
+                    {isLoading ? (
+                        <LoadingState />
+                    ) : data?.data?.success && data.data.homes.length > 0 ? (
+                        <PropertiesList data={data?.data} />
+                    ) : (
+                        <EmptyState />
+                    )}
                 </div>
                 <div className="flex sm:col-span-1 flex-col">
                     <Header level="4" className="mb-3 mt-3">
                         Your Relocation Progress
                     </Header>
-                    <RelocationTasks tasks={data?.data?.relocation.tasks} />
+                    {data?.data?.relocation.tasks && (
+                        <RelocationTasks tasks={data?.data?.relocation.tasks} />
+                    )}
                     <Referrals />
                 </div>
             </div>

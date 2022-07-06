@@ -1,6 +1,6 @@
 import { HomeIcon } from '@heroicons/react/outline'
 
-export default function EmptyState() {
+export function EmptyState() {
     return (
         <div className="max-w-xl mx-auto mt-12 mb-12">
             <div>

@@ -8,12 +8,16 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    await validate.withReq(req).isGet().isUser(['admin', 'customer'])
+    await validate
+        .withReq(req)
+        .isPost()
+        .has('status', 'string')
+        .isUser(['admin', 'customer'])
 
     const user = await getUser(req)
 
     if (user.role === 'admin') {
-        const homes = await loadHomes(user.role)
+        const homes = await loadHomes(user.role, req.body.status)
         res.status(200).json({ success: true, homes })
         res.end()
         return
@@ -26,7 +30,7 @@ export default async function handler(
         return
     }
 
-    const homes = await loadHomes(user.role, relocation.id)
+    const homes = await loadHomes(user.role, req.body.status, relocation.id)
 
     res.status(200).json({ success: true, homes, relocation })
     res.end()

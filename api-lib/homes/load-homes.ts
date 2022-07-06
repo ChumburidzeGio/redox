@@ -3,7 +3,11 @@ import { handleAxiosError } from '../handle-error'
 import { ExternalHomeWithOffers } from './types'
 import { formatHomes } from './format-homes'
 
-function getStatuses(role: string): (string | null)[] {
+function getStatuses(role: string, statusGroupId: string): (string | null)[] {
+    if (statusGroupId === 'archived') {
+        return ['archived']
+    }
+
     const statuses = [
         'considering',
         'viewing_requested',
@@ -14,8 +18,12 @@ function getStatuses(role: string): (string | null)[] {
     return role === 'admin' ? [...statuses, null] : statuses
 }
 
-export async function loadHomes(userRole: string, relocationId?: number) {
-    const statuses = getStatuses(userRole)
+export async function loadHomes(
+    userRole: string,
+    statusGroupId: string,
+    relocationId?: number
+) {
+    const statuses = getStatuses(userRole, statusGroupId)
 
     try {
         const { data }: { data: ExternalHomeWithOffers[] } =

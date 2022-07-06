@@ -21,6 +21,8 @@ const useStatusLabel = (offer: Offer): string => {
                     : 'Viewing Requested'
             case 'rented':
                 return 'Rented'
+            case 'archived':
+                return 'Archived'
             default:
                 return 'No Status'
         }
