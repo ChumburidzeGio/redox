@@ -7,9 +7,10 @@ import { ValidationsProps } from './validation-props'
 
 interface Option {
     id: string
+    Icon?: React.FC<React.ComponentProps<'svg'>>
     title: string
-    description: string
-    value: string
+    description?: string
+    value?: string
 }
 
 export interface RadioCardsProps {
@@ -44,7 +45,7 @@ export const RadioCards: React.FC<RadioCardsProps> = ({
     return (
         <div className="mt-2 relative">
             <RadioGroup value={value} onChange={onChange}>
-                <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+                <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4">
                     {options.map((option) => (
                         <RadioGroup.Option
                             key={option.id}
@@ -61,26 +62,35 @@ export const RadioCards: React.FC<RadioCardsProps> = ({
                         >
                             {({ checked, active }) => (
                                 <>
-                                    <div className="flex-1 flex">
-                                        <div className="flex flex-col">
+                                    <div className="flex-1 flex flex-row gap-3">
+                                        {option.Icon && (
+                                            <div className="flex flex-none">
+                                                <option.Icon className="h-5 w-5" />
+                                            </div>
+                                        )}
+                                        <div className="flex flex-col grow basis-full shrink-0">
                                             <RadioGroup.Label
                                                 as="span"
                                                 className="block text-sm font-medium text-gray-900"
                                             >
                                                 {option.title}
                                             </RadioGroup.Label>
-                                            <RadioGroup.Description
-                                                as="span"
-                                                className="mt-1 flex items-center text-sm text-gray-500"
-                                            >
-                                                {option.description}
-                                            </RadioGroup.Description>
-                                            <RadioGroup.Description
-                                                as="span"
-                                                className="mt-6 text-sm font-medium text-gray-900"
-                                            >
-                                                {option.value}
-                                            </RadioGroup.Description>
+                                            {option.description && (
+                                                <RadioGroup.Description
+                                                    as="span"
+                                                    className="mt-1 flex items-center text-sm text-gray-500"
+                                                >
+                                                    {option.description}
+                                                </RadioGroup.Description>
+                                            )}
+                                            {option.value && (
+                                                <RadioGroup.Description
+                                                    as="span"
+                                                    className="mt-3 text-sm font-medium text-gray-900"
+                                                >
+                                                    {option.value}
+                                                </RadioGroup.Description>
+                                            )}
                                         </div>
                                     </div>
                                     <CheckCircleIcon

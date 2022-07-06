@@ -2,7 +2,7 @@ import * as React from 'react'
 
 export interface LabelProps {
     id: string
-    hintText?: string
+    hintText?: string | React.ReactNode
 }
 
 export const Label: React.FC<LabelProps> = ({ id, hintText, children }) => {

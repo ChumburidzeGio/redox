@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { ErrorText, Form, Input, Label } from 'lib/forms'
-import { useForm } from 'react-hook-form'
+import { ErrorText, Form, Input, Label, RadioCards } from 'lib/forms'
+import { UsersIcon, OfficeBuildingIcon } from '@heroicons/react/outline'
+import { useForm, useWatch } from 'react-hook-form'
 import { useMutation } from 'react-query'
 import toast from 'react-hot-toast'
 import api from 'lib/api'
@@ -20,10 +21,35 @@ function translateError(errorCode?: string) {
     }
 }
 
+interface FormValues {
+    role: 'customer' | 'employer'
+    firstName: string
+    lastName: string
+    companyName: string
+    password: string
+    repeatPassword: string
+    pkg: 'standard' | 'premium' | 'standard-6m' | 'not-sure'
+}
+
 export default function SignUpPage() {
     useLogOnRender('redox:signup')
 
-    const methods = useForm()
+    const methods = useForm<FormValues>({
+        defaultValues: {
+            role: 'customer',
+            firstName: '',
+            companyName: '',
+            lastName: '',
+            password: '',
+            repeatPassword: '',
+            pkg: 'premium',
+        },
+    })
+
+    const role = useWatch({
+        control: methods.control,
+        name: 'role',
+    })
 
     const mutation = useMutation(
         async ({
@@ -62,8 +88,8 @@ export default function SignUpPage() {
 
     return (
         <div className="h-full min-h-screen bg-gray-50">
-            <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-md items-center flex flex-col">
+            <div className="min-h-full flex flex-col justify-center py-8 sm:px-6 lg:px-8">
+                <div className="sm:mx-auto sm:w-full items-center flex flex-col">
                     <Logo />
                     <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
                         Create your account
@@ -77,15 +103,38 @@ export default function SignUpPage() {
                         </Link>
                     </p>
                 </div>
-                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-lg">
                     <div className="bg-white py-7 px-4 sm:px-7 border border-gray-200 sm:rounded-lg">
                         <Form
                             onSubmit={(data) => mutation.mutate(data)}
+                            // @ts-ignore
                             methods={methods}
                         >
+                            <div className="mb-6">
+                                {/*<Label id="role">Individual or Company?</Label>*/}
+                                <RadioCards
+                                    id="role"
+                                    options={[
+                                        {
+                                            id: 'customer',
+                                            title: 'Individual',
+                                            Icon: UsersIcon,
+                                            description: 'Relocating myself',
+                                        },
+                                        {
+                                            id: 'employer',
+                                            title: 'Company',
+                                            Icon: OfficeBuildingIcon,
+                                            description: 'Relocating employee',
+                                        },
+                                    ]}
+                                    defaultValue="customer"
+                                />
+                            </div>
+
                             <div className="flex flex-col sm:flex-row mb-4">
                                 <div className="sm:w-1/2 sm:pr-4">
-                                    <Label id="email">First Name</Label>
+                                    <Label id="firstName">First Name</Label>
                                     <Input
                                         id="firstName"
                                         type="text"
@@ -98,7 +147,7 @@ export default function SignUpPage() {
                                 </div>
 
                                 <div className="sm:w-1/2 sm:pl-4 mt-3 sm:mt-0">
-                                    <Label id="email">Last Name</Label>
+                                    <Label id="lastName">Last Name</Label>
                                     <Input
                                         id="lastName"
                                         type="text"
@@ -110,6 +159,21 @@ export default function SignUpPage() {
                                     </ErrorText>
                                 </div>
                             </div>
+
+                            {role === 'employer' && (
+                                <div className="mb-4">
+                                    <Label id="companyName">Company name</Label>
+                                    <Input
+                                        id="companyName"
+                                        type="text"
+                                        className="mt-1"
+                                        rules={{ required: true }}
+                                    />
+                                    <ErrorText id="companyName">
+                                        Please enter your company name
+                                    </ErrorText>
+                                </div>
+                            )}
 
                             <Label id="email">Email</Label>
                             <Input
@@ -132,7 +196,7 @@ export default function SignUpPage() {
                                         rules={{
                                             required: true,
                                             minLength: 8,
-                                            deps: ['repeat_password'],
+                                            deps: ['repeatPassword'],
                                             pattern:
                                                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,
                                         }}
@@ -142,7 +206,7 @@ export default function SignUpPage() {
                                 <div className="sm:w-1/2 sm:pl-4 mt-3 sm:mt-0">
                                     <Label id="email">Repeat password</Label>
                                     <Input
-                                        id="repeat_password"
+                                        id="repeatPassword"
                                         type="password"
                                         className="mt-1"
                                         rules={{
@@ -162,6 +226,60 @@ export default function SignUpPage() {
                                 minimum 8 characters (min 1 uppercase letter, 1
                                 lowercase and one number).
                             </ErrorText>
+
+                            {role === 'customer' && (
+                                <div className="mt-6 mb-6">
+                                    <Label
+                                        id="role"
+                                        hintText={
+                                            <a
+                                                className="text-blue-600"
+                                                target="_blank"
+                                                href="https://www.relocify.nl/pricing"
+                                                rel="noreferrer"
+                                            >
+                                                Compare pricing
+                                            </a>
+                                        }
+                                    >
+                                        Which package do you want to take?
+                                    </Label>
+                                    <RadioCards
+                                        id="pkg"
+                                        options={[
+                                            {
+                                                id: 'premium',
+                                                title: 'Premium',
+                                                description:
+                                                    'Unlimited viewings and premium support',
+                                                value: '€1,799',
+                                            },
+                                            {
+                                                id: 'standard',
+                                                title: 'Standard',
+                                                description:
+                                                    'Essentials with 8x viewings included',
+                                                value: '€1,649',
+                                            },
+                                            {
+                                                id: 'standard-6m',
+                                                title: 'Standard in 6',
+                                                description:
+                                                    'Standard package but pay over 6 months',
+                                                value: '€279 x 6',
+                                            },
+                                            {
+                                                id: 'not-sure',
+                                                title: 'Not sure yet',
+                                                description:
+                                                    'Let me decide after a free consultation',
+                                                value: '',
+                                            },
+                                        ]}
+                                        defaultValue="premium"
+                                    />
+                                </div>
+                            )}
 
                             <div className="flex items-center mt-3">
                                 <input
