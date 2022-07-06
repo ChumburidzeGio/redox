@@ -8,6 +8,7 @@ import api from 'lib/api'
 import { signIn } from 'next-auth/react'
 import Router from 'next/router'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { Button, Logo } from 'lib/shared-ui'
 import { useLogOnRender } from '../../lib/analytics'
@@ -33,6 +34,9 @@ interface FormValues {
 
 export default function SignUpPage() {
     useLogOnRender('redox:signup')
+
+    const router = useRouter()
+    const { pkg } = router.query
 
     const methods = useForm<FormValues>({
         defaultValues: {

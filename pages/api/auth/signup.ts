@@ -27,7 +27,7 @@ export default async function handler(
 
     if (signup.data.success) {
         await redarApi.messageBus.alert(
-            `${firstName} ${lastName} signed up! (${email} / ${password})`
+            `${firstName} ${lastName} signed up! (${email} / ${password})  ${req.body.pkg}`
         )
     }
 
