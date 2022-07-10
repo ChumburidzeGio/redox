@@ -11,11 +11,14 @@ import Link from 'next/link'
 
 import { Button, Logo } from 'lib/shared-ui'
 import { useLogOnRender } from '../../lib/analytics'
+import { AxiosError } from 'axios'
 
 function translateError(errorCode?: string) {
     switch (errorCode) {
         case 'USER_ALREADY_EXISTS':
             return 'User with this email address already exists. Please sign in or try to reset your password.'
+        case 'COMPANY_ALREADY_EXISTS':
+            return 'Company already exists, please ask your colleague to contact us for inviting you.'
         default:
             return 'Something went wrong :( Try again or contact us for help!'
     }
@@ -51,40 +54,22 @@ export default function SignUpPage() {
         name: 'role',
     })
 
-    const mutation = useMutation(
-        async ({
-            email,
-            firstName,
-            lastName,
-            password,
-        }: Record<string, string>) => {
-            const { data } = await api.user.signup({
-                email,
-                firstName,
-                lastName,
-                password,
-            })
-
-            if (data?.success !== true) {
-                toast.error(translateError(data.errorCode))
-                return
-            }
+    const mutation = useMutation(api.user.signup, {
+        onError: (data: AxiosError) => {
+            toast.error(translateError(data.response?.data?.message))
+        },
+        onSuccess: async (res, data) => {
+            methods.reset()
 
             await signIn('credentials', {
-                email,
-                password,
+                email: data.email,
+                password: data.password,
                 redirect: false,
             })
 
-            methods.reset()
             Router.push('/')
         },
-        {
-            onError: () => {
-                toast.error(translateError())
-            },
-        }
-    )
+    })
 
     return (
         <div className="h-full min-h-screen bg-gray-50">

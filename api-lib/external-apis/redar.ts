@@ -1,15 +1,9 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosError, AxiosInstance } from 'axios'
 import config from 'config'
 
 interface SignInProps {
     email: string
     password: string
-}
-
-interface SignUpProps extends SignInProps {
-    firstName: string
-    lastName: string
-    role: 'customer' | 'employer'
 }
 
 interface EmailProps {
@@ -21,8 +15,9 @@ interface EmailProps {
 }
 
 const RadarApi = (instance: AxiosInstance) => ({
+    get: (endpoint: string) => instance.get(endpoint),
+    post: (endpoint: string, data: any) => instance.post(endpoint, data),
     signIn: (data: SignInProps) => instance.post('/users/sign-in', data),
-    signUp: (data: SignUpProps) => instance.post('/users/sign-up', data),
     employer: {
         relocations: (employerId: number) =>
             instance.get(`/relocations/employer/${employerId}`),
@@ -60,6 +55,9 @@ const RadarApi = (instance: AxiosInstance) => ({
                 template: 'transactional',
             }),
     },
+    companies: {
+        create: (name: string) => instance.post(`/companies/create`, { name }),
+    },
 })
 
 const create = () => {
@@ -70,6 +68,38 @@ const create = () => {
     })
 
     return RadarApi(axiosInstance)
+}
+
+export async function proxyRequest(
+    method: 'POST' | 'GET',
+    endpoint: string,
+    data?: any
+): Promise<{ status: number; json: any }> {
+    try {
+        const request = await (method === 'POST'
+            ? create().post(endpoint, data)
+            : create().get(endpoint))
+        return {
+            status: request.status,
+            json: request.data,
+        }
+    } catch (e) {
+        if (e instanceof Error && e.hasOwnProperty('toJSON')) {
+            const response = e as AxiosError
+            const json = response.response?.data
+            return {
+                status: json.hasOwnProperty('statusCode')
+                    ? json.statusCode
+                    : 500,
+                json,
+            }
+        } else {
+            return {
+                status: 500,
+                json: {},
+            }
+        }
+    }
 }
 
 export default create()

@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { redarApi } from 'api-lib/external-apis'
+import { proxyRequest } from 'api-lib/external-apis'
 
 export default NextAuth({
     debug: true,
@@ -22,13 +22,14 @@ export default NextAuth({
                 }
 
                 try {
-                    const { data } = await redarApi.signIn({
-                        email: credentials?.email!,
-                        password: credentials?.password!,
-                    })
+                    const request = await proxyRequest(
+                        'POST',
+                        '/auth/sign-in',
+                        credentials
+                    )
 
-                    if (data.success) {
-                        return data.user
+                    if (request.status === 201) {
+                        return request.json
                     }
 
                     return null
