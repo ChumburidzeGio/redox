@@ -50,13 +50,13 @@ export function SupportPage() {
                     </Header>
                 </div>
                 <div className="mt-4 text-lg font-medium text-center m-auto max-w-xl text-slate-800">
-                    Here a few ways you can reach us out in case you have
-                    questions or you need a help.
+                    Here are a few ways you can reach us in case you have
+                    questions or you need help.
                 </div>
 
                 <ul
                     role="list"
-                    className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3 mt-12"
+                    className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3 mt-12 pt-6"
                 >
                     {channels.map((channel) => (
                         <a

@@ -65,7 +65,6 @@ export const employerKnowledgeBaseNavigation: NavigationItem[] = [
         name: 'Integration',
         href: '/employers/integration',
         Icon: SparklesIcon,
-        isDisabled: true,
     },
 ]
 
