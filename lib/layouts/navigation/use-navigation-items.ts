@@ -14,6 +14,7 @@ import {
     NewspaperIcon,
     GiftIcon,
     SupportIcon,
+    CalculatorIcon,
 } from '@heroicons/react/outline'
 import * as React from 'react'
 
@@ -44,19 +45,21 @@ export const employerKnowledgeBaseNavigation: NavigationItem[] = [
         name: 'Sourcing',
         href: '/employers/sourcing',
         Icon: SearchIcon,
-        isDisabled: true,
     },
     {
         name: 'Immigration',
         href: '/employers/immigration',
         Icon: AcademicCapIcon,
-        isDisabled: true,
     },
     {
         name: 'Relocation',
         href: '/employers/relocation',
         Icon: HomeIcon,
-        isDisabled: true,
+    },
+    {
+        name: '30% Ruling',
+        href: '/employers/30ruling',
+        Icon: CalculatorIcon,
     },
     {
         name: 'Integration',
