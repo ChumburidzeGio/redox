@@ -12,9 +12,11 @@ export default async function handler(
 
     const request = await proxyRequest(
         'GET',
-        '/employer/employees?userId=' + user.id,
-        req.body
+        '/employer/employees',
+        req.body,
+        user
     )
+
     res.status(request.status).json(request.json)
     res.end()
 }

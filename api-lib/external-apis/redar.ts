@@ -68,12 +68,19 @@ const create = () => {
 export async function proxyRequest(
     method: 'POST' | 'GET',
     endpoint: string,
-    data?: any
+    data?: any,
+    user?: any
 ): Promise<{ status: number; json: any }> {
     try {
+        const userEndpoint = user ? `${endpoint}?userId=${user.id}` : endpoint
+
         const request = await (method === 'POST'
-            ? create().post(endpoint, data)
-            : create().get(endpoint))
+            ? create().post(
+                  userEndpoint,
+                  user ? { userId: user.id, ...data } : data
+              )
+            : create().get(userEndpoint))
+
         return {
             status: request.status,
             json: request.data,

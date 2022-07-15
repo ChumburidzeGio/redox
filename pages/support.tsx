@@ -57,7 +57,7 @@ export function SupportPage() {
                             href={channel.href}
                             target={channel.target}
                             key={channel.title}
-                            className="col-span-1 flex shadow-sm hover:shadow-md rounded-md border border-gray-200"
+                            className="col-span-1 flex shadow-sm hover:shadow-md rounded-md border border-gray-200 p-1"
                         >
                             <div className="flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md">
                                 <channel.Icon

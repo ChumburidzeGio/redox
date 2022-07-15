@@ -10,10 +10,12 @@ export default async function handler(
     await validate.withReq(req).isPost().isUser('employer')
     const user = await getUser(req)
 
-    const request = await proxyRequest('POST', '/employer/invite', {
-        userId: user.id,
-        ...req.body,
-    })
+    const request = await proxyRequest(
+        'POST',
+        '/employer/invite',
+        req.body,
+        user
+    )
 
     res.status(request.status).json(request.json)
     res.end()

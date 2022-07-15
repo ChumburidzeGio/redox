@@ -5,6 +5,7 @@ import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useMutation } from 'react-query'
 import api from 'lib/api'
 import toast from 'react-hot-toast'
+import { AxiosError } from 'axios'
 
 function translateError(errorCode?: string) {
     switch (errorCode) {
@@ -25,14 +26,14 @@ export function ResetPassword() {
         {
             onSuccess: ({ data }) => {
                 if (data?.success === true) {
-                    toast.success('Successfully updated your password')
+                    toast.success('Successfully updated your password!')
                     methods.reset()
                     return
                 }
                 toast.error(translateError(data?.errorCode))
             },
-            onError: () => {
-                toast.error(translateError())
+            onError: (data: AxiosError) => {
+                toast.error(translateError(data.response?.data?.message))
             },
         }
     )
