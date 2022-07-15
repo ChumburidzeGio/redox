@@ -1,13 +1,11 @@
 import * as React from 'react'
-import { RelocationTasks } from 'lib/relocations'
 import Link from 'next/link'
-import { Header } from '../shared-ui'
+import { Button, Header } from '../shared-ui'
 import { useQuery } from 'react-query'
 import api from 'lib/api'
-import { HomeTabs, PropertiesList, EmptyState } from '../properties'
+import { HomeTabs, EmptyState } from '../homes'
 import { useUser } from 'lib/auth'
-import LoadingState from './loading-state'
-import { GiftIcon } from '@heroicons/react/outline'
+import { GiftIcon, HomeIcon, ExternalLinkIcon } from '@heroicons/react/outline'
 
 const Referrals = () => (
     <Link href="/referrals" passHref>
@@ -25,21 +23,11 @@ export const CustomerDashboard: React.FC = () => {
     const { firstName } = useUser()
     const [tabId, setTabId] = React.useState('all')
 
-    const { data, isError, isLoading } = useQuery(
-        ['homes', tabId],
-        () => api.home.loadHomes(tabId),
-        {
-            refetchOnWindowFocus: false,
-        }
+    const { data, isError, isLoading } = useQuery(['homes', tabId], () =>
+        api.request.get('/home/load-homes?status=' + tabId)
     )
 
-    if (
-        !isLoading &&
-        (isError ||
-            !data?.data?.homes ||
-            !data?.data?.relocation ||
-            !data?.data?.relocation.tasks)
-    ) {
+    if (!isLoading && (isError || !data?.data)) {
         return (
             <div>
                 Something went wrong, please refresh this page or contact
@@ -59,21 +47,35 @@ export const CustomerDashboard: React.FC = () => {
             <div className="grid sm:grid-cols-3 gap-12 mt-4 sm:mt-4">
                 <div className="flex sm:col-span-2 flex-col">
                     <HomeTabs onChange={setTabId} />
-                    {isLoading ? (
-                        <LoadingState />
-                    ) : data?.data?.success && data.data.homes.length > 0 ? (
-                        <PropertiesList data={data?.data} />
-                    ) : (
-                        <EmptyState />
-                    )}
+                    <EmptyState
+                        Icon={HomeIcon}
+                        title="Here will be soon list of rental offers"
+                        description="For now please use the other app for accessing rental offers:"
+                    >
+                        <Button
+                            variant="primary"
+                            className="mt-4 px-6"
+                            href="https://relocify.relocationonline.com/"
+                            target="_blank"
+                        >
+                            Open App <ExternalLinkIcon className="h-5 ml-3" />
+                        </Button>
+                    </EmptyState>
+
+                    {/*{isLoading ? (*/}
+                    {/*    <LoadingState />*/}
+                    {/*) : data?.data && data.data.length > 0 ? (*/}
+                    {/*    <PropertiesList data={data?.data} />*/}
+                    {/*) : (*/}
+                    {/*    <EmptyState
+                        Icon={HomeIcon}
+                        title="Here will be the list of rental offers"
+                        description="As soon as your case manager approves offers for you,
+                        you will see them here."
+                    />*/}
+                    {/*)}*/}
                 </div>
-                <div className="flex sm:col-span-1 flex-col">
-                    <Header level="4" className="mb-3 mt-3">
-                        Your Relocation Progress
-                    </Header>
-                    {data?.data?.relocation.tasks && (
-                        <RelocationTasks tasks={data?.data?.relocation.tasks} />
-                    )}
+                <div className="flex sm:col-span-1 flex-col pt-8">
                     <Referrals />
                 </div>
             </div>

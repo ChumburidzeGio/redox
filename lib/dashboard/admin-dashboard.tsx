@@ -2,23 +2,24 @@ import * as React from 'react'
 import { Header } from '../shared-ui'
 import { useQuery } from 'react-query'
 import api from 'lib/api'
-import { HomeTabs, PropertiesList, EmptyState } from '../properties'
+import { HomeTabs, PropertiesList, EmptyState } from '../homes'
 import { useUser } from 'lib/auth'
 import LoadingState from './loading-state'
+import { HomeIcon } from '@heroicons/react/outline'
 
 export const AdminDashboard: React.FC = () => {
     const { firstName } = useUser()
     const [tabId, setTabId] = React.useState('all')
 
     const { data, isError, isLoading } = useQuery(
-        ['homes', tabId],
-        () => api.home.loadHomes(tabId),
+        ['admin-homes', tabId],
+        () => api.request.get('/admin/homes?status=' + tabId),
         {
             refetchOnWindowFocus: false,
         }
     )
 
-    if (!isLoading && (isError || !data?.data?.homes)) {
+    if (!isLoading && (isError || !data?.data)) {
         return (
             <div>
                 Something went wrong, please refresh this page or contact
@@ -40,20 +41,15 @@ export const AdminDashboard: React.FC = () => {
                     <HomeTabs onChange={setTabId} />
                     {isLoading ? (
                         <LoadingState />
-                    ) : data?.data?.success && data.data.homes.length > 0 ? (
+                    ) : data?.data && data.data.length > 0 ? (
                         <PropertiesList data={data?.data} />
                     ) : (
-                        <EmptyState />
+                        <EmptyState
+                            Icon={HomeIcon}
+                            title="Here will be soon list of rental offers"
+                            description="For now please use the other app for accessing rental offers."
+                        />
                     )}
-                </div>
-                <div className="flex sm:col-span-1 flex-col">
-                    <Header level="3" className="mb-3 mt-3">
-                        Active Relocations
-                    </Header>
-                    <p>
-                        In the future here will be active relocations for
-                        Admins.
-                    </p>
                 </div>
             </div>
         </div>

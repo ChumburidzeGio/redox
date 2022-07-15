@@ -5,7 +5,7 @@ import { useMutation } from 'react-query'
 import dayjs from 'dayjs'
 
 import { Form, Input } from 'lib/forms'
-import { Offer, OfferOption } from 'lib/properties/types'
+import { Offer, OfferOption } from './types'
 import { Button, Spinner } from 'lib/shared-ui'
 
 interface ModalProps {

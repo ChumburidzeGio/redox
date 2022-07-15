@@ -1,57 +1,16 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
 import config from 'config'
 
-interface SignInProps {
-    email: string
-    password: string
-}
-
-interface EmailProps {
-    title: string
-    preview: string
-    recipientName: string
-    recipientEmail: string
-    content: string
-}
-
 const RadarApi = (instance: AxiosInstance) => ({
     get: (endpoint: string) => instance.get(endpoint),
     post: (endpoint: string, data: any) => instance.post(endpoint, data),
-    signIn: (data: SignInProps) => instance.post('/users/sign-in', data),
     home: {
-        loadHomes: (status: (string | null)[], id?: number) =>
-            instance.post('/homes/index', { status, relocationId: id }),
         setOfferStatus: (status: string, id: number, date?: Date) =>
             instance.post('/homes/offer/status', { status, id, date }),
-    },
-    relocation: {
-        getForUser: (userId: number) =>
-            instance.get(`/relocations?userId=${userId}`),
-    },
-    users: {
-        resetPassword: (
-            userId: number,
-            oldPassword: string,
-            newPassword: string
-        ) =>
-            instance.post(`/users/reset-password`, {
-                userId,
-                oldPassword,
-                newPassword,
-            }),
     },
     messageBus: {
         alert: (text: string) =>
             instance.post(`/message-bus/notify`, { text, channel: 'alerts' }),
-        email: (props: EmailProps) =>
-            instance.post(`/message-bus/email`, {
-                props,
-                type: 'transactional',
-                template: 'transactional',
-            }),
-    },
-    companies: {
-        create: (name: string) => instance.post(`/companies/create`, { name }),
     },
 })
 
@@ -72,12 +31,18 @@ export async function proxyRequest(
     user?: any
 ): Promise<{ status: number; json: any }> {
     try {
-        const userEndpoint = user ? `${endpoint}?userId=${user.id}` : endpoint
+        const params = new URLSearchParams(
+            method === 'POST'
+                ? { userId: user?.id || null }
+                : { userId: user?.id || null, ...data }
+        ).toString()
+
+        const userEndpoint = user ? `${endpoint}?${params}` : endpoint
 
         const request = await (method === 'POST'
             ? create().post(
                   userEndpoint,
-                  user ? { userId: user.id, ...data } : data
+                  user ? { userId: user?.id || null, ...data } : data
               )
             : create().get(userEndpoint))
 

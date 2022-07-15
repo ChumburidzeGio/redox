@@ -32,13 +32,13 @@ export function ReferralsPage() {
     return (
         <AppLayout>
             <div className="max-w-4xl">
-                <div className="flex items-center mt-8 justify-center">
-                    <GiftIcon className="w-14 mr-4 text-red-500" />
+                <div className="flex items-center mt-4 p-1">
+                    <GiftIcon className="w-14 mr-3 text-red-500 -ml-1" />
                     <Header level="1" color="text-red-500">
                         Referral Program
                     </Header>
                 </div>
-                <div className="mt-4 text-lg font-medium text-center m-auto max-w-xl text-gray-800">
+                <div className="mt-4 text-lg font-medium text-gray-800">
                     Invite a friend, give them €50 discount on any of our
                     packages and receive €100 bonus per invite.
                 </div>

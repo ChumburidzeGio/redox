@@ -8,7 +8,7 @@ const EmployerApi = (instance: AxiosInstance) => ({
 
 const HomeApi = (instance: AxiosInstance) => ({
     loadHomes: (status?: string) =>
-        instance.post('/home/load-homes', { status }),
+        instance.get('/home/load-homes?status=' + status),
     setOfferStatus: (status: string | null, id: number, date?: Date | string) =>
         instance.post(`home/set-offer-status`, { status, id, date }),
 })
@@ -36,6 +36,7 @@ const create = () => {
         user: UserApi(axiosInstance),
         home: HomeApi(axiosInstance),
         referrals: ReferralsApi(axiosInstance),
+        request: axiosInstance,
     }
 }
 

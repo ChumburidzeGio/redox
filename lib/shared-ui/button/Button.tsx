@@ -11,7 +11,7 @@ interface ButtonProps {
 
 export const Button: React.FC<
     React.HTMLProps<HTMLButtonElement> & ButtonProps
-> = ({ variant, className, children, href, ...rest }) => {
+> = ({ variant, className, children, href, target, ...rest }) => {
     const classes = React.useMemo(() => {
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',

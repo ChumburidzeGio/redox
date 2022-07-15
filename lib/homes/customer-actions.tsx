@@ -78,7 +78,7 @@ const OfferActions = ({ offer }: { offer: Offer }): JSX.Element => {
     )
 }
 
-export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
+export const CustomerActions = ({ offer }: { offer: Offer }) => {
     const { role } = useUser()
     if (role !== 'customer') {
         return null
@@ -86,9 +86,7 @@ export const CustomerActions = ({ offers }: { offers: Offer[] }) => {
 
     return (
         <div className="sm:min-w-[400px]">
-            {offers.map((offer: Offer) => (
-                <OfferActions key={offer.id} offer={offer} />
-            ))}
+            <OfferActions key={offer.id} offer={offer} />
         </div>
     )
 }

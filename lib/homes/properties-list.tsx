@@ -6,10 +6,7 @@ import { Home } from './types'
 import { useUser } from '../auth'
 
 interface Props {
-    data: {
-        success: boolean
-        homes: Home[]
-    }
+    data: Home[]
 }
 
 export const PropertiesList: React.FC<Props> = ({ data }) => {
@@ -29,7 +26,7 @@ export const PropertiesList: React.FC<Props> = ({ data }) => {
                     role === 'customer' ? 'divided-y divided-gray-200' : ''
                 )}
             >
-                {data.homes.map((home: Home) => {
+                {data.map((home: Home) => {
                     return <PropertiesCard key={home.id} home={home} />
                 })}
             </ul>

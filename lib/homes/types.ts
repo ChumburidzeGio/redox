@@ -25,7 +25,8 @@ export type Home = {
     street: string
     surface: number
     url: string
-    offers: Offer[]
+    offers?: Offer[]
+    offer: Offer
     coordinates: CoordinatesDts
 }
 

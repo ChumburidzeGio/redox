@@ -7,10 +7,10 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    await validate.withReq(req).isGet().isUser(['customer'])
+    await validate.withReq(req).isGet().isUser(['admin'])
     const user = await getUser(req)
 
-    const request = await proxyRequest('GET', '/homes/index', req.query, user)
+    const request = await proxyRequest('GET', '/admin/homes', req.query, user)
 
     res.status(request.status).json(request.json)
     res.end()

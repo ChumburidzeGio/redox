@@ -57,7 +57,6 @@ interface PropertyCardProps {
 
 const PropertiesCard = ({ home }: PropertyCardProps) => {
     const [showDetails, setShowDetails] = React.useState(false)
-    const { offers } = home
     const { role } = useUser()
 
     return (
@@ -119,8 +118,8 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                             </a>
                         </div>
                         <div className="px-5 mt-3 border-t border-gray-200 pt-3">
-                            <CustomerActions offers={offers || []} />
-                            <AgentActions offers={offers || []} />
+                            <CustomerActions offer={home.offer} />
+                            <AgentActions offers={home.offers || []} />
                         </div>
 
                         <div className="px-5">
@@ -156,7 +155,7 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                             <p className="text-sm mt-1.5 text-gray-600">
                                 {role !== 'admin' ? (
                                     <div>
-                                        {<OfferStatus offer={offers[0]} />}
+                                        {<OfferStatus offer={home.offer} />}
                                     </div>
                                 ) : (
                                     home.availability || home.interior
@@ -177,7 +176,7 @@ const PropertiesCard = ({ home }: PropertyCardProps) => {
                     role="list"
                     className="divide-y divide-dashed divide-gray-200 border-t border-gray-200"
                 >
-                    {offers.map((offer) => (
+                    {home.offers?.map((offer) => (
                         <OfferPreview key={offer.id} offer={offer} />
                     ))}
                 </ul>
