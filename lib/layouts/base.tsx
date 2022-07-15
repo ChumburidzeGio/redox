@@ -32,7 +32,7 @@ export const BaseLayout: React.FC = ({ children }) => {
             {/* Static sidebar for desktop */}
             <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex flex-col flex-grow bg-slate-50 pt-5 overflow-y-auto border-r border-gray-200">
+                <div className="flex flex-col flex-grow bg-slate-50 pt-5 overflow-y-auto border-r border-gray-100">
                     <div className="flex items-center flex-shrink-0 px-6">
                         <Link href="/" passHref>
                             <a className="no-underline text-current inline-flex items-center">

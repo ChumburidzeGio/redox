@@ -5,7 +5,7 @@ import { UserAddIcon } from '@heroicons/react/outline'
 
 export const EmployerDashboard: React.FC = () => {
     return (
-        <div className="mx-1 max-w-3xl">
+        <div className="mx-1 max-w-4xl">
             <div className="md:flex md:items-center md:justify-between mt-5">
                 <div className="flex-1 min-w-0 justify-between flex">
                     <Header level="1">Your Employees</Header>

@@ -6,7 +6,7 @@ import {
     SupportIcon,
     HomeIcon,
 } from '@heroicons/react/solid'
-import { classNames } from 'lib/shared-ui'
+import { classNames, DateFormat } from 'lib/shared-ui'
 import { TaskDts } from './dts/relocation.dts'
 
 const taskToIcon: Record<string, React.FC<React.ComponentProps<'svg'>>> = {
@@ -57,7 +57,10 @@ const Task: React.FC<{ task: TaskDts }> = ({ task }) => {
                         {task.appointment && (
                             <div className="inline-block ml-2">
                                 <div className="inline-block mr-2">|</div>
-                                {task.appointment}
+                                <DateFormat
+                                    date={task.appointment}
+                                    format="MMM DD, YYYY"
+                                />
                             </div>
                         )}
                     </p>

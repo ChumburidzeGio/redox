@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ChevronRightIcon, MailIcon } from '@heroicons/react/solid'
-import { classNames, Drawer } from 'lib/shared-ui'
+import { classNames, DateFormat, Drawer } from 'lib/shared-ui'
 import { Avatar } from './avatar'
 import { RelocationTasks } from './relocation-tasks'
 import { RelocationDts } from './dts/relocation.dts'
@@ -124,7 +124,10 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
                                             Authorized
                                         </dt>
                                         <dd className="text-gray-900">
-                                            {relocation.createdAt}
+                                            <DateFormat
+                                                date={relocation.createdAt}
+                                                format="MMM DD, YYYY"
+                                            />
                                         </dd>
                                     </div>
                                     <div className="flex justify-between py-3 text-sm font-medium">
@@ -132,7 +135,10 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
                                             Last Activity
                                         </dt>
                                         <dd className="text-gray-900">
-                                            {relocation.updatedAt}
+                                            <DateFormat
+                                                date={relocation.updatedAt}
+                                                format="MMM DD, YYYY"
+                                            />
                                         </dd>
                                     </div>
                                     {relocation.completedAt && (
@@ -141,7 +147,12 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
                                                 Completed At
                                             </dt>
                                             <dd className="text-gray-900">
-                                                {relocation.completedAt}
+                                                <DateFormat
+                                                    date={
+                                                        relocation.completedAt
+                                                    }
+                                                    format="MMM DD, YYYY"
+                                                />
                                             </dd>
                                         </div>
                                     )}
@@ -151,7 +162,10 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
                                                 Canceled At
                                             </dt>
                                             <dd className="text-gray-900">
-                                                {relocation.canceledAt}
+                                                <DateFormat
+                                                    date={relocation.canceledAt}
+                                                    format="MMM DD, YYYY"
+                                                />
                                             </dd>
                                         </div>
                                     )}
@@ -192,7 +206,12 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
                             <div className="flex flex-row mb-2">
                                 <RelocationStatus status={relocation.status} />
                                 <p className="text-sm text-gray-900 ml-3">
-                                    Last Activity: {relocation.updatedAt}
+                                    Last Activity:
+                                    <DateFormat
+                                        date={relocation.updatedAt}
+                                        format="MMM DD, YYYY"
+                                        className="ml-1"
+                                    />
                                 </p>
                             </div>
                             <div className="w-[230px]">

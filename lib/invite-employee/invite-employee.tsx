@@ -21,8 +21,8 @@ export function InviteEmployee() {
     const payer = methods.watch('payer', 'company')
 
     const mutation = useMutation(
-        (data: { email: string; note: string }) => {
-            return api.employer.invite(data.email, data.note)
+        (data: Record<string, string>) => {
+            return api.employer.invite(data)
         },
         {
             onSuccess: () => {

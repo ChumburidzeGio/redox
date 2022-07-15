@@ -18,10 +18,6 @@ const RadarApi = (instance: AxiosInstance) => ({
     get: (endpoint: string) => instance.get(endpoint),
     post: (endpoint: string, data: any) => instance.post(endpoint, data),
     signIn: (data: SignInProps) => instance.post('/users/sign-in', data),
-    employer: {
-        relocations: (employerId: number) =>
-            instance.get(`/relocations/employer/${employerId}`),
-    },
     home: {
         loadHomes: (status: (string | null)[], id?: number) =>
             instance.post('/homes/index', { status, relocationId: id }),
@@ -33,7 +29,6 @@ const RadarApi = (instance: AxiosInstance) => ({
             instance.get(`/relocations?userId=${userId}`),
     },
     users: {
-        id: (id: number) => instance.get(`/users/id/${id}`),
         resetPassword: (
             userId: number,
             oldPassword: string,
