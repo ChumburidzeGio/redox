@@ -25,7 +25,7 @@ export default function SettingsPage() {
 
     return (
         <AppLayout>
-            <div className="mx-1">
+            <div className="mx-1 max-w-4xl">
                 <div className="md:flex md:items-center md:justify-between mt-5">
                     <div className="flex-1 min-w-0">
                         <Header level="1">Settings</Header>
