@@ -37,6 +37,7 @@ export interface NavigationItem {
 
 export const employerNavigation: NavigationItem[] = [
     { name: 'Employees', href: '/', Icon: UsersIcon },
+    { name: 'Settings', href: '/settings', Icon: CogIcon },
     { name: 'Support', href: '/support', Icon: SupportIcon },
 ]
 

@@ -1,10 +1,5 @@
 import * as React from 'react'
-import {
-    SupportIcon,
-    MailIcon,
-    PhoneIcon,
-    ChatIcon,
-} from '@heroicons/react/outline'
+import { MailIcon, PhoneIcon, ChatIcon } from '@heroicons/react/outline'
 
 import { AppLayout } from 'lib/layouts'
 import { useLogOnRender } from 'lib/analytics'
@@ -42,16 +37,15 @@ export function SupportPage() {
 
     return (
         <AppLayout>
-            <div className="max-w-4xl">
-                <div className="flex items-center mt-8 justify-center">
-                    <SupportIcon className="w-14 mr-4 text-slate-800" />
+            <div className="max-w-4xl mt-4 p-1">
+                <div className="flex">
                     <Header level="1" color="text-slate-800">
                         Support
                     </Header>
                 </div>
-                <div className="mt-4 text-lg font-medium text-center m-auto max-w-xl text-slate-800">
+                <div className="mt-4 text-lg font-medium text-slate-800">
                     Here are a few ways you can reach us in case you have
-                    questions or you need help.
+                    questions or you need help:
                 </div>
 
                 <ul

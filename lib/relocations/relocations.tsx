@@ -3,7 +3,6 @@ import { useQuery } from 'react-query'
 import EmptyState from './empty-state'
 import LoadingState from './loading-state'
 import { EmployeeCard } from './employee-card'
-import { InviteEmployee } from './invite-employee'
 import api from 'lib/api'
 import { RelocationDts } from './dts/relocation.dts'
 
@@ -32,8 +31,6 @@ export const Relocations = () => {
                     ))}
                 </ul>
             </div>
-
-            <InviteEmployee />
         </>
     )
 }

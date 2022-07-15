@@ -1,5 +1,4 @@
 import { UserGroupIcon } from '@heroicons/react/outline'
-import { InviteEmployee } from './invite-employee'
 
 export default function EmptyState() {
     return (
@@ -18,7 +17,6 @@ export default function EmptyState() {
                     </div>
                 </div>
             </div>
-            <InviteEmployee />
         </>
     )
 }

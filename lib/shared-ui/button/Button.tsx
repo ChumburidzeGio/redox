@@ -1,15 +1,17 @@
 import * as React from 'react'
+import Link from 'next/link'
 
 interface ButtonProps {
     variant?: 'secondary' | 'primary' | 'green' | 'red' | 'gray'
     type?: 'submit'
+    href?: string
     className?: string
     children: React.ReactNode
 }
 
 export const Button: React.FC<
     React.HTMLProps<HTMLButtonElement> & ButtonProps
-> = ({ variant, className, children, ...rest }) => {
+> = ({ variant, className, children, href, ...rest }) => {
     const classes = React.useMemo(() => {
         const list: string[] = [
             'inline-flex items-center justify-center border border-transparent',
@@ -54,9 +56,11 @@ export const Button: React.FC<
         return list.filter(Boolean).join(' ')
     }, [variant, className])
 
-    return (
+    const button = (
         <button className={classes} {...rest}>
             {children}
         </button>
     )
+
+    return href ? <Link href={href}>{button}</Link> : button
 }

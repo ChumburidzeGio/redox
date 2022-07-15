@@ -3,7 +3,7 @@ import slugger from './slugger'
 import { classNames } from 'lib/shared-ui'
 
 interface HeaderProps {
-    level: '1' | '2' | '3' | '4'
+    level: '1' | '2' | '3' | '4' | '5'
     color?: string
     className?: string
 }
@@ -71,6 +71,21 @@ export const Header: React.FC<HeaderProps> = ({
             >
                 {children}
             </h3>
+        )
+    }
+
+    if (level === '5') {
+        return (
+            <h4
+                className={classNames(
+                    'text-md font-semibold',
+                    className,
+                    color || 'text-gray-900'
+                )}
+                id={slugger(children as string)}
+            >
+                {children}
+            </h4>
         )
     }
 

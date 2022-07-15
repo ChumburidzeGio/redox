@@ -56,7 +56,7 @@ export const RadioCards: React.FC<RadioCardsProps> = ({
                                         ? 'border-transparent'
                                         : 'border-gray-300',
                                     active ? 'ring-2 ring-indigo-500' : '',
-                                    'relative bg-white border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none'
+                                    'relative bg-white border rounded-lg shadow-sm px-4 py-3 flex cursor-pointer focus:outline-none'
                                 )
                             }
                         >

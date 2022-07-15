@@ -4,9 +4,8 @@ import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { classNames } from 'lib/shared-ui'
 import type { ValidationsProps } from './validation-props'
 
-export interface InputProps {
+export interface TextareaProps {
     id: string
-    type: 'text' | 'email' | 'password' | 'hidden' | 'datetime-local'
     defaultValue?: string
     placeholder?: string
     disabled?: boolean
@@ -14,9 +13,8 @@ export interface InputProps {
     rules?: Omit<ValidationsProps, 'valueAsDate'>
 }
 
-export const Input: React.FC<InputProps> = ({
+export const Textarea: React.FC<TextareaProps> = ({
     id,
-    type,
     defaultValue,
     placeholder,
     className,
@@ -32,10 +30,8 @@ export const Input: React.FC<InputProps> = ({
 
     return (
         <div className={classNames('relative', className)}>
-            <input
-                type={type}
+            <textarea
                 disabled={disabled}
-                defaultValue={defaultValue}
                 className={classNames(
                     isError
                         ? 'pr-10 border-red-300 text-red-900 focus:border-red-500 placeholder-red-300 focus:ring-red-500'
@@ -47,7 +43,9 @@ export const Input: React.FC<InputProps> = ({
                 aria-invalid={isError ? 'true' : 'false'}
                 aria-describedby={isError ? `${id}-error` : `${id}-input`}
                 {...register(id, rules)}
-            />
+            >
+                {defaultValue}
+            </textarea>
             {isError && (
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <ExclamationCircleIcon
