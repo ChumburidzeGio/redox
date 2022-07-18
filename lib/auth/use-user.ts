@@ -7,6 +7,7 @@ export function useUser() {
     const firstName = React.useMemo(() => name.split(' ')[0] || '', [name])
 
     return {
+        id: (session?.user_id as number) || undefined,
         isAuth: status === 'authenticated',
         isLoading: status === 'loading',
         name,

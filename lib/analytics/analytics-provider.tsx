@@ -1,5 +1,6 @@
 import * as React from 'react'
 import amplitude from 'amplitude-js'
+import { useIntercom } from 'react-use-intercom'
 import { useRouter } from 'next/router'
 import { useUser } from 'lib/auth'
 
@@ -16,16 +17,19 @@ interface AmplitudeProviderProps {
     apiKey: string
 }
 
-export const AmplitudeProvider: React.FC<AmplitudeProviderProps> = ({
+export const AnalyticsProvider: React.FC<AmplitudeProviderProps> = ({
     apiKey,
     children,
 }) => {
     const router = useRouter()
-    const { email } = useUser()
+    const { email, name, id } = useUser()
+    const { update } = useIntercom()
 
     React.useEffect(() => {
         if (router.isReady) {
             initAmplitude(apiKey, email)
+            console.log({ email, name, userId: id as unknown as string })
+            update({ email, name, userId: id as unknown as string })
         }
     }, [router.isReady, apiKey, email])
 

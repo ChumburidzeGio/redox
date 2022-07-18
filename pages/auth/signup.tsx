@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { Button, Logo } from 'lib/shared-ui'
 import { useLogOnRender } from '../../lib/analytics'
 import { AxiosError } from 'axios'
+import { MetaTags } from '../../lib/seo'
 
 function translateError(errorCode?: string) {
     switch (errorCode) {
@@ -73,6 +74,7 @@ export default function SignUpPage() {
 
     return (
         <div className="h-full min-h-screen bg-gray-50">
+            <MetaTags title="Sign Up" />
             <div className="min-h-full flex flex-col justify-center py-8 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full items-center flex flex-col">
                     <Logo />

@@ -9,6 +9,7 @@ import { useMutation } from 'react-query'
 import api from '../lib/api'
 import toast from 'react-hot-toast'
 import { ErrorText, Form, Input, RequestError } from '../lib/forms'
+import { MetaTags } from '../lib/seo'
 
 export function ReferralsPage() {
     useLogOnRender('redox:view', {
@@ -31,6 +32,7 @@ export function ReferralsPage() {
 
     return (
         <AppLayout>
+            <MetaTags title="Referrals" />
             <div className="max-w-4xl">
                 <div className="flex items-center mt-4 p-1">
                     <GiftIcon className="w-14 mr-3 text-red-500 -ml-1" />

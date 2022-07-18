@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useLogOnRender } from '../../lib/analytics'
 import Link from 'next/link'
+import { MetaTags } from '../../lib/seo'
 
 function translateError(errorCode?: string) {
     switch (errorCode) {
@@ -56,6 +57,7 @@ export default function SignInPage() {
 
     return (
         <div className="h-full min-h-screen bg-gray-50">
+            <MetaTags title="Sign In" />
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md items-center flex flex-col">
                     <Logo />

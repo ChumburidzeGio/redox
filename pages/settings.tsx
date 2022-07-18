@@ -6,6 +6,7 @@ import { Header } from 'lib/shared-ui'
 import { ResetPassword } from 'lib/settings'
 import { useLogOnRender } from 'lib/analytics'
 import { CogIcon } from '@heroicons/react/outline'
+import { MetaTags } from '../lib/seo'
 
 export default function SettingsPage() {
     const { isLoading, isAuth } = useUser()
@@ -26,6 +27,7 @@ export default function SettingsPage() {
 
     return (
         <AppLayout>
+            <MetaTags title="User Settings" />
             <div className="mx-1 max-w-4xl">
                 <div className="md:flex md:items-center md:justify-between mt-5">
                     <div className="flex-1 min-w-0 flex items-center">
