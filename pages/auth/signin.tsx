@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
 import { signIn, SignInResponse } from 'next-auth/react'
+import { useIntercom } from 'react-use-intercom'
 import { Button, Logo } from 'lib/shared-ui'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -22,6 +23,7 @@ export default function SignInPage() {
     useLogOnRender('redox:signin')
 
     const methods = useForm()
+    const { trackEvent } = useIntercom()
     const [isLoading, setIsLoading] = React.useState(false)
 
     const router = useRouter()
@@ -32,6 +34,8 @@ export default function SignInPage() {
         password,
     }: Record<'email' | 'password', string>) => {
         setIsLoading(true)
+        trackEvent('app:login', { email })
+
         const res = await signIn('credentials', {
             email,
             password,

@@ -22,14 +22,16 @@ export const AnalyticsProvider: React.FC<AmplitudeProviderProps> = ({
     children,
 }) => {
     const router = useRouter()
-    const { email, name, id } = useUser()
+    const { email, name, id, isAuth, isLoading } = useUser()
     const { update } = useIntercom()
 
     React.useEffect(() => {
         if (router.isReady) {
             initAmplitude(apiKey, email)
-            console.log({ email, name, userId: id as unknown as string })
-            update({ email, name, userId: id as unknown as string })
+
+            if (isAuth && !isLoading) {
+                update({ email, name, userId: id as unknown as string })
+            }
         }
     }, [router.isReady, apiKey, email])
 
