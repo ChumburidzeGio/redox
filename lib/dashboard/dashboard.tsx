@@ -8,19 +8,17 @@ import { AdminDashboard } from './admin-dashboard'
 export const Dashboard: React.FC = () => {
     const { role, isLoading } = useUser()
 
-    if (isLoading) {
-        return <LoadingState />
+    if (!isLoading && role === 'customer') {
+        return <CustomerDashboard />
     }
 
-    return (
-        <>
-            {role === 'customer' ? (
-                <CustomerDashboard />
-            ) : role === 'employer' ? (
-                <EmployerDashboard />
-            ) : (
-                <AdminDashboard />
-            )}
-        </>
-    )
+    if (!isLoading && role === 'employer') {
+        return <EmployerDashboard />
+    }
+
+    if (!isLoading && role === 'admin') {
+        return <AdminDashboard />
+    }
+
+    return <LoadingState />
 }

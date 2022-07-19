@@ -4,6 +4,7 @@ import { classNames, DateFormat, Drawer } from 'lib/shared-ui'
 import { Avatar } from './avatar'
 import { RelocationTasks } from './relocation-tasks'
 import { RelocationDts } from './dts/relocation.dts'
+import { ChevronLeftIcon } from '@heroicons/react/outline'
 
 interface TagProps {
     dotColor: string
@@ -84,8 +85,15 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
                 <div className="pointer-events-auto w-screen max-w-md">
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                         <div className="flex flex-col px-6 pt-6 pb-7">
-                            <div className="flex items-center mb-5">
-                                <div>
+                            <div
+                                className="flex flex-row items-center cursor-pointer flex sm:hidden text-blue-600 font-semibold text-sm"
+                                onClick={() => setShowDetails(false)}
+                            >
+                                <ChevronLeftIcon className="h-5 mr-1" />
+                                Go Back
+                            </div>
+                            <div className="flex items-center mb-5 mt-5 sm:mt-0">
+                                <div className="">
                                     <Avatar
                                         flag={relocation.from.emoji}
                                         size="lg"
