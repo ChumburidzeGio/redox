@@ -60,8 +60,6 @@ export default function SignUpPage() {
             toast.error(translateError(data.response?.data?.message))
         },
         onSuccess: async (res, data) => {
-            methods.reset()
-
             await signIn('credentials', {
                 email: data.email,
                 password: data.password,
