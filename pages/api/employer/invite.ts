@@ -1,24 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
-import externalApi from 'lib/api/external'
+import { proxyRequest } from 'api-lib/external-apis'
+import { validate } from 'api-lib/validate'
+import { getUser } from 'api-lib/auth'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const session = await getSession({ req })
+    await validate.withReq(req).isPost().isUser('employer')
+    const user = await getUser(req)
 
-    if (req.method !== 'POST' || !session || !req.body.email) {
-        res.status(401).json({ success: false })
-        res.end()
-        return
-    }
-
-    const userId = session.user_id as number
-    const userName = session.user?.name
-
-    await externalApi.redarApi.messageBus.alert(
-        `${userName} (id:${userId}) invited ${req.body.email}`
+    const request = await proxyRequest(
+        'POST',
+        '/employer/invite',
+        req.body,
+        user
     )
-    res.status(200).json({ success: true })
+
+    res.status(request.status).json(request.json)
+    res.end()
 }

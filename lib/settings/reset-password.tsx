@@ -1,13 +1,24 @@
 import * as React from 'react'
-import { Alert, Button } from 'lib/shared-ui'
+import { Button } from 'lib/shared-ui'
 import { useForm } from 'react-hook-form'
-import { ErrorText, Form, Input, Label, RequestError } from 'lib/forms'
+import { ErrorText, Form, Input, Label } from 'lib/forms'
 import { useMutation } from 'react-query'
-import api from '../api/internal'
+import api from 'lib/api'
+import toast from 'react-hot-toast'
+import { AxiosError } from 'axios'
+import { logEvent } from '../analytics'
+
+function translateError(errorCode?: string) {
+    switch (errorCode) {
+        case 'WRONG_PASSWORD':
+            return 'Your old password is not correct'
+        default:
+            return 'Something went wrong :( Try again or contact us for help!'
+    }
+}
 
 export function ResetPassword() {
     const methods = useForm()
-    const [showModal, setShowModal] = React.useState(false)
 
     const mutation = useMutation(
         (data: { oldPassword: string; newPassword: string }) => {
@@ -15,10 +26,17 @@ export function ResetPassword() {
         },
         {
             onSuccess: ({ data }) => {
-                if (data && data.success === true) {
-                    setShowModal(true)
+                if (data?.success === true) {
+                    toast.success('Successfully updated your password!')
                     methods.reset()
+                    return
                 }
+
+                logEvent('redox:settings:updatePassword', {})
+                toast.error(translateError(data?.errorCode))
+            },
+            onError: (data: AxiosError) => {
+                toast.error(translateError(data.response?.data?.message))
             },
         }
     )
@@ -65,14 +83,6 @@ export function ResetPassword() {
                             <ErrorText id="newPassword">
                                 Please enter a new password
                             </ErrorText>
-
-                            <ErrorText
-                                show={mutation.isError}
-                                error={mutation.error as RequestError}
-                            >
-                                We could not reset your password, please try
-                                again later.
-                            </ErrorText>
                         </div>
 
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -82,14 +92,6 @@ export function ResetPassword() {
                             </Button>
                         </div>
                     </Form>
-                    <Alert
-                        type="success"
-                        show={showModal}
-                        title="Successfully Updated"
-                        description="We successfully updated your password!"
-                        buttonText="Go back to Settings"
-                        onClose={() => setShowModal(false)}
-                    />
                 </div>
             </div>
         </div>

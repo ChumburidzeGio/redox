@@ -77,13 +77,15 @@ function getPrevOrNext(
 }
 
 export const FooterNavigation: React.FC = () => {
-    const navigation = useNavigationItems()
+    const { secondary: navigation } = useNavigationItems()
     const { asPath } = useRouter()
     const path = asPath.split('#')[0]
+
     const { next, prev } = React.useMemo(() => {
         const index = navigation.findIndex(
             (item) => item.href && item.href === path
         )
+
         if (index > -1) {
             return {
                 prev: getPrevOrNext(navigation, true, index),

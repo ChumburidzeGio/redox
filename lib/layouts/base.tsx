@@ -1,82 +1,38 @@
 import * as React from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon, MenuAlt2Icon } from '@heroicons/react/outline'
-import { Logo } from 'lib/shared-ui'
+import { MenuAlt2Icon, XIcon } from '@heroicons/react/outline'
+import { Drawer, Header, Logo } from 'lib/shared-ui'
 import Link from 'next/link'
-import { Navigation } from './navigation'
+import { Navigation } from './navigation/navigation'
 
 export const BaseLayout: React.FC = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = React.useState(false)
 
     return (
         <div>
-            <Transition.Root show={sidebarOpen} as={React.Fragment}>
-                <Dialog
-                    as="div"
-                    className="fixed inset-0 flex z-40 md:hidden"
-                    onClose={setSidebarOpen}
-                >
-                    <Transition.Child
-                        as={React.Fragment}
-                        enter="transition-opacity ease-linear duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="transition-opacity ease-linear duration-300"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
-                    </Transition.Child>
-                    <Transition.Child
-                        as={React.Fragment}
-                        enter="transition ease-in-out duration-300 transform"
-                        enterFrom="-translate-x-full"
-                        enterTo="translate-x-0"
-                        leave="transition ease-in-out duration-300 transform"
-                        leaveFrom="translate-x-0"
-                        leaveTo="-translate-x-full"
-                    >
-                        <div className="relative flex-1 flex flex-col max-w-xs w-full pt-2 pb-4 bg-white">
-                            <Transition.Child
-                                as={React.Fragment}
-                                enter="ease-in-out duration-300"
-                                enterFrom="opacity-0"
-                                enterTo="opacity-100"
-                                leave="ease-in-out duration-300"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
-                            >
-                                <div className="absolute top-0 right-0 -mr-12 pt-2">
-                                    <button
-                                        type="button"
-                                        className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                                        onClick={() => setSidebarOpen(false)}
-                                    >
-                                        <span className="sr-only">
-                                            Close sidebar
-                                        </span>
-                                        <XIcon
-                                            className="h-6 w-6 text-white"
-                                            aria-hidden="true"
-                                        />
-                                    </button>
-                                </div>
-                            </Transition.Child>
-                            <div className="flex-1 h-0 overflow-y-auto">
-                                <Navigation />
-                            </div>
+            <Drawer
+                show={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+                fromLeft
+            >
+                <div className="pointer-events-auto w-screen max-w-md">
+                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                        <div className="px-5 pt-3 flex justify-between">
+                            <Header level="4">Menu</Header>
+                            <XIcon
+                                className="h-6 w-6 text-black"
+                                aria-hidden="true"
+                                onClick={() => setSidebarOpen(false)}
+                            />
                         </div>
-                    </Transition.Child>
-                    <div className="flex-shrink-0 w-14" aria-hidden="true">
-                        {/* Dummy element to force sidebar to shrink to fit close icon */}
+                        <Navigation />
                     </div>
-                </Dialog>
-            </Transition.Root>
+                </div>
+            </Drawer>
 
             {/* Static sidebar for desktop */}
             <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex flex-col flex-grow bg-slate-50 pt-5 overflow-y-auto border-r border-slate-100">
+                <div className="flex flex-col flex-grow bg-slate-50 pt-5 overflow-y-auto border-r border-gray-100">
                     <div className="flex items-center flex-shrink-0 px-6">
                         <Link href="/" passHref>
                             <a className="no-underline text-current inline-flex items-center">
@@ -100,7 +56,11 @@ export const BaseLayout: React.FC = ({ children }) => {
                         <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
                     <div className="flex items-center ml-3">
-                        <Logo />
+                        <Link href="/" passHref>
+                            <a>
+                                <Logo />
+                            </a>
+                        </Link>
                     </div>
                     {/*<div className="flex-1 px-4 flex justify-between">*/}
                     {/*    <div className="flex-1 flex">*/}

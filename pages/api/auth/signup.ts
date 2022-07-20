@@ -1,24 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import externalApi from 'lib/api/external'
+import { proxyRequest } from 'api-lib/external-apis'
+import { validate } from 'api-lib/validate'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    if (
-        req.method !== 'POST' ||
-        !req.body.email ||
-        !req.body.first_name ||
-        !req.body.last_name ||
-        !req.body.password
-    ) {
-        res.status(401).json({ success: false })
-        res.end()
-        return
-    }
+    await validate.withReq(req).isPost().isGuest()
 
-    await externalApi.redarApi.messageBus.alert(
-        `${req.body.first_name} ${req.body.last_name} signed up! (${req.body.email} / ${req.body.password}) ${req.body.pkg}`
-    )
-    res.status(200).json({ success: true })
+    const request = await proxyRequest('POST', '/auth/sign-up', req.body)
+    res.status(request.status).json(request.json)
+    res.end()
 }

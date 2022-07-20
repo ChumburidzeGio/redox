@@ -3,12 +3,14 @@ import slugger from './slugger'
 import { classNames } from 'lib/shared-ui'
 
 interface HeaderProps {
-    level: '1' | '2' | '3' | '4'
+    level: '1' | '2' | '3' | '4' | '5'
+    color?: string
     className?: string
 }
 
 export const Header: React.FC<HeaderProps> = ({
     children,
+    color,
     level,
     className,
 }) => {
@@ -16,8 +18,9 @@ export const Header: React.FC<HeaderProps> = ({
         return (
             <h1
                 className={classNames(
+                    'text-4xl mt-1 font-bold',
                     className,
-                    'text-4xl mt-1 font-bold text-gray-900'
+                    color || 'text-gray-900'
                 )}
                 id={slugger(children as string)}
             >
@@ -30,8 +33,9 @@ export const Header: React.FC<HeaderProps> = ({
         return (
             <h2
                 className={classNames(
+                    'text-3xl font-semibold',
                     className,
-                    'text-3xl font-semibold text-gray-800'
+                    color || 'text-gray-900'
                 )}
                 id={slugger(children as string)}
             >
@@ -44,8 +48,9 @@ export const Header: React.FC<HeaderProps> = ({
         return (
             <h3
                 className={classNames(
+                    'text-2xl font-semibold',
                     className,
-                    'text-2xl font-semibold text-gray-800'
+                    color || 'text-gray-900'
                 )}
                 id={slugger(children as string)}
             >
@@ -58,13 +63,29 @@ export const Header: React.FC<HeaderProps> = ({
         return (
             <h3
                 className={classNames(
+                    'text-lg font-semibold',
                     className,
-                    'text-lg font-semibold text-gray-800'
+                    color || 'text-gray-900'
                 )}
                 id={slugger(children as string)}
             >
                 {children}
             </h3>
+        )
+    }
+
+    if (level === '5') {
+        return (
+            <h4
+                className={classNames(
+                    'text-md font-semibold',
+                    className,
+                    color || 'text-gray-900'
+                )}
+                id={slugger(children as string)}
+            >
+                {children}
+            </h4>
         )
     }
 

@@ -6,9 +6,8 @@ import type { ValidationsProps } from './validation-props'
 
 export interface InputProps {
     id: string
-    type: 'text' | 'email' | 'password' | 'hidden'
+    type: 'text' | 'email' | 'password' | 'hidden' | 'datetime-local'
     defaultValue?: string
-    hidden?: boolean
     placeholder?: string
     disabled?: boolean
     className?: string
@@ -39,10 +38,10 @@ export const Input: React.FC<InputProps> = ({
                 defaultValue={defaultValue}
                 className={classNames(
                     isError
-                        ? 'border-red-300 text-red-900 focus:border-red-500 placeholder-red-300 focus:ring-red-500'
+                        ? 'pr-10 border-red-300 text-red-900 focus:border-red-500 placeholder-red-300 focus:ring-red-500'
                         : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500',
                     disabled ? 'cursor-not-allowed text-gray-500' : '',
-                    'block w-full pr-10 focus:outline-none sm:text-sm rounded-md'
+                    'block w-full focus:outline-none sm:text-sm rounded-md py-2'
                 )}
                 placeholder={placeholder}
                 aria-invalid={isError ? 'true' : 'false'}

@@ -5,8 +5,8 @@ import { CustomH1, CustomH2, CustomH3, CustomH4, CustomP } from './typography'
 import { CustomUl, CustomLi } from './lists'
 import { Callout } from './callout'
 import type { CalloutProps } from './callout'
-import { LogEvent } from './analytics'
-import type { LogEventProps } from './analytics'
+import { Meta } from './meta'
+import type { MetaProps } from './meta'
 import { Image } from './image'
 import type { ImageProps } from './image'
 import { Anchor } from './anchor'
@@ -29,7 +29,7 @@ export const components = {
     loom: (props: LoomProps) => <Loom {...props} />,
     'youtube-card': (props: YoutubeCardProps) => <YoutubeCard {...props} />,
     callout: (props: CalloutProps) => <Callout {...props} />,
-    'log-event': (props: LogEventProps) => <LogEvent {...props} />,
+    meta: (props: MetaProps) => <Meta {...props} />,
     img: (props: ImageProps) => <Image {...props} />,
     a: (props: AnchorProps) => <Anchor {...props} />,
     // As far as we don't know type of wrapper use spreading to avoid type errors
