@@ -6,6 +6,7 @@ import { useMutation } from 'react-query'
 import api from 'lib/api'
 import toast from 'react-hot-toast'
 import { AxiosError } from 'axios'
+import { logEvent } from '../analytics'
 
 function translateError(errorCode?: string) {
     switch (errorCode) {
@@ -30,6 +31,8 @@ export function ResetPassword() {
                     methods.reset()
                     return
                 }
+
+                logEvent('redox:settings:updatePassword', {})
                 toast.error(translateError(data?.errorCode))
             },
             onError: (data: AxiosError) => {

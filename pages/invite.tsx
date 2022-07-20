@@ -6,8 +6,8 @@ import { InviteEmployee } from 'lib/invite-employee'
 import { MetaTags } from '../lib/seo'
 
 export function InvitePage() {
-    useLogOnRender('redox:invite', {
-        page: 'support',
+    useLogOnRender('redox:view', {
+        page: 'invite',
     })
 
     return (

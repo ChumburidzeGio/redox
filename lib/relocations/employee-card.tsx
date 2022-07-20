@@ -5,6 +5,7 @@ import { Avatar } from './avatar'
 import { RelocationTasks } from './relocation-tasks'
 import { RelocationDts } from './dts/relocation.dts'
 import { ChevronLeftIcon } from '@heroicons/react/outline'
+import { logEvent } from '../analytics'
 
 interface TagProps {
     dotColor: string
@@ -76,10 +77,15 @@ export const EmployeeCard: React.FC<{ relocation: RelocationDts }> = ({
 }) => {
     const [showDetails, setShowDetails] = React.useState(false)
 
+    const handleOpen = () => {
+        logEvent('redox:employer:viewRelocation', { id: relocation.id })
+        setShowDetails(true)
+    }
+
     return (
         <li
             className="block hover:bg-gray-50 cursor-pointer"
-            onClick={() => setShowDetails(true)}
+            onClick={handleOpen}
         >
             <Drawer show={showDetails} onClose={() => setShowDetails(false)}>
                 <div className="pointer-events-auto w-screen max-w-md">
