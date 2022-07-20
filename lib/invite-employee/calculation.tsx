@@ -11,7 +11,7 @@ export function Calculation() {
     const employeePays = React.useMemo(() => payer === 'employee', [payer])
 
     const totalCost = React.useMemo(() => {
-        return extraSchooling ? '€1,930' : '€1,550' // + 380
+        return extraSchooling ? '€2,240' : '€1,760' // + 480
     }, [extraSchooling])
 
     const additionalCosts = React.useMemo(() => {
@@ -20,7 +20,7 @@ export function Calculation() {
         }
 
         return extraAirportShuttle
-            ? 'From €60 for the airport shuttle depending on the distance'
+            ? 'From €80 for the airport shuttle depending on the distance'
             : 'No additional costs'
     }, [extraAirportShuttle, payer])
 
