@@ -8,7 +8,7 @@ interface ProfileCardProps {
 
 export const ProfileCard = ({ profile }: ProfileCardProps) => {
     return (
-        <div className="overflow-hidden rounded-md border border-gray-200 col-span-1 px-4 py-3">
+        <div className="overflow-hidden rounded-md border border-gray-200 col-span-2 sm:col-span-1 px-4 py-3">
             <Header level="3" color="text-indigo-700">
                 {profile.relocationName}
             </Header>
