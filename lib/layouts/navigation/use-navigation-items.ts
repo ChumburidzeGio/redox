@@ -14,6 +14,7 @@ import {
     NewspaperIcon,
     GiftIcon,
     CalculatorIcon,
+    DocumentSearchIcon,
 } from '@heroicons/react/outline'
 import * as React from 'react'
 
@@ -195,22 +196,53 @@ export const customerKnowledgeBaseNavigation: NavigationItem[] = [
     // { name: 'Changelog', href: '/changelog' },
 ]
 
+export const adminNavigation: NavigationItem[] = [
+    { name: 'Dashboard', href: '/', Icon: NewspaperIcon },
+    {
+        name: 'Search Profiles',
+        href: '/search-profiles',
+        Icon: DocumentSearchIcon,
+    },
+    { name: 'Settings', href: '/settings', Icon: CogIcon },
+    { name: 'Referrals', href: '/referrals', Icon: GiftIcon },
+]
+
+export const adminKnowledgeBaseNavigation = [
+    {
+        name: 'For Customers',
+    },
+    ...customerKnowledgeBaseNavigation,
+    {
+        name: 'For HR',
+    },
+    ...employerKnowledgeBaseNavigation,
+]
+
 export function useNavigationItems(): {
     primary: NavigationItem[]
     secondary: NavigationItem[]
 } {
     const { role, isLoading } = useUser()
+
+    const primary = React.useMemo(() => {
+        return role === 'employer'
+            ? employerNavigation
+            : role === 'customer'
+            ? customerNavigation
+            : adminNavigation
+    }, [role])
+
+    const secondary = React.useMemo(() => {
+        return role === 'employer'
+            ? employerKnowledgeBaseNavigation
+            : role === 'customer'
+            ? customerKnowledgeBaseNavigation
+            : adminKnowledgeBaseNavigation
+    }, [role])
+
     if (isLoading) {
         return { primary: [], secondary: [] }
     }
-
-    const primary =
-        role === 'employer' ? employerNavigation : customerNavigation
-
-    const secondary =
-        role === 'employer'
-            ? employerKnowledgeBaseNavigation
-            : customerKnowledgeBaseNavigation
 
     return { primary, secondary }
 }

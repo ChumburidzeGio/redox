@@ -220,6 +220,12 @@ export const Navigation: React.FC = () => {
                                         isDisabled={isDisabled}
                                         key={name}
                                     />
+                                ) : !href && !children ? (
+                                    <MenuItem
+                                        name={name}
+                                        isDisabled={true}
+                                        isSecondary
+                                    />
                                 ) : (
                                     <MenuLink
                                         key={href}
