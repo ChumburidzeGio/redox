@@ -8,4 +8,5 @@ export interface SearchProfile {
     roomsMin: number | null
     interior: string[] | null
     type: string[] | null
+    active: boolean
 }
