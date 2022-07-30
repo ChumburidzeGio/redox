@@ -11,7 +11,7 @@ export default function SearchProfilesPage() {
 
     return (
         <AppLayout>
-            <MetaTags title="User Settings" />
+            <MetaTags title="Admin: Search Profiles" />
             <div className="mx-1 max-w-4xl">
                 <div className="md:flex md:items-center md:justify-between mt-5">
                     <div className="flex-1 min-w-0 flex items-center">

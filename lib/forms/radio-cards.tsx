@@ -17,6 +17,7 @@ export interface RadioCardsProps {
     id: string
     options: Option[]
     defaultValue: string
+    perRow?: '2' | '3'
     rules?: Omit<ValidationsProps, 'valueAsDate'>
 }
 
@@ -24,6 +25,7 @@ export const RadioCards: React.FC<RadioCardsProps> = ({
     id,
     options,
     rules,
+    perRow,
     defaultValue,
 }) => {
     const {
@@ -45,7 +47,12 @@ export const RadioCards: React.FC<RadioCardsProps> = ({
     return (
         <div className="mt-2 relative">
             <RadioGroup value={value} onChange={onChange}>
-                <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4">
+                <div
+                    className={classNames(
+                        perRow === '3' ? 'sm:grid-cols-3' : 'sm:grid-cols-2',
+                        'grid grid-cols-1 gap-y-4 sm:gap-x-4'
+                    )}
+                >
                     {options.map((option) => (
                         <RadioGroup.Option
                             key={option.id}

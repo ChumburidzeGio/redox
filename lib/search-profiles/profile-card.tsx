@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Badge, Drawer, Header } from '../shared-ui'
+import { Badge, Header } from '../shared-ui'
 import { SearchProfile } from './types'
-import { ChevronLeftIcon } from '@heroicons/react/outline'
+import { EditProfile } from './edit-profile'
 
 interface ProfileCardProps {
     profile: SearchProfile
@@ -82,21 +82,11 @@ export const ProfileCard = ({ profile }: ProfileCardProps) => {
                 </div>
             </dl>
 
-            <Drawer show={editMode} onClose={() => setEditMode(false)}>
-                <div className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                        <div className="flex flex-col px-6 pt-6 pb-7">
-                            <div
-                                className="flex flex-row items-center cursor-pointer flex sm:hidden text-blue-600 font-semibold text-sm"
-                                onClick={() => setEditMode(false)}
-                            >
-                                <ChevronLeftIcon className="h-5 mr-1" />
-                                Go Back
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Drawer>
+            <EditProfile
+                profile={profile}
+                open={editMode}
+                setOpen={(val) => setEditMode(val)}
+            />
         </div>
     )
 }
