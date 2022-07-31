@@ -253,7 +253,9 @@ export const EditProfile = ({ profile, open, onClose }: EditProfileProps) => {
                                     variant="primary"
                                     className="w-full items-center"
                                 >
-                                    Update profile
+                                    {mutation.isLoading
+                                        ? 'Updating profile...'
+                                        : 'Update profile'}
                                 </Button>
                             </div>
                         </Form>
